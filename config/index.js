@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 /**
- * 
+ * Contains general definitions to Electron APP
  */
 module.exports = {
   environment: {
