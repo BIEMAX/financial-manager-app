@@ -44,6 +44,7 @@
     "@angular-devkit/build-angular": "^13.3.2",
     "@angular/cli": "^13.3.2",
     "@angular/core": "^13.3.2",
+    "@angular/localize": "^13.3.3",
     "dotenv": "^16.0.0",
     "save": "^2.4.0",
     "zone.js": "^0.11.5"
