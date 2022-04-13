@@ -9,12 +9,15 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 ```bash
 # Clone this repository
 git clone https://github.com/electron/electron-quick-start
+
 # Go into the repository
 cd financial-manager-app
+
 # Install dependencies
 npm install
-# Run the app
-npm start
+
+# Run the app (development)
+npm run dev
 ```
 
 ## License
