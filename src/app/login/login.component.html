@@ -1,0 +1,43 @@
+<!--Background image-->
+<!-- <div [ngStyle]="{background: 'url(./images/' + trls.img + ')'}"></div> -->
+<!-- <img src="./assets/background/industrie.png" /> -->
+<div class="main-div">
+  <mat-card>
+    <mat-card-content>
+      <div class="example-container">
+
+        <mat-form-field class="full-width-input" appearance="fill">
+          <mat-label>
+            Login
+            <mat-icon>login</mat-icon>
+          </mat-label>
+          <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="full-width-input" appearance="fill">
+          <mat-label>
+            Senha
+            <mat-icon>lock</mat-icon>
+          </mat-label>
+          <input matInput placeholder="" value="" type="password" [(ngModel)]="userPassword">
+        </mat-form-field>
+
+        <br>
+
+        <mat-slide-toggle color={{primalColor}}>
+          Salvar senha
+        </mat-slide-toggle>
+
+        <br><br>
+
+        <div class="example-button-row">
+          <button mat-raised-button color={{primalColor}} (click)="doLogin($event)">Login</button>
+        </div>
+
+        <br>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
