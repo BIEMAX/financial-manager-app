@@ -16,8 +16,11 @@ cd financial-manager-app
 # Install dependencies
 npm install
 
-# Run the app (development)
+# Run the app (development) with electron and angular
 npm run dev
+
+# Run only angular on port 4200
+npm run start-angular
 ```
 
 ## License
