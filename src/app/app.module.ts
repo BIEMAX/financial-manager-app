@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 //Angular material packages
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,7 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
-import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
@@ -66,6 +68,7 @@ import { LoginComponent } from './login/login.component';
     MatNativeDateModule,
     MatDialogModule,
     MatDividerModule,
+    MatSidenavModule,
     ClipboardModule,
     CdkTableModule,
     CdkTreeModule,

@@ -1,40 +1,47 @@
 <div class="main-div">
-  <mat-card>
-    <mat-card-content>
-      <div class="example-container">
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer-content>
+      <mat-card>
+        <mat-card-content>
+          <div class="example-container">
 
-        <mat-form-field class="full-width-input" appearance="fill">
-          <mat-label>
-            Login
-            <mat-icon>login</mat-icon>
-          </mat-label>
-          <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin">
-        </mat-form-field>
+            <!--Login button-->
+            <mat-form-field class="full-width-input" appearance="fill">
+              <mat-label>
+                Login
+                <mat-icon>login</mat-icon>
+              </mat-label>
+              <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin">
+            </mat-form-field>
 
-        <br>
+            <br>
 
-        <mat-form-field class="full-width-input" appearance="fill">
-          <mat-label>
-            Senha
-            <mat-icon>lock</mat-icon>
-          </mat-label>
-          <input matInput placeholder="" value="" type="password" [(ngModel)]="userPassword">
-        </mat-form-field>
+            <!--Password button-->
+            <mat-form-field class="full-width-input" appearance="fill">
+              <mat-label>
+                Senha
+                <mat-icon>lock</mat-icon>
+              </mat-label>
+              <input matInput placeholder="" value="" type="password" [(ngModel)]="userPassword">
+            </mat-form-field>
 
-        <br>
+            <br>
 
-        <mat-slide-toggle>
-          Salvar senha
-        </mat-slide-toggle>
+            <mat-slide-toggle>
+              Salvar senha
+            </mat-slide-toggle>
 
-        <br><br>
+            <br><br>
 
-        <div class="example-button-row">
-          <button mat-raised-button (click)="doLogin($event)">Login</button>
-        </div>
+            <div class="example-button-row">
+              <button mat-raised-button (click)="doLogin($event)">Login</button>
+            </div>
 
-        <br>
-      </div>
-    </mat-card-content>
-  </mat-card>
+            <br>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
 </div>
