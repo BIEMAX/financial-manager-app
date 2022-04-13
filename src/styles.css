@@ -1,0 +1,99 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.royalblue-progress .mat-progress-bar-fill::after {
+  background-color: royalblue !important;
+}
+
+.orange-progress .mat-progress-bar-fill::after {
+  background-color: orange !important;
+}
+
+.mat-progress-bar-buffer {
+  background-color: rgb(236, 236, 236);
+}
+
+.slide-toogle-loked.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #d32f2f;
+  box-shadow: inset 0 0 0.2em 0.1em rgb(32 32 39 / 30%) !important;
+  box-sizing: border-box;
+  /* CD5C5C */
+}
+
+.slide-toogle-loked.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: rgb(245, 245, 245);
+  box-shadow: 0 2px 2px rgb(0 0 0 / 30%) !important;
+  box-sizing: border-box;
+}
+
+.slide-toogle-loked {
+  display: flex !important;
+}
+
+/*   .slide-toogle-loked .mat-slide-toggle-thumb {
+    background-color: #000;
+  }
+  .slide-toogle-loked.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #FFF;
+  } */
+
+
+.slide-toogle-loked .mat-slide-toggle-thumb {
+  transform: translate(0%, 0%);
+  background-image: url(/assets/img/lock_24dp.png);
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center;
+  margin-left: 2px;
+}
+
+.slide-toogle-loked.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-image: url(/assets/img/lock_open_24dp.png);
+  transition: all 0.2s ease-in-out;
+  margin-left: -2px;
+}
+
+
+.slide-toogle-loked .mat-accent .mat-slide-toggle-thumb {
+  filter: grayscale(100%);
+}
+
+.slide-toogle-loked .mat-checked .mat-slide-toggle-thumb {
+  filter: grayscale(0);
+}
+
+.slide-toogle-loked .mat-slide-toggle-bar {
+  background-color: #cccccc;
+  border-radius: 15px !important;
+  height: 23px !important;
+}
+
+.slide-toogle-loked .mat-slide-toggle-thumb-container {
+  top: 1.5px !important;
+
+}
+
+.btn-custom-red.mat-raised-button {
+  background-color: crimson;
+  border-radius: 20px;
+  line-height: 2.4rem;
+  min-width: 74px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-custom-red.mat-raised-button .mat-icon {
+  color: whitesmoke;
+}
+
+*/
