@@ -29,7 +29,7 @@
     "@angular/router": "13.3.2"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.1001.7",
+    "@angular-devkit/build-angular": "^13.3.2",
     "@angular/cli": "^13.3.2",
     "@angular/core": "^13.3.2",
     "dotenv": "^16.0.0"
