@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   /**
    * Define default color on UI (User Interface)
    */
-  primalColor: string = userInterface.controlColors;
+  //primalColor: string = userInterface.controlColors;
   userLogin: any;
   userPassword: any;
 
