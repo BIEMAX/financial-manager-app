@@ -28,6 +28,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list';
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
@@ -36,12 +37,18 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { FinancialsListComponent } from './financial-manager/financials-list/financials-list.component';
+import { FinancialsNewComponent } from './financial-manager/financials-new/financials-new.component';
+import { PageNotFoundComponent } from './generic/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    FinancialsListComponent,
+    FinancialsNewComponent,
+    PageNotFoundComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -69,6 +76,7 @@ import { LoginComponent } from './login/login.component';
     MatDialogModule,
     MatDividerModule,
     MatSidenavModule,
+    MatListModule,
     ClipboardModule,
     CdkTableModule,
     CdkTreeModule,
