@@ -40,7 +40,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -67,9 +66,20 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "fileReplacements": [
+                {
+                  "replace": "index.js",
+                  "with": "index.prod.js"
+                }
+              ]
             }
-          }
+          },
+          "scripts": [
+            {
+              "input": "index.js",
+              "inject": false
+            }
+          ]
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
