@@ -56,8 +56,27 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": {
+                "scripts": false,
+                "styles": false,
+                "fonts": false
+              },
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -65,23 +84,7 @@
             "browserTarget": "app:build"
           },
           "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "index.js",
-                  "with": "index.prod.js"
-                }
-              ]
-            },
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true
+            "production": {}
           }
         },
         "extract-i18n": {
