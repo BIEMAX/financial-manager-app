@@ -12,10 +12,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private _snackBar: MatSnackBar, private _router: Router) { }
 
-  /**
-   * Define default color on UI (User Interface)
-   */
-  //primalColor: string = userInterface.controlColors;
   userLogin: any;
   userPassword: any;
 

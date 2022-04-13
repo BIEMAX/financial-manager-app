@@ -1,5 +1,6 @@
 export const environment = {
-  production: false
+  production: false,
+  applicationName: 'Financial Manager'
 };
 
 export const userInterface = {
