@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment as Environment } from 'src/environments/environment';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,14 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   //Global variables
-  applicationName: string = environment.applicationName;
+  applicationName: string = Environment.applicationName;
+  fakeUserName: string = "Franciele";
+  welcomeTitle: string = `Welcome back ${this.fakeUserName}`;
+  customerName: string = "Beilke Industries";
+  productVersion: string = "Beta 1";
 
   ngOnInit (): void {
+
   }
 
 }
