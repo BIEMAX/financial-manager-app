@@ -27,6 +27,7 @@
   <mat-sidenav #sidenav>
     <mat-nav-list>
 
+      <!-- //TODO: #3 Instead create each component, call an API to return all data needed-->
       <a mat-list-item [routerLink]="'/financials'"> Financials </a>
 
       <!-- <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
@@ -41,6 +42,42 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div style="height: 88vh;">
+
+      <div class="example-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
+      <mat-accordion>
+
+        <div *ngFor="let panel of panelsDataSource">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <!--First expansion panel-->
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{panel.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{panel.description}}
+                <mat-icon>{{panel.icon}}</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Lists -->
+            <div *ngFor="let task of panel.tasks">
+              <mat-list>
+                <mat-list-item> {{task.title}} </mat-list-item>
+              </mat-list>
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+
+          </mat-expansion-panel>
+        </div>
+
+
+      </mat-accordion>
 
       <router-outlet></router-outlet>
     </div>

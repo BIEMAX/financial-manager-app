@@ -29,12 +29,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion'
+
+import { HttpClientModule } from '@angular/common/http';
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { FinancialsListComponent } from './financial-manager/financials-list/financials-list.component';
@@ -77,6 +78,7 @@ import { PageNotFoundComponent } from './generic/page-not-found/page-not-found.c
     MatDividerModule,
     MatSidenavModule,
     MatListModule,
+    MatExpansionModule,
     ClipboardModule,
     CdkTableModule,
     CdkTreeModule,
