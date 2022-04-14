@@ -1,4 +1,19 @@
-<!-- <app-header *ngIf="menuOn"></app-header>
+<!--Header-->
+<mat-toolbar class="toolbar-home">
+  <button mat-button [matMenuTriggerFor]="menu" mat-icon-button>
+    <mat-icon style="color:white;">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/home">Home page</a>
+    <a mat-menu-item routerLink="/financials">My financials</a>
+    <!-- //TODO: #3 Instead create each component, call an API to return all data needed-->
+    <!-- <a mat-menu-item routerLink="/proposta-anular">Anula Propostas</a>
+    <a mat-menu-item routerLink="/monitoramento">Monitoramento</a>
+    <a mat-menu-item routerLink="/geradorHash">Gerador Hash</a>
+    <a mat-menu-item routerLink="/relatorios">Relatórios</a> -->
+  </mat-menu>
+  <span class="toolbar-text ">{{applicationName}}</span>
+</mat-toolbar>
 <router-outlet></router-outlet>
-<app-footer *ngIf="menuOn"></app-footer> -->
-<router-outlet></router-outlet>
+<!--footer-->
+<footer class="footer">© 2022 Copyright: by Dionei Beilke dos Santos</footer>
