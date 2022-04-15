@@ -9,7 +9,7 @@
         <button mat-button (click)="accordion.openAll()">Expand All</button>
         <button mat-button (click)="accordion.closeAll()">Collapse All</button>
       </div>
-      <mat-accordion>
+      <mat-accordion multi>
 
         <div *ngFor="let panel of panelsDataSource">
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
