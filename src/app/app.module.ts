@@ -30,6 +30,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatDatepickerModule } from '@angular/material/datepicker'
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -79,6 +80,7 @@ import { PageNotFoundComponent } from './generic/page-not-found/page-not-found.c
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
+    MatDatepickerModule,
     ClipboardModule,
     CdkTableModule,
     CdkTreeModule,
