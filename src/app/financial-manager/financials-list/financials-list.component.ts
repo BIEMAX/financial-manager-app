@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import * as moment from 'moment';
 import { Moment } from 'moment';
@@ -42,23 +43,60 @@ export const DATE_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _snackBar: MatSnackBar
+  ) { }
 
+  //Global variables
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   expandedElement: PeriodicElement | null;
   email = new FormControl('', [Validators.required, Validators.email]);
-  date = new FormControl(moment())
+  date = new FormControl(moment());
+
+  //NG Models variables
+  descPicked: string = "";
+  datePicked: any;
+
 
   ngOnInit (): void {
   }
 
+  /**
+   * 
+   * @param normalizedMonthAndYear 
+   * @param datepicker 
+   */
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
     datepicker.close();
+  }
+
+  /**
+   * Call the API to query registers
+   * @param event 
+   */
+  search (event) {
+    try {
+      this.showNotification('Login efetuado com êxito', '');
+
+    }
+    catch (err) {
+      this.showNotification(err, 'Error when searching');
+    }
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event
+   * @param duration Integer containing the value to animation time
+   */
+  showNotification (message: string, action: string, duration = 2000) {
+    this._snackBar.open(message, action, { duration: duration })
   }
 
 }
