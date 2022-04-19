@@ -20,7 +20,7 @@ npm install
 npm run dev
 
 # Run only angular on port 4200
-npm run start-angular
+npm run angular
 ```
 
 ## Icons

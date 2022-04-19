@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         this.showNotification('Login ou senha inválidos. Tente novamente.', '');
       else {
         this.showNotification('Login efetuado com êxito', '');
-        this._router.navigate(['home'])
+        this._router.navigate(['home']);
       }
     }
     catch (err) {
