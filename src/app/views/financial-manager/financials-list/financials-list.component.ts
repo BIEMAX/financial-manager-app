@@ -106,7 +106,6 @@ export class FinancialsListComponent implements AfterViewInit {
   search (event) {
     try {
       this.showNotification('Login efetuado com êxito', '');
-
     }
     catch (err) {
       this.showNotification(err, 'Error when searching');
