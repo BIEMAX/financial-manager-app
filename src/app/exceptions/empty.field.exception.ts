@@ -1,6 +1,6 @@
 export class EmptyFieldException extends Error {
-  constructor(message?: string) {
-    super(message);
+  constructor(fieldObject: Object) {
+    super(`Field '${Object.keys({ fieldObject })}' cannot be null`);
     Object.setPrototypeOf(this, new.target.prototype);
     this.name = 'EmptyFieldException';
   }
