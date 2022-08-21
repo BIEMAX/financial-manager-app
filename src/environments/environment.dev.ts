@@ -3,7 +3,8 @@ export const environment = {
   applicationName: 'Financial Manager',
   apiUrl: 'http://localhost:8080/',
   apiVersion: 'v1/',
-  apiSecret: ''
+  apiSecret: '',
+  logInfo: true,
 };
 
 export const userInterface = {
