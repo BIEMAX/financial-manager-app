@@ -6,29 +6,30 @@
     <mat-card-subtitle>Fill fields to search</mat-card-subtitle>
     <mat-card-actions>
 
-      <!--Description field-->
-      <mat-form-field appearance="fill">
-        <mat-label>Enter a description</mat-label>
-        <input matInput placeholder="Ex.: NuBank..." [(ngModel)]="descPicked">
-      </mat-form-field>
-
-      <div></div>
-
-      <!--Month selection-->
-      <mat-form-field appearance="fill">
-        <mat-label>Month and Year</mat-label>
-        <input matInput [matDatepicker]="dp" [formControl]="date" [(ngModel)]="datePicked">
-        <mat-hint>MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
-          panelClass="example-month-picker">
-        </mat-datepicker>
-      </mat-form-field>
-
-      <div>
-        <button mat-raised-button (click)="search($event)">Search</button>
-      </div>
-
+      <table class="table-filter-fields" cellspacing="0">
+        <td>
+          <!--Description field-->
+          <mat-form-field appearance="fill">
+            <mat-label>Enter a description</mat-label>
+            <input matInput placeholder="Ex.: NuBank..." [(ngModel)]="descPicked">
+          </mat-form-field>
+        </td>
+        <td>
+          <!--Month selection-->
+          <mat-form-field appearance="fill">
+            <mat-label>Month and Year</mat-label>
+            <input matInput [matDatepicker]="dp" [formControl]="date" [(ngModel)]="datePicked">
+            <mat-hint>MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+              panelClass="example-month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <button mat-raised-button (click)="search()">Search</button>
+        </td>
+      </table>
     </mat-card-actions>
   </mat-card>
 
