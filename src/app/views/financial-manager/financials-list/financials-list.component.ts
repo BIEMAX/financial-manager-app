@@ -101,11 +101,10 @@ export class FinancialsListComponent implements AfterViewInit {
 
   /**
    * Call the API to query registers
-   * @param event 
    */
-  search (event) {
+  search () {
     try {
-      this.showNotification('Login efetuado com êxito', '');
+      this.showNotification('Dados pesquisados', '');
     }
     catch (err) {
       this.showNotification(err, 'Error when searching');
