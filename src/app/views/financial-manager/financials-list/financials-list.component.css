@@ -1,7 +1,7 @@
 .table-filter-fields {
-  width: 100%;
+  width: 50%;
 }
 
 td {
-  padding-right: 8px;
+  padding-right: 1px;
 }
