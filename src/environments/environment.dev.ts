@@ -7,6 +7,6 @@ export const environment = {
   logInfo: true,
 };
 
-export const userInterface = {
-  controlColors: "primary", //Can be: primary (purple), accent (pink) or warn (orange)
+export const ui = {
+  color: "primary", //Can be: primary (purple), accent (pink) or warn (orange)
 };
