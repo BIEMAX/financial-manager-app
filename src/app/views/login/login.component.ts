@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment, userInterface } from 'src/environments/environment';
+import { environment, ui } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 

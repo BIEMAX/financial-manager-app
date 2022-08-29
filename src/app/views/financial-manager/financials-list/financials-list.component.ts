@@ -6,8 +6,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { FormControl, Validators } from '@angular/forms';
 
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import { ui } from 'src/environments/environment';
+
+// import * as moment from 'moment';
+// import { Moment } from 'moment';
 
 export interface UserData {
   id: string;
@@ -62,13 +64,17 @@ export class FinancialsListComponent implements AfterViewInit {
   //Global variables
   columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
   email = new FormControl('', [Validators.required, Validators.email]);
-  date = new FormControl(moment());
+  date = new FormControl(new Object());
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
   dataSource: MatTableDataSource<UserData>;
 
   //NG Models variables
   descPicked: string = "";
   datePicked: any;
+  /**
+   * Define default color on UI (User Interface)
+   */
+  uiColor: string = ui.color;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -91,10 +97,10 @@ export class FinancialsListComponent implements AfterViewInit {
    * @param normalizedMonthAndYear 
    * @param datepicker 
    */
-  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
+  setMonthAndYear (normalizedMonthAndYear: Object, datepicker: MatDatepicker<Object>) {
     const ctrlValue = this.date.value;
-    ctrlValue.month(normalizedMonthAndYear.month());
-    ctrlValue.year(normalizedMonthAndYear.year());
+    ctrlValue.month(normalizedMonthAndYear);
+    ctrlValue.year(normalizedMonthAndYear);
     this.date.setValue(ctrlValue);
     datepicker.close();
   }
