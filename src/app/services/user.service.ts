@@ -11,14 +11,27 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   private readonly apiUrl = `${environment.apiUrl}/${environment.apiVersion}`;
-  private readonly apiHeader = {
+  private readonly headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
   };
 
-  getUser (user: UserLogginModel) {
-    return this.http.get(this.apiUrl, this.apiHeader);
+  doLogin (user: UserLogginModel) {
+    // return this.http.get(`${this.apiUrl}/login`, { this.reqOptions, JSON.stringify(user) })
+    //   .subscribe(observer => (
+    //     observer.
+    // ));
+    return this.http.post(`${this.apiUrl}/login`, JSON.stringify(user), this.headers)
+      .subscribe(
+        response => {
+          const resp: any = response
+          return resp
+        },
+        error => {
+          return error
+        }
+      )
   }
 
   addUser (user: UserModel) {
