@@ -2,6 +2,10 @@
   <mat-card-content>
     <div class="example-container">
 
+      <div class="loading-indicator">
+        <mat-progress-spinner mode="indeterminate" *ngIf="hasToWait" diameter="50"> </mat-progress-spinner>
+      </div>
+
       <!--Login button-->
       <mat-form-field class="full-width-input" appearance="fill">
         <mat-label>
