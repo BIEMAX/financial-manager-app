@@ -8,3 +8,12 @@ mat-card {
 mat-form-field {
   display: block;
 }
+
+.loading-indicator {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-row: 1;
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
