@@ -20,17 +20,7 @@ export class LoginService {
     })
   };
 
-  // getAuthentication (user: LogginModel) {
-  //   return this.http.get(this.apiUrl, this.apiHeader);
-  // }
-
   doLogin (user: LogginModel) {
-    // return this.http.get(`${this.apiUrl}/login`, { this.reqOptions, JSON.stringify(user) })
-    //   .subscribe(observer => (
-    //     observer.
-    // ));
-
-    //TODO: #7 Fix the "CORs policy" issue.
     return this.http.post(`${this.apiUrl}/user/login`, JSON.stringify(user), this.apiHeader);
   }
 }
