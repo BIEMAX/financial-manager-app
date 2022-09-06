@@ -40,7 +40,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
-import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
+import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 
 @NgModule({
@@ -49,7 +49,7 @@ import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-f
     HomeComponent,
     LoginComponent,
     FinancialsListComponent,
-    FinancialsNewComponent,
+    CustomDialogComponent,
     PageNotFoundComponent
   ],
   imports: [

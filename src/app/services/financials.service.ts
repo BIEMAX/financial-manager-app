@@ -18,6 +18,15 @@ export class FinancialsService {
     })
   }
 
+  // getAuthentication (user: LogginModel) {
+  //   return this.http.get(this.apiUrl, this.apiHeader);
+  // }
+
+  // return this.http.get(`${this.apiUrl}/login`, { this.reqOptions, JSON.stringify(user) })
+  //   .subscribe(observer => (
+  //     observer.
+  // ));
+
   addNewBill (financial: Financial) {
     return this.http.post(this.apiUrl, financial, this.apiHeader);
   }

@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
-import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
+import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 
 //Project packages
@@ -22,12 +22,12 @@ const routes: Routes = [
   {
     path: 'financials',
     component: FinancialsListComponent,
-    children: [
-      {
-        path: 'new',
-        component: FinancialsNewComponent
-      }
-    ]
+    // children: [
+    //   {
+    //     path: 'new',
+    //     component: FinancialsNewComponent
+    //   }
+    // ]
   },
 
   //Templates
