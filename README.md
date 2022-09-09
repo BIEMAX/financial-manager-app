@@ -16,11 +16,17 @@ cd financial-manager-app
 # Install dependencies
 npm install
 
-# Run the app (development) with electron and angular
+# Run angular app in "development environment"
 npm run dev
 
-# Run only angular on port 4200
-npm run angular
+# Run angular app in "staging environment"
+npm run dev
+
+# Run angular app in "production environment"
+npm run prd
+
+# Build the project and run the app with electron
+npm run electron
 ```
 
 ## Icons
