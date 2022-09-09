@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   userLogin: any = "dionei.santos";
-  userPassword: any = "aDti3shw!";
+  userPassword: any = "JOSNEL";
   /**
    * Define true to show waiting progress spinner on front.
    */
