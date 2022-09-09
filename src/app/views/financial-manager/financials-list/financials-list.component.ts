@@ -82,10 +82,11 @@ export class FinancialsListComponent implements OnInit {
 
   openDialogAddNewBill (): void {
     var lstFields: DialogFields[] = [
-      { fieldName: "Bill", fieldType: String },
-      { fieldName: "Description", fieldType: String },
-      { fieldName: "Date", fieldType: Date },
-      { fieldName: "Value", fieldType: Number },
+      { fieldName: "Bill", fieldType: "string", fieldDescription: 'Name of the bill' },
+      { fieldName: "Description", fieldType: "string", fieldDescription: 'About the bill' },
+      { fieldName: "Due date", fieldType: "date", fieldDescription: 'Due date (limit)' },
+      { fieldName: "Value", fieldType: "number", fieldDescription: 'Value of the bill' },
+      { fieldName: 'Tags', fieldType: "string", fieldDescription: 'Tag to find the bill' }
     ]
     const dialogRef = this.dialog.open(CustomDialogComponent, {
       width: '250px',
