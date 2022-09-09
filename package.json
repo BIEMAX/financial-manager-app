@@ -4,18 +4,6 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-<<<<<<< HEAD
-    "ng": "ng",
-    "angular": "ng serve --port 4200",
-    "dev-test": "ng serve --port 4200 && electron .",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "electron": "wait-on http://localhost:4200 && electron .",
-    "prestart": "npm run clean",
-    "dev": "concurrently -k \"ng serve\" \"npm run electron --no-sandbox .\""
-=======
     "dev": "ng serve --port 4200 -c dev",
     "stg": "ng serve --port 4200 -c stg",
     "prd": "ng serve --port 4200 -c prd",
@@ -24,7 +12,6 @@
     "build-prd": "ng build -c prd --output-hashing=all",
     "electron-dev": "electron .",
     "electron-prd": "ng build && electron ."
->>>>>>> 3e244621ceb2517eaf49a96a130c4bef97e68cc1
   },
   "author": "",
   "license": "ISC",
@@ -62,8 +49,4 @@
     "save": "^2.4.0",
     "zone.js": "^0.11.5"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 3e244621ceb2517eaf49a96a130c4bef97e68cc1
