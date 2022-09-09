@@ -1,14 +1,12 @@
 export const environment = {
   production: false,
   applicationName: 'Financial Manager',
-  apiUrl: 'http://localhost:8080/',
+  apiUrl: 'http://localhost:8080',
   apiVersion: 'v1',
-  apiSecret: ''
+  apiSecret: '',
+  logInfo: true,
 };
 
-/**
- * User interface colors
- */
 export const ui = {
   color: "primary", //Can be: primary (purple), accent (pink) or warn (orange)
 };

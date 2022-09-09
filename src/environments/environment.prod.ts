@@ -1,5 +1,10 @@
 export const environment = {
-  production: true
+  production: false,
+  applicationName: 'Financial Manager',
+  apiUrl: 'http://localhost:8080',
+  apiVersion: 'v1',
+  apiSecret: '',
+  logInfo: true,
 };
 
 export const ui = {
