@@ -27,7 +27,7 @@ export class FinancialsService {
   //     observer.
   // ));
 
-  addNewBill (financial: Financial) {
+  createBill (financial: Financial) {
     return this.http.post(this.apiUrl, financial, this.apiHeader);
   }
 

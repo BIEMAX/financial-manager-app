@@ -5,6 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ui } from 'src/environments/environment';
 import { CustomDialogComponent } from '../../generic/dialog/custom-dialog.component';
+import { DialogFields } from 'src/app/models/dialog-fields.model';
+import { FinancialsService } from 'src/app/services/financials.service';
+import { environment } from 'src/environments/environment';
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -25,8 +28,11 @@ export class FinancialsListComponent implements OnInit {
    */
   uiColor: string = ui.color;
 
-  constructor(private _snackBar: MatSnackBar,
-    public _dialog: MatDialog) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private financialService: FinancialsService
+  ) { }
 
   ngOnInit (): void { }
 
@@ -62,7 +68,7 @@ export class FinancialsListComponent implements OnInit {
    * @param duration Integer containing the value to animation time
    */
   showNotification (message: string, action: string, duration = 2000) {
-    this._snackBar.open(message, action, { duration: duration })
+    this.snackBar.open(message, action, { duration: duration })
   }
 
   applyFilter (event: Event) {
@@ -75,14 +81,35 @@ export class FinancialsListComponent implements OnInit {
   }
 
   openDialogAddNewBill (): void {
-    const dialogRef = this._dialog.open(CustomDialogComponent, {
+    var lstFields: DialogFields[] = [
+      { fieldName: "Bill", fieldType: String },
+      { fieldName: "Description", fieldType: String },
+      { fieldName: "Date", fieldType: Date },
+      { fieldName: "Value", fieldType: Number },
+    ]
+    const dialogRef = this.dialog.open(CustomDialogComponent, {
       width: '250px',
-      // data: { name: this.name, animal: this.animal },
+      data: lstFields
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      if (environment.logInfo) console.log('The dialog was closed');
+      if (environment.logInfo) console.log('result: ', result);
+      this.saveBill(result);
     });
+  }
+
+  saveBill (bill: any) {
+    this.financialService.createBill(bill).subscribe(
+      data => {
+        if (environment.logInfo) console.log(data);
+        this.showNotification('Conta salva com êxito', '');
+      },
+      error => {
+        if (environment.logInfo) console.log(error);
+        //this.hasToWait = false;
+        this.showNotification(error.message, 'Erro ao tentar efetuar login');
+      }
+    );
   }
 }
