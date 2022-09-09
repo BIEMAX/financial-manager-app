@@ -14,7 +14,7 @@ export class FinancialsService {
   private readonly apiHeader = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer HASUAHSAUSASHAUSHUAHSUAH'
+      'Authorization': 'YOUR_BEARER_HERE'
     })
   }
 
