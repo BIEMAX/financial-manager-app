@@ -94,9 +94,14 @@ export class FinancialsListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (environment.logInfo) console.log('The dialog was closed');
-      if (environment.logInfo) console.log('result: ', result);
-      this.saveBill(result);
+      if (result) {
+        if (environment.logInfo) console.log('result: ', result);
+        this.saveBill(result);
+      }
+      else {
+        this.showNotification('Nova conta a pagar não foi salva', '');
+        if (environment.logInfo) console.log('The dialog was closed');
+      }
     });
   }
 
@@ -108,8 +113,7 @@ export class FinancialsListComponent implements OnInit {
       },
       error => {
         if (environment.logInfo) console.log(error);
-        //this.hasToWait = false;
-        this.showNotification(error.message, 'Erro ao tentar efetuar login');
+        this.showNotification(error.message, 'Erro ao tentar salvar nova conta a pagar');
       }
     );
   }
