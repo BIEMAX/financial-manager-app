@@ -87,14 +87,15 @@ export class FinancialsListComponent implements OnInit {
       { fieldName: "Due date", fieldType: "date", fieldDescription: 'Due date (limit)' },
       { fieldName: "Value", fieldType: "number", fieldDescription: 'Value of the bill' },
       { fieldName: 'Tags', fieldType: "string", fieldDescription: 'Tag to find the bill' }
-    ]
+    ];
     const dialogRef = this.dialog.open(CustomDialogComponent, {
       width: '250px',
-      data: lstFields
+      data: lstFields,
+      autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (this.isValidBill(result)) {
         if (environment.logInfo) console.log('result: ', result);
         this.saveBill(result);
       }
@@ -103,6 +104,17 @@ export class FinancialsListComponent implements OnInit {
         if (environment.logInfo) console.log('The dialog was closed');
       }
     });
+  }
+
+  /**
+   * Validate if all fields was filled correctly in the dialog.
+   * @param bill Object containing the bill
+   * @returns 
+   */
+  isValidBill (bill: any) {
+    return bill.map((b: { fieldValue: any; }) => {
+      return b.fieldValue != undefined && b.fieldValue
+    }).every((b: boolean) => b == true);
   }
 
   saveBill (bill: any) {
