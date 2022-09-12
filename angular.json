@@ -116,7 +116,7 @@
             "dev": {
               "browserTarget": "financial-manager-app:build:dev"
             },
-            "hml": {
+            "stg": {
               "browserTarget": "financial-manager-app:build:hml"
             }
           }
@@ -128,18 +128,18 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "financial-manager-app:build:desenvolvimento"
+              "browserTarget": "financial-manager-app:build:dev"
             }
           }
         },
-        "hml": {
+        "stg": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "financial-manager-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "financial-manager-app:build:homologacao"
+              "browserTarget": "financial-manager-app:build:stg"
             }
           }
         },
