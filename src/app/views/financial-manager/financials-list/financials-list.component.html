@@ -3,22 +3,21 @@
 
   <!--Card with filters-->
   <mat-card>
-    <mat-card-title>Filter</mat-card-title>
-    <mat-card-subtitle>Fill fields to search</mat-card-subtitle>
+    <mat-card-title>Contas</mat-card-title>
     <mat-card-actions>
 
       <table class="table-filter-fields" cellspacing="0">
         <td>
           <!--Description field-->
           <mat-form-field>
-            <mat-label>Enter a description</mat-label>
+            <mat-label>Insira uma descrição</mat-label>
             <input matInput placeholder="Ex.: NuBank..." [(ngModel)]="descPicked">
           </mat-form-field>
         </td>
         <td>
           <!--Month selection-->
           <mat-form-field>
-            <mat-label>Month and Year</mat-label>
+            <mat-label>Mês e ano</mat-label>
             <input matInput [matDatepicker]="dp" [(ngModel)]="datePicked">
             <mat-hint>MM/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
@@ -29,21 +28,20 @@
         </td>
         <!--Button search-->
         <td>
-          <button mat-raised-button color="{{uiColor}}" (click)="search()">Search</button>
+          <button mat-raised-button color="{{uiColor}}" (click)="openDialogAddNewBill()">Criar</button>
+          <button mat-raised-button color="{{uiColor}}" (click)="search()">Pesquisar</button>
         </td>
       </table>
       <!--Button add new register-->
       <td>
-        <button color="{{uiColor}}" mat-mini-fab (click)="openDialogAddNewBill()">
-          <mat-icon>add</mat-icon>
-        </button>
+
       </td>
-      <!--Exportation-->
+      <!--Exportation
       <td>
         <button color="{{uiColor}}" mat-mini-fab>
           <mat-icon>picture_as_pdf</mat-icon>
         </button>
-      </td>
+      </td>-->
     </mat-card-actions>
   </mat-card>
 </div>
