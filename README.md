@@ -18,17 +18,6 @@ npm install
 
 # Run angular app in "development environment"
 npm run dev
-<<<<<<< HEAD
-
-# Run angular app in "staging environment"
-npm run dev
-
-# Run angular app in "production environment"
-npm run prd
-
-# Build the project and run the app with electron
-npm run electron
-=======
 ```
 
 ## How to build
@@ -61,7 +50,6 @@ npm run electron-dev
 
 # Build and run electron
 npm run electron-prd
->>>>>>> 3e244621ceb2517eaf49a96a130c4bef97e68cc1
 ```
 
 ## Icons
