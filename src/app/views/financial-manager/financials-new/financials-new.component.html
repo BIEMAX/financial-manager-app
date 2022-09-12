@@ -1,0 +1,48 @@
+<div>
+  <mat-form-field class="input">
+    <mat-label>
+      Nome da conta
+      <mat-icon>payments</mat-icon>
+    </mat-label>
+    <input matInput type="text" placeholder="Título da conta a pagar" [(ngModel)]="billName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Descrição da conta
+      <mat-icon>description</mat-icon>
+    </mat-label>
+    <input matInput type="text" placeholder="Informações da conta a ser pagar" [(ngModel)]="billDescription">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Data de vencimento
+      <mat-icon>calendar_month</mat-icon>
+    </mat-label>
+    <input matInput type="date" placeholder="Data de vencimento da conta" [(ngModel)]="billDueDate">
+  </mat-form-field>
+
+  <mat-form-field class="number-1">
+    <mat-label>
+      Valor total da conta
+      <mat-icon>123</mat-icon>
+    </mat-label>
+    <input matInput type="number" placeholder="R$ 1.200,00" [(ngModel)]="billTotalValue" currencyMask
+      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>
+      Número de prestações
+      <mat-icon>123</mat-icon>
+    </mat-label>
+    <input matInput type=" number" placeholder="1" value="1" [(ngModel)]="billAmountQuantity">
+  </mat-form-field>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onExitClick()">Sair</button>
+    <button mat-button (click)="onSaveClick()">Salvar</button>
+  </div>
+
+</div>
