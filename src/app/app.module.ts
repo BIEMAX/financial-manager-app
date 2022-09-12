@@ -29,8 +29,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list';
-import { MatExpansionModule } from '@angular/material/expansion'
-import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -43,9 +45,6 @@ import { FinancialsListComponent } from './views/financial-manager/financials-li
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
-
-//Custom packages
-import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -90,7 +89,8 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     CdkTableModule,
     CdkTreeModule,
     CdkTreeModule,
-    CurrencyMaskModule
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
