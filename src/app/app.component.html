@@ -1,12 +1,12 @@
 <!--Header-->
 <mat-toolbar class="toolbar-home">
   <button mat-button [matMenuTriggerFor]="menu" mat-icon-button>
-    <mat-icon style="color:white;">menu</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/home">Home page</a>
-    <a mat-menu-item routerLink="/financials">My financials</a>
-    <a mat-menu-item routerLink="/">Logout</a>
+    <a mat-menu-item routerLink="/home">Página inicial</a>
+    <a mat-menu-item routerLink="/financials">Minhas finanças</a>
+    <a mat-menu-item routerLink="/">Sair...</a>
     <!-- //TODO: #3 Instead create each component, call an API to return all data needed-->
     <!-- <a mat-menu-item routerLink="/proposta-anular">Anula Propostas</a>
     <a mat-menu-item routerLink="/monitoramento">Monitoramento</a>

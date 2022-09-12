@@ -4,7 +4,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ui } from 'src/environments/environment';
-import { CustomDialogComponent } from '../../generic/dialog/custom-dialog.component';
+import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
 import { DialogFields } from 'src/app/models/dialog-fields.model';
 import { FinancialsService } from 'src/app/services/financials.service';
 import { environment } from 'src/environments/environment';
@@ -81,16 +81,16 @@ export class FinancialsListComponent implements OnInit {
   }
 
   openDialogAddNewBill (): void {
-    var lstFields: DialogFields[] = [
-      { fieldName: "Bill", fieldType: "string", fieldDescription: 'Name of the bill' },
-      { fieldName: "Description", fieldType: "string", fieldDescription: 'About the bill' },
-      { fieldName: "Due date", fieldType: "date", fieldDescription: 'Due date (limit)' },
-      { fieldName: "Value", fieldType: "number", fieldDescription: 'Value of the bill' },
-      { fieldName: 'Tags', fieldType: "string", fieldDescription: 'Tag to find the bill' }
-    ];
-    const dialogRef = this.dialog.open(CustomDialogComponent, {
+    // var lstFields: DialogFields[] = [
+    //   { fieldName: "Bill", fieldType: "string", fieldDescription: 'Name of the bill' },
+    //   { fieldName: "Description", fieldType: "string", fieldDescription: 'About the bill' },
+    //   { fieldName: "Due date", fieldType: "date", fieldDescription: 'Due date (limit)' },
+    //   { fieldName: "Value", fieldType: "number", fieldDescription: 'Value of the bill' },
+    //   { fieldName: 'Tags', fieldType: "string", fieldDescription: 'Tag to find the bill' }
+    // ];
+    const dialogRef = this.dialog.open(FinancialsNewComponent, {
       width: '250px',
-      data: lstFields,
+      //data: lstFields,
       autoFocus: false
     });
 

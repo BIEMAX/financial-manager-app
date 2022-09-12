@@ -42,6 +42,10 @@ import { LoginComponent } from './views/login/login.component';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
+import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
+
+//Custom packages
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -50,7 +54,8 @@ import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-f
     LoginComponent,
     FinancialsListComponent,
     CustomDialogComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FinancialsNewComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -85,6 +90,7 @@ import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-f
     CdkTableModule,
     CdkTreeModule,
     CdkTreeModule,
+    CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
