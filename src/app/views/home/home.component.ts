@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   //Global variables
   applicationName: string = Environment.applicationName;
   fakeUserName: string = "Franciele";
-  welcomeTitle: string = `Welcome back ${this.fakeUserName}`;
+  welcomeTitle: string = `Bem vindo de volta ${this.fakeUserName}`;
   customerName: string = "Beilke Industries";
   productVersion: string = "Beta 1";
   step = 0;
@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
   //Datasources for testings
   panelsDataSource: any = [
     {
-      name: 'Notifications',
-      description: 'Your notifications',
+      name: 'Notificações',
+      description: 'Suas notificações',
       icon: 'notifications',
       tasks: [
         {
@@ -43,8 +43,8 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      name: 'Tasks',
-      description: 'Your tasks (done and to do)',
+      name: 'Tarefas',
+      description: 'Suas tarefas a fazer e já concluídas',
       icon: 'task_alt',
       tasks: [
         {
@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
       ]
     },
     {
-      name: 'Bill',
-      description: 'Billings to pay',
+      name: 'Contas',
+      description: 'Contas a pagar e pagas',
       icon: 'money',
       tasks: [
         {
