@@ -1,0 +1,26 @@
+<mat-form-field>
+  <!--Title-->
+  <!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
+
+  <div *ngFor="let field of data">
+
+    <mat-form-field class="input">
+      <mat-label>
+        {{field.fieldName}}
+        <!-- <mat-icon>login</mat-icon> -->
+      </mat-label>
+      <!-- <input matInput placeholder="Ex. 0012482" value=""> -->
+      <!--//TODO: #8 Implement mask into components [textMask]="{mask:{{field.fieldType}}}"-->
+
+      <input matInput type="{{field.fieldType}}" placeholder="{{field.fieldDescription}}" value=""
+        [(ngModel)]="field.fieldValue">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Exit</button>
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  </div>
+
+</mat-form-field>

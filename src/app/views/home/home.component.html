@@ -1,0 +1,47 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+
+      <div class="example-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
+      <mat-accordion multi>
+
+        <div *ngFor="let panel of panelsDataSource">
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+            <!--First expansion panel-->
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{panel.name}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{panel.description}}
+                <mat-icon>{{panel.icon}}</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Lists -->
+            <div *ngFor="let task of panel.tasks">
+              <mat-list>
+                <mat-list-item> {{task.title}} </mat-list-item>
+              </mat-list>
+            </div>
+
+            <mat-action-row>
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+
+          </mat-expansion-panel>
+        </div>
+
+
+      </mat-accordion>
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

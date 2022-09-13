@@ -16,12 +16,47 @@ cd financial-manager-app
 # Install dependencies
 npm install
 
-# Run the app (development) with electron and angular
+# Run angular app in "development environment"
 npm run dev
-
-# Run only angular on port 4200
-npm run start-angular
 ```
+
+## How to build
+
+To build the project, you can just build with `ng build` command, however, we implemented one build for each environment. You can build with the following commands:
+
+
+```bash
+# Default build
+ng build
+
+# Run angular app in "development environment"
+npm run build-dev
+
+# Run angular app in "staging environment"
+npm run build-stg
+
+# Run angular app in "production environment"
+npm run build-prd
+```
+
+
+## How to run with electron
+
+Before you run the electron app, certify that you build the project running the upstair commands.
+
+```bash
+# Run electron after build
+npm run electron-dev
+
+# Build and run electron
+npm run electron-prd
+```
+
+## Icons
+
+Default icons available on google forms:
+
+[https://fonts.google.com/icons](https://fonts.google.com/icons?selected=Material+Icons)
 
 ## License
 

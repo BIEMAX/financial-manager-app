@@ -10,10 +10,10 @@
   "javascript.format.insertSpaceAfterSemicolonInForStatements": false,
   "typescript.format.insertSpaceAfterSemicolonInForStatements": false,
   "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-  "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
-  "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
   "typescript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
   "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+  "javascript.format.placeOpenBraceOnNewLineForFunctions": false,
   "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
   "eslint.alwaysShowStatus": true,
   "[javascript]": {

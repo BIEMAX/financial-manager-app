@@ -28,20 +28,34 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+import { HttpClientModule } from '@angular/common/http';
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './views/home/home.component';
+import { LoginComponent } from './views/login/login.component';
+import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
+import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
+import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
+import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    FinancialsListComponent,
+    CustomDialogComponent,
+    PageNotFoundComponent,
+    FinancialsNewComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -69,10 +83,16 @@ import { LoginComponent } from './login/login.component';
     MatDialogModule,
     MatDividerModule,
     MatSidenavModule,
+    MatListModule,
+    MatExpansionModule,
+    MatDatepickerModule,
     ClipboardModule,
     CdkTableModule,
     CdkTreeModule,
     CdkTreeModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

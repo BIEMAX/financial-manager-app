@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment as Environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -16,5 +17,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  //Global variables
   title = 'app';
+  applicationName: string = Environment.applicationName;
+  fakeUserName: string = "Franciele";
+  welcomeTitle: string = `Welcome back ${this.fakeUserName}`;
 }
