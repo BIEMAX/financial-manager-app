@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Financial } from '../models/financial.model'
+import { FinancialModel } from '../models/financial.model'
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class FinancialsService {
   private readonly apiHeader = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'YOUR_BEARER_HERE'
+      Authorization: localStorage.getItem('userBearerKey')
     })
   }
 
@@ -27,8 +27,8 @@ export class FinancialsService {
   //     observer.
   // ));
 
-  createBill (financial: Financial) {
-    return this.http.post(this.apiUrl, financial, this.apiHeader);
+  createBill (financial: FinancialModel) {
+    return this.http.post(`${this.apiUrl}/bill/new`, financial, this.apiHeader);
   }
 
   getBillsList (month: number, year: number, description: string) {
