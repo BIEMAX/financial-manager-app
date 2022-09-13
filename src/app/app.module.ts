@@ -33,6 +33,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -90,7 +91,8 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
     CdkTreeModule,
     CdkTreeModule,
     MatChipsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

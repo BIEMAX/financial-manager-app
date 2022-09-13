@@ -86,7 +86,7 @@ export class FinancialsListComponent implements OnInit {
     // ];
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: '60%',
+      width: '40%',
       //data: lstFields,
       autoFocus: true
     });

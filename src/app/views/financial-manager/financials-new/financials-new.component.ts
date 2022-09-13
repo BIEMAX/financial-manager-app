@@ -28,7 +28,6 @@ export class FinancialsNewComponent implements OnInit {
   billTotalValue: Number;
   billAmountQuantity: Number = 1;//Quantidade de vezes da conta
   billTags: Array<String>;
-  maskTotalValue: String = "R$ 000.000,00"
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
