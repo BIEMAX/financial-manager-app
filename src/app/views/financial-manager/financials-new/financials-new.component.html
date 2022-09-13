@@ -54,7 +54,7 @@
     <mat-form-field class="" appearance="fill" style="width: 100%;">
       <mat-label>Tags</mat-label>
       <mat-chip-list #chipList aria-label=" Seleção de tags">
-        <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+        <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
           {{tag}}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
@@ -74,7 +74,7 @@
 
   <div mat-dialog-actions>
     <button mat-button (click)="onExitClick()">Sair</button>
-    <button mat-button (click)="onSaveClick()">Salvar</button>
+    <button mat-button (click)="onSaveClick()" [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
   </div>
 
 </div>

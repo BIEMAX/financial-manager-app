@@ -7,6 +7,7 @@ import { ui } from 'src/environments/environment';
 import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
 import { FinancialsService } from 'src/app/services/financials.service';
 import { environment } from 'src/environments/environment';
+import { ResponseStatus } from 'src/app/util/response-status-message';
 
 @Component({
   selector: 'financials-list.component',
@@ -77,22 +78,14 @@ export class FinancialsListComponent implements OnInit {
   }
 
   openDialogAddNewBill (): void {
-    // var lstFields: DialogFields[] = [
-    //   { fieldName: "Bill", fieldType: "string", fieldDescription: 'Name of the bill' },
-    //   { fieldName: "Description", fieldType: "string", fieldDescription: 'About the bill' },
-    //   { fieldName: "Due date", fieldType: "date", fieldDescription: 'Due date (limit)' },
-    //   { fieldName: "Value", fieldType: "number", fieldDescription: 'Value of the bill' },
-    //   { fieldName: 'Tags', fieldType: "string", fieldDescription: 'Tag to find the bill' }
-    // ];
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
       width: '40%',
-      //data: lstFields,
       autoFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (this.isValidBill(result)) {
+      if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
         this.saveBill(result);
       }
@@ -103,18 +96,6 @@ export class FinancialsListComponent implements OnInit {
     });
   }
 
-  /**
-   * Validate if all fields was filled correctly in the dialog.
-   * @param bill Object containing the bill
-   * @returns 
-   */
-  isValidBill (bill: any) {
-    if (bill == undefined) return false;
-    else return bill.map((b: { fieldValue: any; }) => {
-      return b.fieldValue != undefined && b.fieldValue
-    }).every((b: boolean) => b == true);
-  }
-
   saveBill (bill: any) {
     this.financialService.createBill(bill).subscribe(
       data => {
@@ -123,7 +104,7 @@ export class FinancialsListComponent implements OnInit {
       },
       error => {
         if (environment.logInfo) console.log(error);
-        this.showNotification(error.message, 'Erro ao tentar salvar nova conta a pagar');
+        this.showNotification(ResponseStatus(error.status), 'Não foi possível salvar o registro');
       }
     );
   }

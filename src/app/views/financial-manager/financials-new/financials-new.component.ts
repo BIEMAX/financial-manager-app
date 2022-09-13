@@ -13,6 +13,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { FinancialModel } from 'src/app/models/financial.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-financials-new',
@@ -23,16 +25,15 @@ export class FinancialsNewComponent implements OnInit {
 
   //NG Models variables
   billName: String;
-  billDescription: String;
   billDueDate: Date;
+  billDescription: String;
   billTotalValue: Number;
   billAmountQuantity: Number = 1;//Quantidade de vezes da conta
-  billTags: Array<String>;
+  billTags: string[] = ['Contas fixas'];
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
   filteredTags: Observable<string[]>;
-  tags: string[] = ['Contas fixas'];
   allTags: string[] = ['Contas fixas', 'Contas não previstas', 'Faculdade', 'Mercado', 'Lazer', 'Salário', 'Cŕedito'];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -51,7 +52,18 @@ export class FinancialsNewComponent implements OnInit {
   }
 
   onSaveClick () {
-
+    this.data = new FinancialModel(
+      '0',
+      localStorage.getItem('userName'),
+      this.billName,
+      this.billDueDate,
+      this.billDescription || '',
+      this.billTotalValue,
+      this.billAmountQuantity,
+      this.billTags
+    );
+    if (environment.logInfo) console.log('this.data: ', this.data);
+    this.dialogRef.close(this.data);
   }
 
   onExitClick () {
@@ -69,7 +81,7 @@ export class FinancialsNewComponent implements OnInit {
     const value = (event.value || '').trim();
 
     // Add new tag
-    if (value) this.tags.push(value);
+    if (value) this.billTags.push(value);
 
     // Clear the input value
     event.chipInput!.clear();
@@ -77,21 +89,21 @@ export class FinancialsNewComponent implements OnInit {
   }
 
   selectTag (event: MatAutocompleteSelectedEvent): void {
-    if (this.tags.length <= 0)
-      this.tags.push(event.option.viewValue);
+    if (this.billTags.length <= 0)
+      this.billTags.push(event.option.viewValue);
     else {
-      if (this.tags.filter(t => t.toUpperCase().trim() == event.option.viewValue.toUpperCase().trim()).length <= 0)
-        this.tags.push(event.option.viewValue);
+      if (this.billTags.filter(t => t.toUpperCase().trim() == event.option.viewValue.toUpperCase().trim()).length <= 0)
+        this.billTags.push(event.option.viewValue);
     }
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }
 
   removeTag (tag: string): void {
-    const index = this.tags.indexOf(tag);
+    const index = this.billTags.indexOf(tag);
 
     if (index >= 0) {
-      this.tags.splice(index, 1);
+      this.billTags.splice(index, 1);
     }
   }
 
