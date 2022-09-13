@@ -68,19 +68,21 @@ export class FinancialsNewComponent implements OnInit {
   addTag (event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
-    if (value) {
-      this.tags.push(value);
-    }
+    // Add new tag
+    if (value) this.tags.push(value);
 
     // Clear the input value
     event.chipInput!.clear();
-
     this.tagCtrl.setValue(null);
   }
 
   selectTag (event: MatAutocompleteSelectedEvent): void {
-    this.tags.push(event.option.viewValue);
+    if (this.tags.length <= 0)
+      this.tags.push(event.option.viewValue);
+    else {
+      if (this.tags.filter(t => t.toUpperCase().trim() == event.option.viewValue.toUpperCase().trim()).length <= 0)
+        this.tags.push(event.option.viewValue);
+    }
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }

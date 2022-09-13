@@ -109,7 +109,8 @@ export class FinancialsListComponent implements OnInit {
    * @returns 
    */
   isValidBill (bill: any) {
-    return bill.map((b: { fieldValue: any; }) => {
+    if (bill == undefined) return false;
+    else return bill.map((b: { fieldValue: any; }) => {
       return b.fieldValue != undefined && b.fieldValue
     }).every((b: boolean) => b == true);
   }
