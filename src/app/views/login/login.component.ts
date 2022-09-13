@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit (): void { }
 
-  doLogin (button) {
+  doLogin (button: any) {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit {
         this.loginService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
             data => {
-              console.log(data);
+              let loginData: any = data;
+              localStorage.setItem('userBearerKey', loginData.bearerKey);
+              localStorage.setItem('userName', this.userLogin);
+
               this.showNotification('Login efetuado com êxito', '');
               this.router.navigate(['home']);
             },
