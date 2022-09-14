@@ -18,21 +18,11 @@ export class FinancialsService {
     })
   }
 
-  // getAuthentication (user: LogginModel) {
-  //   return this.http.get(this.apiUrl, this.apiHeader);
-  // }
-
-  // return this.http.get(`${this.apiUrl}/login`, { this.reqOptions, JSON.stringify(user) })
-  //   .subscribe(observer => (
-  //     observer.
-  // ));
-
   createBill (financial: FinancialModel) {
     return this.http.post(`${this.apiUrl}/bill/new`, financial, this.apiHeader);
   }
 
   getBillsList (month: number, year: number, description: string) {
-    return this.http.get(`${this.apiUrl}/${month}/${year}/${description}`, this.apiHeader)
+    return this.http.get(`${this.apiUrl}/bill/${month || '{month}'}/${year || '{year}'}/${description || ' '}`, this.apiHeader)
   }
-
 }
