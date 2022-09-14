@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
         this.showNotification('Login ou senha inválidos. Tente novamente.', '');
         this.loginService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
-            data => {
-              let loginData: any = data;
+            response => {
+              let loginData: any = response;
               localStorage.setItem('userBearerKey', loginData.bearerKey);
               localStorage.setItem('userName', this.userLogin);
 
