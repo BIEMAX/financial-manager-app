@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
             error => {
               console.log(error);
               this.hasToWait = false;
-              this.showNotification(error.message, 'Erro ao tentar efetuar login');
+              this.showNotification(error.error.message, 'Erro ao tentar efetuar login');
             }
           )
       }
