@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { ui } from 'src/environments/environment';
 import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
@@ -19,11 +22,17 @@ export class FinancialsListComponent implements OnInit {
   //NG Models variables
   descPicked: string = "";
   datePicked: any;
+  hasToWait: Boolean = false;
+  listBills: MatTableDataSource<any>;
+  displayedColumns: string[] = ['billName', 'dueDate', 'value', 'quantityAmount', 'tags'];
 
   /**
    * Define default color on UI (User Interface)
    */
   uiColor: string = ui.color;
+
+  // @ViewChild(MatSort) sort: MatSort;
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -50,12 +59,23 @@ export class FinancialsListComponent implements OnInit {
    * Call the API to query registers
    */
   search () {
-    try {
-      this.showNotification('Dados pesquisados', '');
-    }
-    catch (err) {
-      this.showNotification(err, 'Error when searching');
-    }
+    this.hasToWait = true;
+    this.financialService.getBillsList(0, 0, '').subscribe(
+      response => {
+        let data: any = response;
+        this.listBills = new MatTableDataSource(data);
+        //this.listBills.sort = this.sort;
+        //this.listBills.paginator = this.paginator;
+
+        this.hasToWait = false;
+        this.showNotification('Dados pesquisados', '');
+      },
+      error => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log(error);
+        this.showNotification(ResponseStatus(error.status), 'Não foi possível buscar os registros');
+      }
+    );
   }
 
   /**
@@ -97,12 +117,15 @@ export class FinancialsListComponent implements OnInit {
   }
 
   saveBill (bill: any) {
+    this.hasToWait = true;
     this.financialService.createBill(bill).subscribe(
       data => {
+        this.hasToWait = false;
         if (environment.logInfo) console.log(data);
         this.showNotification('Conta salva com êxito', '');
       },
       error => {
+        this.hasToWait = false;
         if (environment.logInfo) console.log(error);
         this.showNotification(ResponseStatus(error.status), 'Não foi possível salvar o registro');
       }
