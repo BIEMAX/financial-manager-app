@@ -4,7 +4,7 @@ export class FinancialModel {
   id: String;
   user: String;
   name: String;
-  dueDate: Date;
+  dueDate: String;
   description: String;
   value: Number;
   quantityAmount: Number;
@@ -14,7 +14,7 @@ export class FinancialModel {
     Id: String,
     User: String,
     Name: String,
-    DueDate: Date,
+    DueDate: String,
     Description: String,
     Value: Number,
     QuantityAmount: Number,

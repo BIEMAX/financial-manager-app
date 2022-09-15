@@ -56,7 +56,7 @@ export class FinancialsNewComponent implements OnInit {
       '0',
       localStorage.getItem('userName'),
       this.billName,
-      this.billDueDate,
+      `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,
       this.billDescription || '',
       this.billTotalValue,
       this.billAmountQuantity,

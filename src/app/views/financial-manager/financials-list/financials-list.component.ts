@@ -11,6 +11,7 @@ import { FinancialsNewComponent } from 'src/app/views/financial-manager/financia
 import { FinancialsService } from 'src/app/services/financials.service';
 import { environment } from 'src/environments/environment';
 import { ResponseStatus } from 'src/app/util/response-status-message';
+import { FinancialModel } from 'src/app/models/financial.model';
 
 @Component({
   selector: 'financials-list.component',
@@ -24,7 +25,7 @@ export class FinancialsListComponent implements OnInit {
   datePicked: any;
   hasToWait: Boolean = false;
   listBills: MatTableDataSource<any>;
-  displayedColumns: string[] = ['billName', 'dueDate', 'value', 'quantityAmount', 'tags'];
+  displayedColumns: string[] = ['name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
 
   /**
    * Define default color on UI (User Interface)
@@ -58,10 +59,11 @@ export class FinancialsListComponent implements OnInit {
   /**
    * Call the API to query registers
    */
-  search () {
+  getBills () {
     this.hasToWait = true;
-    this.financialService.getBillsList(0, 0, '').subscribe(
+    this.financialService.getBills().subscribe(
       response => {
+        if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
         this.listBills = new MatTableDataSource(data);
         //this.listBills.sort = this.sort;
@@ -88,15 +90,9 @@ export class FinancialsListComponent implements OnInit {
     this.snackBar.open(message, action, { duration: duration })
   }
 
-  applyFilter (event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
-  }
-
+  /**
+   * Open a dialog to create a new bill
+   */
   openDialogAddNewBill (): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
@@ -116,19 +112,48 @@ export class FinancialsListComponent implements OnInit {
     });
   }
 
+  /**
+   * Create a new bill
+   * @param bill 
+   */
   saveBill (bill: any) {
     this.hasToWait = true;
     this.financialService.createBill(bill).subscribe(
-      data => {
+      response => {
         this.hasToWait = false;
-        if (environment.logInfo) console.log(data);
+        if (environment.logInfo) console.log(response);
         this.showNotification('Conta salva com êxito', '');
       },
       error => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.status), 'Não foi possível salvar o registro');
+        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível salvar o registro');
       }
     );
+  }
+
+  updateBill (bill: FinancialModel) {
+    console.log('Bill to update: ', bill)
+  }
+
+  deleteBill (bill: FinancialModel) {
+    if (confirm("Você deseja realmente excluir a conta? Uma vez feita, não será possível desfazer")) {
+      this.hasToWait = true;
+      this.financialService.deleteBill(bill.id).subscribe(
+        response => {
+          this.hasToWait = false;
+          if (environment.logInfo) console.log(response);
+          this.showNotification('Conta excluída com êxito', '');
+
+          this.getBills(); //Update the screen
+        },
+        error => {
+          this.hasToWait = false;
+          if (environment.logInfo) console.log(error.error.message);
+          this.showNotification(ResponseStatus(error.error.message), 'Não foi possível excluir o registro');
+        }
+      );
+    }
+    else return;
   }
 }
