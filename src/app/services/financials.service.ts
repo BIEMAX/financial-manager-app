@@ -22,7 +22,7 @@ export class FinancialsService {
     return this.http.post(`${this.apiUrl}/bill/new`, financial, this.apiHeader);
   }
 
-  getBillsList (month: number, year: number, description: string) {
-    return this.http.get(`${this.apiUrl}/bill/${month || '{month}'}/${year || '{year}'}/${description || ' '}`, this.apiHeader)
+  getBillsList (month?: number, year?: number, description?: string) {
+    return this.http.get(`${this.apiUrl}/bill/${month}/${year}/${description}`, this.apiHeader)
   }
 }
