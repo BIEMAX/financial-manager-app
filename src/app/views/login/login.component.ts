@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { LogginModel } from 'src/app/models/login.model';
+import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userAccessService: UserAccessService,
   ) { }
 
   userLogin: any = "dionei.santos";
@@ -38,6 +40,13 @@ export class LoginComponent implements OnInit {
               let loginData: any = response;
               localStorage.setItem('userBearerKey', loginData.bearerKey);
               localStorage.setItem('userName', this.userLogin);
+
+              this.userAccessService.userAuthenticated = true;
+              this.userAccessService.user.userLogin = this.userLogin;
+              this.userAccessService.user.userPass = this.userPassword;
+              this.userAccessService.user.userBearer = loginData.bearerKey;
+              this.userAccessService.user.userBearerExpiration = "";
+              this.userAccessService.permissions = loginData.permissions;
 
               this.showNotification('Login efetuado com êxito', '');
               this.router.navigate(['home']);
