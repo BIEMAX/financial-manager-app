@@ -18,16 +18,17 @@ export class UserHasAccess implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | boolean {
 
+    let permission = this.userAccessService.permissions.filter((p: { toString: () => string; }) =>
+      p.toString().toUpperCase() === route.pathFromRoot[1].routeConfig.path.toString().toUpperCase());
 
-    if (route.pathFromRoot.toString() == "") {
-      return false;
-    }
-    else if (this.userAccessService.userAuthenticated) {
+    if (permission.toString().toUpperCase() === route.pathFromRoot[1].routeConfig.path.toString().toUpperCase()
+      && this.userAccessService.userAuthenticated) {
       return true;
     }
-
-    this.router.navigate(['']);
-    return false;
+    else {
+      this.router.navigate(['']);
+      return false;
+    }
   }
 
 }

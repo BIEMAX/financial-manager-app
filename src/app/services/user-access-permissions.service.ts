@@ -8,22 +8,20 @@ export class UserAccessService implements OnDestroy {
 
   public userAuthenticated: Boolean = false;
   public showMainMenu: Boolean = false;
-  public user: any = {
+  public user = {
     userLogin: "",
     userBearer: "",
     userPass: "",
     userBearerExpiration: ""
   };
-  public permissions: any = [
-
-  ]
+  public permissions: any = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnDestroy () {
     this.userAuthenticated = false;
     this.showMainMenu = false;
-    this.user = {};
+    this.user = null;
     this.permissions = [];
   }
 }
