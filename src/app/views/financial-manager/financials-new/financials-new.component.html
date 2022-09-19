@@ -32,6 +32,19 @@
 
   <!--Third line-->
   <div>
+    <mat-form-field class="number-2">
+      <!-- <mat-label>
+        Tipo de conta
+        <mat-icon>toggle_off</mat-icon>
+      </mat-label> -->
+      <mat-slide-toggle [(ngModel)]="isCashIn">
+        <!-- Tipo de movimento: {{isCashIn ? "Entrada" : "Saída" }} -->
+      </mat-slide-toggle>
+    </mat-form-field>
+  </div>
+
+  <!--Fourth line-->
+  <div>
     <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
       <mat-label>
         Valor total da conta
@@ -50,6 +63,7 @@
     </mat-form-field>
   </div>
 
+  <!--fifth line-->
   <div>
     <mat-form-field class="" appearance="fill" style="width: 100%;">
       <mat-label>Tags</mat-label>

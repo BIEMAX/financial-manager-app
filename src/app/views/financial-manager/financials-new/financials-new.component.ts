@@ -30,6 +30,7 @@ export class FinancialsNewComponent implements OnInit {
   billTotalValue: Number;
   billAmountQuantity: Number = 1;//Quantidade de vezes da conta
   billTags: string[] = ['Contas fixas'];
+  isCashIn: Boolean = false;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
