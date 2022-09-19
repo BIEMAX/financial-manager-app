@@ -57,7 +57,7 @@ export class FinancialsListComponent implements OnInit {
   datePicked: any;
   hasToWait: Boolean = false;
   listBills: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
+  displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
   date = new FormControl(moment());
 
   /**
@@ -152,6 +152,8 @@ export class FinancialsListComponent implements OnInit {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
         this.showNotification('Conta salva com êxito', '');
+
+        this.getBills(); //Update the screen
       },
       error => {
         this.hasToWait = false;

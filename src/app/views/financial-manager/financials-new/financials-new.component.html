@@ -21,7 +21,17 @@
 
   <!--Second line-->
   <div>
-    <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
+      <mat-label>Tipo de movimento da conta</mat-label>
+      <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashIn">
+        <div *ngIf="isCashIn">Entrada</div>
+        <div *ngIf="!isCashIn">Saída</div>
+      </mat-slide-toggle>
+      <textarea matInput hidden></textarea>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill" style="width: 47.5%;">
       <mat-label>
         Descrição da conta
         <mat-icon>description</mat-icon>
@@ -31,19 +41,6 @@
   </div>
 
   <!--Third line-->
-  <div>
-    <mat-form-field class="number-2">
-      <!-- <mat-label>
-        Tipo de conta
-        <mat-icon>toggle_off</mat-icon>
-      </mat-label> -->
-      <mat-slide-toggle [(ngModel)]="isCashIn">
-        <!-- Tipo de movimento: {{isCashIn ? "Entrada" : "Saída" }} -->
-      </mat-slide-toggle>
-    </mat-form-field>
-  </div>
-
-  <!--Fourth line-->
   <div>
     <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
       <mat-label>
@@ -63,7 +60,7 @@
     </mat-form-field>
   </div>
 
-  <!--fifth line-->
+  <!--Fourth line-->
   <div>
     <mat-form-field class="" appearance="fill" style="width: 100%;">
       <mat-label>Tags</mat-label>
