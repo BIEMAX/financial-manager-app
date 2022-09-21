@@ -6,3 +6,4 @@ dist
 
 #Files
 .env
+package-lock.json
