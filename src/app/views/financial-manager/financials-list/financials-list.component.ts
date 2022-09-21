@@ -122,17 +122,19 @@ export class FinancialsListComponent implements OnInit {
   /**
    * Open a dialog to create a new bill
    */
-  openDialogAddNewBill (): void {
+  openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
       width: '40%',
-      autoFocus: true
+      autoFocus: true,
+      data: bill
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
-        this.saveBill(result);
+        if (bill && result.id != '0') this.updateBill(result);//If exist an bill, means its a update
+        else this.saveBill(result);
       }
       else {
         this.showNotification('Nova conta a pagar não foi salva', '');
@@ -163,8 +165,22 @@ export class FinancialsListComponent implements OnInit {
     );
   }
 
-  updateBill (bill: FinancialModel) {
-    console.log('Bill to update: ', bill)
+  updateBill (bill: any) {
+    this.hasToWait = true;
+    this.financialService.updateBill(bill).subscribe(
+      response => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log(response);
+        this.showNotification('Conta atualizada com êxito', '');
+
+        this.getBills(); //Update the screen
+      },
+      error => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log(error);
+        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível atualizar o registro');
+      }
+    );
   }
 
   deleteBill (bill: FinancialModel) {
