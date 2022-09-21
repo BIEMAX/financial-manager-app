@@ -14,7 +14,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FinancialModel } from 'src/app/models/financial.model';
-import { environment } from 'src/environments/environment';
+import { environment, ui } from 'src/environments/environment';
 
 @Component({
   selector: 'app-financials-new',
@@ -30,6 +30,8 @@ export class FinancialsNewComponent implements OnInit {
   billTotalValue: Number;
   billAmountQuantity: Number = 1;//Quantidade de vezes da conta
   billTags: string[] = ['Contas fixas'];
+  isCashIn: Boolean = false;
+  uiColor: string = ui.color;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
@@ -60,7 +62,8 @@ export class FinancialsNewComponent implements OnInit {
       this.billDescription || '',
       this.billTotalValue,
       this.billAmountQuantity,
-      this.billTags
+      this.billTags,
+      this.isCashIn
     );
     if (environment.logInfo) console.log('this.data: ', this.data);
     this.dialogRef.close(this.data);

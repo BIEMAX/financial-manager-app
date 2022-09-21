@@ -1,7 +1,6 @@
-export let ResponseStatus = (status_code: number) => {
-  switch (status_code) {
-    case 0: return 'Servidor indisponível no momento';
-    case 404: return 'Registro não encontrado com base nos filtros determinados';
-    case 500: return 'Erro interno do servidor';
-  }
+export let ResponseStatus = (status_code: String) => {
+  if (status_code.startsWith('JWT expired at')) return 'Sua sessão expirou. Faça novamente o login';
+  if (status_code.startsWith('0')) return 'Servidor indisponível no momento';
+  if (status_code.startsWith('404')) return 'Registro não encontrado com base nos filtros determinados';
+  if (status_code.startsWith('500')) return 'Erro interno do servidor';
 }

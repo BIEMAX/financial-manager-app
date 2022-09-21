@@ -9,6 +9,7 @@ export class FinancialModel {
   value: Number;
   quantityAmount: Number;
   tags: Array<String>;
+  isCashIn: Boolean;
 
   constructor(
     Id: String,
@@ -18,7 +19,8 @@ export class FinancialModel {
     Description: String,
     Value: Number,
     QuantityAmount: Number,
-    Tags: Array<String>
+    Tags: Array<String>,
+    IsCashIn: Boolean
   ) {
     if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException(Id);
     else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException(Name);
@@ -33,6 +35,7 @@ export class FinancialModel {
       this.value = Value;
       this.quantityAmount = QuantityAmount || 1;
       this.tags = Tags;
+      this.isCashIn = IsCashIn;
     }
   }
 }
