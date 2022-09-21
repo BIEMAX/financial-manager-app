@@ -23,7 +23,13 @@ export class FinancialsService {
   }
 
   getBills (month?: number, year?: number, description?: string) {
-    return this.http.get(`${this.apiUrl}/bill/${month}/${year}/${description}`, this.apiHeader)
+    let query: String = '';
+    if (month != undefined) query += `month=${month}&`;
+    if (year != undefined) query += `year=${year}&`;
+    if (description != undefined) query += `description=${description}&`;
+
+    query = query.endsWith("&") ? query.substring(0, query.lastIndexOf('&')) : query
+    return this.http.get(`${this.apiUrl}/bill/list${query != '' ? '?' + query : ''}`, this.apiHeader)
   }
 
   deleteBill (id: any) {
