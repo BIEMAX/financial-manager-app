@@ -46,6 +46,7 @@ import { FinancialsListComponent } from './views/financial-manager/financials-li
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
+import { FinancialsReportComponent } from './financials-report/financials-report.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
     FinancialsListComponent,
     CustomDialogComponent,
     PageNotFoundComponent,
-    FinancialsNewComponent
+    FinancialsNewComponent,
+    FinancialsReportComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -32,7 +32,10 @@ const routes: Routes = [
     //   }
     // ]
   },
-
+  {
+    path: 'reports',
+    component: FinancialsListComponent
+  },
   //Templates
   {
     path: '**',
