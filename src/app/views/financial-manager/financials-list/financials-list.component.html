@@ -45,64 +45,72 @@
       </td>-->
     </mat-card-actions>
   </mat-card>
-  <mat-card>
 
-    <table mat-table [dataSource]="listBills">
+  <table mat-table [dataSource]="listBills">
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      <!-- Column 'Nome da conta' -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nome da conta </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
+    <!-- Column 'Entrada ou saída' -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip *ngIf="element.isCashIn">Entrada</mat-chip>
+          <mat-chip *ngIf="!element.isCashIn">Saída</mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
 
-      <!-- Column 'Data de vencimento' -->
-      <ng-container matColumnDef="dueDate">
-        <th mat-header-cell *matHeaderCellDef> Data de vencimento </th>
-        <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
-      </ng-container>
+    <!-- Column 'Nome da conta' -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nome da conta </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
 
-      <!-- Column 'Valor' -->
-      <ng-container matColumnDef="value">
-        <th mat-header-cell *matHeaderCellDef> Valor </th>
-        <td mat-cell *matCellDef="let element">
-          <span matPrefix>R$&nbsp;</span>
-          {{element.value}}
-        </td>
+    <!-- Column 'Data de vencimento' -->
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef> Data de vencimento </th>
+      <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+    </ng-container>
 
-      </ng-container>
+    <!-- Column 'Valor' -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef> Valor </th>
+      <td mat-cell *matCellDef="let element">
+        <span matPrefix>R$&nbsp;</span>
+        {{element.value}}
+      </td>
+    </ng-container>
 
-      <!-- Column 'Qtd Parcelas' -->
-      <ng-container matColumnDef="quantityAmount">
-        <th mat-header-cell *matHeaderCellDef> Qtd Parcelas </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantityAmount}} </td>
-      </ng-container>
+    <!-- Column 'Qtd Parcelas' -->
+    <ng-container matColumnDef="quantityAmount">
+      <th mat-header-cell *matHeaderCellDef> Qtd Parcelas </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantityAmount}} </td>
+    </ng-container>
 
-      <!-- Column 'tags' -->
-      <ng-container matColumnDef="tags">
-        <th mat-header-cell *matHeaderCellDef> Tags </th>
-        <td mat-cell *matCellDef="let element"> {{element.tags}} </td>
-      </ng-container>
+    <!-- Column 'tags' -->
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef> Tags </th>
+      <td mat-cell *matCellDef="let element"> {{element.tags}} </td>
+    </ng-container>
 
-      <!-- Column 'Button Edit' -->
-      <ng-container matColumnDef="update">
-        <th mat-header-cell *matHeaderCellDef>Editar</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="{{uiColor}}" (click)="updateBill(element)" disabled>Editar</button>
-        </td>
-      </ng-container>
+    <!-- Column 'Button Edit' -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="{{uiColor}}" (click)="updateBill(element)" disabled>Editar</button>
+      </td>
+    </ng-container>
 
-      <!-- Column 'Button Remove'-->
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef>Remover</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-raised-button color="{{uiColor}}" (click)="deleteBill(element)">Excluir</button>
-        </td>
-      </ng-container>
+    <!-- Column 'Button Remove'-->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Remover</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="{{uiColor}}" (click)="deleteBill(element)">Excluir</button>
+      </td>
+    </ng-container>
 
-    </table>
-  </mat-card>
+  </table>
 
 </div>

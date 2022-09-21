@@ -57,7 +57,7 @@ export class FinancialsListComponent implements OnInit {
   datePicked: any;
   hasToWait: Boolean = false;
   listBills: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
+  displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
   date = new FormControl(moment());
 
   /**
@@ -89,22 +89,22 @@ export class FinancialsListComponent implements OnInit {
    */
   getBills () {
     this.hasToWait = true;
-    this.financialService.getBills().subscribe(
+    let month = this.date.value != undefined ? Number.parseInt(this.date.value.format("MM").toString()) : undefined;
+    let year = this.date.value != undefined ? this.date.value.year() : undefined;
+    this.financialService.getBills(month, year).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
         this.listBills = new MatTableDataSource(data);
         //this.listBills.sort = this.sort;
         //this.listBills.paginator = this.paginator;
-
         this.hasToWait = false;
         this.showNotification('Dados pesquisados', '');
       },
       error => {
         if (this.listBills != undefined) this.listBills = undefined;
         this.hasToWait = false;
-        if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.status), 'Não foi possível buscar os registros');
+        this.showNotification(ResponseStatus((error.error.message)), 'Erro');
       }
     );
   }
@@ -152,6 +152,8 @@ export class FinancialsListComponent implements OnInit {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
         this.showNotification('Conta salva com êxito', '');
+
+        this.getBills(); //Update the screen
       },
       error => {
         this.hasToWait = false;
