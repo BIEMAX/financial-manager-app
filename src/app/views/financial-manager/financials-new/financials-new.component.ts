@@ -25,13 +25,14 @@ export class FinancialsNewComponent implements OnInit {
 
   //NG Models variables
   billName: String;
-  billDueDate: Date;
+  billDueDate: String;
   billDescription: String;
   billTotalValue: Number;
   billAmountQuantity: Number = 1;//Quantidade de vezes da conta
   billTags: string[] = ['Contas fixas'];
   isCashIn: Boolean = false;
   uiColor: string = ui.color;
+  billId: String;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
@@ -51,11 +52,21 @@ export class FinancialsNewComponent implements OnInit {
   }
 
   ngOnInit (): void {
+    if (this.data) { //Its an update
+      this.billId = this.data.id;
+      this.billName = this.data.name;
+      this.billDueDate = `${this.data.dueDate.split("/")[2]}-${this.data.dueDate.split("/")[1]}-${this.data.dueDate.split("/")[0]}`;
+      this.billDescription = this.data.description;
+      this.billTotalValue = this.data.value;
+      this.billAmountQuantity = this.data.quantityAmount;
+      this.billTags = this.data.tags;
+      this.isCashIn = this.data.isCashIn;
+    }
   }
 
   onSaveClick () {
     this.data = new FinancialModel(
-      '0',
+      this.billId ? this.billId : '0',
       localStorage.getItem('userName'),
       this.billName,
       `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,

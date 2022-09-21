@@ -18,10 +18,6 @@ export class FinancialsService {
     })
   }
 
-  createBill (financial: FinancialModel) {
-    return this.http.post(`${this.apiUrl}/bill/new`, financial, this.apiHeader);
-  }
-
   getBills (month?: number, year?: number, description?: string) {
     let query: String = '';
     if (month != undefined) query += `month=${month}&`;
@@ -30,6 +26,14 @@ export class FinancialsService {
 
     query = query.endsWith("&") ? query.substring(0, query.lastIndexOf('&')) : query
     return this.http.get(`${this.apiUrl}/bill/list${query != '' ? '?' + query : ''}`, this.apiHeader)
+  }
+
+  createBill (financial: FinancialModel) {
+    return this.http.post(`${this.apiUrl}/bill/new`, financial, this.apiHeader);
+  }
+
+  updateBill (financial: FinancialModel) {
+    return this.http.post(`${this.apiUrl}/bill/update/${financial.id}`, financial, this.apiHeader);
   }
 
   deleteBill (id: any) {
