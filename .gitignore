@@ -1,9 +1,10 @@
-#Folders
-node_modules
-dist
-.angular
-.firebase
+# #Folders
+# node_modules
+# dist
+# .angular
+# .firebase
 
-#Files
-.env
-package-lock.json
+# #Files
+# .env
+# package-lock.json
+node_modules

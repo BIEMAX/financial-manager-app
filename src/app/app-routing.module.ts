@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-f
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { UserHasAccess } from './services/user-access-permissions';
+import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 
 //Router to access through angular
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    component: FinancialsListComponent
+    component: FinancialsReportComponent
   },
   //Templates
   {
