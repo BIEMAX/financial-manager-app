@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { LogginModel } from "../models/login.model";
@@ -9,7 +9,7 @@ import { LogginModel } from "../models/login.model";
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  enableMenusOnScreen = new EventEmitter<boolean>();
 
   private readonly apiUrl = `${environment.apiUrl}/${environment.apiVersion}`;
   private readonly apiHeader = {
@@ -19,6 +19,8 @@ export class LoginService {
       'Accept': '*/*'
     })
   };
+
+  constructor(private http: HttpClient) { }
 
   doLogin (user: LogginModel) {
     return this.http.post(`${this.apiUrl}/user/login`, JSON.stringify(user), this.apiHeader);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { environment as Environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,14 @@ import { environment as Environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //Global variables
-  title = 'app';
-  applicationName: string = Environment.applicationName;
-  fakeUserName: string = "Franciele";
-  welcomeTitle: string = `Welcome back ${this.fakeUserName}`;
+
+  enableMenu: Boolean = false;
+
+  constructor(private loginService: LoginService) { }
+
+  ngOnInit () {
+    this.loginService.enableMenusOnScreen.subscribe(
+      menu => this.enableMenu = menu
+    );
+  }
 }
