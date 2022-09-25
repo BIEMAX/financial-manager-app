@@ -13,16 +13,17 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 })
 export class LoginComponent implements OnInit {
 
-  userLogin: any = "dionei.santos";
-  userPassword: any = "senha_teste";
+  public userLogin: any = "dionei.santos";
+  public userPassword: any = "senha_teste";
   /**
    * Define true to show waiting progress spinner on front.
    */
-  hasToWait: boolean = false;
+  public hasToWait: boolean = false;
   /**
      * Define default color on UI (User Interface)
      */
-  uiColor: string = ui.color;
+  public uiColor: string = ui.color;
+  public showPassword: Boolean = false;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -74,6 +75,10 @@ export class LoginComponent implements OnInit {
       this.hasToWait = false;
       this.showNotification(err, 'Login');
     }
+  }
+
+  togglePasswordVisibility () {
+    this.showPassword = !this.showPassword;
   }
 
   /**

@@ -21,10 +21,11 @@
       <mat-form-field class="full-width-input" appearance="fill">
         <mat-label>
           Senha
-          <mat-icon>lock</mat-icon>
         </mat-label>
-        <input matInput placeholder="" value="" type="password" [(ngModel)]="userPassword" required
-          (keyup.enter)="doLogin()">
+        <input matInput placeholder="" value="" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="userPassword"
+          required (keyup.enter)="doLogin()">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{ showPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
       </mat-form-field>
 
       <br>
