@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit (): void { }
 
-  doLogin (button: any) {
+  doLogin () {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
@@ -48,10 +48,13 @@ export class LoginComponent implements OnInit {
               this.userAccessService.user.userBearerExpiration = "";
               this.userAccessService.permissions = loginData.permissions;
 
+              this.loginService.enableMenusOnScreen.emit(true);
+
               this.showNotification('Login efetuado com êxito', '');
               this.router.navigate(['home']);
             },
             error => {
+              this.loginService.enableMenusOnScreen.emit(false);
               console.log(error);
               this.hasToWait = false;
               this.showNotification(error.error.message, 'Erro ao tentar efetuar login');
