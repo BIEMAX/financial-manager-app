@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './services/login.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import { LoginService } from './services/login.service';
     <app-header></app-header>
 
     <!-- routes will be rendered here -->
-    <router-outlet>login</router-outlet>
+    <router-outlet></router-outlet>
 
     <!-- footer -->
     <app-footer></app-footer>
@@ -18,7 +19,8 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
 
-  enableMenu: Boolean = false;
+  public enableMenu: Boolean = false;
+  public applicationName: string = environment.applicationName;
 
   constructor(private loginService: LoginService) { }
 

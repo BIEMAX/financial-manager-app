@@ -19,19 +19,13 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [UserHasAccess],
+    canActivate: [UserHasAccess]
   },
   //Financials manager
   {
     path: 'financials',
     component: FinancialsListComponent,
-    canActivate: [UserHasAccess],
-    // children: [
-    //   {
-    //     path: 'new',
-    //     component: FinancialsNewComponent
-    //   }
-    // ]
+    canActivate: [UserHasAccess]
   },
   {
     path: 'reports',
