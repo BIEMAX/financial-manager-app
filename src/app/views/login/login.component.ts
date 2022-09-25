@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment, ui } from 'src/environments/environment';
+import { ui } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
@@ -13,19 +13,23 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 })
 export class LoginComponent implements OnInit {
 
+  userLogin: any = "dionei.santos";
+  userPassword: any = "senha_teste";
+  /**
+   * Define true to show waiting progress spinner on front.
+   */
+  hasToWait: boolean = false;
+  /**
+     * Define default color on UI (User Interface)
+     */
+  uiColor: string = ui.color;
+
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
     private loginService: LoginService,
     private userAccessService: UserAccessService,
   ) { }
-
-  userLogin: any = "dionei.santos";
-  userPassword: any = "JOSNEL";
-  /**
-   * Define true to show waiting progress spinner on front.
-   */
-  hasToWait: boolean = false;
 
   ngOnInit (): void { }
 
