@@ -1,3 +1,35 @@
-<canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels" [options]="pieChartOptions"
-  [plugins]="pieChartPlugins" [legend]="pieChartLegend">
-</canvas>
+<!--Card with filters-->
+<div *ngFor="let chart in listCharts">
+  <mat-card>
+    <mat-card-title>{{chart.reportName}}</mat-card-title>
+    <mat-card-actions>
+
+      <!-- <table class="table-filter-fields" cellspacing="0">
+        <td>
+          Description field
+          <mat-form-field>
+            <mat-label>Insira uma descrição</mat-label>
+            <input matInput placeholder="Ex.: NuBank...">
+          </mat-form-field>
+        </td>
+        <td>
+          Month selection
+          <mat-form-field>
+            <mat-label>Mês e ano</mat-label>
+          </mat-form-field>
+        </td>
+        Button search
+        <td>
+          <button mat-raised-button color="{{uiColor}}">Criar</button>
+          <button mat-raised-button color="{{uiColor}}">Pesquisar</button>
+        </td>
+      </table>
+      Button add new register
+      <td></td> -->
+
+      <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+      </canvas>
+    </mat-card-actions>
+  </mat-card>
+</div>
