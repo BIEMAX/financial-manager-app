@@ -20,10 +20,10 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
 
-        <a mat-list-item [routerLink]="'/home'"> Página inicial </a>
-        <a mat-list-item [routerLink]="'/financials'"> Minhas finanças </a>
-        <a mat-list-item [routerLink]="'/reports'"> Relatórios </a>
-        <a mat-list-item [routerLink]="'/'"> Sair... </a>
+        <a mat-list-item [routerLink]="'/home'" (click)="sidenav.toggle()"> Página inicial </a>
+        <a mat-list-item [routerLink]="'/financials'" (click)="sidenav.toggle()"> Minhas finanças </a>
+        <a mat-list-item [routerLink]="'/reports'" (click)="sidenav.toggle()"> Relatórios </a>
+        <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()"> Sair... </a>
 
       </mat-nav-list>
     </mat-sidenav>

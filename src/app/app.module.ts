@@ -48,8 +48,8 @@ import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.comp
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
-import { HeaderComponent } from './components/header/header/header.component';
-import { FooterComponent } from './components/footer/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
