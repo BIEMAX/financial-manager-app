@@ -6,10 +6,11 @@
     <h1>{{applicationName}}</h1>
     <span class="menu-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'/home'"> Página inicial </a>
+
+      <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
       <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
-      <a mat-button [routerLink]="'/'"> Sair... </a>
+      <a mat-button [routerLink]="'/'"> Sair... </a> -->
 
     </div>
   </mat-toolbar-row>
@@ -27,7 +28,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div>
+    <div style="height: 88vh;">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
