@@ -4,14 +4,14 @@
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>{{applicationName}}</h1>
-    <!-- <span class="menu-spacer"></span>
-      <div>
-        <a mat-button [routerLink]="'/home'"> Página inicial </a>
-        <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
-        <a mat-button [routerLink]="'/reports'"> Relatórios </a>
-        <a mat-button [routerLink]="'/Sair'"> Sair... </a>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/home'"> Página inicial </a>
+      <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
+      <a mat-button [routerLink]="'/reports'"> Relatórios </a>
+      <a mat-button [routerLink]="'/'"> Sair... </a>
 
-      </div> -->
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -26,5 +26,9 @@
 
     </mat-nav-list>
   </mat-sidenav>
-  <!-- <mat-sidenav-content></mat-sidenav-content> -->
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
