@@ -1,0 +1,29 @@
+.toolbar-home {
+    flex: 1 1 auto;
+    color: red;
+    background-color: crimson;
+}
+
+.toolbar-text {
+    color: white;
+}
+
+.button-row {
+    display: table-cell;
+    width: 490px;
+}
+
+form .content .button-form {
+    display: table-cell;
+    width: 490px;
+}
+
+.form-input {
+    float: left;
+}
+
+.content {
+    margin-top: 2pc;
+    position: relative;
+    margin-left: 2pc;
+}

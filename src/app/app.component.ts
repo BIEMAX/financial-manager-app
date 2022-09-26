@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
     <app-header></app-header>
 
     <!-- routes will be rendered here -->
-    <router-outlet></router-outlet>
+    <router-outlet>login</router-outlet>
 
     <!-- footer -->
     <app-footer></app-footer>
