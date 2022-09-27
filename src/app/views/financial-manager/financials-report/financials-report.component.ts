@@ -14,44 +14,50 @@ import { ResponseStatus } from 'src/app/util/response-status-message';
 export class FinancialsReportComponent implements OnInit {
 
   // Pie
-  public pieChartOptions: ChartOptions<'pie'> = {
+  private genericOptions: ChartOptions<'pie'> = {
     responsive: false,
   };
-  public pieChartLabels = [['Entradas'], ['Saídas']];
-  public pieChartDatasets = [{
-    data: [11500.15, 4547.69]
-  }];
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
 
   /**
    * Define default color on UI (User Interface)
    */
   public uiColor: string = ui.color;
-  public listCharts: [];
+  public listCharts: any = [];
   public hasToWait: Boolean = false;
 
+  private currentMonth: number = new Date().getMonth() + 1;
+  private currentYear: number = new Date().getFullYear();
 
   constructor(
     private chartsService: ChartsService,
     private snackBar: MatSnackBar,
-  ) {
-  }
+  ) { }
 
   ngOnInit () {
     this.getUserCharts();
   }
 
   getUserCharts () {
-    this.chartsService.getCharts().subscribe(
+    this.chartsService.getChartsList().subscribe(
       response => {
         let charts: any = response;
 
         if (charts.data[0] != undefined && charts.data[0].charts.length > 0) {
           this.listCharts = charts.data[0].charts.filter(c => c.hasAccess == true)
-          this.showNotification("Sucesso ao consultar os relatórios", "");
-        } else {
+          this.listCharts.map((chart) => {
+            if (chart.hasAccess) {
+              switch (chart.reportNumber) {
+                case 1: chart = this.getBillsByMonth(chart); break;
+                case 2: this.getBillsByYear(); break;
+                case 3: this.getBillsSpendByMonth(); break;
+                default: break;
+              }
 
+              this.showNotification("Sucesso ao consultar os relatórios", "");
+            }
+          });
+        } else {
+          this.showNotification("Não há relatórios disponíveis para seu usuário", "");
         }
       },
       error => {
@@ -59,6 +65,31 @@ export class FinancialsReportComponent implements OnInit {
         this.showNotification(ResponseStatus((error.error.message)), 'Erro');
       }
     );
+  }
+
+  getBillsByMonth (chart: any) {
+    this.chartsService.getBillsByMonth(this.currentMonth, this.currentYear).subscribe(
+      response => {
+        let data: any = response;
+        chart.type = 'pie';
+        chart.dataset = [{ data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)) }]; //Ordena os verdadeiros primeiro
+        chart.labels = [data.data.labels[0], data.data.labels[1]];
+        chart.options = this.genericOptions;
+        chart.plugins = [];
+        chart.legend = true;
+
+        return chart;
+      },
+      error => { }
+    );
+  }
+
+  getBillsByYear () {
+
+  }
+
+  getBillsSpendByMonth () {
+
   }
 
   /**

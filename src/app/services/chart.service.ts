@@ -17,7 +17,11 @@ export class ChartsService {
     })
   }
 
-  getCharts () {
+  getChartsList () {
     return this.http.get(`${this.apiUrl}/charts/user/access`, this.apiHeader)
+  }
+
+  getBillsByMonth (month: number, year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/${month}/${year}`, this.apiHeader);
   }
 }
