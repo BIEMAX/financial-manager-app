@@ -24,9 +24,19 @@
     <mat-grid-tile *ngFor="let chart of listCharts" style="border-radius: 4px;">
 
       <mat-card style="flex: 1 1 auto;">
+
+        <!--Month selection-->
+        <mat-form-field>
+          <mat-label>Mês e ano</mat-label>
+          <input matInput [matDatepicker]="dp" placeholder="Escolha uma data" [formControl]="date">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+            panelClass="example-month-picker"></mat-datepicker>
+        </mat-form-field>
+
         <mat-card-title>{{chart.reportName}}</mat-card-title>
         <canvas baseChart [type]="chart.type" [datasets]="chart.dataset" [labels]="chart.labels"
-          [options]="chart.options" [plugins]="chart.plugins" [legend]="chart.legend">
+          [options]="chart.options" [legend]="chart.legend">
         </canvas>
       </mat-card>
 

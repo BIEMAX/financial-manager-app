@@ -1,15 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDatepicker } from '@angular/material/datepicker';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { FormControl } from '@angular/forms';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
 import { ResponseStatus } from 'src/app/util/response-status-message';
 
+// tslint:disable-next-line:no-duplicate-imports
+import * as _moment from 'moment';
+import { default as _rollupMoment, Moment } from 'moment';
+const moment = _rollupMoment || _moment;
+
 @Component({
   selector: 'app-financials-report',
   templateUrl: './financials-report.component.html',
-  styleUrls: ['./financials-report.component.css']
+  styleUrls: ['./financials-report.component.css'],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    {
+      provide: MAT_DATE_FORMATS, useValue:
+      {
+        parse: {
+          dateInput: 'MM/YYYY',
+        },
+        display: {
+          dateInput: 'MM/YYYY',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      }
+    },
+  ],
 })
 export class FinancialsReportComponent implements OnInit {
 
@@ -24,6 +54,8 @@ export class FinancialsReportComponent implements OnInit {
   public uiColor: string = ui.color;
   public listCharts: any = [];
   public hasToWait: Boolean = false;
+  public datePicked: any;
+  public date = new FormControl(moment());
 
   private currentMonth: number = new Date().getMonth() + 1;
   private currentYear: number = new Date().getFullYear();
@@ -116,13 +148,20 @@ export class FinancialsReportComponent implements OnInit {
         chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
         chart.labels = labels;
         chart.options = this.genericOptions;
-        chart.plugins = [];
         chart.legend = true;
 
         return chart;
       },
       error => { }
     );
+  }
+
+  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    datepicker.close();
   }
 
   /**
