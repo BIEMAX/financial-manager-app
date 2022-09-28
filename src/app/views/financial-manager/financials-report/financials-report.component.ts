@@ -147,10 +147,10 @@ export class FinancialsReportComponent implements OnInit {
       response => {
         let data: any = response;
 
-        var receivedData = data.data.data;
+        var receivedData = data.data;
 
-        let dataSet = receivedData.map((c: { value: any; }) => c.value);
-        let labels = receivedData.map((c: { name: any; }) => [c.name]);
+        let dataSet = [receivedData.data.entriesValues, receivedData.data.exitsValues, receivedData.data.remainValues];
+        let labels = receivedData.labels.map((c) => [c]);
 
         chart.type = 'pie';
         chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
