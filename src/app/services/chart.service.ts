@@ -24,4 +24,12 @@ export class ChartsService {
   getBillsByMonth (month: number, year: number) {
     return this.http.get(`${this.apiUrl}/charts/bills/${month}/${year}`, this.apiHeader);
   }
+
+  getBillsByYear (year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/${year}`, this.apiHeader);
+  }
+
+  getBillsOutgoingByMonth (month: number, year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/outgoing/${month}/${year}`, this.apiHeader);
+  }
 }

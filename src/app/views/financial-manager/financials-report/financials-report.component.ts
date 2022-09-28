@@ -48,8 +48,8 @@ export class FinancialsReportComponent implements OnInit {
             if (chart.hasAccess) {
               switch (chart.reportNumber) {
                 case 1: chart = this.getBillsByMonth(chart); break;
-                case 2: this.getBillsByYear(); break;
-                case 3: this.getBillsSpendByMonth(); break;
+                case 2: this.getBillsByYear(chart); break;
+                case 3: this.getBillsSpendByMonth(chart); break;
                 default: break;
               }
 
@@ -71,6 +71,7 @@ export class FinancialsReportComponent implements OnInit {
     this.chartsService.getBillsByMonth(this.currentMonth, this.currentYear).subscribe(
       response => {
         let data: any = response;
+
         chart.type = 'pie';
         chart.dataset = [{ data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)) }]; //Ordena os verdadeiros primeiro
         chart.labels = [data.data.labels[0], data.data.labels[1]];
@@ -84,12 +85,44 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  getBillsByYear () {
+  getBillsByYear (chart: any) {
+    this.chartsService.getBillsByYear(this.currentYear).subscribe(
+      response => {
+        let data: any = response;
+        chart.type = 'pie';
+        chart.dataset = [{ data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)) }]; //Ordena os verdadeiros primeiro
+        chart.labels = [data.data.labels[0], data.data.labels[1]];
+        chart.options = this.genericOptions;
+        chart.plugins = [];
+        chart.legend = true;
 
+        return chart;
+      },
+      error => { }
+    );
   }
 
-  getBillsSpendByMonth () {
+  getBillsSpendByMonth (chart: any) {
+    this.chartsService.getBillsOutgoingByMonth(this.currentMonth, this.currentYear).subscribe(
+      response => {
+        let data: any = response;
 
+        var outgoingData = data.data.data;
+
+        let dataSet = outgoingData.map((c: { value: any; }) => c.value);
+        let labels = outgoingData.map((c: { name: any; }) => [c.name]);
+
+        chart.type = 'pie';
+        chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
+        chart.labels = labels;
+        chart.options = this.genericOptions;
+        chart.plugins = [];
+        chart.legend = true;
+
+        return chart;
+      },
+      error => { }
+    );
   }
 
   /**

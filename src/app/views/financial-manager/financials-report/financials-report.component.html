@@ -1,12 +1,36 @@
-<!--Card with filters-->
-<div *ngIf="listCharts != undefined && listCharts != []">
+<!--Ordem vertical -->
+<!-- <div *ngIf="listCharts != undefined && listCharts != []">
   <div *ngFor="let chart of listCharts">
-    <mat-card>
-      <mat-card-title>{{chart.reportName}}</mat-card-title>
-      <!-- <mat-card-actions></mat-card-actions> -->
-      <canvas baseChart [type]="chart.type" [datasets]="chart.dataset" [labels]="chart.labels" [options]="chart.options"
-        [plugins]="chart.plugins" [legend]="chart.legend">
-      </canvas>
-    </mat-card>
+
+    <mat-grid-list cols="2" rowHeight="1:0.5">
+      <mat-grid-tile style="border-radius: 4px;">
+
+        <mat-card style="flex: 1 1 auto;">
+          <mat-card-title>{{chart.reportName}}</mat-card-title>
+          <canvas baseChart [type]="chart.type" [datasets]="chart.dataset" [labels]="chart.labels"
+            [options]="chart.options" [plugins]="chart.plugins" [legend]="chart.legend">
+          </canvas>
+        </mat-card>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+
   </div>
+</div> -->
+
+<div *ngIf="listCharts != undefined && listCharts != []">
+
+  <mat-grid-list cols="2" rowHeight="1:0.5">
+    <mat-grid-tile *ngFor="let chart of listCharts" style="border-radius: 4px;">
+
+      <mat-card style="flex: 1 1 auto;">
+        <mat-card-title>{{chart.reportName}}</mat-card-title>
+        <canvas baseChart [type]="chart.type" [datasets]="chart.dataset" [labels]="chart.labels"
+          [options]="chart.options" [plugins]="chart.plugins" [legend]="chart.legend">
+        </canvas>
+      </mat-card>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
 </div>
