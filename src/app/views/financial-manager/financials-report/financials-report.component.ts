@@ -54,8 +54,7 @@ export class FinancialsReportComponent implements OnInit {
   public uiColor: string = ui.color;
   public listCharts: any = [];
   public hasToWait: Boolean = false;
-  public datePicked: any;
-  public date = new FormControl(moment());
+  public dateToSelect: any = new FormControl(moment());
 
   private currentMonth: number = new Date().getMonth() + 1;
   private currentYear: number = new Date().getFullYear();
@@ -70,27 +69,14 @@ export class FinancialsReportComponent implements OnInit {
   }
 
   getUserCharts () {
-    this.chartsService.getChartsList().subscribe(
+    this.chartsService.getAvailableChartByUser().subscribe(
       response => {
         let charts: any = response;
 
         if (charts.data[0] != undefined && charts.data[0].charts.length > 0) {
-          this.listCharts = charts.data[0].charts.filter(c => c.hasAccess == true)
-          this.listCharts.map((chart) => {
-            if (chart.hasAccess) {
-              switch (chart.reportNumber) {
-                case 1: chart = this.getBillsByMonth(chart); break;
-                case 2: this.getBillsByYear(chart); break;
-                case 3: this.getBillsSpendByMonth(chart); break;
-                default: break;
-              }
-
-              this.showNotification("Sucesso ao consultar os relatórios", "");
-            }
-          });
-        } else {
-          this.showNotification("Não há relatórios disponíveis para seu usuário", "");
-        }
+          this.listCharts = charts.data[0].charts.filter(c => c.hasAccess == true);
+          this.updateChartData(this.currentMonth, this.currentYear);
+        } else this.showNotification("Não há relatórios disponíveis para seu usuário", "");
       },
       error => {
         this.hasToWait = false;
@@ -99,8 +85,8 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  getBillsByMonth (chart: any) {
-    this.chartsService.getBillsByMonth(this.currentMonth, this.currentYear).subscribe(
+  getBillsByMonth (chart: any, month: number, year: number) {
+    this.chartsService.getSumBillsByMonthAndYear(month, year).subscribe(
       response => {
         let data: any = response;
 
@@ -117,8 +103,8 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  getBillsByYear (chart: any) {
-    this.chartsService.getBillsByYear(this.currentYear).subscribe(
+  getBillsByYear (chart: any, year: number) {
+    this.chartsService.getSumBillsByYear(year).subscribe(
       response => {
         let data: any = response;
         chart.type = 'pie';
@@ -134,15 +120,15 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  getBillsSpendByMonth (chart: any) {
-    this.chartsService.getBillsOutgoingByMonth(this.currentMonth, this.currentYear).subscribe(
+  getBillsSpendByMonth (chart: any, month: number, year: number) {
+    this.chartsService.getMoneySpentByMonth(month, year).subscribe(
       response => {
         let data: any = response;
 
-        var outgoingData = data.data.data;
+        var spendData = data.data.data;
 
-        let dataSet = outgoingData.map((c: { value: any; }) => c.value);
-        let labels = outgoingData.map((c: { name: any; }) => [c.name]);
+        let dataSet = spendData.map((c: { value: any; }) => c.value);
+        let labels = spendData.map((c: { name: any; }) => [c.name]);
 
         chart.type = 'pie';
         chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
@@ -156,12 +142,72 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.date.value!;
+  getReceiptsAndExpensesByMonth (chart: any, month: number, year: number) {
+    this.chartsService.getMoneyRemainByMonth(month, year).subscribe(
+      response => {
+        let data: any = response;
+
+        var receivedData = data.data.data;
+
+        let dataSet = receivedData.map((c: { value: any; }) => c.value);
+        let labels = receivedData.map((c: { name: any; }) => [c.name]);
+
+        chart.type = 'pie';
+        chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
+        chart.labels = labels;
+        chart.options = this.genericOptions;
+        chart.legend = true;
+
+        return chart;
+      },
+      error => { }
+    );
+  }
+
+  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, reportNumber: any, chart: any) {
+
+    const ctrlValue = this.dateToSelect.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue(ctrlValue);
+    this.dateToSelect.setValue(ctrlValue);
     datepicker.close();
+
+    switch (chart.reportNumber) {
+      case 1: chart.date.setValue(ctrlValue); break;
+      case 2: chart.date.setValue(ctrlValue); break;
+      case 3: chart.date.setValue(ctrlValue); break;
+    }
+
+    this.updateChartData(normalizedMonthAndYear.month() + 1, normalizedMonthAndYear.year(), reportNumber);
+  }
+
+  /**
+   * Update specific chart after month changed by the user
+   * @param month 
+   * @param year 
+   * @param reportNumber 
+   */
+  updateChartData (month: number, year: number, reportNumber?: number) {
+    this.listCharts.map((chart) => {
+
+      chart.date = new FormControl(moment());
+      if (!chart.reportName.includes("anuais"))
+        chart.reportName = chart.reportName.replace("vigente", `${month}/${year}`);
+      else if (chart.reportName.includes("vigente")) {
+        let monthToReplace = chart.reportName.substring(chart.reportName.lastIndexOf(" "), chart.reportName.length);
+        chart.reportName = chart.reportName.replace(monthToReplace, ` ${month}/${year}`);
+      }
+
+      switch (chart.reportNumber) { //Loading screen, load all reports
+        case 1: chart = this.getBillsByMonth(chart, month, year); break;
+        case 2: chart = this.getBillsByYear(chart, year); break;
+        case 3: chart = this.getBillsSpendByMonth(chart, month, year); break;
+        case 4: chart = this.getReceiptsAndExpensesByMonth(chart, month, year); break;
+        default: break;
+      }
+
+      this.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`, "");
+    });
   }
 
   /**

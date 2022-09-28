@@ -17,19 +17,23 @@ export class ChartsService {
     })
   }
 
-  getChartsList () {
+  getAvailableChartByUser () {
     return this.http.get(`${this.apiUrl}/charts/user/access`, this.apiHeader)
   }
 
-  getBillsByMonth (month: number, year: number) {
-    return this.http.get(`${this.apiUrl}/charts/bills/${month}/${year}`, this.apiHeader);
+  getSumBillsByMonthAndYear (month: number, year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/sum/month/${month}/${year}`, this.apiHeader);
   }
 
-  getBillsByYear (year: number) {
-    return this.http.get(`${this.apiUrl}/charts/bills/${year}`, this.apiHeader);
+  getSumBillsByYear (year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/sum/year/${year}`, this.apiHeader);
   }
 
-  getBillsOutgoingByMonth (month: number, year: number) {
-    return this.http.get(`${this.apiUrl}/charts/bills/outgoing/${month}/${year}`, this.apiHeader);
+  getMoneySpentByMonth (month: number, year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/money/spent/${month}/${year}`, this.apiHeader);
+  }
+
+  getMoneyRemainByMonth (month: number, year: number) {
+    return this.http.get(`${this.apiUrl}/charts/bills/money/remain/${month}/${year}`, this.apiHeader);
   }
 }

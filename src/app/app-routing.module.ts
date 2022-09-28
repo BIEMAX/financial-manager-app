@@ -29,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    component: FinancialsReportComponent
+    component: FinancialsReportComponent,
+    canActivate: [UserHasAccess]
   },
   //Templates
   {
