@@ -185,9 +185,12 @@ export class FinancialsReportComponent implements OnInit {
     this.listCharts.map((chart) => {
 
       chart.date = new FormControl(moment());
-      if (!chart.reportName.includes("anuais"))
+
+      //The vigente comes from database (first opening)
+      if (chart.reportName.toLowerCase().includes("vigente") && !chart.reportName.toLowerCase().includes("anuais")) {
         chart.reportName = chart.reportName.replace("vigente", `${month}/${year}`);
-      else if (chart.reportName.includes("vigente")) {
+      }
+      else if (!chart.reportName.toLowerCase().includes("anuais")) {
         let monthToReplace = chart.reportName.substring(chart.reportName.lastIndexOf(" "), chart.reportName.length);
         chart.reportName = chart.reportName.replace(monthToReplace, ` ${month}/${year}`);
       }
