@@ -45,7 +45,7 @@ export class FinancialsReportComponent implements OnInit {
 
   // Pie
   private genericOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: false
   };
 
   /**
@@ -164,19 +164,13 @@ export class FinancialsReportComponent implements OnInit {
     );
   }
 
-  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, reportNumber: any, chart: any) {
+  setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>, reportNumber: any) {
 
     const ctrlValue = this.dateToSelect.value!;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.dateToSelect.setValue(ctrlValue);
     datepicker.close();
-
-    switch (chart.reportNumber) {
-      case 1: chart.date.setValue(ctrlValue); break;
-      case 2: chart.date.setValue(ctrlValue); break;
-      case 3: chart.date.setValue(ctrlValue); break;
-    }
 
     this.updateChartData(normalizedMonthAndYear.month() + 1, normalizedMonthAndYear.year(), reportNumber);
   }

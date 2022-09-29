@@ -1,9 +1,10 @@
 mat-card {
-  margin: 10em auto;
+  margin: 2em auto;
   margin-top: 10em auto;
+  margin-left: 10em auto;
+  margin-right: 10em auto;
   text-align: center;
   border-radius: 10px;
-  margin-left: 10em auto;
   width: calc(100% - 70px);
   height: calc(100% - 70px);
 }
