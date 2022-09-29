@@ -13,6 +13,10 @@ export class HeaderComponent implements OnInit {
 
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
+  public isExpanded = true;
+  public showSubmenu: boolean = false;
+  public isShowing = false;
+  public showSubSubMenu: boolean = false;
 
   constructor(private loginService: LoginService) { }
 
@@ -20,6 +24,18 @@ export class HeaderComponent implements OnInit {
     this.loginService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
+  }
+
+  mouseenter () {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave () {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
   }
 
 }

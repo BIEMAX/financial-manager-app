@@ -1,29 +1,45 @@
-.toolbar-home {
-    flex: 1 1 auto;
-    color: red;
-    background-color: crimson;
+.example-container {
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.toolbar-text {
-    color: white;
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
-.button-row {
-    display: table-cell;
-    width: 490px;
+.example-sidenav {
+  user-select: none;
 }
 
-form .content .button-form {
-    display: table-cell;
-    width: 490px;
+.full-width {
+  width: 100%;
 }
 
-.form-input {
-    float: left;
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  padding-left: 30px;
+}
+
+.submenu.expanded {
+  transform: scaleY(1);
 }
 
 .content {
-    margin-top: 2pc;
-    position: relative;
-    margin-left: 2pc;
+  margin-top: 2pc;
+  position: relative;
+  margin-left: 2pc;
 }
