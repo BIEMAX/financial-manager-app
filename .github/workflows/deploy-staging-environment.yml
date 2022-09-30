@@ -2,7 +2,7 @@ name: deploy-staging-environment
 on:
   push:
     branches:
-      - feature/firebase_deploy
+      - feature/pipelines
       - develop
 jobs:
   install:
