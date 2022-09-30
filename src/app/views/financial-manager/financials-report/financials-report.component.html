@@ -1,1 +1,19 @@
-<p>financials-report works!</p>
+<div *ngIf="listCharts != undefined && listCharts != []">
+  <mat-card *ngFor="let chart of listCharts">
+
+    <mat-card-title>{{chart.reportName}}</mat-card-title>
+
+    <mat-form-field *ngIf="chart.reportNumber != '2'">
+      <mat-label>Mês e ano</mat-label>
+      <input matInput [matDatepicker]="dp" placeholder="Escolha uma data" [formControl]="dateToSelect">
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp, chart.reportNumber)"
+        panelClass="example-month-picker"></mat-datepicker>
+    </mat-form-field>
+
+    <canvas baseChart [type]="chart.type" [datasets]="chart.dataset" [labels]="chart.labels" [options]="chart.options"
+      [legend]="chart.legend">
+    </canvas>
+
+  </mat-card>
+</div>

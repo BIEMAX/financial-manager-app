@@ -52,13 +52,11 @@ export const MY_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  //NG Models variables
-  descPicked: string = "";
-  datePicked: any;
-  hasToWait: Boolean = false;
-  listBills: MatTableDataSource<any>;
-  displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
-  date = new FormControl(moment());
+  public descPicked: string = "";
+  public hasToWait: Boolean = false;
+  public listBills: MatTableDataSource<any>;
+  public displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
+  public date = new FormControl(moment());
 
   /**
    * Define default color on UI (User Interface)

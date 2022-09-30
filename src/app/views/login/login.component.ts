@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment, ui } from 'src/environments/environment';
+import { ui } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
@@ -13,6 +13,18 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 })
 export class LoginComponent implements OnInit {
 
+  public userLogin: any = "dionei.santos";
+  public userPassword: any = "senha_teste";
+  /**
+   * Define true to show waiting progress spinner on front.
+   */
+  public hasToWait: boolean = false;
+  /**
+     * Define default color on UI (User Interface)
+     */
+  public uiColor: string = ui.color;
+  public showPassword: Boolean = false;
+
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
@@ -20,16 +32,9 @@ export class LoginComponent implements OnInit {
     private userAccessService: UserAccessService,
   ) { }
 
-  userLogin: any = "dionei.santos";
-  userPassword: any = "JOSNEL";
-  /**
-   * Define true to show waiting progress spinner on front.
-   */
-  hasToWait: boolean = false;
-
   ngOnInit (): void { }
 
-  doLogin (button: any) {
+  doLogin () {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
@@ -48,10 +53,13 @@ export class LoginComponent implements OnInit {
               this.userAccessService.user.userBearerExpiration = "";
               this.userAccessService.permissions = loginData.permissions;
 
+              this.loginService.enableMenusOnScreen.emit(true);
+
               this.showNotification('Login efetuado com êxito', '');
               this.router.navigate(['home']);
             },
             error => {
+              this.loginService.enableMenusOnScreen.emit(false);
               console.log(error);
               this.hasToWait = false;
               this.showNotification(error.error.message, 'Erro ao tentar efetuar login');
@@ -67,6 +75,10 @@ export class LoginComponent implements OnInit {
       this.hasToWait = false;
       this.showNotification(err, 'Login');
     }
+  }
+
+  togglePasswordVisibility () {
+    this.showPassword = !this.showPassword;
   }
 
   /**

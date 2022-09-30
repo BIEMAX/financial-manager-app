@@ -35,6 +35,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
 
 //Aplication packages
@@ -46,7 +47,9 @@ import { FinancialsListComponent } from './views/financial-manager/financials-li
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
-import { FinancialsReportComponent } from './financials-report/financials-report.component';
+import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { FinancialsReportComponent } from './financials-report/financials-report
     CustomDialogComponent,
     PageNotFoundComponent,
     FinancialsNewComponent,
-    FinancialsReportComponent
+    FinancialsReportComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -94,7 +99,8 @@ import { FinancialsReportComponent } from './financials-report/financials-report
     CdkTreeModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatGridListModule
+    MatGridListModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

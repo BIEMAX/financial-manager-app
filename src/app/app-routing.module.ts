@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-f
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { UserHasAccess } from './services/user-access-permissions';
+import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 
 //Router to access through angular
 const routes: Routes = [
@@ -18,23 +19,18 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [UserHasAccess],
+    canActivate: [UserHasAccess]
   },
   //Financials manager
   {
     path: 'financials',
     component: FinancialsListComponent,
-    canActivate: [UserHasAccess],
-    // children: [
-    //   {
-    //     path: 'new',
-    //     component: FinancialsNewComponent
-    //   }
-    // ]
+    canActivate: [UserHasAccess]
   },
   {
     path: 'reports',
-    component: FinancialsListComponent
+    component: FinancialsReportComponent,
+    canActivate: [UserHasAccess]
   },
   //Templates
   {
