@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +20,11 @@ export class HeaderComponent implements OnInit {
   public isShowing = false;
   public showSubSubMenu: boolean = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private userAccessService: UserAccessService,
+  ) { }
 
   ngOnInit () {
     this.loginService.enableMenusOnScreen.subscribe(
@@ -36,6 +42,21 @@ export class HeaderComponent implements OnInit {
     if (!this.isExpanded) {
       this.isShowing = false;
     }
+  }
+
+  logout () {
+    localStorage.removeItem('userBearerKey');
+    localStorage.removeItem('userName');
+
+    this.userAccessService.userAuthenticated = false;
+    this.userAccessService.user.userLogin = '';
+    this.userAccessService.user.userPass = '';
+    this.userAccessService.user.userBearer = '';
+    this.userAccessService.user.userBearerExpiration = '';
+    this.userAccessService.permissions = '';
+
+    this.loginService.enableMenusOnScreen.emit(false);
+    this.router.navigate(['']);
   }
 
 }
