@@ -12,7 +12,7 @@
           Usuário para login
           <mat-icon>login</mat-icon>
         </mat-label>
-        <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin">
+        <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin" required (keyup.enter)="doLogin()">
       </mat-form-field>
 
       <br>
@@ -21,21 +21,23 @@
       <mat-form-field class="full-width-input" appearance="fill">
         <mat-label>
           Senha
-          <mat-icon>lock</mat-icon>
         </mat-label>
-        <input matInput placeholder="" value="" type="password" [(ngModel)]="userPassword">
+        <input matInput placeholder="" value="" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="userPassword"
+          required (keyup.enter)="doLogin()">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{ showPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
       </mat-form-field>
 
       <br>
 
-      <mat-slide-toggle>
+      <mat-slide-toggle color="{{uiColor}}">
         Salvar senha
       </mat-slide-toggle>
 
       <br><br>
 
       <div class="example-button-row">
-        <button mat-raised-button (click)="doLogin($event)">Login</button>
+        <button mat-raised-button color="{{uiColor}}" (click)="doLogin()">Login</button>
       </div>
 
       <br>

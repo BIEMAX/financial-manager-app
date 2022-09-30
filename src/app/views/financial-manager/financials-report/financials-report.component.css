@@ -1,0 +1,15 @@
+mat-card {
+  margin: 2em auto;
+  margin-top: 10em auto;
+  margin-left: 10em auto;
+  margin-right: 10em auto;
+  text-align: center;
+  border-radius: 10px;
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}
+
+canvas {
+  margin: 5em auto;
+  /*margin-top: 5em auto;*/
+}

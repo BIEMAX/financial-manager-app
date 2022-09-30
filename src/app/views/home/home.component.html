@@ -1,13 +1,11 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav>
-
-  </mat-sidenav>
+  <mat-sidenav #sidenav></mat-sidenav>
   <mat-sidenav-content>
-    <div style="height: 88vh;">
+    <div style="height: 100%;">
 
       <div class="example-action-buttons">
-        <button mat-button (click)="accordion.openAll()">Expand All</button>
-        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+        <button mat-button (click)="accordion.openAll()">Expandir todos</button>
+        <button mat-button (click)="accordion.closeAll()">Recolher todos</button>
       </div>
       <mat-accordion multi>
 
@@ -38,10 +36,7 @@
           </mat-expansion-panel>
         </div>
 
-
       </mat-accordion>
-
-      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
