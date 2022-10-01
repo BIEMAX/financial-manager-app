@@ -3,7 +3,7 @@ node_modules
 dist
 .angular
 .firebase
-src/environments
+/src/environments/**
 
 # #Files
 ./firebase/**
