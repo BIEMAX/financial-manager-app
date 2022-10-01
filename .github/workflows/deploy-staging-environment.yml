@@ -46,7 +46,6 @@ name: Deployment in staging environment
 on:
   push:
     branches:
-      - feature/pipelines
       - develop
 
 jobs:
