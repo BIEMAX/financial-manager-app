@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ui } from 'src/environments/environment';
+import { ui, environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
 import { LoginService } from '../../../services/login.service';
 import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
+import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css']
 })
 export class UserLoginComponent implements OnInit {
 
@@ -30,6 +33,7 @@ export class UserLoginComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private userAccessService: UserAccessService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit (): void { }
@@ -79,6 +83,31 @@ export class UserLoginComponent implements OnInit {
 
   togglePasswordVisibility () {
     this.showPassword = !this.showPassword;
+  }
+
+  /**
+   * Open a dialog to create a new bill
+   */
+  openDialogAddNewUser (bill?: any): void {
+    const dialogRef = this.dialog.open(UserNewComponent, {
+      disableClose: true,
+      width: '50%',
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        if (environment.logInfo) console.log('result: ', result);
+        if (bill && result.id != '0') this.createNewUser();
+      }
+      else {
+        this.showNotification('Nova conta a pagar não foi salva', '');
+        if (environment.logInfo) console.log('The dialog was closed');
+      }
+    });
+  }
+
+  createNewUser () {
   }
 
   /**

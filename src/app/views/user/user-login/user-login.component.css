@@ -18,3 +18,8 @@ mat-form-field {
   grid-column-start: 2;
   grid-column-end: 2;
 }
+
+.space {
+  display: inline-block;
+  margin-right: 10px;
+}
