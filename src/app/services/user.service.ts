@@ -7,7 +7,7 @@ import { LogginModel } from "../models/login.model";
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   enableMenusOnScreen = new EventEmitter<boolean>();
 
