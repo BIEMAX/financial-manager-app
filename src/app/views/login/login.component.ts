@@ -13,8 +13,8 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 })
 export class LoginComponent implements OnInit {
 
-  public userLogin: any = "dionei.santos";
-  public userPassword: any = "senha_teste";
+  public userLogin: any = "";
+  public userPassword: any = "";
   /**
    * Define true to show waiting progress spinner on front.
    */
