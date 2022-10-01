@@ -88,7 +88,7 @@ export class FinancialsNewComponent implements OnInit {
     if (this.billName || this.billDescription || this.billDueDate || this.billTotalValue || this.billAmountQuantity) {
       if (confirm("Você deseja realmente sair?")) return true;
       else return false;
-    } else return false;
+    } else return true;
   }
 
   addTag (event: MatChipInputEvent): void {
