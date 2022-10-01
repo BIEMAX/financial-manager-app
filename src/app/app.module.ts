@@ -42,7 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
-import { LoginComponent } from './views/login/login.component';
+import { UserLoginComponent } from './views/user/user-login/user-login.component';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
@@ -50,19 +50,25 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { UserComponent } from './views/user/user-change-pass/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    FinancialsListComponent,
+    //User
+    UserLoginComponent,
+    UserComponent,
+    //Generic
     CustomDialogComponent,
     PageNotFoundComponent,
+    //Financials
+    FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
+    //Footer and header
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     ReactiveFormsModule,

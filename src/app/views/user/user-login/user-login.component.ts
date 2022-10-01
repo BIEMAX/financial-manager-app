@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ui } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../../services/login.service';
 import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 
@@ -11,7 +11,7 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
 
   public userLogin: any = "";
   public userPassword: any = "";
