@@ -34,6 +34,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
@@ -60,6 +62,7 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     //User
     UserLoginComponent,
     UserComponent,
+    UserNewComponent,
     //Generic
     CustomDialogComponent,
     PageNotFoundComponent,
@@ -70,7 +73,6 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     //Footer and header
     FooterComponent,
     HeaderComponent,
-    UserNewComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -108,6 +110,8 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatGridListModule,
+    MatTooltipModule,
+    MatBadgeModule,
     NgChartsModule
   ],
   providers: [],
