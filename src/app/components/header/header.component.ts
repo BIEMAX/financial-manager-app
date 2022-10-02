@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
   public showSubmenu: boolean = false;
   public isShowing = false;
   public showSubSubMenu: boolean = false;
+  public userNameComplete: String = "";
+  public userFirstName: String = "";
 
   constructor(
     private userService: UserService,
@@ -27,6 +29,8 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit () {
+    this.userNameComplete = localStorage.getItem('userName');
+    this.userFirstName = localStorage.getItem('userName').split(" ")[0];
     this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
@@ -58,6 +62,10 @@ export class HeaderComponent implements OnInit {
 
     this.userService.enableMenusOnScreen.emit(false);
     this.router.navigate(['']);
+  }
+
+  updateUser () {
+
   }
 
 }

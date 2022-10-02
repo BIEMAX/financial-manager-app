@@ -5,12 +5,27 @@
     </button>
     <h1>{{applicationName}}</h1>
     <span class="menu-spacer"></span>
-    <div>
+    <div class="right-align">
 
       <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
       <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
       <a mat-button [routerLink]="'/'"> Sair... </a> -->
+
+      <a mat-button> Olá {{userFirstName}}, bem-vindo de volta </a>
+
+      <button mat-icon-button>
+        <mat-icon matBadge="15" matBadgeColor="warn" matTooltip="Notificações" click="">notifications_active
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Atualizar dados" (click)="updateUser()">settings</mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Sair..." (click)="logout()" [routerLink]="'/'">logout</mat-icon>
+      </button>
 
     </div>
   </mat-toolbar-row>
@@ -51,13 +66,12 @@
           </a>
         </div>
 
-      </div>
+        <!-- <mat-list-item [routerLink]="'/'" (click)="logout()" class="parent">
+          <span class="full-width" *ngIf="isExpanded || isShowing">Sair</span>
+          <mat-icon mat-list-icon>logout</mat-icon>
+        </mat-list-item> -->
 
-      <!--(click)="showSubmenu = !showSubmenu"-->
-      <mat-list-item [routerLink]="'/'" (click)="logout()" class="parent">
-        <span class="full-width" *ngIf="isExpanded || isShowing">Sair</span>
-        <mat-icon mat-list-icon>logout</mat-icon>
-      </mat-list-item>
+      </div>
 
     </mat-nav-list>
   </mat-sidenav>
