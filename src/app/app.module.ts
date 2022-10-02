@@ -52,7 +52,7 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
-import { UserComponent } from './views/user/user-change-pass/user.component';
+import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
 import { UserNewComponent } from './views/user/user-new/user-new.component';
 
 @NgModule({
@@ -61,8 +61,8 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     HomeComponent,
     //User
     UserLoginComponent,
-    UserComponent,
     UserNewComponent,
+    UserUpdateInfoComponent,
     //Generic
     CustomDialogComponent,
     PageNotFoundComponent,

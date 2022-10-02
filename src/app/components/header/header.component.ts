@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
+import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +30,8 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private userAccessService: UserAccessService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit () {
@@ -64,8 +70,50 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  updateUser () {
+  /**
+   * Open a dialog to create a new user
+   */
+  openDialogUpdateUser (): void {
+    const dialogRef = this.dialog.open(UserUpdateInfoComponent, {
+      disableClose: true,
+      width: '30%',
+      autoFocus: true
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        if (environment.logInfo) console.log('result: ', result);
+        if (result) this.createNewUser();
+      }
+      else {
+        this.showNotification('Não foi possível cadastrar uma nova conta', '');
+        if (environment.logInfo) console.log('The dialog was closed');
+      }
+    });
+  }
+
+  createNewUser () {
+    // this.userService.createUser().subscribe(
+    //   response => {
+
+    //     this.showNotification('Conta criada com sucesso', '');
+    //   },
+    //   error => {
+    //     console.log(error);
+
+    //     this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+    //   }
+    // );
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event
+   * @param duration Integer containing the value to animation time
+   */
+  showNotification (message: string, action: string, duration = 2000) {
+    this.snackBar.open(message, action, { duration: duration })
   }
 
 }
