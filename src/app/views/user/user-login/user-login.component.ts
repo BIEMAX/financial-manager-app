@@ -4,10 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { LoginService } from '../../../services/login.service';
+import { UserService } from '../../../services/user.service';
 import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
-    private loginService: LoginService,
+    private userService: UserService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
   ) { }
@@ -43,7 +44,7 @@ export class UserLoginComponent implements OnInit {
     try {
       if (this.userLogin && this.userPassword) {
         this.showNotification('Login ou senha inválidos. Tente novamente.', '');
-        this.loginService.doLogin(new LogginModel(this.userLogin, this.userPassword))
+        this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
               let loginData: any = response;
@@ -57,13 +58,13 @@ export class UserLoginComponent implements OnInit {
               this.userAccessService.user.userBearerExpiration = "";
               this.userAccessService.permissions = loginData.permissions;
 
-              this.loginService.enableMenusOnScreen.emit(true);
+              this.userService.enableMenusOnScreen.emit(true);
 
               this.showNotification('Login efetuado com êxito', '');
               this.router.navigate(['home']);
             },
             error => {
-              this.loginService.enableMenusOnScreen.emit(false);
+              this.userService.enableMenusOnScreen.emit(false);
               console.log(error);
               this.hasToWait = false;
               this.showNotification(error.error.message, 'Erro ao tentar efetuar login');
@@ -88,26 +89,38 @@ export class UserLoginComponent implements OnInit {
   /**
    * Open a dialog to create a new bill
    */
-  openDialogAddNewUser (bill?: any): void {
+  openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
-      width: '50%',
+      width: '30%',
       autoFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
-        if (bill && result.id != '0') this.createNewUser();
+        if (result) this.createNewUser(result);
       }
       else {
-        this.showNotification('Nova conta a pagar não foi salva', '');
+        this.showNotification('Não foi possível cadastrar uma nova conta', '');
         if (environment.logInfo) console.log('The dialog was closed');
       }
     });
   }
 
-  createNewUser () {
+  createNewUser (user: UserModel) {
+    this.hasToWait = true;
+    this.userService.createUser(user).subscribe(
+      response => {
+        this.hasToWait = false;
+        this.showNotification('Conta criada com sucesso', '');
+      },
+      error => {
+        console.log(error);
+        this.hasToWait = false;
+        this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+      }
+    );
   }
 
   /**

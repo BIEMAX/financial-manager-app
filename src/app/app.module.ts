@@ -51,6 +51,7 @@ import { FinancialsReportComponent } from './views/financial-manager/financials-
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UserComponent } from './views/user/user-change-pass/user.component';
+import { UserNewComponent } from './views/user/user-new/user-new.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { UserComponent } from './views/user/user-change-pass/user.component';
     //Footer and header
     FooterComponent,
     HeaderComponent,
+    UserNewComponent,
   ],
   imports: [
     ReactiveFormsModule,
