@@ -49,14 +49,15 @@ export class UserLoginComponent implements OnInit {
             response => {
               let loginData: any = response;
               localStorage.setItem('userBearerKey', loginData.bearerKey);
-              localStorage.setItem('userName', this.userLogin);
+              localStorage.setItem('userLogin', this.userLogin);
+              localStorage.setItem('userName', loginData.data.userName);
 
               this.userAccessService.userAuthenticated = true;
               this.userAccessService.user.userLogin = this.userLogin;
               this.userAccessService.user.userPass = this.userPassword;
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.user.userBearerExpiration = "";
-              this.userAccessService.permissions = loginData.permissions;
+              this.userAccessService.permissions = loginData.data.permissions;
 
               this.userService.enableMenusOnScreen.emit(true);
 

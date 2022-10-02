@@ -67,7 +67,7 @@ export class FinancialsNewComponent implements OnInit {
   onSaveClick () {
     this.data = new FinancialModel(
       this.billId ? this.billId : '0',
-      localStorage.getItem('userName'),
+      localStorage.getItem('userLogin'),
       this.billName,
       `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,
       this.billDescription || '',
