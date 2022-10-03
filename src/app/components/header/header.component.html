@@ -56,7 +56,7 @@
         <!--Financials sub-menu-->
         <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
           <a mat-list-item [routerLink]="'/financials'" (click)="sidenav.toggle()">
-            <mat-icon>attach_money</mat-icon>Contas mensais
+            <mat-icon>attach_money</mat-icon>Gastos mensais
           </a>
           <a mat-list-item [routerLink]="'/defaulters'" (click)="sidenav.toggle()">
             <mat-icon>account_balance</mat-icon>Inadimplentes
