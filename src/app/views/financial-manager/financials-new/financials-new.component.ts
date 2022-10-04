@@ -23,16 +23,16 @@ import { environment, ui } from 'src/environments/environment';
 })
 export class FinancialsNewComponent implements OnInit {
 
-  //NG Models variables
-  billName: String;
-  billDueDate: String;
-  billDescription: String;
-  billTotalValue: Number;
-  billAmountQuantity: Number = 1;//Quantidade de vezes da conta
-  billTags: string[] = ['Contas fixas'];
-  isCashIn: Boolean = false;
-  uiColor: string = ui.color;
-  billId: String;
+  public billName: string;
+  public billDueDate: string;
+  public billDescription: string;
+  public billTotalValue: Number;
+  public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
+  public billTags: string[] = ['Contas fixas'];
+  public isCashIn: Boolean = false;
+  public uiColor: string = ui.color;
+  public billId: string;
+  public isBillPayed: boolean = false;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
@@ -61,6 +61,7 @@ export class FinancialsNewComponent implements OnInit {
       this.billAmountQuantity = this.data.quantityAmount;
       this.billTags = this.data.tags;
       this.isCashIn = this.data.isCashIn;
+      this.isBillPayed = this.data.isBillPayed;
     }
   }
 
@@ -74,7 +75,8 @@ export class FinancialsNewComponent implements OnInit {
       this.billTotalValue,
       this.billAmountQuantity,
       this.billTags,
-      this.isCashIn
+      this.isCashIn,
+      this.isBillPayed
     );
     if (environment.logInfo) console.log('this.data: ', this.data);
     this.dialogRef.close(this.data);

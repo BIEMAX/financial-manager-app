@@ -10,6 +10,7 @@ export class FinancialModel {
   quantityAmount: Number;
   tags: Array<String>;
   isCashIn: Boolean;
+  isBillPayed: Boolean = false;
 
   constructor(
     Id: String,
@@ -20,7 +21,8 @@ export class FinancialModel {
     Value: Number,
     QuantityAmount: Number,
     Tags: Array<String>,
-    IsCashIn: Boolean
+    IsCashIn: Boolean,
+    IsBillPayed: Boolean
   ) {
     if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException(Id);
     else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException(Name);
@@ -36,6 +38,7 @@ export class FinancialModel {
       this.quantityAmount = QuantityAmount || 1;
       this.tags = Tags;
       this.isCashIn = IsCashIn;
+      this.isBillPayed = IsBillPayed;
     }
   }
 }

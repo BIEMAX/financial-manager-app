@@ -30,14 +30,10 @@
       <textarea matInput hidden></textarea>
     </mat-form-field>
 
+    <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashIn">
+      Conta paga? {{isBillPayed == true ? 'Sim' : 'Não' }}
+    </mat-checkbox>
 
-    <mat-form-field appearance="fill" style="width: 47.5%;">
-      <mat-label>
-        Descrição da conta
-        <mat-icon>description</mat-icon>
-      </mat-label>
-      <input matInput type="text" placeholder="Informações da conta a ser pagar" [(ngModel)]="billDescription">
-    </mat-form-field>
   </div>
 
   <!--Third line-->
@@ -80,6 +76,17 @@
           {{tag}}
         </mat-option>
       </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>
+        Descrição da conta
+        <mat-icon>description</mat-icon>
+      </mat-label>
+      <textarea matInput type="text-area" placeholder="Informações da conta a ser pagar" [(ngModel)]="billDescription">
+      </textarea>
     </mat-form-field>
   </div>
 
