@@ -36,6 +36,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule } from '@angular/common/http';
@@ -112,6 +113,7 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     MatGridListModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatCheckboxModule,
     NgChartsModule
   ],
   providers: [],
