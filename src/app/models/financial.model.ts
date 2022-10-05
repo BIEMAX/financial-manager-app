@@ -1,4 +1,4 @@
-import { EmptyFieldException } from '../exceptions/empty.field.exception'
+import { EmptyFieldException } from 'src/app/exceptions/empty.field.exception';
 
 export class FinancialModel {
   id: String;

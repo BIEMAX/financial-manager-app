@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { UserService } from '../../../services/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
