@@ -36,4 +36,8 @@ export class UserService {
   createUser (user: UserModel) {
     return this.http.post(`${this.apiUrl}/user/new`, JSON.stringify(user), this.apiHeaderSecret);
   }
+
+  updateUser (user: UserModel) {
+    return this.http.post(`${this.apiUrl}/user/update`, JSON.stringify(user), this.apiHeader);
+  }
 }

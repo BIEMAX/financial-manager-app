@@ -9,6 +9,7 @@ import { environment, ui } from 'src/environments/environment';
 })
 export class UserUpdateInfoComponent implements OnInit {
 
+  public userName: String;
   public userOldPass: String;
   public userNewPass: String;
   public userEmail: String;

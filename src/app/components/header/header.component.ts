@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -83,27 +84,23 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
-        if (result) this.createNewUser();
-      }
-      else {
-        this.showNotification('Não foi possível cadastrar uma nova conta', '');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (result) this.updateUser(result);
       }
     });
   }
 
-  createNewUser () {
-    // this.userService.createUser().subscribe(
-    //   response => {
+  updateUser (user: UserModel) {
+    this.userService.updateUser(user).subscribe(
+      response => {
+        
+        this.showNotification('Conta criada com sucesso', '');
+      },
+      error => {
+        console.log(error);
 
-    //     this.showNotification('Conta criada com sucesso', '');
-    //   },
-    //   error => {
-    //     console.log(error);
-
-    //     this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
-    //   }
-    // );
+        this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+      }
+    );
   }
 
   /**

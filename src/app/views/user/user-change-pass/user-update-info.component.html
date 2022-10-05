@@ -1,6 +1,44 @@
 <div>
 
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>
+      Nome
+      <mat-icon>person</mat-icon>
+    </mat-label>
+    <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userName">
+  </mat-form-field>
 
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>
+      Email
+      <mat-icon>mail</mat-icon>
+    </mat-label>
+    <input matInput type="text" placeholder="E-mail" [(ngModel)]="userName">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>
+      Senha atual
+      <mat-icon>key</mat-icon>
+    </mat-label>
+    <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userOldPass">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>
+      Nova senha
+      <mat-icon>key</mat-icon>
+    </mat-label>
+    <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userOldPass">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>
+      Repita a nova senha
+      <mat-icon>key</mat-icon>
+    </mat-label>
+    <input matInput type="password" placeholder="Repita a senha nova" [(ngModel)]="userOldPass">
+  </mat-form-field>
 
   <div mat-dialog-actions>
     <button mat-button color="{{uiColor}}" (click)="onExitClick()">Sair</button>

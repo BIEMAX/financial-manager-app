@@ -43,7 +43,6 @@ export class UserLoginComponent implements OnInit {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
-        this.showNotification('Login ou senha inválidos. Tente novamente.', '');
         this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
@@ -88,7 +87,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   /**
-   * Open a dialog to create a new bill
+   * Open a dialog to create a new user
    */
   openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
