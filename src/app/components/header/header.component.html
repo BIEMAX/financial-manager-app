@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="isExpanded = !isExpanded">
+    <button mat-icon-button matTooltip="Menu" (click)="isExpanded = !isExpanded">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>{{applicationName}}</h1>

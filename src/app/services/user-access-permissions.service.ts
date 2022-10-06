@@ -8,12 +8,7 @@ export class UserAccessService implements OnDestroy {
 
   public userAuthenticated: Boolean = false;
   public showMainMenu: Boolean = false;
-  public user = {
-    userLogin: "",
-    userBearer: "",
-    userPass: "",
-    userBearerExpiration: ""
-  };
+  public user: any = [];
   public permissions: any = [];
 
   constructor(private http: HttpClient) { }
