@@ -21,9 +21,9 @@ export class HeaderComponent implements OnInit {
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
   public isExpanded = true;
-  public showSubmenu: boolean = false;
+  public showSubmenu: boolean = true;
   public isShowing = false;
-  public showSubSubMenu: boolean = false;
+  public showSubSubMenu: boolean = true;
   public userNameComplete: String = "";
   public userFirstName: String = "";
 

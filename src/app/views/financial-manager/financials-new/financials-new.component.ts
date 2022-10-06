@@ -24,7 +24,7 @@ import { environment, ui } from 'src/environments/environment';
 export class FinancialsNewComponent implements OnInit {
 
   public billName: string;
-  public billDueDate: string;
+  public billDueDate: string; //format yyyy-MM-dd
   public billDescription: string;
   public billTotalValue: Number;
   public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
@@ -33,6 +33,7 @@ export class FinancialsNewComponent implements OnInit {
   public uiColor: string = ui.color;
   public billId: string;
   public isBillPayed: boolean = false;
+  public isBillValueToDivide: boolean = false;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
@@ -62,6 +63,8 @@ export class FinancialsNewComponent implements OnInit {
       this.billTags = this.data.tags;
       this.isCashIn = this.data.isCashIn;
       this.isBillPayed = this.data.isBillPayed;
+    } else {
+      this.billDueDate = new Date().toISOString().split("T")[0];
     }
   }
 
@@ -76,7 +79,8 @@ export class FinancialsNewComponent implements OnInit {
       this.billAmountQuantity,
       this.billTags,
       this.isCashIn,
-      this.isBillPayed
+      this.isBillPayed,
+      this.isBillValueToDivide
     );
     if (environment.logInfo) console.log('this.data: ', this.data);
     this.dialogRef.close(this.data);
