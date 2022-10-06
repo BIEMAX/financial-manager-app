@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { UserService } from '../../../services/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
@@ -17,8 +17,8 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class UserLoginComponent implements OnInit {
 
-  public userLogin: any = "";
-  public userPassword: any = "";
+  public userLogin: string = "";
+  public userPassword: string = "";
   /**
    * Define true to show waiting progress spinner on front.
    */
@@ -52,10 +52,8 @@ export class UserLoginComponent implements OnInit {
               localStorage.setItem('userName', loginData.data.userName);
 
               this.userAccessService.userAuthenticated = true;
-              this.userAccessService.user.userLogin = this.userLogin;
-              this.userAccessService.user.userPass = this.userPassword;
+              this.userAccessService.user = loginData.data;
               this.userAccessService.user.userBearer = loginData.bearerKey;
-              this.userAccessService.user.userBearerExpiration = "";
               this.userAccessService.permissions = loginData.data.permissions;
 
               this.userService.enableMenusOnScreen.emit(true);

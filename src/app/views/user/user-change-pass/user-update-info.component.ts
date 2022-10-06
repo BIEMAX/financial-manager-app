@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment, ui } from 'src/environments/environment';
+import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 
 @Component({
   selector: 'app-user',
@@ -16,11 +17,18 @@ export class UserUpdateInfoComponent implements OnInit {
   public uiColor = ui.color;
 
   constructor(
+    private userAccessService: UserAccessService,
     public dialogRef: MatDialogRef<UserUpdateInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit (): void {
+    this.loadPreviousInformation();
+  }
+
+  loadPreviousInformation () {
+    this.userName = this.userAccessService.user.userName;
+    this.userEmail = this.userAccessService.user.email;
   }
 
   onExitClick () {

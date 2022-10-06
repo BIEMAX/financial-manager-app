@@ -61,10 +61,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userName');
 
     this.userAccessService.userAuthenticated = false;
-    this.userAccessService.user.userLogin = '';
-    this.userAccessService.user.userPass = '';
-    this.userAccessService.user.userBearer = '';
-    this.userAccessService.user.userBearerExpiration = '';
+    this.userAccessService.user = [];
     this.userAccessService.permissions = '';
 
     this.userService.enableMenusOnScreen.emit(false);
@@ -92,7 +89,7 @@ export class HeaderComponent implements OnInit {
   updateUser (user: UserModel) {
     this.userService.updateUser(user).subscribe(
       response => {
-        
+
         this.showNotification('Conta criada com sucesso', '');
       },
       error => {
