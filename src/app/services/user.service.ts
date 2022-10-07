@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { LogginModel } from "../models/login.model";
-import { UserModel } from "../models/user.model";
+import { UserModel, UserUpdateModel } from "../models/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,12 @@ export class UserService {
       'x_client_id': environment.apiClientId
     })
   }
+  private readonly apiHeaderAuth = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: localStorage.getItem('userBearerKey')
+    })
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -37,7 +43,7 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/user/new`, JSON.stringify(user), this.apiHeaderSecret);
   }
 
-  updateUser (user: UserModel) {
-    return this.http.post(`${this.apiUrl}/user/update`, JSON.stringify(user), this.apiHeader);
+  updateUser (user: UserUpdateModel) {
+    return this.http.post(`${this.apiUrl}/user/update`, JSON.stringify(user), this.apiHeaderAuth);
   }
 }

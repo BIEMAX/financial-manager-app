@@ -8,7 +8,7 @@
           Nome
           <mat-icon>person</mat-icon>
         </mat-label>
-        <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userName">
+        <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userNameNew">
       </mat-form-field>
 
       <mat-form-field appearance="fill" style="width: 100%;">
@@ -16,7 +16,7 @@
           Email
           <mat-icon>mail</mat-icon>
         </mat-label>
-        <input matInput type="text" placeholder="E-mail" [(ngModel)]="userEmail">
+        <input matInput type="text" placeholder="E-mail" [(ngModel)]="userEmailNew">
       </mat-form-field>
 
     </mat-tab>
@@ -27,7 +27,7 @@
           Senha atual
           <mat-icon>key</mat-icon>
         </mat-label>
-        <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userOldPass">
+        <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userPassOld">
       </mat-form-field>
 
       <mat-form-field appearance="fill" style="width: 100%;">
@@ -35,7 +35,7 @@
           Nova senha
           <mat-icon>key</mat-icon>
         </mat-label>
-        <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userOldPass">
+        <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userPassNew">
       </mat-form-field>
 
       <mat-form-field appearance="fill" style="width: 100%;">
@@ -43,7 +43,7 @@
           Repita a nova senha
           <mat-icon>key</mat-icon>
         </mat-label>
-        <input matInput type="password" placeholder="Repita a senha nova" [(ngModel)]="userOldPass">
+        <input matInput type="password" placeholder="Repita a senha nova" [(ngModel)]="userPassRepeatNew">
       </mat-form-field>
 
     </mat-tab>

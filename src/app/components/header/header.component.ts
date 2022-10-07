@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
-import { UserModel } from 'src/app/models/user.model';
+import { UserUpdateModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -86,16 +86,17 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  updateUser (user: UserModel) {
+  updateUser (user: UserUpdateModel) {
     this.userService.updateUser(user).subscribe(
       response => {
-
-        this.showNotification('Conta criada com sucesso', '');
+        console.log('response from user update: ', response);
+        this.userAccessService.user.userName = user.newUserName;
+        this.userAccessService.user.email = user.newEmail;
+        this.showNotification('Usuário atualizado com sucesso', '');
       },
       error => {
-        console.log(error);
-
-        this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+        if (environment.logInfo) console.log(error);
+        this.showNotification(error.error.message, 'Erro');
       }
     );
   }
