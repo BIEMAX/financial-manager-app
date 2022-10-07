@@ -1,5 +1,5 @@
 //Native angular packages
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,7 +39,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NgChartsModule } from 'ng2-charts';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
@@ -55,6 +56,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
 import { UserNewComponent } from './views/user/user-new/user-new.component';
+import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     //Footer and header
     FooterComponent,
     HeaderComponent,
+    ReleaseNotesComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -114,7 +117,8 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
     MatTooltipModule,
     MatBadgeModule,
     MatCheckboxModule,
-    NgChartsModule
+    NgChartsModule,
+    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
   ],
   providers: [],
   bootstrap: [AppComponent]
