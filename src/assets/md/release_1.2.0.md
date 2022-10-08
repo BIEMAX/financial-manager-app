@@ -26,7 +26,6 @@
 
 # Melhorias futuras
 
-- Desenvolver filtro por para pesquisar através de tags
 - Salvar novas tags por usuário
 - Desenvolver interface para inadimplentes (devedores)
 - Desenvolver um gráfico que demonstra a relação de 'gasto' e 'ganho' através dos meses (de uma maneira geral)
@@ -45,6 +44,7 @@
 - Corrigido o problema de em algumas situações onde a conta possui valores decimais e o sistema acababa arredondando o valor
 - [#44 Relatório de dinheiro restante - Relatório quebrando quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/44)
 - [#45 Relatório de dinheiro restante - Valores errados eram mostrandos quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/45)
+- Implementado filtro por tags e descrição nas contas mensais
 
 # Problemas conhecidos
 
