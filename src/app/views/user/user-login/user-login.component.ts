@@ -17,8 +17,8 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class UserLoginComponent implements OnInit {
 
-  public userLogin: string = "";
-  public userPassword: string = "";
+  public userLogin: string = "dionei.santos";
+  public userPassword: string = "aDti3shw!";
   /**
    * Define true to show waiting progress spinner on front.
    */

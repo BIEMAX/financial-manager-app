@@ -43,6 +43,8 @@
 - [#26 Consultas por datas não estão trazendo os resultados esperados](https://github.com/BIEMAX/financial-manager-api/issues/26)
 - Corrigido o problema do sistema não dividir o valor total da conta pelo número de prestações
 - Corrigido o problema de em algumas situações onde a conta possui valores decimais e o sistema acababa arredondando o valor
+- [#44 Relatório de dinheiro restante - Relatório quebrando quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/44)
+- [#45 Relatório de dinheiro restante - Valores errados eram mostrandos quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/45)
 
 # Problemas conhecidos
 
