@@ -52,7 +52,8 @@ export const MY_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  public descPicked: string = "";
+  public description: string = "";
+  public tag: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
   public displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
@@ -89,7 +90,9 @@ export class FinancialsListComponent implements OnInit {
     this.hasToWait = true;
     let month = this.date.value != undefined ? Number.parseInt(this.date.value.format("MM").toString()) : undefined;
     let year = this.date.value != undefined ? this.date.value.year() : undefined;
-    this.financialService.getBills(month, year).subscribe(
+    let description = this.description != undefined && this.description != '' ? this.description : undefined;
+    let tag = this.tag != undefined && this.tag != '' ? this.tag : undefined;
+    this.financialService.getBills(month, year, description, tag).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
