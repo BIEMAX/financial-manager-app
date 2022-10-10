@@ -204,4 +204,16 @@ export class FinancialsListComponent implements OnInit {
     }
     else return;
   }
+
+  nextMonth () {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(ctrlValue.month() + 1);
+    this.date.setValue(ctrlValue);
+  }
+
+  previousMonth () {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(ctrlValue.month() - 1);
+    this.date.setValue(ctrlValue);
+  }
 }

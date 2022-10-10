@@ -25,12 +25,15 @@
 
 - [#54 Apresentado mensagem de erro caso alguma informação não tenha sido preenchida na criação de novas contas](https://github.com/BIEMAX/financial-manager-app/issues/54)
 
+- [#55 Implementado botões para facilitar navegação entre os meses](https://github.com/BIEMAX/financial-manager-app/issues/55)
+
 
 # Melhorias futuras
 
 - Salvar novas tags por usuário
 - Desenvolver interface para inadimplentes (devedores)
 - Desenvolver um gráfico que demonstra a relação de 'gasto' e 'ganho' através dos meses (de uma maneira geral)
+- Desenvolver gráfico para agrupar por tags
 
 # Problemas corrigidos
 
@@ -47,6 +50,8 @@
 - [#44 Relatório de dinheiro restante - Relatório quebrando quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/44)
 - [#45 Relatório de dinheiro restante - Valores errados eram mostrandos quando não havia dinheiro de entrada](https://github.com/BIEMAX/financial-manager-api/issues/45)
 - Implementado filtro por tags e descrição nas contas mensais
+- [Contas com mais de uma parcela não eram salvas adequadamente no banco de dados](https://github.com/BIEMAX/financial-manager-api/issues/48)
+- [Em alguns casos excepcionais, não era possível consultar contas apenas por mês e ano](https://github.com/BIEMAX/financial-manager-api/issues/49)
 
 # Problemas conhecidos
 

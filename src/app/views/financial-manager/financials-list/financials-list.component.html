@@ -25,6 +25,10 @@
           </mat-form-field>
         </td>
         <td>
+          <button mat-icon-button color="{{uiColor}}" (click)="previousMonth()">
+            <mat-icon matTooltip="Mês anterior">arrow_back_ios_new</mat-icon>
+          </button>
+
           <!--Month selection-->
           <mat-form-field>
             <mat-label>Mês e ano</mat-label>
@@ -33,6 +37,10 @@
             <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
               panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
+
+          <button mat-icon-button color="{{uiColor}}" (click)="nextMonth()">
+            <mat-icon matTooltip="Mês posterior">arrow_forward_ios</mat-icon>
+          </button>
         </td>
         <!--Button search-->
         <td>
