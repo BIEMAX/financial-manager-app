@@ -23,6 +23,8 @@
 
 - [#47 Implementado notas sobre novas versões](https://github.com/BIEMAX/financial-manager-app/issues/47)
 
+- [#54 Apresentado mensagem de erro caso alguma informação não tenha sido preenchida na criação de novas contas](https://github.com/BIEMAX/financial-manager-app/issues/54)
+
 
 # Melhorias futuras
 

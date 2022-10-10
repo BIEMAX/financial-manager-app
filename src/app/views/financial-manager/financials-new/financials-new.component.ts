@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -44,7 +45,8 @@ export class FinancialsNewComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar
   ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -69,21 +71,29 @@ export class FinancialsNewComponent implements OnInit {
   }
 
   onSaveClick () {
-    this.data = new FinancialModel(
-      this.billId ? this.billId : '0',
-      localStorage.getItem('userLogin'),
-      this.billName,
-      `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,
-      this.billDescription || '',
-      this.billTotalValue,
-      this.billAmountQuantity,
-      this.billTags,
-      this.isCashIn,
-      this.isBillPayed,
-      this.isBillValueToDivide
-    );
-    if (environment.logInfo) console.log('this.data: ', this.data);
-    this.dialogRef.close(this.data);
+    try {
+      this.data = new FinancialModel(
+        this.billId ? this.billId : '0',
+        localStorage.getItem('userLogin'),
+        this.billName,
+        `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,
+        this.billDescription || '',
+        this.billTotalValue,
+        this.billAmountQuantity,
+        this.billTags,
+        this.isCashIn,
+        this.isBillPayed,
+        this.isBillValueToDivide
+      );
+
+      if (environment.logInfo) console.log('this.data: ', this.data);
+      this.dialogRef.close(this.data);
+    }
+    catch (error) {
+      if (environment.logInfo) console.log('error on save: ', error);
+      this.showNotification(error.message, 'Erro ao salvar');
+      return;
+    }
   }
 
   onExitClick () {
@@ -131,6 +141,16 @@ export class FinancialsNewComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event
+   * @param duration Integer containing the value to animation time
+   */
+  showNotification (message: string, action: string, duration = 2000) {
+    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

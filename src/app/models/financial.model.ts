@@ -26,10 +26,10 @@ export class FinancialModel {
     IsBillPayed: Boolean,
     IsToDivideValue: Boolean
   ) {
-    if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException(Id);
-    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException(Name);
-    else if (typeof (DueDate) == "undefined" || !DueDate) throw new EmptyFieldException(DueDate);
-    else if (typeof (Value) == "undefined" || !Value) throw new EmptyFieldException(Value);
+    if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException("Id");
+    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException("Nome da conta");
+    else if (typeof (DueDate) == "undefined" || !DueDate) throw new EmptyFieldException("Data de vencimento");
+    else if (typeof (Value) == "undefined" || !Value) throw new EmptyFieldException("Valor");
     else {
       this.id = Id;
       this.user = User;
