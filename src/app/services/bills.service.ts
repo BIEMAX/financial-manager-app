@@ -40,4 +40,8 @@ export class BillsService {
   deleteBill (id: any) {
     return this.http.delete(`${this.apiUrl}/bill/delete/${id}`, this.apiHeader);
   }
+
+  getBillByPayed (billPayed: Boolean = false) {
+    return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
+  }
 }

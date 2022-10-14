@@ -9,7 +9,7 @@
       </div>
       <mat-accordion multi>
 
-        <div *ngFor="let panel of panelsDataSource">
+        <div *ngFor="let panel of panels">
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
             <!--First expansion panel-->
             <mat-expansion-panel-header>

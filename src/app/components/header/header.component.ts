@@ -26,6 +26,8 @@ export class HeaderComponent implements OnInit {
   public showSubSubMenu: boolean = true;
   public userNameComplete: String = "";
   public userFirstName: String = "";
+  public qtyNotification: any = 0;
+  public descNotifications: String = "";
 
   constructor(
     private userService: UserService,
@@ -41,6 +43,8 @@ export class HeaderComponent implements OnInit {
     this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
+    this.qtyNotification = this.userAccessService.user.notifications.length;
+    this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
   }
 
   mouseenter () {

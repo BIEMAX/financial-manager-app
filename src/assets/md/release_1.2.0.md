@@ -29,6 +29,8 @@
 
 - [#59 Adicionado coluna "conta paga?"](https://github.com/BIEMAX/financial-manager-app/issues/59)
 
+- [#36 Implementado contas próximas do vencimento na tela inicial](https://github.com/BIEMAX/financial-manager-app/issues/36)
+
 
 # Melhorias futuras
 

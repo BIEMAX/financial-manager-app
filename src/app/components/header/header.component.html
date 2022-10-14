@@ -15,7 +15,8 @@
       <a mat-button> Olá {{userFirstName}}, bem-vindo de volta </a>
 
       <button mat-icon-button>
-        <mat-icon matBadge="15" matBadgeColor="warn" matTooltip="Notificações" click="">notifications_active
+        <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
+          notifications_active
         </mat-icon>
       </button>
 
