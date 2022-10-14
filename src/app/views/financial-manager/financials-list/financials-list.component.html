@@ -110,6 +110,14 @@
       <td mat-cell *matCellDef="let element"> {{element.tags}} </td>
     </ng-container>
 
+    <!-- Column 'isBillPayed' -->
+    <ng-container matColumnDef="isBillPayed">
+      <th mat-header-cell *matHeaderCellDef> Conta paga </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [ngModel]="element.isBillPayed" color="{{uiColor}}" [disabled]="true"></mat-checkbox>
+      </td>
+    </ng-container>
+
     <!-- Column 'Button Edit' -->
     <ng-container matColumnDef="update">
       <th mat-header-cell *matHeaderCellDef>Editar</th>

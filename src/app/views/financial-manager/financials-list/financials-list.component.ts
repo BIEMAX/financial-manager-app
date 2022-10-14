@@ -56,7 +56,17 @@ export class FinancialsListComponent implements OnInit {
   public tag: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
-  public displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
+  public displayedColumns: string[] = [
+    'type',
+    'name',
+    'dueDate',
+    'value',
+    'quantityAmount',
+    'tags',
+    'isBillPayed',
+    'update',
+    'delete'
+  ];
   public date = new FormControl(moment());
 
   /**

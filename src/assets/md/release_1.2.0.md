@@ -27,6 +27,8 @@
 
 - [#55 Implementado botões para facilitar navegação entre os meses](https://github.com/BIEMAX/financial-manager-app/issues/55)
 
+- [#59 Adicionado coluna "conta paga?"](https://github.com/BIEMAX/financial-manager-app/issues/59)
+
 
 # Melhorias futuras
 
