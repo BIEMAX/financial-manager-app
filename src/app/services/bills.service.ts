@@ -6,7 +6,7 @@ import { FinancialModel } from 'src/app/models/financial.model';
 @Injectable({
   providedIn: 'root'
 })
-export class FinancialsService {
+export class BillsService {
 
   constructor(private http: HttpClient) { }
 

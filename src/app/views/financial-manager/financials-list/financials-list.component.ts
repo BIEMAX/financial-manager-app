@@ -16,7 +16,7 @@ const moment = _rollupMoment || _moment;
 
 import { ui } from 'src/environments/environment';
 import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
-import { FinancialsService } from 'src/app/services/financials.service';
+import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
 import { ResponseStatus } from 'src/app/util/response-status-message';
 import { FinancialModel } from 'src/app/models/financial.model';
@@ -80,7 +80,7 @@ export class FinancialsListComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private financialService: FinancialsService
+    private billsService: BillsService
   ) { }
 
   ngOnInit () { }
@@ -102,7 +102,7 @@ export class FinancialsListComponent implements OnInit {
     let year = this.date.value != undefined ? this.date.value.year() : undefined;
     let description = this.description != undefined && this.description != '' ? this.description : undefined;
     let tag = this.tag != undefined && this.tag != '' ? this.tag : undefined;
-    this.financialService.getBills(month, year, description, tag).subscribe(
+    this.billsService.getBills(month, year, description, tag).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
@@ -160,7 +160,7 @@ export class FinancialsListComponent implements OnInit {
    */
   saveBill (bill: any) {
     this.hasToWait = true;
-    this.financialService.createBill(bill).subscribe(
+    this.billsService.createBill(bill).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
@@ -178,7 +178,7 @@ export class FinancialsListComponent implements OnInit {
 
   updateBill (bill: any) {
     this.hasToWait = true;
-    this.financialService.updateBill(bill).subscribe(
+    this.billsService.updateBill(bill).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
@@ -197,7 +197,7 @@ export class FinancialsListComponent implements OnInit {
   deleteBill (bill: FinancialModel) {
     if (confirm("Você deseja realmente excluir a conta? Uma vez feita, não será possível desfazer")) {
       this.hasToWait = true;
-      this.financialService.deleteBill(bill.id).subscribe(
+      this.billsService.deleteBill(bill.id).subscribe(
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);
