@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment, environment as Environment } from 'src/environments/environment';
+import { environment, ui } from 'src/environments/environment';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BillsService } from 'src/app/services/bills.service';
@@ -20,12 +20,13 @@ export class HomeComponent implements OnInit {
     private userAccessService: UserAccessService
   ) { }
 
-  public applicationName: string = Environment.applicationName;
+  public applicationName: string = environment.applicationName;
   public fakeUserName: string = "Franciele";
   public welcomeTitle: string = `Bem vindo de volta ${this.fakeUserName}`;
   public customerName: string = "Beilke Industries";
   public productVersion: string = "Beta 1";
   public step = 0;
+  public uiColor = ui.color;
   public panels: any = [
     // {
     //   name: 'Tarefas',
