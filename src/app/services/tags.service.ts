@@ -17,8 +17,12 @@ export class TagsService {
     })
   };
 
-  getTags (id: any) {
+  getTags () {
     return this.http.get(`${this.apiUrl}/tag/tags`, this.apiHeader);
+  }
+
+  newTag (id: any) {
+    return this.http.post(`${this.apiUrl}/tag/tags`, id, this.apiHeader);
   }
 
 }
