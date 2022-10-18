@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FinancialModel } from 'src/app/models/financial.model';
 import { environment, ui } from 'src/environments/environment';
+import { TagsService } from 'src/app/services/tags.service';
 
 @Component({
   selector: 'app-financials-new',
@@ -29,24 +30,25 @@ export class FinancialsNewComponent implements OnInit {
   public billDescription: string;
   public billTotalValue: Number;
   public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
-  public billTags: string[] = ['Contas fixas'];
+  public billTags: string[] = ['Contas fixas']; //Starter tag
   public isCashIn: Boolean = false;
   public uiColor: string = ui.color;
   public billId: string;
   public isBillPayed: boolean = false;
   public isBillValueToDivide: boolean = false;
+  public filteredTags: Observable<string[]>;
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
+  public tagCtrl = new FormControl('');
 
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl('');
-  filteredTags: Observable<string[]>;
-  allTags: string[] = ['Contas fixas', 'Contas não previstas', 'Faculdade', 'Mercado', 'Lazer', 'Salário', 'Cŕedito'];
+  private allTags: string[] = [];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
   constructor(
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private tagsService: TagsService
   ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -68,6 +70,7 @@ export class FinancialsNewComponent implements OnInit {
     } else {
       this.billDueDate = new Date().toISOString().split("T")[0];
     }
+    this.getTagsByUser();
   }
 
   onSaveClick () {
@@ -143,6 +146,22 @@ export class FinancialsNewComponent implements OnInit {
     return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
   }
 
+  getTagsByUser () {
+    this.tagsService.getTags().subscribe(
+      response => {
+        let resp: any = response;
+        if (resp.data) {
+          this.allTags = resp.data[0].tags
+        }
+        else this.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
+      },
+      error => {
+        if (environment.logInfo) console.log('error on save: ', error);
+        this.showNotification(error.message, 'Erro');
+      }
+    )
+  }
+
   /**
    * Show a notification in the main page
    * @param message Message to display
@@ -150,7 +169,7 @@ export class FinancialsNewComponent implements OnInit {
    * @param duration Integer containing the value to animation time
    */
   showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
+    this.snackBar.open(message, action, { duration: duration });
   }
 
 }
