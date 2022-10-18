@@ -15,7 +15,7 @@ export class ChartsService {
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('userBearerKey')
     })
-  }
+  };
 
   getAvailableChartByUser () {
     return this.http.get(`${this.apiUrl}/charts/user/access`, this.apiHeader)
