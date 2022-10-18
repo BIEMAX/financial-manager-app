@@ -9,6 +9,7 @@ import { LogginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 import { UserModel } from 'src/app/models/user.model';
+import { BillsService } from 'src/app/services/bills.service';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,7 @@ export class UserLoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private userService: UserService,
+    private billsService: BillsService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
   ) { }
@@ -56,10 +58,7 @@ export class UserLoginComponent implements OnInit {
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.permissions = loginData.data.permissions;
 
-              this.userService.enableMenusOnScreen.emit(true);
-
-              this.showNotification('Login efetuado com êxito', '');
-              this.router.navigate(['home']);
+              this.getOverdueBills();
             },
             error => {
               this.userService.enableMenusOnScreen.emit(false);
@@ -117,6 +116,37 @@ export class UserLoginComponent implements OnInit {
         console.log(error);
         this.hasToWait = false;
         this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+      }
+    );
+  }
+
+  /**
+   * Get the bills that will overdue or already overdue.
+   */
+  getOverdueBills () {
+    this.billsService.getBillByPayed().subscribe(
+      response => {
+        let resp: any = response;
+
+        this.userAccessService.user.notifications = resp.data.map((b) => {
+          return {
+            id: b.id,
+            title: b.name,
+            description: b.description,
+            done: false,
+            date: b.dueDate
+          };
+        });
+
+        this.userService.enableMenusOnScreen.emit(true);
+        this.hasToWait = false;
+
+        this.showNotification('Login efetuado com êxito', '');
+        this.router.navigate(['home']);
+      },
+      error => {
+        if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
+        this.showNotification(error.message, 'Erro');
       }
     );
   }

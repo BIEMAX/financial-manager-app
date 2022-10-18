@@ -89,6 +89,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  payBillOverdue (bill: any) {
+    if (bill.id) {
+
+    }
+    else this.showNotification('', 'Erro');
+  }
+
   setStep (index: number) {
     this.step = index;
   }
