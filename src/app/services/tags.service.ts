@@ -18,11 +18,15 @@ export class TagsService {
   };
 
   getTags () {
-    return this.http.get(`${this.apiUrl}/tag/tags`, this.apiHeader);
+    return this.http.get(`${this.apiUrl}/tag/list`, this.apiHeader);
   }
 
-  newTag (id: any) {
-    return this.http.post(`${this.apiUrl}/tag/tags`, id, this.apiHeader);
+  newTag (tagName: string) {
+    return this.http.post(`${this.apiUrl}/tag/new`, { name: tagName }, this.apiHeader);
+  }
+
+  deleteTag (name: string) {
+    return this.http.delete(`${this.apiUrl}/tag/delete/${name.trim()}`, this.apiHeader);
   }
 
 }

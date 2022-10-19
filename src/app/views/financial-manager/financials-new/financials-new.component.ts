@@ -89,8 +89,7 @@ export class FinancialsNewComponent implements OnInit {
         this.isBillValueToDivide
       );
 
-      //TODO: Check if the all tags already exist.
-      let existTag = this.allTags.filter(t => t.toUpperCase().trim() == "").length > 0;
+      this.thereIsNewTags();
 
       if (environment.logInfo) console.log('this.data: ', this.data);
       this.dialogRef.close(this.data);
@@ -99,6 +98,23 @@ export class FinancialsNewComponent implements OnInit {
       if (environment.logInfo) console.log('error on save: ', error);
       this.showNotification(error.message, 'Erro ao salvar');
       return;
+    }
+  }
+
+  /**
+   * Validate if there are new tags to save in database
+   */
+  thereIsNewTags () {
+    if (this.billTags.length > 0) {
+      this.billTags.map((t) => {
+        if (this.allTags.filter(t => t.toUpperCase().trim() == "").length <= 0) {
+          //If tag doesn't exist, creat it 
+          this.tagsService.newTag(t).subscribe(
+            response => { if (environment.logInfo) console.log('response: ', response); },
+            error => { if (environment.logInfo) console.log('error: ', error); }
+          )
+        }
+      });
     }
   }
 
