@@ -40,7 +40,7 @@ export class FinancialsNewComponent implements OnInit {
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   public tagCtrl = new FormControl('');
 
-  private allTags: string[] = [];
+  private allTags: string[];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
@@ -49,12 +49,7 @@ export class FinancialsNewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
     private tagsService: TagsService
-  ) {
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
-    );
-  }
+  ) { }
 
   ngOnInit (): void {
     if (this.data) { //Its an update
@@ -169,7 +164,13 @@ export class FinancialsNewComponent implements OnInit {
     this.tagsService.getTags().subscribe(
       response => {
         let resp: any = response;
-        if (resp.data) this.allTags = resp.data.tags;
+        if (resp.data) {
+          this.allTags = resp.data.tags;
+          this.filteredTags = this.tagCtrl.valueChanges.pipe(
+            startWith(null),
+            map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
+          );
+        }
         else this.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
       },
       error => {
