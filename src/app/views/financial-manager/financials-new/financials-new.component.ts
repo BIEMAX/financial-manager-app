@@ -52,7 +52,7 @@ export class FinancialsNewComponent implements OnInit {
   ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => (fruit ? this.filterTag(fruit) : this.allTags.slice())),
+      map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
     );
   }
 
@@ -79,7 +79,7 @@ export class FinancialsNewComponent implements OnInit {
         this.billId ? this.billId : '0',
         localStorage.getItem('userLogin'),
         this.billName,
-        `${this.billDueDate}T${new Date().toLocaleTimeString()}Z`,
+        `${this.billDueDate}T${new Date().toLocaleTimeString('pt-BR')}.000Z`,
         this.billDescription || '',
         this.billTotalValue,
         this.billAmountQuantity,
@@ -88,6 +88,9 @@ export class FinancialsNewComponent implements OnInit {
         this.isBillPayed,
         this.isBillValueToDivide
       );
+
+      //TODO: Check if the all tags already exist.
+      let existTag = this.allTags.filter(t => t.toUpperCase().trim() == "").length > 0;
 
       if (environment.logInfo) console.log('this.data: ', this.data);
       this.dialogRef.close(this.data);
@@ -150,9 +153,7 @@ export class FinancialsNewComponent implements OnInit {
     this.tagsService.getTags().subscribe(
       response => {
         let resp: any = response;
-        if (resp.data) {
-          this.allTags = resp.data[0].tags
-        }
+        if (resp.data) this.allTags = resp.data.tags;
         else this.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
       },
       error => {
