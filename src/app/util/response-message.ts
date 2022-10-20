@@ -27,9 +27,9 @@ export let ExceptionMessageResponse = (error: String) => {
  * @param error 
  * @returns String with message
  */
-export let ExceptionSolutioResponse = (errorMessage: String) => {
-  if (errorMessage.toUpperCase().trim().includes('Senha inválida ou diferente do cadastrado'))
-    return 'Verifique sua senha e tente novamente. Caso ainda possuir dificuldades, recomendamos trocar sua senha.';
-  else if (errorMessage.toUpperCase().trim().includes('')) return ''
-  else return '';
+export let ExceptionSolutionResponse = (errorMessage: String) => {
+  if (errorMessage.toLocaleLowerCase().trim().includes('senha inválida ou diferente do cadastrado'))
+    return 'Verifique sua senha e tente novamente. Caso ainda possuir problemas, recomendamos trocar sua senha.';
+  //else if (errorMessage.toUpperCase().trim().includes('')) return ''
+  else return 'Infelizmente ainda não há uma solução para este problemas';
 }
