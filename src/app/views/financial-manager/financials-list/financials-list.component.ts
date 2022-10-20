@@ -18,7 +18,7 @@ import { ui } from 'src/environments/environment';
 import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
 import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
-import { ResponseStatus } from 'src/app/util/response-status-message';
+import { ResponseStatusCode } from 'src/app/util/response-message';
 import { FinancialModel } from 'src/app/models/financial.model';
 
 export const MY_FORMATS = {
@@ -115,7 +115,7 @@ export class FinancialsListComponent implements OnInit {
       error => {
         if (this.listBills != undefined) this.listBills = undefined;
         this.hasToWait = false;
-        this.showNotification(ResponseStatus((error.error.message)), 'Erro');
+        this.showNotification(ResponseStatusCode((error.error.message)), 'Erro');
       }
     );
   }
@@ -171,7 +171,7 @@ export class FinancialsListComponent implements OnInit {
       error => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível salvar o registro');
+        this.showNotification(ResponseStatusCode(error.error.message), 'Não foi possível salvar o registro');
       }
     );
   }
@@ -189,7 +189,7 @@ export class FinancialsListComponent implements OnInit {
       error => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível atualizar o registro');
+        this.showNotification(ResponseStatusCode(error.error.message), 'Não foi possível atualizar o registro');
       }
     );
   }
@@ -208,7 +208,7 @@ export class FinancialsListComponent implements OnInit {
         error => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(error.error.message);
-          this.showNotification(ResponseStatus(error.error.message), 'Não foi possível excluir o registro');
+          this.showNotification(ResponseStatusCode(error.error.message), 'Não foi possível excluir o registro');
         }
       );
     }

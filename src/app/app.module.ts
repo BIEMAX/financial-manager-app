@@ -57,6 +57,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
 import { UserNewComponent } from './views/user/user-new/user-new.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
+import { ErrorReportComponent } from './views/generic/error-report/error-report.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,9 @@ import { ReleaseNotesComponent } from './views/generic/release-notes/release-not
     UserUpdateInfoComponent,
     //Generic
     CustomDialogComponent,
+    ErrorReportComponent,
     PageNotFoundComponent,
+    ReleaseNotesComponent,
     //Financials
     FinancialsListComponent,
     FinancialsNewComponent,
@@ -76,7 +79,6 @@ import { ReleaseNotesComponent } from './views/generic/release-notes/release-not
     //Footer and header
     FooterComponent,
     HeaderComponent,
-    ReleaseNotesComponent,
   ],
   imports: [
     ReactiveFormsModule,
