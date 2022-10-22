@@ -10,6 +10,7 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 import { UserModel } from 'src/app/models/user.model';
 import { BillsService } from 'src/app/services/bills.service';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 @Component({
   selector: 'app-login',
@@ -37,14 +38,18 @@ export class UserLoginComponent implements OnInit {
     private billsService: BillsService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
+    private dialogReport: DialogReport
   ) { }
 
-  ngOnInit (): void { }
+  ngOnInit () {
+    this.clearOldLocalStorage();
+  }
 
   doLogin () {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
+        console.log('1. login');
         this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
@@ -62,9 +67,8 @@ export class UserLoginComponent implements OnInit {
             },
             error => {
               this.userService.enableMenusOnScreen.emit(false);
-              console.log(error);
+              this.dialogReport.showMessageDialog(error, true, true);
               this.hasToWait = false;
-              this.showNotification(error.error.message, 'Erro ao tentar efetuar login');
             }
           )
       }
@@ -110,12 +114,11 @@ export class UserLoginComponent implements OnInit {
     this.userService.createUser(user).subscribe(
       response => {
         this.hasToWait = false;
-        this.showNotification('Conta criada com sucesso', '');
+        this.showNotification('Conta criada com sucesso', 'Sucesso');
       },
       error => {
-        console.log(error);
         this.hasToWait = false;
-        this.showNotification(error.error.message, 'Erro ao tentar cadastrar novo usuário');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }
@@ -124,6 +127,7 @@ export class UserLoginComponent implements OnInit {
    * Get the bills that will overdue or already overdue.
    */
   getOverdueBills () {
+    console.log('2. get overdue bills');
     this.billsService.getBillByPayed().subscribe(
       response => {
         let resp: any = response;
@@ -146,9 +150,15 @@ export class UserLoginComponent implements OnInit {
       },
       error => {
         if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
-        this.showNotification(error.message, 'Erro');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
+  }
+
+  clearOldLocalStorage () {
+    localStorage.removeItem('userBearerKey');
+    localStorage.removeItem('userLogin');
+    localStorage.removeItem('userName');
   }
 
   /**
