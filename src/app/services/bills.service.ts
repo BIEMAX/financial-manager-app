@@ -11,10 +11,10 @@ export class BillsService {
   constructor(private http: HttpClient) { }
 
   private readonly apiUrl = `${environment.apiUrl}/${environment.apiVersion}`;
-  private readonly apiHeader = {
+  private apiHeader = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('userBearerKey')
+      'Authorization': localStorage.getItem('userBearerKey')
     })
   }
 
@@ -42,6 +42,14 @@ export class BillsService {
   }
 
   getBillByPayed (billPayed: Boolean = false) {
+    this.getNewBearer();
     return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
+  }
+
+  /**
+   * Get the new bearer from local storage.
+   */
+  getNewBearer () {
+    this.apiHeader.headers[1] = localStorage.getItem('userBearerKey');
   }
 }
