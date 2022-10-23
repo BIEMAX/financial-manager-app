@@ -13,7 +13,7 @@ export class TagsService {
   private readonly apiHeader = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('userBearerKey')
+      'Authorization': localStorage.getItem('userBearerKey')
     })
   };
 

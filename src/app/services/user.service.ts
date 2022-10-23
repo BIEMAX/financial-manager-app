@@ -29,7 +29,7 @@ export class UserService {
   private readonly apiHeaderAuth = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('userBearerKey')
+      'Authorization': localStorage.getItem('userBearerKey')
     })
   }
 
