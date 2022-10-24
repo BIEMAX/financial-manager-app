@@ -49,7 +49,6 @@ export class UserLoginComponent implements OnInit {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
-        console.log('1. login');
         this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
@@ -77,9 +76,9 @@ export class UserLoginComponent implements OnInit {
         this.showNotification('Preencha os campos login e senha e tente novamente', '');
       }
     }
-    catch (err) {
+    catch (error) {
       this.hasToWait = false;
-      this.showNotification(err, 'Login');
+      this.dialogReport.showMessageDialog(error, true, true);
     }
   }
 
@@ -127,7 +126,6 @@ export class UserLoginComponent implements OnInit {
    * Get the bills that will overdue or already overdue.
    */
   getOverdueBills () {
-    console.log('2. get overdue bills');
     this.billsService.getBillByPayed().subscribe(
       response => {
         let resp: any = response;
@@ -149,6 +147,7 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
       error => {
+        this.hasToWait = false;
         if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
         this.dialogReport.showMessageDialog(error, true, true);
       }
