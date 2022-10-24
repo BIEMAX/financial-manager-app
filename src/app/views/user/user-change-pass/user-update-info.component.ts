@@ -49,7 +49,6 @@ export class UserUpdateInfoComponent implements OnInit {
 
   onSaveClick () {
     if (this.validateBeforeExit()) {
-
       if (this.validatePasswordChange()) {
         this.data = new UserUpdateModel(
           this.userNameOld,

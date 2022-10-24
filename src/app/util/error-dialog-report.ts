@@ -25,9 +25,9 @@ export class DialogReport {
   ) { }
 
   /**
-   * 
+   * Show message or error dialog for user saying that something goes wrong.
    * @param exception Exception or message object.
-   * @param isError 
+   * @param isError True if is an error (the method will extract the info)
    * @param saveLog True to send log information to database.
    */
   public showMessageDialog (exception: any, isError: Boolean = true, saveLog: Boolean = true) {

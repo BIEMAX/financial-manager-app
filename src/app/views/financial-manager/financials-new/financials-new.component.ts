@@ -17,6 +17,7 @@ import { map, startWith } from 'rxjs/operators';
 import { FinancialModel } from 'src/app/models/financial.model';
 import { environment, ui } from 'src/environments/environment';
 import { TagsService } from 'src/app/services/tags.service';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 @Component({
   selector: 'app-financials-new',
@@ -48,7 +49,8 @@ export class FinancialsNewComponent implements OnInit {
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private snackBar: MatSnackBar,
-    private tagsService: TagsService
+    private tagsService: TagsService,
+    private dialogReport: DialogReport
   ) { }
 
   ngOnInit (): void {
@@ -91,7 +93,7 @@ export class FinancialsNewComponent implements OnInit {
     }
     catch (error) {
       if (environment.logInfo) console.log('error on save: ', error);
-      this.showNotification(error.message, 'Erro ao salvar');
+      this.dialogReport.showMessageDialog(error, true, true);
       return;
     }
   }
@@ -175,7 +177,7 @@ export class FinancialsNewComponent implements OnInit {
       },
       error => {
         if (environment.logInfo) console.log('error on save: ', error);
-        this.showNotification(error.message, 'Erro');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     )
   }
