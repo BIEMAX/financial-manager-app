@@ -67,20 +67,21 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref_name == 'fix/firebase_deploys'
     steps:
-      - name: Checking branch name
+      - name: 1. Checking branch name
         run: echo Running on branch ${GITHUB_REF##*/}
-      - name: Installing dependencys
+      - name: 2. Installing dependencys
         uses: actions/checkout@master
-      # - name: Setup Node JS
-      #   uses: actions/setup-node@master
-      #   with:
-      #     node-version: "14.18.0"
-      # - run: npm install --dotenv-extended
-      # - name: Loading environment configurations
-      # - run: node create_env.js
-      #   env:
-      #     ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
-      #     ENVIRONMENT: "stg"
+      - name: 3. Setup Node JS
+        uses: actions/setup-node@master
+        with:
+          node-version: "14.18.0"
+      - name: 4. Installing dotenv package
+        run: npm install --dotenv-extended
+      - name: 5. Loading environment configurations
+      - run: node create_env.js
+        env:
+          ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
+          ENVIRONMENT: "stg"
       # - uses: actions/checkout@v2
       # - run: npm ci && npm run build-hml
       # - uses: FirebaseExtended/action-hosting-deploy@v0
