@@ -12,8 +12,8 @@ on:
 
 jobs:
   staging-deploy:
-    runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'develop' || github.ref_name == 'fix/firebase_deploys' }}
+    runs-on: ubuntu-latest
     steps:
       - run: echo "Running on branch '${{ BRANCH_NAME }}'"
       - uses: actions/checkout@master
