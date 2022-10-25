@@ -1,5 +1,5 @@
 //Native angular packages
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,15 +34,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NgChartsModule } from 'ng2-charts';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MarkdownModule } from 'ngx-markdown';
 
 //Aplication packages
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
-import { LoginComponent } from './views/login/login.component';
+import { UserLoginComponent } from './views/user/user-login/user-login.component';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
@@ -50,19 +54,31 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
+import { UserNewComponent } from './views/user/user-new/user-new.component';
+import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
+import { UserDialogComponent } from './views/generic/user-dialog-report/user-dialog-report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    FinancialsListComponent,
+    //User
+    UserLoginComponent,
+    UserNewComponent,
+    UserUpdateInfoComponent,
+    //Generic
     CustomDialogComponent,
+    UserDialogComponent,
     PageNotFoundComponent,
+    ReleaseNotesComponent,
+    //Financials
+    FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
+    //Footer and header
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -100,7 +116,11 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     MatChipsModule,
     MatAutocompleteModule,
     MatGridListModule,
-    NgChartsModule
+    MatTooltipModule,
+    MatBadgeModule,
+    MatCheckboxModule,
+    NgChartsModule,
+    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
   ],
   providers: [],
   bootstrap: [AppComponent]

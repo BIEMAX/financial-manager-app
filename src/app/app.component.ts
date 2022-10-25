@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,7 +22,7 @@ export class AppComponent {
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: UserService) { }
 
   ngOnInit () {
     this.loginService.enableMenusOnScreen.subscribe(

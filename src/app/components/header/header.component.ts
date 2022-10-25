@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
+import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
+import { UserUpdateModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -16,20 +21,30 @@ export class HeaderComponent implements OnInit {
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
   public isExpanded = true;
-  public showSubmenu: boolean = false;
+  public showSubmenu: boolean = true;
   public isShowing = false;
-  public showSubSubMenu: boolean = false;
+  public showSubSubMenu: boolean = true;
+  public userNameComplete: String = "";
+  public userFirstName: String = "";
+  public qtyNotification: any = 0;
+  public descNotifications: String = "";
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private router: Router,
     private userAccessService: UserAccessService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit () {
-    this.loginService.enableMenusOnScreen.subscribe(
+    this.userNameComplete = localStorage.getItem('userName');
+    this.userFirstName = localStorage.getItem('userName').split(" ")[0];
+    this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
+    this.qtyNotification = this.userAccessService.user.notifications.length;
+    this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
   }
 
   mouseenter () {
@@ -46,17 +61,58 @@ export class HeaderComponent implements OnInit {
 
   logout () {
     localStorage.removeItem('userBearerKey');
+    localStorage.removeItem('userLogin');
     localStorage.removeItem('userName');
 
     this.userAccessService.userAuthenticated = false;
-    this.userAccessService.user.userLogin = '';
-    this.userAccessService.user.userPass = '';
-    this.userAccessService.user.userBearer = '';
-    this.userAccessService.user.userBearerExpiration = '';
+    this.userAccessService.user = [];
     this.userAccessService.permissions = '';
 
-    this.loginService.enableMenusOnScreen.emit(false);
+    this.userService.enableMenusOnScreen.emit(false);
     this.router.navigate(['']);
+  }
+
+  /**
+   * Open a dialog to create a new user
+   */
+  openDialogUpdateUser (): void {
+    const dialogRef = this.dialog.open(UserUpdateInfoComponent, {
+      disableClose: true,
+      width: '30%',
+      autoFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        if (environment.logInfo) console.log('result: ', result);
+        if (result) this.updateUser(result);
+      }
+    });
+  }
+
+  updateUser (user: UserUpdateModel) {
+    this.userService.updateUser(user).subscribe(
+      response => {
+        console.log('response from user update: ', response);
+        this.userAccessService.user.userName = user.newUserName;
+        this.userAccessService.user.email = user.newEmail;
+        this.showNotification('Usuário atualizado com sucesso', '');
+      },
+      error => {
+        if (environment.logInfo) console.log(error);
+        this.showNotification(error.error.message, 'Erro');
+      }
+    );
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event
+   * @param duration Integer containing the value to animation time
+   */
+  showNotification (message: string, action: string, duration = 2000) {
+    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

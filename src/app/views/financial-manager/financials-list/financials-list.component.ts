@@ -16,10 +16,10 @@ const moment = _rollupMoment || _moment;
 
 import { ui } from 'src/environments/environment';
 import { FinancialsNewComponent } from 'src/app/views/financial-manager/financials-new/financials-new.component';
-import { FinancialsService } from 'src/app/services/financials.service';
+import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
-import { ResponseStatus } from 'src/app/util/response-status-message';
 import { FinancialModel } from 'src/app/models/financial.model';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 export const MY_FORMATS = {
   parse: {
@@ -52,10 +52,21 @@ export const MY_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  public descPicked: string = "";
+  public description: string = "";
+  public tag: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
-  public displayedColumns: string[] = ['type', 'name', 'dueDate', 'value', 'quantityAmount', 'tags', 'update', 'delete'];
+  public displayedColumns: string[] = [
+    'type',
+    'name',
+    'dueDate',
+    'value',
+    'quantityAmount',
+    'tags',
+    'isBillPayed',
+    'update',
+    'delete'
+  ];
   public date = new FormControl(moment());
 
   /**
@@ -69,7 +80,8 @@ export class FinancialsListComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private financialService: FinancialsService
+    private billsService: BillsService,
+    private dialogReport: DialogReport
   ) { }
 
   ngOnInit () { }
@@ -89,7 +101,9 @@ export class FinancialsListComponent implements OnInit {
     this.hasToWait = true;
     let month = this.date.value != undefined ? Number.parseInt(this.date.value.format("MM").toString()) : undefined;
     let year = this.date.value != undefined ? this.date.value.year() : undefined;
-    this.financialService.getBills(month, year).subscribe(
+    let description = this.description != undefined && this.description != '' ? this.description : undefined;
+    let tag = this.tag != undefined && this.tag != '' ? this.tag : undefined;
+    this.billsService.getBills(month, year, description, tag).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
@@ -102,7 +116,7 @@ export class FinancialsListComponent implements OnInit {
       error => {
         if (this.listBills != undefined) this.listBills = undefined;
         this.hasToWait = false;
-        this.showNotification(ResponseStatus((error.error.message)), 'Erro');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }
@@ -147,7 +161,7 @@ export class FinancialsListComponent implements OnInit {
    */
   saveBill (bill: any) {
     this.hasToWait = true;
-    this.financialService.createBill(bill).subscribe(
+    this.billsService.createBill(bill).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
@@ -158,14 +172,14 @@ export class FinancialsListComponent implements OnInit {
       error => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível salvar o registro');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }
 
   updateBill (bill: any) {
     this.hasToWait = true;
-    this.financialService.updateBill(bill).subscribe(
+    this.billsService.updateBill(bill).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
@@ -176,7 +190,7 @@ export class FinancialsListComponent implements OnInit {
       error => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(error);
-        this.showNotification(ResponseStatus(error.error.message), 'Não foi possível atualizar o registro');
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }
@@ -184,7 +198,7 @@ export class FinancialsListComponent implements OnInit {
   deleteBill (bill: FinancialModel) {
     if (confirm("Você deseja realmente excluir a conta? Uma vez feita, não será possível desfazer")) {
       this.hasToWait = true;
-      this.financialService.deleteBill(bill.id).subscribe(
+      this.billsService.deleteBill(bill.id).subscribe(
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);
@@ -195,10 +209,22 @@ export class FinancialsListComponent implements OnInit {
         error => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(error.error.message);
-          this.showNotification(ResponseStatus(error.error.message), 'Não foi possível excluir o registro');
+          this.dialogReport.showMessageDialog(error, true, true);
         }
       );
     }
     else return;
+  }
+
+  nextMonth () {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(ctrlValue.month() + 1);
+    this.date.setValue(ctrlValue);
+  }
+
+  previousMonth () {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(ctrlValue.month() - 1);
+    this.date.setValue(ctrlValue);
   }
 }

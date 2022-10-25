@@ -1,5 +1,4 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +7,10 @@ export class UserAccessService implements OnDestroy {
 
   public userAuthenticated: Boolean = false;
   public showMainMenu: Boolean = false;
-  public user = {
-    userLogin: "",
-    userBearer: "",
-    userPass: "",
-    userBearerExpiration: ""
-  };
+  public user: any = [];
   public permissions: any = [];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnDestroy () {
     this.userAuthenticated = false;

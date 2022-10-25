@@ -1,16 +1,36 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <button mat-icon-button (click)="isExpanded = !isExpanded">
+    <button mat-icon-button matTooltip="Menu" (click)="isExpanded = !isExpanded">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>{{applicationName}}</h1>
     <span class="menu-spacer"></span>
-    <div>
+    <div class="right-align">
 
       <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
       <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
       <a mat-button [routerLink]="'/'"> Sair... </a> -->
+
+      <a mat-button> Olá {{userFirstName}}, bem-vindo de volta </a>
+
+      <button mat-icon-button>
+        <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
+          notifications_active
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Atualizar dados" (click)="openDialogUpdateUser()">settings</mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Novidades" [routerLink]="'/whatsnew'">verified_user</mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matTooltip="Sair..." (click)="logout()" [routerLink]="'/'">logout</mat-icon>
+      </button>
 
     </div>
   </mat-toolbar-row>
@@ -23,7 +43,7 @@
 
       <mat-list-item [routerLink]="'/home'" (click)="showSubmenu = !showSubmenu" class="parent">
         <span class="full-width" *ngIf="isExpanded || isShowing">Página inicial</span>
-        <mat-icon mat-list-icon>home</mat-icon>
+        <mat-icon mat-list-icon><img src="../../../assets/icons/home.png"></mat-icon>
         <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more
         </mat-icon>
       </mat-list-item>
@@ -32,6 +52,7 @@
       <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
 
         <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+          <img src="../../../assets/icons/financials_menu.png">
           <span class="full-width" *ngIf="isExpanded || isShowing">Financeiro</span>
           <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">
             expand_more
@@ -41,23 +62,22 @@
         <!--Financials sub-menu-->
         <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
           <a mat-list-item [routerLink]="'/financials'" (click)="sidenav.toggle()">
-            <mat-icon>attach_money</mat-icon>Contas mensais
+            <img src="../../../assets/icons/expenses.png"> Gastos mensais
           </a>
-          <a mat-list-item [routerLink]="'/defaulters'" (click)="sidenav.toggle()">
-            <mat-icon>account_balance</mat-icon>Inadimplentes
-          </a>
+          <!-- <a mat-list-item [routerLink]="'/defaulters'" (click)="sidenav.toggle()">
+            <img src="../../../assets/icons/money_receipt.png"> Inadimplentes
+          </a> -->
           <a mat-list-item [routerLink]="'/reports'" (click)="sidenav.toggle()">
-            <mat-icon>leaderboard</mat-icon>Relatórios
+            <img src="../../../assets/icons/reports.png"> Relatórios
           </a>
         </div>
 
-      </div>
+        <!-- <mat-list-item [routerLink]="'/'" (click)="logout()" class="parent">
+          <span class="full-width" *ngIf="isExpanded || isShowing">Sair</span>
+          <mat-icon mat-list-icon>logout</mat-icon>
+        </mat-list-item> -->
 
-      <!--(click)="showSubmenu = !showSubmenu"-->
-      <mat-list-item [routerLink]="'/'" (click)="logout()" class="parent">
-        <span class="full-width" *ngIf="isExpanded || isShowing">Sair</span>
-        <mat-icon mat-list-icon>logout</mat-icon>
-      </mat-list-item>
+      </div>
 
     </mat-nav-list>
   </mat-sidenav>

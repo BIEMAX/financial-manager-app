@@ -43,3 +43,8 @@
   position: relative;
   margin-left: 2pc;
 }
+
+.right-align {
+  margin-left: auto;
+  margin-right: 0;
+}

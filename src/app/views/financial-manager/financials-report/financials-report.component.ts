@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
-import { ResponseStatus } from 'src/app/util/response-status-message';
+import { ResponseStatusCode } from 'src/app/util/response-message';
 
 // tslint:disable-next-line:no-duplicate-imports
 import * as _moment from 'moment';
@@ -80,7 +80,7 @@ export class FinancialsReportComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.showNotification(ResponseStatus((error.error.message)), 'Erro');
+        this.showNotification(ResponseStatusCode((error.error.message)), 'Erro');
       }
     );
   }

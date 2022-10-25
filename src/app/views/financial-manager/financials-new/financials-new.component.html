@@ -1,91 +1,132 @@
 <div>
 
-  <!--First line-->
-  <div>
-    <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
-      <mat-label>
-        Nome da conta
-        <mat-icon>payments</mat-icon>
-      </mat-label>
-      <input matInput required="true" type="text" placeholder="Título da conta a pagar" [(ngModel)]="billName">
-    </mat-form-field>
+  <mat-tab-group>
+    <!--Aba 1-->
+    <mat-tab label="Detalhes">
 
-    <mat-form-field appearance="fill" style="width: 47.5%;">
-      <mat-label>
-        Data de vencimento
-        <mat-icon>calendar_month</mat-icon>
-      </mat-label>
-      <input matInput required="true" type="date" placeholder="Data de vencimento da conta" [(ngModel)]="billDueDate">
-    </mat-form-field>
-  </div>
+      <div>
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Nome da conta
+            <mat-icon>payments</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="text" placeholder="Título da conta a pagar" [(ngModel)]="billName">
+        </mat-form-field>
 
-  <!--Second line-->
-  <div>
-    <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
-      <mat-label>Tipo de movimento da conta</mat-label>
-      <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashIn">
-        <div *ngIf="isCashIn">Entrada</div>
-        <div *ngIf="!isCashIn">Saída</div>
-      </mat-slide-toggle>
-      <textarea matInput hidden></textarea>
-    </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Data de vencimento
+            <mat-icon>calendar_month</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="date" placeholder="Data de vencimento da conta"
+            [(ngModel)]="billDueDate">
+        </mat-form-field>
+      </div>
 
+      <div>
+        <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>Tipo de movimento da conta</mat-label>
+          <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashIn">
+            <div *ngIf="isCashIn">Entrada</div>
+            <div *ngIf="!isCashIn">Saída</div>
+          </mat-slide-toggle>
+          <textarea matInput hidden></textarea>
+        </mat-form-field>
 
-    <mat-form-field appearance="fill" style="width: 47.5%;">
-      <mat-label>
-        Descrição da conta
-        <mat-icon>description</mat-icon>
-      </mat-label>
-      <input matInput type="text" placeholder="Informações da conta a ser pagar" [(ngModel)]="billDescription">
-    </mat-form-field>
-  </div>
+        <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashIn">
+          Conta paga? {{isBillPayed == true ? 'Sim' : 'Não' }}
+        </mat-checkbox>
+      </div>
 
-  <!--Third line-->
-  <div>
-    <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
-      <mat-label>
-        Valor total da conta
-        <mat-icon>123</mat-icon>
-      </mat-label>
-      <input matInput required="true" type="number" placeholder="0" [(ngModel)]="billTotalValue">
-      <span matPrefix>R$&nbsp;</span>
-    </mat-form-field>
+      <div>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Descrição da conta
+            <mat-icon>description</mat-icon>
+          </mat-label>
+          <textarea matInput type="text-area" placeholder="Informações da conta a ser pagar"
+            [(ngModel)]="billDescription">
+            </textarea>
+        </mat-form-field>
+      </div>
 
-    <mat-form-field appearance="fill" style="width: 47.5%;">
-      <mat-label>
-        Número de prestações
-        <mat-icon>123</mat-icon>
-      </mat-label>
-      <input matInput type=" number" placeholder="1" value="1" [(ngModel)]="billAmountQuantity">
-    </mat-form-field>
-  </div>
+    </mat-tab>
+    <!--Aba 2-->
+    <mat-tab label="Valor">
 
-  <!--Fourth line-->
-  <div>
-    <mat-form-field class="" appearance="fill" style="width: 100%;">
-      <mat-label>Tags</mat-label>
-      <mat-chip-list #chipList aria-label=" Seleção de tags">
-        <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
-          {{tag}}
-          <button matChipRemove>
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip>
-        <input placeholder="Nova tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
-          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="addTag($event)">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
-        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-          {{tag}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
+      <div>
+        <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Valor total da conta
+            <mat-icon>123</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="number" placeholder="0" [(ngModel)]="billTotalValue">
+          <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Número de prestações
+            <mat-icon>123</mat-icon>
+          </mat-label>
+          <input matInput [(disabled)]="isCashIn" matTooltip="Informe um valor maior que um para habilitar novos campos"
+            type=" number" placeholder="1" value="1" [(ngModel)]="billAmountQuantity">
+        </mat-form-field>
+
+        <div *ngIf="billAmountQuantity > 1">
+          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashIn">
+            Dividir "valor total" pelo "número de prestações"? {{isBillValueToDivide == true ? 'Sim' : 'Não' }}
+          </mat-checkbox>
+
+          <div>
+            <mat-label *ngIf="billAmountQuantity > 1 && billTotalValue > 1">
+              <mat-card style="width: 95%; height: 10%;">
+                <mat-icon>help</mat-icon>
+                Exemplo:
+                {{isBillValueToDivide == true ? 'O valor por prestação ficará: ' + ( billTotalValue /
+                billAmountQuantity) : 'O valor final ficará: ' + ( billTotalValue *
+                billAmountQuantity)}}
+
+                <strong>
+                  <p>No caso da opção '{{isBillValueToDivide == true ? 'marcada' : 'desmarcada'}}', o cálculo será:</p>
+                  '{{isBillValueToDivide == true ? 'valorTotal / numeroPrestacoes = valor por prestação' : 'valorTotal *
+                  numeroPrestacoes = valor por prestação'}}'
+                </strong>
+              </mat-card>
+            </mat-label>
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <mat-form-field class="" appearance="fill" style="width: 100%;">
+          <mat-label>Tags</mat-label>
+          <mat-chip-list #chipList aria-label=" Seleção de tags">
+            <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
+              {{tag}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input placeholder="Nova tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
+              [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
+            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+              {{tag}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
 
   <div mat-dialog-actions>
     <button mat-button (click)="onExitClick()">Sair</button>
-    <button mat-button (click)="onSaveClick()" [mat-dialog-close]="data" cdkFocusInitial>Salvar</button>
+    <button mat-button (click)="onSaveClick()" cdkFocusInitial>Salvar</button>
   </div>
 
 </div>

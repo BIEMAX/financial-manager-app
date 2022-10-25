@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ export class ChartsService {
   private readonly apiHeader = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: localStorage.getItem('userBearerKey')
+      'Authorization': localStorage.getItem('userBearerKey')
     })
-  }
+  };
 
   getAvailableChartByUser () {
     return this.http.get(`${this.apiUrl}/charts/user/access`, this.apiHeader)

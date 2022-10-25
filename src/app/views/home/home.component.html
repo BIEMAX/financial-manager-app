@@ -9,7 +9,7 @@
       </div>
       <mat-accordion multi>
 
-        <div *ngFor="let panel of panelsDataSource">
+        <div *ngFor="let panel of panels">
           <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
             <!--First expansion panel-->
             <mat-expansion-panel-header>
@@ -24,9 +24,13 @@
 
             <!-- Lists -->
             <div *ngFor="let task of panel.tasks">
-              <mat-list>
-                <mat-list-item> {{task.title}} </mat-list-item>
-              </mat-list>
+              <mat-card color="{{uiColor}}">
+                <mat-card-title>Conta '{{task.title}}' próximo do vencimento ou vencida</mat-card-title>
+                <mat-card-subtitle>Data de vencimento: {{task.date}}</mat-card-subtitle>
+                <mat-card-content *ngIf="task.description != ''">Descrição: {{task.description}}</mat-card-content>
+                <mat-checkbox [ngModel]="task.done" [disabled]="false" color="{{uiColor}}"
+                  (click)="payBillOverdue(task)">Conta paga?</mat-checkbox>
+              </mat-card>
             </div>
 
             <mat-action-row>

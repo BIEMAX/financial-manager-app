@@ -31,13 +31,15 @@
       <br>
 
       <mat-slide-toggle color="{{uiColor}}">
-        Salvar senha
+        Mantenha-me conectado
       </mat-slide-toggle>
 
       <br><br>
 
       <div class="example-button-row">
-        <button mat-raised-button color="{{uiColor}}" (click)="doLogin()">Login</button>
+        <button class="space" mat-raised-button color="{{uiColor}}" (click)="openDialogAddNewUser()">Criar nova
+          conta</button>
+        <button mat-raised-button (click)="doLogin()">Login</button>
       </div>
 
       <br>
