@@ -6,8 +6,8 @@ name: Deploy to Firebase on merge
 on:
   push:
     branches:
-      - develop
       - fix/firebase_deploys
+      - develop
       - master
 
 jobs:
@@ -60,3 +60,10 @@ jobs:
       #     firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FINANCIAL_MANAGER_STAGING }}"
       #     channelId: live
       #     projectId: financials-manager
+
+  hotfix-deploy:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'fix/firebase_deploys'
+    steps:
+      - run: echo "github.ref_name - {{github.ref_name}}"
+      - run: echo "github.ref - {{github.ref}}"
