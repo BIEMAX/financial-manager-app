@@ -68,7 +68,7 @@ jobs:
     if: github.ref_name == 'fix/firebase_deploys'
     steps:
       - name: Checking branch name
-        run: echo "Running on branch '${{ BRANCH_NAME }}'"
+        run: echo Running on branch ${GITHUB_REF##*/}
       # - name: Installing dependencys
       #   uses: actions/checkout@master
       # - name: Setup Node JS
