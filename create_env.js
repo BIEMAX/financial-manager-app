@@ -27,14 +27,12 @@ fs.access(dir, fs.constants.F_OK, (err) => {
     console.log('3. Default file created');
 
     console.log('4. Enviroment: ', env);
-    if (env.toUpperCase().trim().includes('STG')) {
-      console.log('  4.1 Creating stg file');
-      fs.writeFileSync(`${dir}/${stgFile}`, content);
-    }
-    else {
-      console.log('  4.2 Creating prd file');
-      fs.writeFileSync(`${dir}/${prdFile}`, content);
-    }
+
+    console.log('  4.1 Creating stg file');
+    fs.writeFileSync(`${dir}/${stgFile}`, content);
+
+    console.log('  4.2 Creating prd file');
+    fs.writeFileSync(`${dir}/${prdFile}`, content);
 
     console.log('5. Files created successfully');
 
