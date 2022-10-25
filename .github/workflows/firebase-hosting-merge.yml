@@ -6,9 +6,9 @@ name: Deploy to Firebase on merge
 on:
   push:
     branches:
-      - fix/firebase_deploys
-      - develop
-      - master
+      - "fix/firebase_deploys"
+      - "develop"
+      - "master"
 
 jobs:
   staging-deploy:
