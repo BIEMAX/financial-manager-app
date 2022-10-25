@@ -15,9 +15,12 @@ jobs:
     if: ${{ github.ref_name == 'develop' || github.ref_name == 'fix/firebase_deploys' }}
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Running on branch '${{ BRANCH_NAME }}'"
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - name: Checking branch name
+        run: echo "Running on branch '${{ BRANCH_NAME }}'"
+      - name: Installing dependencys
+        uses: actions/checkout@master
+      - name: Setup Node JS
+        uses: actions/setup-node@master
         with:
           node-version: "14.18.0"
       - run: npm install --dotenv-extended
