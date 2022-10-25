@@ -12,8 +12,8 @@ on:
 
 jobs:
   staging-deploy:
-    if: github.ref_name == 'fix/firebase_deploys'
     runs-on: ubuntu-latest
+    if: github.ref_name == 'develop'
     steps:
       - name: Checking branch name
         run: echo "Running on branch '${{ BRANCH_NAME }}'"
@@ -63,9 +63,29 @@ jobs:
       #     channelId: live
       #     projectId: financials-manager
 
-  # hotfix-deploy:
-  #   runs-on: ubuntu-latest
-  #   if: github.ref_name == 'fix/firebase_deploys'
-  #   steps:
-  #     - run: echo "ref_name variable ${{ BRANCH_NAME }}"
-  #     - run: echo "ref variable ${{ BRANCH_NAME }}"
+  hotfix-deploy:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'fix/firebase_deploys'
+    steps:
+      - name: Checking branch name
+        run: echo "Running on branch '${{ BRANCH_NAME }}'"
+      # - name: Installing dependencys
+      #   uses: actions/checkout@master
+      # - name: Setup Node JS
+      #   uses: actions/setup-node@master
+      #   with:
+      #     node-version: "14.18.0"
+      # - run: npm install --dotenv-extended
+      # - name: Loading environment configurations
+      # - run: node create_env.js
+      #   env:
+      #     ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
+      #     ENVIRONMENT: "stg"
+      # - uses: actions/checkout@v2
+      # - run: npm ci && npm run build-hml
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: "${{ secrets.GITHUB_TOKEN }}"
+      #     firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FINANCIAL_MANAGER_STAGING }}"
+      #     channelId: live
+      #     projectId: financial-manager-staging
