@@ -16,7 +16,7 @@ jobs:
     if: github.ref_name == 'develop'
     steps:
       - name: Checking branch name
-        run: echo "Running on branch '${{ BRANCH_NAME }}'"
+      - run: echo "Running on branch '${{ BRANCH_NAME }}'"
       - name: Installing dependencys
         uses: actions/checkout@master
       - name: Setup Node JS
