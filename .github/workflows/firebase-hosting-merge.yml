@@ -69,8 +69,8 @@ jobs:
     steps:
       - name: Checking branch name
         run: echo Running on branch ${GITHUB_REF##*/}
-      # - name: Installing dependencys
-      #   uses: actions/checkout@master
+      - name: Installing dependencys
+        uses: actions/checkout@master
       # - name: Setup Node JS
       #   uses: actions/setup-node@master
       #   with:
