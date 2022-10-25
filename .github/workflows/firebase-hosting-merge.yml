@@ -12,7 +12,7 @@ on:
 
 jobs:
   staging-deploy:
-    if: ${{ github.ref_name == 'develop' || github.ref_name == 'fix/firebase_deploys' }}
+    if: github.ref_name == 'fix/firebase_deploys'
     runs-on: ubuntu-latest
     steps:
       - name: Checking branch name
