@@ -16,7 +16,7 @@ export class BillsService {
       'Content-Type': 'application/json',
       'Authorization': localStorage.getItem('userBearerKey')
     })
-  }
+  };
 
   getBills (month?: number, year?: number, description?: string, tag?: string) {
     let query: String = '';
@@ -41,15 +41,17 @@ export class BillsService {
     return this.http.delete(`${this.apiUrl}/bill/delete/${id}`, this.apiHeader);
   }
 
-  getBillByPayed (billPayed: Boolean = false) {
-    this.getNewBearer();
+  getBillByPayed (bearer: String, billPayed: Boolean = false) {
+    this.getNewAuthorization(bearer);
     return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
   }
 
-  /**
-   * Get the new bearer from local storage.
-   */
-  getNewBearer () {
-    this.apiHeader.headers[1] = localStorage.getItem('userBearerKey');
+  getNewAuthorization (bearer: String) {
+    this.apiHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': bearer.toString()
+      })
+    };
   }
 }
