@@ -5,8 +5,8 @@ require('dotenv').config();
 const dir = "src/environments";
 
 const defaultFile = `${dir}/environment.ts`;
-const stgFile = "environment.stg.ts"
-const prdFile = "environment.prod.ts"
+const stgFile = "environment.stg.ts";
+const prdFile = "environment.prd.ts";
 
 const content = `${process.env.ENVIRONMENT_CONTENT}`;
 const env = `${process.env.ENVIRONMENT}`;
@@ -23,12 +23,18 @@ fs.access(dir, fs.constants.F_OK, (err) => {
   //Now, create file
   try {
     console.log('2. creating default file');
-    fs.writeFileSync(defaultFile, content);
+    fs.writeFileSync(defaultFile, "");
     console.log('3. Default file created');
 
     console.log('4. Enviroment: ', env);
-    if (env === 'stg') fs.writeFileSync(`${dir}/${stgFile}`, content);
-    else fs.writeFileSync(`${dir}/${prdFile}`, content);
+    if (env.toUpperCase().trim().includes('STG')) {
+      console.log('  4.1 Creating stg file');
+      fs.writeFileSync(`${dir}/${stgFile}`, content);
+    }
+    else {
+      console.log('  4.2 Creating prd file');
+      fs.writeFileSync(`${dir}/${prdFile}`, content);
+    }
 
     console.log('5. Files created successfully');
 
