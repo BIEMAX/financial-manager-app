@@ -15,26 +15,25 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref_name == 'develop' || github.ref_name == 'fix/firebase_deploys' }}
     steps:
-      - run: echo "github.ref_name - {{github.ref_name}}"
-      - run: echo "github.ref - {{github.ref}}"
-      # - uses: actions/checkout@master
-      # - uses: actions/setup-node@master
-      #   with:
-      #     node-version: "14.18.0"
-      # - run: npm install --dotenv-extended
-      # - name: Loading environment configurations
-      # - run: node create_env.js
-      #   env:
-      #     ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
-      #     ENVIRONMENT: "stg"
-      # - uses: actions/checkout@v2
-      # - run: npm ci && npm run build-hml
-      # - uses: FirebaseExtended/action-hosting-deploy@v0
-      #   with:
-      #     repoToken: "${{ secrets.GITHUB_TOKEN }}"
-      #     firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FINANCIAL_MANAGER_STAGING }}"
-      #     channelId: live
-      #     projectId: financial-manager-staging
+      - run: echo "Running on branch '${{ BRANCH_NAME }}'"
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: "14.18.0"
+      - run: npm install --dotenv-extended
+      - name: Loading environment configurations
+      - run: node create_env.js
+        env:
+          ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
+          ENVIRONMENT: "stg"
+      - uses: actions/checkout@v2
+      - run: npm ci && npm run build-hml
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_FINANCIAL_MANAGER_STAGING }}"
+          channelId: live
+          projectId: financial-manager-staging
 
   production-deploy:
     runs-on: ubuntu-latest
