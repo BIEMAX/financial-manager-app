@@ -43,7 +43,7 @@ jobs:
 
   production-deploy:
     runs-on: ubuntu-latest
-    if: github.ref_name == 'fix/firebase_deploys'
+    if: github.ref_name == 'main'
     steps:
       - name: 1. Checking branch name
         run: echo Running on branch ${GITHUB_REF##*/}
