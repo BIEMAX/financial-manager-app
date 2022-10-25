@@ -26,7 +26,7 @@ fs.access(dir, fs.constants.F_OK, (err) => {
     fs.writeFileSync(defaultFile, content);
     console.log('3. Default file created');
 
-    console.log('4. Env: ', env);
+    console.log('4. Enviroment: ', env);
     if (env === 'stg') fs.writeFileSync(`${dir}/${stgFile}`, content);
     else fs.writeFileSync(`${dir}/${prdFile}`, content);
 
