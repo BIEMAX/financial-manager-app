@@ -65,5 +65,6 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref_name == 'fix/firebase_deploys'
     steps:
-      - run: echo "ref_name variable {{ github.ref_name }}"
-      - run: echo "ref variable {{ github.ref }}"
+      - run: echo "ref_name variable ${{ BRANCH_NAME }}"
+      - run: echo "${{ BRANCH_NAME }} == 'fix/firebase_deploys'"
+      - run: echo "ref variable ${{ BRANCH_NAME }}"
