@@ -62,7 +62,7 @@ export class UserLoginComponent implements OnInit {
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.permissions = loginData.data.permissions;
 
-              this.getOverdueBills();
+              this.getOverdueBills(loginData.bearerKey);
             },
             error => {
               this.userService.enableMenusOnScreen.emit(false);
@@ -125,8 +125,8 @@ export class UserLoginComponent implements OnInit {
   /**
    * Get the bills that will overdue or already overdue.
    */
-  getOverdueBills () {
-    this.billsService.getBillByPayed().subscribe(
+  getOverdueBills (bearer: String) {
+    this.billsService.getBillByPayed(bearer, false).subscribe(
       response => {
         let resp: any = response;
 
