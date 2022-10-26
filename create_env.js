@@ -24,7 +24,9 @@ fs.access(dir, fs.constants.F_OK, (err) => {
   try {
     console.log('2. creating default file');
     fs.writeFileSync(defaultFile, content);
-    console.log('3. Default file created');
+    console.log('3. Default env file created');
+    console.log('  3.1 content length: ', content.length);
+    console.log('  3.1 env length: ', env.length);
 
     console.log('4. Enviroment: ', env);
 
