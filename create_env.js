@@ -37,7 +37,10 @@ fs.access(dir, fs.constants.F_OK, (err) => {
     console.log('5. Files created successfully');
 
     if (fs.existsSync(defaultFile)) {
-      console.log('6. File is created', path.resolve(defaultFile));
+      console.log('6. Files created: ')
+      console.log('  6.1 default file: ', path.resolve(defaultFile));
+      console.log('  6.2 stg file: ', path.resolve(`${dir}/${stgFile}`));
+      console.log('  6.3 prd file: ', path.resolve(`${dir}/${prdFile}`));
       const str = fs.readFileSync(defaultFile).toString();
       console.log('7. File content: ', str);
     }
