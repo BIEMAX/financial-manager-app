@@ -23,7 +23,7 @@ fs.access(dir, fs.constants.F_OK, (err) => {
   //Now, create file
   try {
     console.log('2. creating default file');
-    fs.writeFileSync(defaultFile, "");
+    fs.writeFileSync(defaultFile, content);
     console.log('3. Default file created');
 
     console.log('4. Enviroment: ', env);
