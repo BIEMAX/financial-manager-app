@@ -24,6 +24,7 @@ jobs:
           node-version: "14.18.0"
       - name: 4. Installing dotenv package
         run: npm install --dotenv-extended
+
       # Staging env
       - name: 5. Loading staging environment config
         if: github.ref_name == 'develop'
@@ -45,11 +46,13 @@ jobs:
         env:
           ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
           ENVIRONMENT: "stg"
+
       # Staging env
-      - name: 6. Building project for stagging environment
+      - name: 6. STG - Building project
         if: github.ref_name == 'develop'
         run: npm ci && npm run build-hml
-      - name: 7. Defining firebase configurations
+      - name: 7. STG - Deploying to firebase
+        if: github.ref_name == 'develop'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -57,10 +60,11 @@ jobs:
           channelId: live
           projectId: financial-manager-staging
       # Production env
-      - name: 6. Building project for production environment
+      - name: 6. PRD - Building project
         if: github.ref_name == 'main'
         run: npm install && npm ci && npm run build-hml
-      - name: 7. Defining firebase configurations
+      - name: 7. PRD - Deploying to firebase
+        if: github.ref_name == 'main'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -68,10 +72,11 @@ jobs:
           channelId: live
           projectId: financials-manager
       # Test only
-      - name: 6. Building project for stagging environment
+      - name: 6. TST - Building project
         if: github.ref_name == 'fix/firebase_deploys'
         run: npm install && npm run build-hml
-      - name: 7. Defining firebase configurations
+      - name: 7. TST - Deploying to firebase
+        if: github.ref_name == 'fix/firebase_deploys'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
