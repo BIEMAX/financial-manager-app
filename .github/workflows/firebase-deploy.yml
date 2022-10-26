@@ -56,11 +56,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Staging env
-      - name: 6. [STG] Building project
-        if: github.ref_name == 'develop'
+      - name: 6. Install angular dependencys
         run: npm install
-      - run: npm run build-hml
-      - name: 7. [STG] Defining firebase configurations
+      - name: 7. [STG] Building project
+        if: github.ref_name == 'develop'
+        run: npm run build-hml
+      - name: 8. [STG] Defining firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -68,10 +69,10 @@ jobs:
           channelId: live
           projectId: financial-manager-staging
       # Production env
-      - name: 6. [PRD] Building project
+      - name: 7. [PRD] Building project
         if: github.ref_name == 'main'
         run: npm ci && npm run build-prd
-      - name: 7. [PRD] Defining firebase configurations
+      - name: 8. [PRD] Defining firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
@@ -79,11 +80,11 @@ jobs:
           channelId: live
           projectId: financials-manager
       # Test only
-      - name: 6. [TST] Building project
+      - name: 7. [TST] Building project
         if: github.ref_name == 'fix/firebase_deploys'
       - run: npm install
       - run: npm run build-hml
-      - name: 7. [TST] Defining firebase configurations
+      - name: 8. [TST] Defining firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
