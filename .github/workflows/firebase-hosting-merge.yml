@@ -92,7 +92,7 @@ jobs:
           ENVIRONMENT: "stg"
       - uses: actions/checkout@v2
       - name: 6. Building project for stagging environment
-        run: npm ci && npm run build-hml
+        run: npm run build-hml
       - name: 7. Defining firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
