@@ -17,26 +17,21 @@ fs.access(dir, fs.constants.F_OK, (err) => {
 
     //Create src
     fs.mkdir(dir, { recursive: true }, (err) => {
-      if (err) throw err;
+      if (err) console.log('  1.1 error when creating default folder: ', err);
     })
   }
   //Now, create file
   try {
     console.log('2. creating default file');
     console.log('  2.1 current folder: ', __dirname);
-    console.log('  2.2 Validation if dir exists: ', fs.exists(dir, (e) => { return e; }));
-    if (!fs.exists(dir)) {
-      console.log('  2.3 Default folder not exists. Creating them');
-      fs.writeFileSync(`${dir}/test.txt`);
-      console.log('  2.4 Folder created');
-    }
+
     fs.writeFileSync(defaultFile, content);
+
     console.log('3. Default env file created');
     console.log('  3.1 content length: ', content.length);
     console.log('  3.1 env length: ', env.length);
 
     console.log('4. Enviroment: ', env);
-
     console.log('  4.1 Creating stg file');
     fs.writeFileSync(`${dir}/${stgFile}`, content);
 
