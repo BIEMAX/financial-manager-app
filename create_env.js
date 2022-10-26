@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
-const dir = "src/environments";
+const dir = "./src/environments";
 
 const defaultFile = `${dir}/environment.ts`;
 const stgFile = "environment.stg.ts";
