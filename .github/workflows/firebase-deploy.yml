@@ -58,7 +58,7 @@ jobs:
       # Staging env
       - name: 6. [STG] Building project
         if: github.ref_name == 'develop'
-      - run: npm install
+        run: npm install
       - run: npm run build-hml
       - name: 7. [STG] Defining firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
