@@ -91,9 +91,11 @@ jobs:
           ENVIRONMENT_CONTENT: "${{ secrets.STAGING_ENVIRONMENT }}"
           ENVIRONMENT: "stg"
       - uses: actions/checkout@v2
-      - name: 6. Building project for stagging environment
+      - name: 6. Installing angular dependencys
+        run: npm install
+      - name: 7. Building project for stagging environment
         run: npm run build-hml
-      - name: 7. Defining firebase configurations
+      - name: 8. Loading firebase configurations
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
