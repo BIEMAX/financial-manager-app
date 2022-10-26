@@ -24,7 +24,7 @@ fs.access(dir, fs.constants.F_OK, (err) => {
   try {
     console.log('2. creating default file');
     console.log('  2.1 current folder: ', __dirname);
-    console.log('  2.2 Validation if dir exists: ', fs.exists(dir));
+    console.log('  2.2 Validation if dir exists: ', fs.exists(dir, (e) => { return e; }));
     if (!fs.exists(dir)) {
       console.log('  2.3 Default folder not exists. Creating them');
       fs.writeFileSync(`${dir}/test.txt`);
