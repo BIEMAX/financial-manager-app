@@ -1,7 +1,7 @@
 {
   "name": "financial-manager-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project to controls personal/profissional costs and receiveds.",
   "main": "main.js",
   "scripts": {
     "dev": "ng serve --port 4200 -c dev",
@@ -28,6 +28,7 @@
     "@angular/router": "14.2.1",
     "@types/jasmine": "^4.0.2",
     "@types/jasminewd2": "^2.0.10",
+    "@types/node": "^18.7.18",
     "concurrently": "^7.1.0",
     "electron": "^20.1.3",
     "jasmine-core": "^4.1.0",
@@ -40,13 +41,29 @@
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^14.2.2",
+    "@angular/animations": "^14.2.1",
+    "@angular/cdk": "~14.2.1",
     "@angular/cli": "^14.2.2",
     "@angular/core": "^14.2.1",
+    "@angular/forms": "^14.2.1",
     "@angular/localize": "^14.2.1",
+    "@angular/material": "~14.2.1",
     "@angular/material-moment-adapter": "^14.2.1",
+    "chart.js": "^3.9.1",
     "dotenv": "^16.0.0",
+    "firebase": "^9.12.1",
     "moment": "^2.29.4",
+    "ng2-charts": "^4.0.1",
+    "ngx-markdown": "^14.0.1",
     "save": "^2.4.0",
     "zone.js": "^0.11.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BIEMAX/financial-manager-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BIEMAX/financial-manager-app/issues"
+  },
+  "homepage": "https://github.com/BIEMAX/financial-manager-app#readme"
 }

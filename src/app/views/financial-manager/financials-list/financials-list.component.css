@@ -1,7 +1,30 @@
-.table-filter-fields {
-  width: 50%;
+/* Absolute Center Spinner */
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-td {
-  padding-right: 1px;
+table {
+  width: 100%;
+}
+
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+.mat-form-field {
+  margin-left: 8px;
+  width: 150px;
 }

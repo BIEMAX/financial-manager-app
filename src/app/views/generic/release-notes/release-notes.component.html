@@ -1,0 +1,21 @@
+<div>
+
+  <mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+      <mat-nav-list *ngFor="let version of listReleases">
+        <mat-list-item (click)="getReleaseNotes(version.name)">
+          <mat-icon *ngIf="version.name != 'Versões'">{{version.icon}}</mat-icon>
+          {{version.name}}
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div style="height: 100vh;">
+        <router-outlet>
+          <markdown [data]="releaseMarkdown" (load)="onLoad($event)" (error)="onError($event)"></markdown>
+        </router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

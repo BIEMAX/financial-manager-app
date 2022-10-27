@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -14,7 +15,9 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FinancialModel } from 'src/app/models/financial.model';
-import { environment } from 'src/environments/environment';
+import { environment, ui } from 'src/environments/environment';
+import { TagsService } from 'src/app/services/tags.service';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 @Component({
   selector: 'app-financials-new',
@@ -23,47 +26,93 @@ import { environment } from 'src/environments/environment';
 })
 export class FinancialsNewComponent implements OnInit {
 
-  //NG Models variables
-  billName: String;
-  billDueDate: Date;
-  billDescription: String;
-  billTotalValue: Number;
-  billAmountQuantity: Number = 1;//Quantidade de vezes da conta
-  billTags: string[] = ['Contas fixas'];
+  public billName: string;
+  public billDueDate: string; //format yyyy-MM-dd
+  public billDescription: string;
+  public billTotalValue: Number;
+  public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
+  public billTags: string[] = ['Contas fixas']; //Starter tag
+  public isCashIn: Boolean = false;
+  public uiColor: string = ui.color;
+  public billId: string;
+  public isBillPayed: boolean = false;
+  public isBillValueToDivide: boolean = false;
+  public filteredTags: Observable<string[]>;
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
+  public tagCtrl = new FormControl('');
 
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl('');
-  filteredTags: Observable<string[]>;
-  allTags: string[] = ['Contas fixas', 'Contas não previstas', 'Faculdade', 'Mercado', 'Lazer', 'Salário', 'Cŕedito'];
+  private allTags: string[];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
   constructor(
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => (fruit ? this.filterTag(fruit) : this.allTags.slice())),
-    );
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
+    private tagsService: TagsService,
+    private dialogReport: DialogReport
+  ) { }
 
   ngOnInit (): void {
+    if (this.data) { //Its an update
+      this.billId = this.data.id;
+      this.billName = this.data.name;
+      this.billDueDate = `${this.data.dueDate.split("/")[2]}-${this.data.dueDate.split("/")[1]}-${this.data.dueDate.split("/")[0]}`;
+      this.billDescription = this.data.description;
+      this.billTotalValue = this.data.value;
+      this.billAmountQuantity = this.data.quantityAmount;
+      this.billTags = this.data.tags;
+      this.isCashIn = this.data.isCashIn;
+      this.isBillPayed = this.data.isBillPayed;
+    } else {
+      this.billDueDate = new Date().toISOString().split("T")[0];
+    }
+    this.getTagsByUser();
   }
 
   onSaveClick () {
-    this.data = new FinancialModel(
-      '0',
-      localStorage.getItem('userName'),
-      this.billName,
-      this.billDueDate,
-      this.billDescription || '',
-      this.billTotalValue,
-      this.billAmountQuantity,
-      this.billTags
-    );
-    if (environment.logInfo) console.log('this.data: ', this.data);
-    this.dialogRef.close(this.data);
+    try {
+      this.data = new FinancialModel(
+        this.billId ? this.billId : '0',
+        localStorage.getItem('userLogin'),
+        this.billName,
+        `${this.billDueDate}T${new Date().toLocaleTimeString('pt-BR')}.000Z`,
+        this.billDescription || '',
+        this.billTotalValue,
+        this.billAmountQuantity,
+        this.billTags,
+        this.isCashIn,
+        this.isBillPayed,
+        this.isBillValueToDivide
+      );
+
+      this.thereIsNewTags();
+
+      if (environment.logInfo) console.log('this.data: ', this.data);
+      this.dialogRef.close(this.data);
+    }
+    catch (error) {
+      if (environment.logInfo) console.log('error on save: ', error);
+      this.dialogReport.showMessageDialog(error, true, true);
+      return;
+    }
+  }
+
+  /**
+   * Validate if there are new tags to save in database
+   */
+  thereIsNewTags () {
+    if (this.billTags.length > 0) {
+      this.billTags.map((t) => {
+        if (this.allTags.filter(t => t.toUpperCase().trim() == "").length <= 0) {
+          //If tag doesn't exist, creat it 
+          this.tagsService.newTag(t).subscribe(
+            response => { if (environment.logInfo) console.log('response: ', response); },
+            error => { if (environment.logInfo) console.log('error: ', error); }
+          )
+        }
+      });
+    }
   }
 
   onExitClick () {
@@ -74,7 +123,7 @@ export class FinancialsNewComponent implements OnInit {
     if (this.billName || this.billDescription || this.billDueDate || this.billTotalValue || this.billAmountQuantity) {
       if (confirm("Você deseja realmente sair?")) return true;
       else return false;
-    } else return false;
+    } else return true;
   }
 
   addTag (event: MatChipInputEvent): void {
@@ -111,6 +160,36 @@ export class FinancialsNewComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue));
+  }
+
+  getTagsByUser () {
+    this.tagsService.getTags().subscribe(
+      response => {
+        let resp: any = response;
+        if (resp.data) {
+          this.allTags = resp.data.tags;
+          this.filteredTags = this.tagCtrl.valueChanges.pipe(
+            startWith(null),
+            map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
+          );
+        }
+        else this.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
+      },
+      error => {
+        if (environment.logInfo) console.log('error on save: ', error);
+        this.dialogReport.showMessageDialog(error, true, true);
+      }
+    )
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event
+   * @param duration Integer containing the value to animation time
+   */
+  showNotification (message: string, action: string, duration = 2000) {
+    this.snackBar.open(message, action, { duration: duration });
   }
 
 }

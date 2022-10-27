@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ui } from 'src/environments/environment';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
+  /**
+     * Define default color on UI (User Interface)
+     */
+  public uiColor: string = ui.color;
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit (): void {
   }
 
 }

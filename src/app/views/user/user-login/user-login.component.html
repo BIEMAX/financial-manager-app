@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-content>
+    <div class="example-container">
+
+      <div class="loading-indicator">
+        <mat-progress-spinner mode="indeterminate" *ngIf="hasToWait" diameter="50"> </mat-progress-spinner>
+      </div>
+
+      <!--Login button-->
+      <mat-form-field class="full-width-input" appearance="fill">
+        <mat-label>
+          Usuário para login
+          <mat-icon>login</mat-icon>
+        </mat-label>
+        <input matInput placeholder="Ex. 0012482" value="" [(ngModel)]="userLogin" required (keyup.enter)="doLogin()">
+      </mat-form-field>
+
+      <br>
+
+      <!--Password button-->
+      <mat-form-field class="full-width-input" appearance="fill">
+        <mat-label>
+          Senha
+        </mat-label>
+        <input matInput placeholder="" value="" [type]="showPassword ? 'text' : 'password'" [(ngModel)]="userPassword"
+          required (keyup.enter)="doLogin()">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">{{ showPassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+      </mat-form-field>
+
+      <br>
+
+      <mat-slide-toggle color="{{uiColor}}">
+        Mantenha-me conectado
+      </mat-slide-toggle>
+
+      <br><br>
+
+      <div class="example-button-row">
+        <button class="space" mat-raised-button color="{{uiColor}}" (click)="openDialogAddNewUser()">Criar nova
+          conta</button>
+        <button mat-raised-button (click)="doLogin()">Login</button>
+      </div>
+
+      <br>
+    </div>
+  </mat-card-content>
+</mat-card>

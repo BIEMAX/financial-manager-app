@@ -1,29 +1,35 @@
-import { EmptyFieldException } from '../exceptions/empty.field.exception'
+import { EmptyFieldException } from 'src/app/exceptions/empty.field.exception';
 
 export class FinancialModel {
   id: String;
   user: String;
   name: String;
-  dueDate: Date;
+  dueDate: String;
   description: String;
   value: Number;
   quantityAmount: Number;
   tags: Array<String>;
+  isCashIn: Boolean;
+  isBillPayed: Boolean = false;
+  isToDivideValue: Boolean = false;
 
   constructor(
     Id: String,
     User: String,
     Name: String,
-    DueDate: Date,
+    DueDate: String,
     Description: String,
     Value: Number,
     QuantityAmount: Number,
-    Tags: Array<String>
+    Tags: Array<String>,
+    IsCashIn: Boolean,
+    IsBillPayed: Boolean,
+    IsToDivideValue: Boolean
   ) {
-    if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException(Id);
-    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException(Name);
-    else if (typeof (DueDate) == "undefined" || !DueDate) throw new EmptyFieldException(DueDate);
-    else if (typeof (Value) == "undefined" || !Value) throw new EmptyFieldException(Value);
+    if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException("Id");
+    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException("Nome da conta");
+    else if (typeof (DueDate) == "undefined" || !DueDate) throw new EmptyFieldException("Data de vencimento");
+    else if (typeof (Value) == "undefined" || !Value) throw new EmptyFieldException("Valor");
     else {
       this.id = Id;
       this.user = User;
@@ -33,6 +39,9 @@ export class FinancialModel {
       this.value = Value;
       this.quantityAmount = QuantityAmount || 1;
       this.tags = Tags;
+      this.isCashIn = IsCashIn;
+      this.isBillPayed = IsBillPayed;
+      this.isToDivideValue = IsToDivideValue;
     }
   }
 }

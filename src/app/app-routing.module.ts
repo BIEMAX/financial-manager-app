@@ -1,35 +1,42 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
-import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 
 //Project packages
 import { HomeComponent } from './views/home/home.component';
-import { LoginComponent } from './views/login/login.component';
+import { UserLoginComponent } from './views/user/user-login/user-login.component';
+import { UserHasAccess } from './services/user-access-permissions';
+
+import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
+import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
+import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 
 //Router to access through angular
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: UserLoginComponent
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [UserHasAccess]
   },
   //Financials manager
   {
     path: 'financials',
     component: FinancialsListComponent,
-    // children: [
-    //   {
-    //     path: 'new',
-    //     component: FinancialsNewComponent
-    //   }
-    // ]
+    canActivate: [UserHasAccess]
   },
-
+  {
+    path: 'reports',
+    component: FinancialsReportComponent,
+    canActivate: [UserHasAccess]
+  },
+  {
+    path: 'whatsnew',
+    component: ReleaseNotesComponent
+  },
   //Templates
   {
     path: '**',

@@ -1,1 +1,26 @@
-<p>page-not-found works!</p>
+<mat-card>
+  <mat-card-content>
+    <div class="example-container">
+
+      <div class="example-button-row">
+        <h1 style="color: #3f51b5">Página não encontrada</h1>
+        <h1 style="color: #3f51b5">404</h1>
+
+        <br><br><br><br><br>
+
+        <img src="/assets/1_page_not_found.png" not-repeat style="width: 275px; background-color: transparent;">
+
+        <h5>
+          Desculpe, mas não encontramos a página que estava procurando.<br>
+          Nós sugerimos que retorne à página inicial
+        </h5>
+
+
+        <div class="example-button-row">
+          <button mat-raised-button color="{{uiColor}}" [routerLink]="'/home'">Voltar à página inicial</button>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>

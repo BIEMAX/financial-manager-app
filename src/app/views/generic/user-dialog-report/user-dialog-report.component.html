@@ -1,0 +1,26 @@
+<mat-form-field appearance="fill" style="width: 95%; margin-right: 5%;">
+  <!--Title-->
+  <h2 mat-dialog-title>{{data.title}}</h2>
+  <mat-dialog-content>
+
+    <div *ngIf="data.isError == true">
+      <p>
+        {{firstMessage}}
+        {{secondMessage}}
+        <br><br>
+        {{issuesReportLink}}
+      </p>
+    </div>
+
+    <p>
+      <b>Mensagem:</b> {{data.message}}.
+    </p>
+    <p>
+      <b>Solução: {{data.solution}}</b>
+    </p>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Voltar</button>
+  </div>
+
+</mat-form-field>
