@@ -4,6 +4,8 @@ import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BillsService } from 'src/app/services/bills.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
+import { DialogReport } from 'src/app/util/error-dialog-report';
+import { FinancialModel } from 'src/app/models/financial.model';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +19,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private billsService: BillsService,
     private snackBar: MatSnackBar,
-    private userAccessService: UserAccessService
+    private userAccessService: UserAccessService,
+    private dialogReport: DialogReport
   ) { }
 
   public applicationName: string = environment.applicationName;
-  public fakeUserName: string = "Franciele";
-  public welcomeTitle: string = `Bem vindo de volta ${this.fakeUserName}`;
-  public customerName: string = "Beilke Industries";
-  public productVersion: string = "Beta 1";
   public step = 0;
   public uiColor = ui.color;
   public panels: any = [
@@ -72,6 +71,9 @@ export class HomeComponent implements OnInit {
     this.checkNotifications();
   }
 
+  /**
+   * Verify if the user has new notifications.
+   */
   checkNotifications () {
     try {
       this.panels.push(
@@ -85,13 +87,24 @@ export class HomeComponent implements OnInit {
     }
     catch (error) {
       if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
-      this.showNotification(error.message, 'Erro');
+      this.dialogReport.showMessageDialog(error, true, true);
     }
   }
 
-  payBillOverdue (bill: any) {
+  /**
+   * Bill a bill that is overdue (for some unkown reason, the user forget to define the bill as payed.)
+   * @param bill Bill object
+   */
+  payBillOverdue (bill: FinancialModel) {
     if (bill.id) {
-
+      this.billsService.payBillOverdue(bill.id).subscribe(
+        response => {
+          let resp: any = response;
+        },
+        error => {
+          this.dialogReport.showMessageDialog(error, true, true);
+        }
+      );
     }
     else this.showNotification('', 'Erro');
   }

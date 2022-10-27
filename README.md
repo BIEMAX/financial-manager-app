@@ -1,4 +1,4 @@
-[![Deployment in staging environment](https://github.com/BIEMAX/financial-manager-app/actions/workflows/deploy-staging-environment.yml/badge.svg?branch=develop)](https://github.com/BIEMAX/financial-manager-app/actions/workflows/deploy-staging-environment.yml)
+[![Deploy to Firebase - Staging Environment](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml/badge.svg?branch=develop)](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml)
 
 # Financial Manager App
 

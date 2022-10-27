@@ -54,4 +54,8 @@ export class BillsService {
       })
     };
   }
+
+  payBillOverdue (id: any) {
+    return this.http.post(`${this.apiUrl}/bill/`, this.apiHeader);
+  }
 }
