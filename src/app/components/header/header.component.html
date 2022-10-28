@@ -41,7 +41,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="example-container" autosize>
-  <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
+  <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="startSideNavOpened" (mouseenter)="mouseenter()"
     (mouseleave)="mouseleave()">
     <mat-nav-list>
 

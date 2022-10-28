@@ -21,15 +21,24 @@ export class HeaderComponent implements OnInit {
 
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
+
   public isExpanded = true;
-  public showSubmenu: boolean = true;
-  public isShowing = false;
+  public showSubmenu: Boolean = true;
+  public isShowing: Boolean = false;
   public showSubSubMenu: boolean = true;
+
   public userNameComplete: String = "";
   public userFirstName: String = "";
   public qtyNotification: any = 0;
   public descNotifications: String = "";
+  /**
+   * True if is a mobile device
+   */
   public isMobileDevice: Boolean = false;
+  /**
+   * Define if the side bar start opened or close (for mobile devices).
+   */
+  public startSideNavOpened: Boolean = false;
 
   constructor(
     private userService: UserService,
@@ -49,6 +58,8 @@ export class HeaderComponent implements OnInit {
     this.qtyNotification = this.userAccessService.user.notifications.length;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
+    this.startSideNavOpened = !this.isMobileDevice;
+    this.isShowing = this.isMobileDevice;
   }
 
   mouseenter () {
