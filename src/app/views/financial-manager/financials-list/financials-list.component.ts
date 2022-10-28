@@ -57,23 +57,14 @@ export class FinancialsListComponent implements OnInit {
   public tag: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
-  public displayedColumns: string[] = [
-    'type',
-    'name',
-    'dueDate',
-    'value',
-    'quantityAmount',
-    'tags',
-    'isBillPayed',
-    'update',
-    'delete'
-  ];
+  public displayedColumns: string[];
   public date = new FormControl(moment());
 
   /**
    * Define default color on UI (User Interface)
    */
-  uiColor: string = ui.color;
+  public uiColor: string = ui.color;
+  public isMobileDevice: Boolean = false;
 
   // @ViewChild(MatSort) sort: MatSort;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -86,7 +77,10 @@ export class FinancialsListComponent implements OnInit {
     private genericFunctions: GenericFunctions
   ) { }
 
-  ngOnInit () { }
+  ngOnInit () {
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
+    this.setDisplayedColumnsByDevice();
+  }
 
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -218,15 +212,44 @@ export class FinancialsListComponent implements OnInit {
     else return;
   }
 
+  /**
+   * Set the next month and get the bills
+   */
   nextMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() + 1);
     this.date.setValue(ctrlValue);
   }
 
+  /**
+   * Set the previous month and get the bills
+   */
   previousMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() - 1);
     this.date.setValue(ctrlValue);
+  }
+
+  setDisplayedColumnsByDevice () {
+    if (this.isMobileDevice) {
+      this.displayedColumns = [
+        'name',
+        'dueDate',
+        'value'
+      ];
+    }
+    else {
+      this.displayedColumns = [
+        'type',
+        'name',
+        'dueDate',
+        'value',
+        'quantityAmount',
+        'tags',
+        'isBillPayed',
+        'update',
+        'delete'
+      ];
+    }
   }
 }
