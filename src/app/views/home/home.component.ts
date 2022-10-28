@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment, ui } from 'src/environments/environment';
 import { MatAccordion } from '@angular/material/expansion';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BillsService } from 'src/app/services/bills.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { FinancialModel } from 'src/app/models/financial.model';
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
-    private billsService: BillsService,
     private snackBar: MatSnackBar,
     private userAccessService: UserAccessService,
     private dialogReport: DialogReport
@@ -78,8 +76,8 @@ export class HomeComponent implements OnInit {
     try {
       this.panels.push(
         {
-          name: 'Contas próximas do vencimento',
-          description: 'Contas vencidas ou irão vencer futuramente',
+          name: 'Contas vencidas',
+          description: 'Próximas contas à vencer',
           icon: 'notification_important',
           tasks: this.userAccessService.user.notifications
         },

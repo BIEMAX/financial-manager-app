@@ -4,6 +4,8 @@ import { UserDialogComponent } from 'src/app/views/generic/user-dialog-report/us
 import { ResponseStatusCode, ExceptionSolutionResponse } from './response-message';
 import { LogService } from 'src/app/services/log.service';
 import { environment } from 'src/environments/environment';
+import { UserModel } from '../models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 /**
  * Generic class that open a dialog to show user that an error ocurrered
@@ -21,7 +23,8 @@ export class DialogReport {
 
   constructor(
     public dialog: MatDialog,
-    private logService: LogService
+    private logService: LogService,
+    private genericFunctions: GenericFunctions
   ) { }
 
   /**
@@ -34,6 +37,40 @@ export class DialogReport {
     this.extractInfoFromException(exception);
 
     if (saveLog) this.saveLog(exception);
+
+    let widthDialog = '';
+    let isMobileDevice = this.genericFunctions.isMobileDevice();
+
+    if (isMobileDevice) {
+      widthDialog = isError ? '100%' : '75%';
+    }
+    else widthDialog = isError ? '50%' : '25%';
+
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      disableClose: false,
+      width: widthDialog,
+      autoFocus: true,
+      data: {
+        isError: isError,
+        title: this.title,
+        message: this.message,
+        solution: this.solution
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(r => { });
+  }
+
+  /**
+   * Show message or error dialog for user saying that something goes wrong in user new registration.
+   * @param exception Exception or message object.
+   * @param isError True if is an error (the method will extract the info)
+   * @param saveLog True to send log information to database.
+   */
+  public showMessageDialog_UserCreation (exception: any, user: UserModel, isError: Boolean = true, saveLog: Boolean = true) {
+    this.extractInfoFromException(exception);
+
+    if (saveLog) this.saveLogUserCreation(exception);
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       disableClose: false,
@@ -56,12 +93,16 @@ export class DialogReport {
    */
   private extractInfoFromException (exception: any) {
     this.title = ResponseStatusCode(exception?.error?.error || '');
-    this.message = exception?.error?.message || '';
-    this.solution = ExceptionSolutionResponse(exception?.error?.message || '');
+
+    if (!exception?.error?.message != undefined) this.message = exception?.error?.message;
+    else this.message = exception?.message ? exception?.message : '';
+
+    if (exception?.error?.message != undefined) this.solution = ExceptionSolutionResponse(exception?.error?.message);
+    else this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : '');
   }
 
   /**
-   * 
+   * Save log for users logged in.
    * @param exception 
    */
   private saveLog (exception: any) {
@@ -79,6 +120,27 @@ export class DialogReport {
       error => {
         if (environment.logInfo) console.log('error when saving log: ', error)
       }
+    );
+  }
+
+  /**
+   * Save log for user creation (API does not required authentication)
+   * @param exception 
+   */
+  private saveLogUserCreation (exception: any, user: UserModel = undefined) {
+    let log: any = {
+      timestamp: exception?.error?.timestamp,
+      errorMessage: exception?.error?.message,
+      httpStatusCode: exception?.error?.status,
+      endpoint: exception?.error?.path,
+      stackTrace: exception?.error?.trace,
+    };
+
+    if (user != undefined) log.user = user;
+
+    this.logService.saveLogUserCreation(log).subscribe(
+      resp => { if (environment.logInfo) console.log('Success when save lag'); },
+      error => { if (environment.logInfo) console.log('error when saving log: ', error) }
     );
   }
 

@@ -1,5 +1,7 @@
 <footer class="footer">
-  <div class="footer-copyright text-center py-3">Copyright © 2022 Dionei Beilke dos Santos - Todos os direitos
-    reservados
+  <div *ngIf="isMobileDevice" style="font-size: 10px; margin-bottom: 10px;">
+    Copyright © 2022 Dionei Beilke dos Santos - Todos os direitos reservados
+  </div>
+  <div *ngIf="!isMobileDevice">Copyright © 2022 Dionei Beilke dos Santos - Todos os direitos reservados
   </div>
 </footer>
