@@ -11,6 +11,7 @@ import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component
 import { UserModel } from 'src/app/models/user.model';
 import { BillsService } from 'src/app/services/bills.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +32,11 @@ export class UserLoginComponent implements OnInit {
   public uiColor: string = ui.color;
   public showPassword: Boolean = false;
 
+  /**
+   * True if is an mobile device.
+   */
+  private isMobileResolution: Boolean = false;
+
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
@@ -38,11 +44,18 @@ export class UserLoginComponent implements OnInit {
     private billsService: BillsService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit () {
     this.clearOldLocalStorage();
+  }
+
+  clearOldLocalStorage () {
+    localStorage.removeItem('userBearerKey');
+    localStorage.removeItem('userLogin');
+    localStorage.removeItem('userName');
   }
 
   doLogin () {
@@ -92,7 +105,7 @@ export class UserLoginComponent implements OnInit {
   openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
-      width: '30%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
       autoFocus: true
     });
 
@@ -117,7 +130,7 @@ export class UserLoginComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.dialogReport.showMessageDialog(error, true, true);
+        this.dialogReport.showMessageDialog_UserCreation(error, user, true, true);
       }
     );
   }
@@ -152,12 +165,6 @@ export class UserLoginComponent implements OnInit {
         this.dialogReport.showMessageDialog(error, true, true);
       }
     );
-  }
-
-  clearOldLocalStorage () {
-    localStorage.removeItem('userBearerKey');
-    localStorage.removeItem('userLogin');
-    localStorage.removeItem('userName');
   }
 
   /**

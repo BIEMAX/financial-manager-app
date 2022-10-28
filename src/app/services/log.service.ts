@@ -21,4 +21,8 @@ export class LogService {
     return this.http.post(`${this.apiUrl}/log/new`, body, this.apiHeader);
   }
 
+  saveLogUserCreation (body: any) {
+    return this.http.post(`${this.apiUrl}/log/new/user-registration`, body);
+  }
+
 }
