@@ -20,6 +20,7 @@ import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
 import { FinancialModel } from 'src/app/models/financial.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 export const MY_FORMATS = {
   parse: {
@@ -56,23 +57,14 @@ export class FinancialsListComponent implements OnInit {
   public tag: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
-  public displayedColumns: string[] = [
-    'type',
-    'name',
-    'dueDate',
-    'value',
-    'quantityAmount',
-    'tags',
-    'isBillPayed',
-    'update',
-    'delete'
-  ];
+  public displayedColumns: string[];
   public date = new FormControl(moment());
 
   /**
    * Define default color on UI (User Interface)
    */
-  uiColor: string = ui.color;
+  public uiColor: string = ui.color;
+  public isMobileDevice: Boolean = false;
 
   // @ViewChild(MatSort) sort: MatSort;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -81,10 +73,14 @@ export class FinancialsListComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private billsService: BillsService,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions
   ) { }
 
-  ngOnInit () { }
+  ngOnInit () {
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
+    this.setDisplayedColumnsByDevice();
+  }
 
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -137,7 +133,7 @@ export class FinancialsListComponent implements OnInit {
   openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: '40%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
       autoFocus: true,
       data: bill
     });
@@ -216,15 +212,44 @@ export class FinancialsListComponent implements OnInit {
     else return;
   }
 
+  /**
+   * Set the next month and get the bills
+   */
   nextMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() + 1);
     this.date.setValue(ctrlValue);
   }
 
+  /**
+   * Set the previous month and get the bills
+   */
   previousMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() - 1);
     this.date.setValue(ctrlValue);
+  }
+
+  setDisplayedColumnsByDevice () {
+    if (this.isMobileDevice) {
+      this.displayedColumns = [
+        'name',
+        'dueDate',
+        'value'
+      ];
+    }
+    else {
+      this.displayedColumns = [
+        'type',
+        'name',
+        'dueDate',
+        'value',
+        'quantityAmount',
+        'tags',
+        'isBillPayed',
+        'update',
+        'delete'
+      ];
+    }
   }
 }
