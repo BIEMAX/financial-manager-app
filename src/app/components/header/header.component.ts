@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
 import { UserUpdateModel } from 'src/app/models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 @Component({
   selector: 'app-header',
@@ -28,13 +29,15 @@ export class HeaderComponent implements OnInit {
   public userFirstName: String = "";
   public qtyNotification: any = 0;
   public descNotifications: String = "";
+  public isMobileDevice: Boolean = false;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit () {
@@ -45,6 +48,7 @@ export class HeaderComponent implements OnInit {
     );
     this.qtyNotification = this.userAccessService.user.notifications.length;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
   }
 
   mouseenter () {
@@ -78,7 +82,7 @@ export class HeaderComponent implements OnInit {
   openDialogUpdateUser (): void {
     const dialogRef = this.dialog.open(UserUpdateInfoComponent, {
       disableClose: true,
-      width: '30%',
+      width: this.isMobileDevice ? '100%' : '30%',
       autoFocus: true
     });
 

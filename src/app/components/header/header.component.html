@@ -3,7 +3,8 @@
     <button mat-icon-button matTooltip="Menu" (click)="isExpanded = !isExpanded">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <h1>{{applicationName}}</h1>
+    <!--Only show application name if is a web device-->
+    <h1 *ngIf="!isMobileDevice">{{applicationName}}</h1>
     <span class="menu-spacer"></span>
     <div class="right-align">
 
@@ -12,7 +13,10 @@
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
       <a mat-button [routerLink]="'/'"> Sair... </a> -->
 
-      <a mat-button> Olá {{userFirstName}}, bem-vindo de volta </a>
+      <a mat-button *ngIf="isMobileDevice">
+        Olá {{userFirstName}}
+      </a>
+      <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
 
       <button mat-icon-button>
         <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
