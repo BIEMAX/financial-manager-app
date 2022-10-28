@@ -20,6 +20,7 @@ import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
 import { FinancialModel } from 'src/app/models/financial.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 export const MY_FORMATS = {
   parse: {
@@ -81,7 +82,8 @@ export class FinancialsListComponent implements OnInit {
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private billsService: BillsService,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit () { }
@@ -137,7 +139,7 @@ export class FinancialsListComponent implements OnInit {
   openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: '40%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
       autoFocus: true,
       data: bill
     });

@@ -5,6 +5,7 @@ import { ResponseStatusCode, ExceptionSolutionResponse } from './response-messag
 import { LogService } from 'src/app/services/log.service';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 /**
  * Generic class that open a dialog to show user that an error ocurrered
@@ -22,7 +23,8 @@ export class DialogReport {
 
   constructor(
     public dialog: MatDialog,
-    private logService: LogService
+    private logService: LogService,
+    private genericFunctions: GenericFunctions
   ) { }
 
   /**
@@ -36,9 +38,17 @@ export class DialogReport {
 
     if (saveLog) this.saveLog(exception);
 
+    let widthDialog = '';
+    let isMobileDevice = this.genericFunctions.isMobileDevice();
+
+    if (isMobileDevice) {
+      widthDialog = isError ? '100%' : '75%';
+    }
+    else widthDialog = isError ? '50%' : '25%';
+
     const dialogRef = this.dialog.open(UserDialogComponent, {
       disableClose: false,
-      width: (isError ? '50%' : '25%'),
+      width: widthDialog,
       autoFocus: true,
       data: {
         isError: isError,
