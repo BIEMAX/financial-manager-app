@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
   }
 
   payBillOverdue (bill: FinancialModel) {
-    if (bill.id) {
+    if (bill.id && confirm("Deseja atualizar a conta como paga?")) {
       this.billsService.payBillOverdue(bill.id).subscribe(
         response => {
           let resp: any = response;
@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
         }
       );
     }
-    else this.showNotification('', 'Erro');
+    else return;
   }
 
   setStep (index: number) {
