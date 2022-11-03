@@ -10,13 +10,13 @@ You can create future bills, control receive salary, spent and remaining money f
 # System requeriments
 
 
-| O.S.   | Node Version      |  Supported |
-|----------|:-------------:|------:|
-| Windows 7 |  Unsupported | :x: |
-| Windows 10 |  v14.18.x | - [x] Supported |
-| Windows 11 |  v14.18.x  | - [x] Supported |
-| Linux (Ubuntu) | v16.17.x | - [x] Supported |
-| col 3 is | right-aligned | - [x] Supported |
+| O.S.       | Node Version  |  Supported |
+|------------|:-------------:|-----------:|
+| Windows 7  |  Unsupported  | :x:                |
+| Windows 10 |  v14.18.x     | :heavy_check_mark: |
+| Windows 11 |  v14.18.x     | :heavy_check_mark: |
+| Linux (Ubuntu) | v16.17.x  | :heavy_check_mark: |
+| MacOs      |  v16.17.x     | :heavy_check_mark: |
 
 # Bills screen
 
