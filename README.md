@@ -12,7 +12,7 @@ You can create future bills, control receive salary, spent and remaining money f
 
 | O.S.   | Node Version      |  Supported |
 |----------|:-------------:|------:|
-| Windows 7 |  Unsupported | - [ ] |
+| Windows 7 |  Unsupported | :x: |
 | Windows 10 |  v14.18.x | - [x] Supported |
 | Windows 11 |  v14.18.x  | - [x] Supported |
 | Linux (Ubuntu) | v16.17.x | - [x] Supported |
