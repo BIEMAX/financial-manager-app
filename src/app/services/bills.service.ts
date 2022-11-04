@@ -41,18 +41,18 @@ export class BillsService {
     return this.http.delete(`${this.apiUrl}/bill/delete/${id}`, this.apiHeader);
   }
 
-  getBillByPayed (bearer: String, billPayed: Boolean = false) {
-    this.getNewAuthorization(bearer);
-    return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
+  getBillsCloseToOverdue () {
+    return this.http.get(`${this.apiUrl}/bill/close-to-overdue`, this.apiHeader);
   }
 
-  getNewAuthorization (bearer: String) {
+  getBillByPayed (bearer: String, billPayed: Boolean = false) {
     this.apiHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': bearer.toString()
       })
     };
+    return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
   }
 
   payBillOverdue (id: any) {
