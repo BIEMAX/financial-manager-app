@@ -24,10 +24,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   public applicationName: string = environment.applicationName;
-  public fakeUserName: string = "Franciele";
-  public welcomeTitle: string = `Bem vindo de volta ${this.fakeUserName}`;
-  public customerName: string = "Beilke Industries";
-  public productVersion: string = "Beta 1";
   public step = 0;
   public uiColor = ui.color;
   public panels: any = [
@@ -79,10 +75,11 @@ export class HomeComponent implements OnInit {
     try {
       this.panels.push(
         {
-          name: 'Contas vencidas',
-          description: 'Próximas contas à vencer',
+          name: 'Contas à vencer',
+          description: 'Próximos vencimentos',
           icon: 'notification_important',
-          tasks: this.userAccessService.user.notifications
+          tasks: this.userAccessService.user.notifications,
+          class: 'bills-close-to-overdue'
         },
       );
     }

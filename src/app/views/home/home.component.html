@@ -25,7 +25,8 @@
             <!-- Lists -->
             <div *ngFor="let task of panel.tasks">
               <mat-card color="{{uiColor}}">
-                <mat-card-title>Conta '{{task.title}}' próximo do vencimento ou vencida</mat-card-title>
+                <mat-card-title class="{{panel.class}}">Conta '{{task.title}}' próximo do vencimento ou vencida
+                </mat-card-title>
                 <mat-card-subtitle>Data de vencimento: {{task.date}}</mat-card-subtitle>
                 <mat-card-content *ngIf="task.description != ''">Descrição: {{task.description}}</mat-card-content>
                 <mat-checkbox [ngModel]="task.done" [disabled]="false" color="{{uiColor}}"
