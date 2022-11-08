@@ -26,46 +26,7 @@ export class HomeComponent implements OnInit {
   public applicationName: string = environment.applicationName;
   public step = 0;
   public uiColor = ui.color;
-  public panels: any = [
-    // {
-    //   name: 'Tarefas',
-    //   description: 'Suas tarefas a fazer e já concluídas',
-    //   icon: 'task_alt',
-    //   tasks: [
-    //     {
-    //       title: 'teste 1',
-    //       description: 'Teste',
-    //       done: false,
-    //       date: new Date(2022, 4, 30, 17, 50, 0)
-    //     },
-    //     {
-    //       title: 'teste 2',
-    //       description: 'teste',
-    //       done: true,
-    //       date: new Date(2022, 4, 30, 17, 50, 0)
-    //     }
-    //   ]
-    // },
-    // {
-    //   name: 'Contas',
-    //   description: 'Contas a pagar e pagas',
-    //   icon: 'money',
-    //   tasks: [
-    //     {
-    //       title: 'teste 1',
-    //       description: 'Teste',
-    //       done: false,
-    //       date: new Date(2022, 4, 30, 17, 50, 0)
-    //     },
-    //     {
-    //       title: 'teste 2',
-    //       description: 'teste',
-    //       done: true,
-    //       date: new Date(2022, 4, 30, 17, 50, 0)
-    //     }
-    //   ]
-    // }
-  ];
+  public panels: any = [];
 
   ngOnInit (): void {
     this.checkNotifications();
@@ -89,18 +50,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  payBillOverdue (bill: FinancialModel) {
+  payBillOverdue (bill: any) {
     if (bill.id && confirm("Deseja atualizar a conta como paga?")) {
       this.billsService.payBillOverdue(bill.id).subscribe(
-        response => {
-          let resp: any = response;
-        },
-        error => {
-          this.dialogReport.showMessageDialog(error, true, true);
-        }
+        resp => { this.showNotification('Sucesso ao atualizar a conta'); },
+        error => { this.dialogReport.showMessageDialog(error, true, true); }
       );
     }
-    else return;
+    else {
+      bill.done = false;
+      return;
+    }
   }
 
   setStep (index: number) {
@@ -121,7 +81,7 @@ export class HomeComponent implements OnInit {
    * @param action Origin event
    * @param duration Integer containing the value to animation time
    */
-  showNotification (message: string, action: string, duration = 2000) {
+  showNotification (message: string, action: string = '', duration = 2000) {
     this.snackBar.open(message, action, { duration: duration })
   }
 
