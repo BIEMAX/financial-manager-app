@@ -31,6 +31,7 @@ export class UserLoginComponent implements OnInit {
      */
   public uiColor: string = ui.color;
   public showPassword: Boolean = false;
+  public keepUserConnected: Boolean = false;
 
   /**
    * True if is an mobile device.
@@ -50,12 +51,14 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit () {
     this.clearOldLocalStorage();
+    this.isToKeepUserConnected();
   }
 
   clearOldLocalStorage () {
     localStorage.removeItem('userBearerKey');
     localStorage.removeItem('userLogin');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userSecret');
   }
 
   doLogin () {
@@ -69,6 +72,8 @@ export class UserLoginComponent implements OnInit {
               localStorage.setItem('userBearerKey', loginData.bearerKey);
               localStorage.setItem('userLogin', this.userLogin);
               localStorage.setItem('userName', loginData.data.userName);
+              localStorage.setItem('userSecret', this.userPassword);
+              localStorage.setItem('keepUserConnected', this.keepUserConnected == true ? 'Y' : 'N');
 
               this.userAccessService.userAuthenticated = true;
               this.userAccessService.user = loginData.data;
@@ -181,6 +186,23 @@ export class UserLoginComponent implements OnInit {
         this.dialogReport.showMessageDialog(error, true, true);
       }
     );
+  }
+
+  encryptPass () {
+
+  }
+
+  decryptPass () {
+
+  }
+
+  /**
+   * Validate if the user turn on the button to keep him connected.
+   */
+  isToKeepUserConnected () {
+    if (this.keepUserConnected) {
+
+    }
   }
 
   /**
