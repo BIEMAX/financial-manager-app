@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UserService } from 'src/app/services/user.service';
-import { LogginModel } from 'src/app/models/login.model';
+import { LoginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 import { UserModel } from 'src/app/models/user.model';
 import { BillsService } from 'src/app/services/bills.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
+import Encrypt from 'src/app/util/encrypt-data';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +34,6 @@ export class UserLoginComponent implements OnInit {
   public showPassword: Boolean = false;
   public keepUserConnected: Boolean = false;
 
-  /**
-   * True if is an mobile device.
-   */
-  private isMobileResolution: Boolean = false;
-
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
@@ -46,34 +42,42 @@ export class UserLoginComponent implements OnInit {
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
     private dialogReport: DialogReport,
-    private genericFunctions: GenericFunctions
+    private genericFunctions: GenericFunctions,
+    private encrypt: Encrypt
   ) { }
 
   ngOnInit () {
-    this.clearOldLocalStorage();
+    this.clearLocalStorageVariables();
     this.isToKeepUserConnected();
   }
 
-  clearOldLocalStorage () {
-    localStorage.removeItem('userBearerKey');
-    localStorage.removeItem('userLogin');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userSecret');
+  /**
+   * Clear local storage only if the user not checked the option to keep connected.
+   */
+  clearLocalStorageVariables () {
+    if (localStorage.getItem('keepUserConnected') == null || localStorage.getItem('keepUserConnected') == 'false') {
+      localStorage.removeItem('userBearerKey');
+      localStorage.removeItem('userLogin');
+      localStorage.removeItem('userName');
+    }
   }
 
+  /**
+   * Do the user login and validations (if is active, enable, and others)
+   */
   doLogin () {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
-        this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
+        this.userService.doLogin(new LoginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
               let loginData: any = response;
               localStorage.setItem('userBearerKey', loginData.bearerKey);
               localStorage.setItem('userLogin', this.userLogin);
               localStorage.setItem('userName', loginData.data.userName);
-              localStorage.setItem('userSecret', this.userPassword);
-              localStorage.setItem('keepUserConnected', this.keepUserConnected == true ? 'Y' : 'N');
+              localStorage.setItem('userSecret', this.encrypt.encrypt(this.userPassword));
+              localStorage.setItem('keepUserConnected', this.keepUserConnected.toString());
 
               this.userAccessService.userAuthenticated = true;
               this.userAccessService.user = loginData.data;
@@ -188,20 +192,15 @@ export class UserLoginComponent implements OnInit {
     );
   }
 
-  encryptPass () {
-
-  }
-
-  decryptPass () {
-
-  }
-
   /**
    * Validate if the user turn on the button to keep him connected.
    */
   isToKeepUserConnected () {
+    this.keepUserConnected = localStorage.getItem('keepUserConnected').toLowerCase() == 'true';
     if (this.keepUserConnected) {
-
+      this.userLogin = localStorage.getItem('userLogin');
+      this.userPassword = this.encrypt.decrypt(localStorage.getItem('userSecret'));
+      this.doLogin();
     }
   }
 
