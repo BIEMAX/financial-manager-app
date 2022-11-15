@@ -9,7 +9,6 @@ import { LoginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 import { UserModel } from 'src/app/models/user.model';
-import { BillsService } from 'src/app/services/bills.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import Encrypt from 'src/app/util/encrypt-data';
@@ -38,7 +37,6 @@ export class UserLoginComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router,
     private userService: UserService,
-    private billsService: BillsService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
     private dialogReport: DialogReport,
@@ -84,7 +82,12 @@ export class UserLoginComponent implements OnInit {
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.permissions = loginData.data.permissions;
 
-              this.getBillsCloseToOverdue(loginData.bearerKey);
+              // this.getBillsCloseToOverdue(loginData.bearerKey);
+              this.hasToWait = false;
+
+              this.userService.enableMenusOnScreen.emit(true);
+              this.showNotification('Login efetuado com êxito', '');
+              this.router.navigate(['home']);
             },
             error => {
               this.userService.enableMenusOnScreen.emit(false);
@@ -140,54 +143,6 @@ export class UserLoginComponent implements OnInit {
       error => {
         this.hasToWait = false;
         this.dialogReport.showMessageDialog_UserCreation(error, user, true, true);
-      }
-    );
-  }
-
-  /**
-   * Get the bills that will overdue or already overdue.
-   */
-  getBillsCloseToOverdue (bearer: String) {
-    this.billsService.getBillByPayed(bearer, false).subscribe(
-      response => {
-        this.getBillsOverdue(bearer);
-      },
-      error => {
-        this.hasToWait = false;
-        if (environment.logInfo) console.log('erro ao consultar contas a vencer: ', error);
-        this.dialogReport.showMessageDialog(error, true, true);
-      }
-    );
-  }
-
-  /**
-   * Get the bills already overdue (all bills in history)
-   */
-  getBillsOverdue (bearer: String) {
-    this.billsService.getBillByPayed(bearer, false).subscribe(
-      response => {
-        let resp: any = response;
-
-        this.userAccessService.user.notifications = resp.data.map((b) => {
-          return {
-            id: b.id,
-            title: b.name,
-            description: b.description,
-            done: false,
-            date: b.dueDate
-          };
-        });
-
-        this.userService.enableMenusOnScreen.emit(true);
-        this.hasToWait = false;
-
-        this.showNotification('Login efetuado com êxito', '');
-        this.router.navigate(['home']);
-      },
-      error => {
-        this.hasToWait = false;
-        if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
-        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }

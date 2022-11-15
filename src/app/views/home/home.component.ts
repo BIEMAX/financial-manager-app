@@ -16,6 +16,15 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
+  public applicationName: string = environment.applicationName;
+  public step = 0;
+  public uiColor = ui.color;
+  public panels: any = [];
+  /**
+   * Define true to show waiting progress spinner on front.
+   */
+  public hasToWait: boolean = false;
+
   constructor(
     private snackBar: MatSnackBar,
     private userAccessService: UserAccessService,
@@ -23,31 +32,98 @@ export class HomeComponent implements OnInit {
     private billsService: BillsService
   ) { }
 
-  public applicationName: string = environment.applicationName;
-  public step = 0;
-  public uiColor = ui.color;
-  public panels: any = [];
-
   ngOnInit (): void {
-    this.checkNotifications();
+    this.startPanels();
   }
 
-  checkNotifications () {
+  /**
+   * Create the initial panels for user checking
+   */
+  startPanels () {
+    this.hasToWait = true;
     try {
       this.panels.push(
         {
           name: 'Contas à vencer',
           description: 'Próximos vencimentos',
           icon: 'notification_important',
-          tasks: this.userAccessService.user.notifications,
+          tasks: '',
           class: 'bills-close-to-overdue'
         },
+        {
+          name: 'Contas vencidas',
+          description: 'Contas atrasadas',
+          icon: 'assignment_late',
+          tasks: '',
+          class: 'bills-overdue'
+        }
       );
+      this.getBillsCloseToOverdue();
     }
     catch (error) {
-      if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
+      this.hasToWait = false;
+      if (environment.logInfo) console.log('Erro ao inicial paineis: ', error);
       this.dialogReport.showMessageDialog(error, true, true);
     }
+  }
+
+  /**
+   * Get the bills that will overdue or already overdue.
+   */
+  getBillsCloseToOverdue () {
+    this.billsService.getBillsCloseToOverdue().subscribe(
+      response => {
+        let resp: any = response;
+
+        this.panels[0].tasks = resp.data.map((b) => {
+          return {
+            id: b.id,
+            name: b.name,
+            title: `Conta '${b.name}' está próxima do seu vencimento`,
+            description: b.description || 'Efetue o pagamento da mesma e evite juros.',
+            done: false,
+            date: b.dueDate
+          };
+        });
+
+        this.getBillsOverdue();
+      },
+      error => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log('erro ao consultar próximas do vencimento: ', error);
+        this.dialogReport.showMessageDialog(error, true, true);
+      }
+    );
+  }
+
+  /**
+   * Get the bills already overdue (all bills in history)
+   */
+  getBillsOverdue () {
+    this.billsService.getBillByPayed(false).subscribe(
+      response => {
+        let resp: any = response;
+
+        this.panels[1].tasks = resp.data.map((b) => {
+          return {
+            id: b.id,
+            name: b.name,
+            title: `Conta '${b.name}' não foi paga e se encontra atrasada`,
+            description: b.description || 'Pague a conta para evitar o aumento dos juros.',
+            done: false,
+            date: b.dueDate
+          };
+        });
+
+        this.userAccessService.user.notifications = this.panels[1].tasks.length;
+        this.hasToWait = false;
+      },
+      error => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log('erro ao consultar contas vencidas: ', error);
+        this.dialogReport.showMessageDialog(error, true, true);
+      }
+    );
   }
 
   payBillOverdue (bill: any) {

@@ -42,7 +42,7 @@ export class BillsService {
   }
 
   /**
-   * Get bills that is near to overdue (not yet)
+   * Get bills that is near to overdue (not overdue yet)
    * @returns Function
    */
   getBillsCloseToOverdue () {
@@ -51,11 +51,10 @@ export class BillsService {
 
   /**
    * Get bills by state: is payed or not
-   * @param bearer Authorization from login
    * @param billPayed False or True
    * @returns Function
    */
-  getBillByPayed (bearer: String, billPayed: Boolean = false) {
+  getBillByPayed (billPayed: Boolean = false) {
     this.updateHeaders();
     return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
   }
