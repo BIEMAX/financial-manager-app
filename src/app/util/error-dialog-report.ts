@@ -107,11 +107,11 @@ export class DialogReport {
    */
   private saveLog (exception: any) {
     let log = {
-      timestamp: exception?.error?.timestamp,
-      errorMessage: exception?.error?.message,
-      httpStatusCode: exception?.error?.status,
-      endpoint: exception?.error?.path,
-      stackTrace: exception?.error?.trace
+      timestamp: exception?.error?.timestamp || new Date().toISOString(),
+      errorMessage: exception?.error?.message || exception?.message,
+      httpStatusCode: exception?.error?.status || exception?.status,
+      endpoint: exception?.error?.path || exception?.url,
+      stackTrace: exception?.error?.trace || exception?.name
     };
     this.logService.saveLog(log).subscribe(
       response => {

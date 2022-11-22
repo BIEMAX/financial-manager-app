@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
-    this.qtyNotification = this.userAccessService.user.notifications.length;
+    this.qtyNotification = this.userAccessService.user.notifications?.length || 0;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
     this.startSideNavOpened = !this.isMobileDevice;

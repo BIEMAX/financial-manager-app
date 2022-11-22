@@ -41,16 +41,44 @@ export class BillsService {
     return this.http.delete(`${this.apiUrl}/bill/delete/${id}`, this.apiHeader);
   }
 
-  getBillByPayed (bearer: String, billPayed: Boolean = false) {
-    this.getNewAuthorization(bearer);
+  /**
+   * Get bills that is near to overdue (not overdue yet)
+   * @returns Function
+   */
+  getBillsCloseToOverdue () {
+    return this.http.get(`${this.apiUrl}/bill/close-to-overdue`, this.apiHeader);
+  }
+
+  /**
+   * Get bills by state: is payed or not
+   * @param billPayed False or True
+   * @returns Function
+   */
+  getBillByPayed (billPayed: Boolean = false) {
+    this.updateHeaders();
     return this.http.get(`${this.apiUrl}/bill/payed/${billPayed}`, this.apiHeader);
   }
 
-  getNewAuthorization (bearer: String) {
+  /**
+   * Pay a bill that already overdue
+   * @param id Bill id
+   * @returns Function
+   */
+  payBillOverdue (id: any) {
+    this.updateHeaders();
+    return this.http.put(`${this.apiUrl}/bill/pay/${id}`, null, this.apiHeader);
+  }
+
+  /**
+   * Update the headers for requests
+   * @param bearer Authorization bearer
+   */
+  updateHeaders (bearer: string = '') {
+    this.apiHeader = null;
     this.apiHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': bearer.toString()
+        'Authorization': bearer.toString() || localStorage.getItem('userBearerKey')
       })
     };
   }
