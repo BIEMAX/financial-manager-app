@@ -9,7 +9,7 @@ export class FinancialModel {
   value: Number;
   quantityAmount: Number;
   tags: Array<String>;
-  isCashIn: Boolean;
+  isCashEntry: Boolean;
   isBillPayed: Boolean = false;
   isToDivideValue: Boolean = false;
 
@@ -22,7 +22,7 @@ export class FinancialModel {
     Value: Number,
     QuantityAmount: Number,
     Tags: Array<String>,
-    IsCashIn: Boolean,
+    IsCashEntry: Boolean,
     IsBillPayed: Boolean,
     IsToDivideValue: Boolean
   ) {
@@ -39,7 +39,7 @@ export class FinancialModel {
       this.value = Value;
       this.quantityAmount = QuantityAmount || 1;
       this.tags = Tags;
-      this.isCashIn = IsCashIn;
+      this.isCashEntry = IsCashEntry;
       this.isBillPayed = IsBillPayed;
       this.isToDivideValue = IsToDivideValue;
     }

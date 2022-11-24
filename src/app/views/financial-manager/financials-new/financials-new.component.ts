@@ -32,7 +32,7 @@ export class FinancialsNewComponent implements OnInit {
   public billTotalValue: Number;
   public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
   public billTags: string[] = ['Contas fixas']; //Starter tag
-  public isCashIn: Boolean = false;
+  public isCashEntry: Boolean = false;
   public uiColor: string = ui.color;
   public billId: string;
   public isBillPayed: boolean = false;
@@ -62,7 +62,7 @@ export class FinancialsNewComponent implements OnInit {
       this.billTotalValue = this.data.value;
       this.billAmountQuantity = this.data.quantityAmount;
       this.billTags = this.data.tags;
-      this.isCashIn = this.data.isCashIn;
+      this.isCashEntry = this.data.isCashEntry;
       this.isBillPayed = this.data.isBillPayed;
     } else {
       this.billDueDate = new Date().toISOString().split("T")[0];
@@ -81,8 +81,8 @@ export class FinancialsNewComponent implements OnInit {
         this.billTotalValue,
         this.billAmountQuantity,
         this.billTags,
-        this.isCashIn,
-        this.isBillPayed,
+        this.isCashEntry,
+        this.isBillPayed || false,
         this.isBillValueToDivide
       );
 

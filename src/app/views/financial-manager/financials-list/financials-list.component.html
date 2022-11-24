@@ -94,8 +94,8 @@
       <th mat-header-cell *matHeaderCellDef> Tipo </th>
       <td mat-cell *matCellDef="let element">
         <mat-chip-list>
-          <mat-chip *ngIf="element.isCashIn">Entrada</mat-chip>
-          <mat-chip *ngIf="!element.isCashIn">Saída</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry">Entrada</mat-chip>
+          <mat-chip *ngIf="!element.isCashEntry">Saída</mat-chip>
         </mat-chip-list>
       </td>
     </ng-container>
