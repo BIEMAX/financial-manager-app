@@ -15,14 +15,14 @@
           <!--Description field-->
           <mat-form-field>
             <mat-label>Insira uma descrição</mat-label>
-            <input matInput placeholder="Ex.: NuBank..." [(ngModel)]="description">
+            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: NuBank..." [(ngModel)]="description">
           </mat-form-field>
         </td>
         <td>
           <!--Tags field-->
           <mat-form-field>
             <mat-label>Insira uma tag</mat-label>
-            <input matInput placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
+            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
           </mat-form-field>
         </td>
         <td>
