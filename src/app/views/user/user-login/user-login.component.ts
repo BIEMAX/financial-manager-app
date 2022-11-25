@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ui, environment } from 'src/environments/environment';
+import { ui, environment, user } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,8 +20,8 @@ import Encrypt from 'src/app/util/encrypt-data';
 })
 export class UserLoginComponent implements OnInit {
 
-  public userLogin: string = "";
-  public userPassword: string = "";
+  public userLogin: string = user?.login || "";
+  public userPassword: string = user?.password || "";
   /**
    * Define true to show waiting progress spinner on front.
    */
