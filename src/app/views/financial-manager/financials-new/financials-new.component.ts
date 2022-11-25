@@ -31,6 +31,9 @@ export class FinancialsNewComponent implements OnInit {
   public billDescription: string;
   public billTotalValue: Number;
   public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
+  /**
+   * Contains the tags linked to new bill creation
+   */
   public billTags: string[] = ['Contas fixas']; //Starter tag
   public isCashEntry: Boolean = false;
   public uiColor: string = ui.color;
@@ -41,6 +44,9 @@ export class FinancialsNewComponent implements OnInit {
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   public tagCtrl = new FormControl('');
 
+  /**
+   * Contains the user tags previously stored into database.
+   */
   private allTags: string[];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -103,15 +109,16 @@ export class FinancialsNewComponent implements OnInit {
    */
   thereIsNewTags () {
     if (this.billTags.length > 0) {
-      this.billTags.map((t) => {
-        if (this.allTags.filter(t => t.toUpperCase().trim() == "").length <= 0) {
+      let newTags = this.billTags.filter(t => !this.allTags.includes(t));
+      if (newTags.length > 0) {
+        newTags.map((newTag) => {
           //If tag doesn't exist, creat it 
-          this.tagsService.newTag(t).subscribe(
+          this.tagsService.newTag(newTag).subscribe(
             response => { if (environment.logInfo) console.log('response: ', response); },
             error => { if (environment.logInfo) console.log('error: ', error); }
-          )
-        }
-      });
+          );
+        })
+      }
     }
   }
 
