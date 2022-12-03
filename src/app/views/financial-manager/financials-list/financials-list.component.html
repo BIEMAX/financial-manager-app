@@ -15,14 +15,14 @@
           <!--Description field-->
           <mat-form-field>
             <mat-label>Insira uma descrição</mat-label>
-            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: NuBank..." [(ngModel)]="description">
+            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: NuBank..." [(ngModel)]="descToFilter">
           </mat-form-field>
         </td>
         <td>
           <!--Tags field-->
           <mat-form-field>
             <mat-label>Insira uma tag</mat-label>
-            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
+            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: Conta fixa..." [(ngModel)]="tagToFilter">
           </mat-form-field>
         </td>
         <td>
@@ -84,37 +84,38 @@
     </mat-card-actions>
   </mat-card>
 
-  <table mat-table [dataSource]="listBills">
+  <table mat-table [dataSource]="listBills" matSort>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     <!-- Column 'Entrada ou saída' -->
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
       <td mat-cell *matCellDef="let element">
         <mat-chip-list>
-          <mat-chip *ngIf="element.isCashEntry">Entrada</mat-chip>
-          <mat-chip *ngIf="!element.isCashEntry">Saída</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry == true">Entrada</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry == false">Saída</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry == null">Somatório</mat-chip>
         </mat-chip-list>
       </td>
     </ng-container>
 
     <!-- Column 'Nome da conta' -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nome da conta </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome da conta </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Column 'Data de vencimento' -->
     <ng-container matColumnDef="dueDate">
-      <th mat-header-cell *matHeaderCellDef> Data de vencimento </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de vencimento </th>
       <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
     </ng-container>
 
     <!-- Column 'Valor' -->
     <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef> Valor </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
       <td mat-cell *matCellDef="let element">
         <span matPrefix>R$&nbsp;</span>
         {{element.value}}
@@ -123,7 +124,7 @@
 
     <!-- Column 'Qtd Parcelas' -->
     <ng-container matColumnDef="quantityAmount">
-      <th mat-header-cell *matHeaderCellDef> Qtd Parcelas </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Qtd Parcelas </th>
       <td mat-cell *matCellDef="let element"> {{element.quantityAmount}} </td>
     </ng-container>
 
@@ -145,7 +146,8 @@
     <ng-container matColumnDef="update">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="{{uiColor}}" (click)="openDialogAddNewBill(element)">Editar</button>
+        <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableEdit"
+          (click)="openDialogAddNewBill(element)">Editar</button>
       </td>
     </ng-container>
 
@@ -153,7 +155,8 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Remover</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="{{uiColor}}" (click)="deleteBill(element)">Excluir</button>
+        <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="deleteBill(element)">Excluir</button>
       </td>
     </ng-container>
 
