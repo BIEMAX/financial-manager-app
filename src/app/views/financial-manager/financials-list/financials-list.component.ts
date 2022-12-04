@@ -53,8 +53,14 @@ export const MY_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  public description: string = "";
-  public tag: string = "";
+  /**
+   * Description to filter bills
+   */
+  public descToFilter: string = "";
+  /**
+   * Tag to filter bills
+   */
+  public tagToFilter: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
   public displayedColumns: string[];
@@ -66,8 +72,8 @@ export class FinancialsListComponent implements OnInit {
   public uiColor: string = ui.color;
   public isMobileDevice: Boolean = false;
 
-  // @ViewChild(MatSort) sort: MatSort;
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -97,15 +103,35 @@ export class FinancialsListComponent implements OnInit {
     this.hasToWait = true;
     let month = this.date.value != undefined ? Number.parseInt(this.date.value.format("MM").toString()) : undefined;
     let year = this.date.value != undefined ? this.date.value.year() : undefined;
-    let description = this.description != undefined && this.description != '' ? this.description : undefined;
-    let tag = this.tag != undefined && this.tag != '' ? this.tag : undefined;
+    let description = this.descToFilter != undefined && this.descToFilter != '' ? this.descToFilter : undefined;
+    let tag = this.tagToFilter != undefined && this.tagToFilter != '' ? this.tagToFilter : undefined;
     this.billsService.getBills(month, year, description, tag).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
-        this.listBills = new MatTableDataSource(data);
-        //this.listBills.sort = this.sort;
-        //this.listBills.paginator = this.paginator;
+
+        if ((this.descToFilter || this.tagToFilter) && data.length > 0) {
+          let sumBillsValues = {
+            id: '123',
+            user: '',
+            name: 'Somatório dos valores',
+            dueDate: '',
+            description: '',
+            isBillPayed: false,
+            isCashEntry: null,
+            isToDivideValue: false,
+            quantityAmount: 0,
+            tags: ['Somatório'],
+            value: parseFloat(data.map((b) => b.value).reduce((b1, b2) => b1 + b2)).toFixed(2),
+            disableEdit: true,
+            disableDelete: true
+          };
+          data.push(sumBillsValues);
+          this.listBills = new MatTableDataSource(data);
+        } else this.listBills = new MatTableDataSource(data);
+
+        this.listBills.sort = this.sort;
+        this.listBills.paginator = this.paginator;
         this.hasToWait = false;
         this.showNotification('Dados pesquisados', '');
       },

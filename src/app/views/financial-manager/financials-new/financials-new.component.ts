@@ -31,8 +31,11 @@ export class FinancialsNewComponent implements OnInit {
   public billDescription: string;
   public billTotalValue: Number;
   public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
+  /**
+   * Contains the tags linked to new bill creation
+   */
   public billTags: string[] = ['Contas fixas']; //Starter tag
-  public isCashIn: Boolean = false;
+  public isCashEntry: Boolean = false;
   public uiColor: string = ui.color;
   public billId: string;
   public isBillPayed: boolean = false;
@@ -41,6 +44,9 @@ export class FinancialsNewComponent implements OnInit {
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   public tagCtrl = new FormControl('');
 
+  /**
+   * Contains the user tags previously stored into database.
+   */
   private allTags: string[];
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
@@ -62,7 +68,7 @@ export class FinancialsNewComponent implements OnInit {
       this.billTotalValue = this.data.value;
       this.billAmountQuantity = this.data.quantityAmount;
       this.billTags = this.data.tags;
-      this.isCashIn = this.data.isCashIn;
+      this.isCashEntry = this.data.isCashEntry;
       this.isBillPayed = this.data.isBillPayed;
     } else {
       this.billDueDate = new Date().toISOString().split("T")[0];
@@ -81,8 +87,8 @@ export class FinancialsNewComponent implements OnInit {
         this.billTotalValue,
         this.billAmountQuantity,
         this.billTags,
-        this.isCashIn,
-        this.isBillPayed,
+        this.isCashEntry,
+        this.isBillPayed || false,
         this.isBillValueToDivide
       );
 
@@ -103,15 +109,16 @@ export class FinancialsNewComponent implements OnInit {
    */
   thereIsNewTags () {
     if (this.billTags.length > 0) {
-      this.billTags.map((t) => {
-        if (this.allTags.filter(t => t.toUpperCase().trim() == "").length <= 0) {
+      let newTags = this.billTags.filter(t => !this.allTags.includes(t));
+      if (newTags.length > 0) {
+        newTags.map((newTag) => {
           //If tag doesn't exist, creat it 
-          this.tagsService.newTag(t).subscribe(
+          this.tagsService.newTag(newTag).subscribe(
             response => { if (environment.logInfo) console.log('response: ', response); },
             error => { if (environment.logInfo) console.log('error: ', error); }
-          )
-        }
-      });
+          );
+        })
+      }
     }
   }
 

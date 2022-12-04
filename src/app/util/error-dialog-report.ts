@@ -115,7 +115,7 @@ export class DialogReport {
     };
     this.logService.saveLog(log).subscribe(
       response => {
-        if (environment.logInfo) console.log('Success when save lag');
+        if (environment.logInfo) console.log('Success when save log');
       },
       error => {
         if (environment.logInfo) console.log('error when saving log: ', error)
@@ -139,7 +139,7 @@ export class DialogReport {
     if (user != undefined) log.user = user;
 
     this.logService.saveLogUserCreation(log).subscribe(
-      resp => { if (environment.logInfo) console.log('Success when save lag'); },
+      resp => { if (environment.logInfo) console.log('Success when save log'); },
       error => { if (environment.logInfo) console.log('error when saving log: ', error) }
     );
   }
