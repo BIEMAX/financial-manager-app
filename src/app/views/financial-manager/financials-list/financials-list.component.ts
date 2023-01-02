@@ -86,6 +86,7 @@ export class FinancialsListComponent implements OnInit {
   ngOnInit () {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
     this.setDisplayedColumnsByDevice();
+    this.paginator._intl.itemsPerPageLabel = "Items por página";
   }
 
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {

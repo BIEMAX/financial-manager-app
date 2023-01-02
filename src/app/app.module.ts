@@ -37,6 +37,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -120,6 +121,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatBadgeModule,
     MatCheckboxModule,
     NgChartsModule,
+    MatSortModule,
     MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
   ],
   providers: [],
