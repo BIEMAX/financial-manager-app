@@ -1,3 +1,7 @@
+## [1.2.4]
+
+- Fixed users can't access submenu 'tags' in 'financial manager'
+
 ## [1.2.3]
 
 - Implemented pagination in bills list
@@ -16,4 +20,4 @@
 
 ## [1.0.0]
 
-- Created a new sample api using microservices
+- Created a new sample app using java microservices
