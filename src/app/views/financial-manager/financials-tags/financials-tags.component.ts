@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,6 +11,7 @@ import { TagModel } from 'src/app/models/tag.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { TagsService } from 'src/app/services/tags.service';
+import { FinancialsTagNewComponent } from '../financials-tag-new/financials-tag-new.component';
 
 @Component({
   selector: 'financials-tags.component',
@@ -88,46 +88,46 @@ export class FinancialsTagsComponent implements OnInit {
    * Open a dialog to create a new bill
    */
   openDialogAddNewTag (bill?: any): void {
-    // const dialogRef = this.dialog.open(FinancialsNewComponent, {
-    //   disableClose: true,
-    //   width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
-    //   autoFocus: true,
-    //   data: bill
-    // });
+    const dialogRef = this.dialog.open(FinancialsTagNewComponent, {
+      disableClose: true,
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      autoFocus: true,
+      data: bill
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result != undefined) {
-    //     if (environment.logInfo) console.log('result: ', result);
-    //     if (bill && result.id != '0') this.updateBill(result);//If exist an bill, means its a update
-    //     else this.saveBill(result);
-    //   }
-    //   else {
-    //     this.showNotification('Nova conta a pagar não foi salva', '');
-    //     if (environment.logInfo) console.log('The dialog was closed');
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        if (environment.logInfo) console.log('result: ', result);
+        if (bill && result.id != '0') this.updateBill(result);//If exist an bill, means its a update
+        else this.saveTag(result);
+      }
+      else {
+        this.showNotification('Nova tag não foi salva', '');
+        if (environment.logInfo) console.log('The dialog was closed');
+      }
+    });
   }
 
   /**
    * Create a new tag
-   * @param bill 
+   * @param tag 
    */
-  saveTag (bill: any) {
-    // this.hasToWait = true;
-    // this.billsService.createBill(bill).subscribe(
-    //   response => {
-    //     this.hasToWait = false;
-    //     if (environment.logInfo) console.log(response);
-    //     this.showNotification('Conta salva com êxito', '');
+  saveTag (tag: any) {
+    this.hasToWait = true;
+    this.tagsService.createTag(tag).subscribe(
+      response => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log(response);
+        this.showNotification('Tag salva com êxito', '');
 
-    //     this.getBills(); //Update the screen
-    //   },
-    //   error => {
-    //     this.hasToWait = false;
-    //     if (environment.logInfo) console.log(error);
-    //     this.dialogReport.showMessageDialog(error, true, true);
-    //   }
-    // );
+        this.getTags(); //Update the screen
+      },
+      error => {
+        this.hasToWait = false;
+        if (environment.logInfo) console.log(error);
+        this.dialogReport.showMessageDialog(error, true, true);
+      }
+    );
   }
 
   updateBill (bill: any) {

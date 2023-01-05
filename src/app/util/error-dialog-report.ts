@@ -113,7 +113,7 @@ export class DialogReport {
       endpoint: exception?.error?.path || exception?.url,
       stackTrace: exception?.error?.trace || exception?.name
     };
-    this.logService.saveLog(log).subscribe(
+    this.logService.createLog(log).subscribe(
       response => {
         if (environment.logInfo) console.log('Success when save log');
       },

@@ -55,6 +55,7 @@ import { FinancialsListComponent } from './views/financial-manager/financials-li
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
+import { FinancialsTagNewComponent } from './views/financial-manager/financials-tag-new/financials-tag-new.component';
 
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -81,6 +82,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     FinancialsNewComponent,
     FinancialsReportComponent,
     FinancialsTagsComponent,
+    FinancialsTagNewComponent,
     //Footer and header
     FooterComponent,
     HeaderComponent,
