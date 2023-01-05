@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 //Angular material packages
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -43,7 +44,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
 
-//Aplication packages
+//Application packages
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
@@ -117,6 +118,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatExpansionModule,
     MatDatepickerModule,
     ClipboardModule,
+    FlexLayoutModule,
     CdkTableModule,
     CdkTreeModule,
     CdkTreeModule,

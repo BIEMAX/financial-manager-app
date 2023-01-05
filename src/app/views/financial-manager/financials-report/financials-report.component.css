@@ -13,3 +13,16 @@ canvas {
   margin: 5em auto;
   /*margin-top: 5em auto;*/
 }
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 16px;
+  margin-left: 10em auto;
+}
+
+.content>mat-card {
+  margin-bottom: 16px;
+}

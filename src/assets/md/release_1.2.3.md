@@ -12,3 +12,4 @@
 - [Habilitado o botão de remoção de contas em dispositivos móveis](https://github.com/BIEMAX/financial-manager-app/issues/84)
 - [Adicionado menu para gestão de tags](https://github.com/BIEMAX/financial-manager-app/issues/91)
 - [Alterado a cor do botão de salvar em novos formulários para facilitar a visualização](https://github.com/BIEMAX/financial-manager-app/issues/102)
+- [Ajustado o tamanho de relatórios com base no dispositivo](https://github.com/BIEMAX/financial-manager-app/issues/101)

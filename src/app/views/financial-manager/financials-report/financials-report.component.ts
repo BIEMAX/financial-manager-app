@@ -5,6 +5,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormControl } from '@angular/forms';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
@@ -55,13 +56,14 @@ export class FinancialsReportComponent implements OnInit {
   public listCharts: any = [];
   public hasToWait: Boolean = false;
   public dateToSelect: any = new FormControl(moment());
+  public gridColumnsToShow: Number = 2;
 
   private currentMonth: number = new Date().getMonth() + 1;
   private currentYear: number = new Date().getFullYear();
 
   constructor(
     private chartsService: ChartsService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit () {
@@ -205,6 +207,10 @@ export class FinancialsReportComponent implements OnInit {
 
       this.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`, "");
     });
+  }
+
+  toggleGridColumns () {
+    this.gridColumnsToShow = this.gridColumnsToShow === 2 ? 4 : 2;
   }
 
   /**

@@ -5,6 +5,7 @@
 - Enable edit and delete button on mobile devices
 - Implemented tags manager (creation, update and delete)
 - Change button 'save' color on new forms opening
+- Implement screen resize for charts
 
 ## [1.2.2]
 
