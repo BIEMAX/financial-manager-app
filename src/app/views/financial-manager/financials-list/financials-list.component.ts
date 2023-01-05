@@ -262,7 +262,9 @@ export class FinancialsListComponent implements OnInit {
       this.displayedColumns = [
         'name',
         'dueDate',
-        'value'
+        'value',
+        'update',
+        'delete'
       ];
     }
     else {

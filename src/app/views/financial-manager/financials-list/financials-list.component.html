@@ -146,8 +146,19 @@
     <ng-container matColumnDef="update">
       <th mat-header-cell *matHeaderCellDef>Editar</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableEdit"
-          (click)="openDialogAddNewBill(element)">Editar</button>
+        <!--For mobile devices, show only the icon-->
+        <div *ngIf="isMobileDevice">
+          <button mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
+            (click)="openDialogAddNewBill(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <!--Other devices-->
+        <div *ngIf="!isMobileDevice">
+          <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableEdit"
+            (click)="openDialogAddNewBill(element)">Editar</button>
+        </div>
+
       </td>
     </ng-container>
 
@@ -155,8 +166,17 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef>Remover</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableDelete"
-          (click)="deleteBill(element)">Excluir</button>
+        <!--For mobile devices, show only the icon-->
+        <div *ngIf="isMobileDevice">
+          <button mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete" (click)="deleteBill(element)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+        <!--Other devices-->
+        <div *ngIf="!isMobileDevice">
+          <button mat-raised-button color="{{uiColor}}" [disabled]="element.disableDelete"
+            (click)="deleteBill(element)">Excluir</button>
+        </div>
       </td>
     </ng-container>
 
