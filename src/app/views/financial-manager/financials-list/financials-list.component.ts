@@ -73,7 +73,7 @@ export class FinancialsListComponent implements OnInit {
   public isMobileDevice: Boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
