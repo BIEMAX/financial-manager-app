@@ -10,6 +10,7 @@ import { UserHasAccess } from './services/user-access-permissions';
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
+import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
 
 //Router to access through angular
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: 'reports',
     component: FinancialsReportComponent,
     canActivate: [UserHasAccess]
+  },
+  {
+    path: 'tags',
+    component: FinancialsTagsComponent,
+    // canActivate: [UserHasAccess]
   },
   {
     path: 'whatsnew',

@@ -48,11 +48,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { UserLoginComponent } from './views/user/user-login/user-login.component';
-import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
+
+import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
+import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
+
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
@@ -77,6 +80,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
+    FinancialsTagsComponent,
     //Footer and header
     FooterComponent,
     HeaderComponent,
