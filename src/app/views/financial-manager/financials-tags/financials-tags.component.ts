@@ -114,7 +114,7 @@ export class FinancialsTagsComponent implements OnInit {
    */
   saveTag (tag: any) {
     this.hasToWait = true;
-    this.tagsService.createTag(tag).subscribe(
+    this.tagsService.createTag(tag.name).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);

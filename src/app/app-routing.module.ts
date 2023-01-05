@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'tags',
     component: FinancialsTagsComponent,
-    // canActivate: [UserHasAccess]
+    canActivate: [UserHasAccess]
   },
   {
     path: 'whatsnew',
