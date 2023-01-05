@@ -6,6 +6,7 @@
 - Implemented tags manager (creation, update and delete)
 - Change button 'save' color on new forms opening
 - Implement screen resize for charts
+- Improved error messages with solution and simplified
 
 ## [1.2.2]
 

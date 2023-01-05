@@ -20,6 +20,7 @@ export class DialogReport {
   private title: string;
   private message: string;
   private solution: string;
+  private isException: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -39,11 +40,8 @@ export class DialogReport {
     if (saveLog) this.saveLog(exception);
 
     let widthDialog = '';
-    let isMobileDevice = this.genericFunctions.isMobileDevice();
 
-    if (isMobileDevice) {
-      widthDialog = isError ? '100%' : '75%';
-    }
+    if (this.genericFunctions.isMobileDevice()) widthDialog = isError ? '100%' : '75%';
     else widthDialog = isError ? '50%' : '25%';
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
@@ -54,7 +52,8 @@ export class DialogReport {
         isError: isError,
         title: this.title,
         message: this.message,
-        solution: this.solution
+        solution: this.solution,
+        isException: this.isException
       }
     });
 
@@ -74,7 +73,7 @@ export class DialogReport {
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       disableClose: false,
-      width: (isError ? '50%' : '25%'),
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
       autoFocus: true,
       data: {
         isError: isError,
@@ -92,13 +91,10 @@ export class DialogReport {
    * @param exception Exception generated
    */
   private extractInfoFromException (exception: any) {
-    this.title = ResponseStatusCode(exception?.error?.error || '');
-
-    if (!exception?.error?.message != undefined) this.message = exception?.error?.message;
-    else this.message = exception?.message ? exception?.message : '';
-
-    if (exception?.error?.message != undefined) this.solution = ExceptionSolutionResponse(exception?.error?.message);
-    else this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : '');
+    this.title = "Erro";
+    this.isException = ResponseStatusCode(exception?.error?.error || exception?.message) != '';
+    this.message = exception?.message ? exception?.message : exception?.error?.error;
+    this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
   }
 
   /**
