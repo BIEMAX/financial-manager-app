@@ -7,3 +7,6 @@
 - Resolvido um problema ao tentar salvar tags existentes
 - [Resolvido um problema ao apresentar erro na tela inicial em relação às contas atrasadas e contas à vencer](https://github.com/BIEMAX/financial-manager-api/issues/72)
 - [Implementado a funcionalidade de somar valores das contas quando filtrado](https://github.com/BIEMAX/financial-manager-app/issues/58)
+- [Implementado a organização de dados na lista de contas](https://github.com/BIEMAX/financial-manager-app/issues/90)
+- [Habilitado o botão de edição de contas em dispositivos móveis](https://github.com/BIEMAX/financial-manager-app/issues/83)
+- - [Habilitado o botão de remoção de contas em dispositivos móveis](https://github.com/BIEMAX/financial-manager-app/issues/84)
