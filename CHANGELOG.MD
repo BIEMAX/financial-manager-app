@@ -4,6 +4,7 @@
 - Implemented sort data in bills list by header
 - Enable edit and delete button on mobile devices
 - Implemented tags manager (creation, update and delete)
+- Change button 'save' color on new forms opening
 
 ## [1.2.2]
 
