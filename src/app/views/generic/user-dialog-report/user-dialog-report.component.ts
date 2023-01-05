@@ -4,6 +4,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ui } from 'src/environments/environment';
 
 @Component({
   selector: 'user-dialog-report.component',
@@ -15,6 +16,10 @@ export class UserDialogComponent implements OnInit {
   public firstMessage: string = 'Não se preocupe, ocorreu um erro e já o reportamos para a nossa equipe que irá analisar.';
   public secondMessage: string = 'Caso continue obtendo este erro, você poderá abrir uma solicitação de suporte através:';
   public issuesReportLink: string = 'https://github.com/BIEMAX/financial-manager-app/issues';
+  /**
+   * Define default color on UI (User Interface)
+   */
+  public uiColor: string = ui.color;
 
   constructor(
     public _dialogRef: MatDialogRef<UserDialogComponent>,

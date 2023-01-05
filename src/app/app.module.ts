@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CdkTableModule } from '@angular/cdk/table';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 //Angular material packages
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -37,21 +38,26 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
 
-//Aplication packages
+//Application packages
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { UserLoginComponent } from './views/user/user-login/user-login.component';
-import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
+
+import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
 import { FinancialsNewComponent } from './views/financial-manager/financials-new/financials-new.component';
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
+import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
+import { FinancialsTagNewComponent } from './views/financial-manager/financials-tag-new/financials-tag-new.component';
+
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-update-info.component';
@@ -76,6 +82,8 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
+    FinancialsTagsComponent,
+    FinancialsTagNewComponent,
     //Footer and header
     FooterComponent,
     HeaderComponent,
@@ -110,6 +118,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatExpansionModule,
     MatDatepickerModule,
     ClipboardModule,
+    FlexLayoutModule,
     CdkTableModule,
     CdkTreeModule,
     CdkTreeModule,
@@ -120,6 +129,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatBadgeModule,
     MatCheckboxModule,
     NgChartsModule,
+    MatSortModule,
     MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
   ],
   providers: [],

@@ -11,6 +11,7 @@ export class ReleaseNotesComponent implements OnInit {
 
   public releaseMarkdown: any;
   public listReleases: any;
+  public isMobileDevice: Boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -37,9 +38,11 @@ export class ReleaseNotesComponent implements OnInit {
   }
 
   async getReleaseNotes (version: string) {
-    let releaseDocName = `/assets/md/release_${version}.md`;
-    let tempMd = await this.http.get(releaseDocName, { responseType: 'text' }).toPromise();
-    this.releaseMarkdown = this.mdService.parse(tempMd);
+    if (version.toUpperCase().trim() != "VERSÕES") {
+      let releaseDocName = `/assets/md/release_${version}.md`;
+      let tempMd = await this.http.get(releaseDocName, { responseType: 'text' }).toPromise();
+      this.releaseMarkdown = this.mdService.parse(tempMd);
+    }
   }
 
   onLoad (data: any) {

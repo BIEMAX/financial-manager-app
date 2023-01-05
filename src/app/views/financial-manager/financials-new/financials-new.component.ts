@@ -113,7 +113,7 @@ export class FinancialsNewComponent implements OnInit {
       if (newTags.length > 0) {
         newTags.map((newTag) => {
           //If tag doesn't exist, creat it 
-          this.tagsService.newTag(newTag).subscribe(
+          this.tagsService.createTag(newTag).subscribe(
             response => { if (environment.logInfo) console.log('response: ', response); },
             error => { if (environment.logInfo) console.log('error: ', error); }
           );
