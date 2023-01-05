@@ -1,6 +1,7 @@
 ## [1.2.4]
 
 - Fixed users can't access submenu 'tags' in 'financial manager'
+- Fixed an issue that prevents user query tags in mobile devices
 
 ## [1.2.3]
 
