@@ -73,7 +73,7 @@ export class FinancialsListComponent implements OnInit {
   public isMobileDevice: Boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -86,6 +86,7 @@ export class FinancialsListComponent implements OnInit {
   ngOnInit () {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
     this.setDisplayedColumnsByDevice();
+    this.paginator._intl.itemsPerPageLabel = "Items por página";
   }
 
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
@@ -261,7 +262,9 @@ export class FinancialsListComponent implements OnInit {
       this.displayedColumns = [
         'name',
         'dueDate',
-        'value'
+        'value',
+        'update',
+        'delete'
       ];
     }
     else {

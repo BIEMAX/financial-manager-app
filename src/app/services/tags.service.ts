@@ -21,7 +21,7 @@ export class TagsService {
     return this.http.get(`${this.apiUrl}/tag/list`, this.apiHeader);
   }
 
-  newTag (tagName: string) {
+  createTag (tagName: string) {
     return this.http.post(`${this.apiUrl}/tag/new`, { name: tagName }, this.apiHeader);
   }
 

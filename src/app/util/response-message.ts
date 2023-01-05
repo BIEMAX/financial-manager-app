@@ -3,12 +3,12 @@
  * @param statusCode http status code
  * @returns String with message
  */
-export let ResponseStatusCode = (statusCode: String) => {
+export let ResponseStatusCode = (statusCode: string) => {
   if (statusCode.startsWith('0')) return 'Servidor indisponível no momento';
   if (statusCode.startsWith('401')) return 'Não autorizado';
   if (statusCode.startsWith('404')) return 'Registro não encontrado com base nos filtros determinados';
   if (statusCode.startsWith('500')) return 'Erro interno do servidor';
-  else return 'Parece que algo deu errado';
+  else return '';
 }
 
 /**
@@ -16,7 +16,7 @@ export let ResponseStatusCode = (statusCode: String) => {
  * @param exception Exception error or message property
  * @returns String with message
  */
-export let ExceptionMessageResponse = (error: String) => {
+export let ExceptionMessageResponse = (error: string) => {
   if (error.startsWith('JWT expired at')) return 'Sua sessão expirou. Faça novamente o login';
   if (error.includes('Unauthorized')) return 'Não autorizado';
   else return 'Parece que algo deu errado';
@@ -27,9 +27,10 @@ export let ExceptionMessageResponse = (error: String) => {
  * @param error 
  * @returns String with message
  */
-export let ExceptionSolutionResponse = (errorMessage: String) => {
-  if (errorMessage.toLocaleLowerCase().trim().includes('senha inválida ou diferente do cadastrado'))
+export let ExceptionSolutionResponse = (errorMessage: string) => {
+  if (errorMessage.toLowerCase().trim().includes('senha inválida ou diferente do cadastrado'))
     return 'Verifique sua senha e tente novamente. Caso ainda possuir problemas, recomendamos trocar sua senha.';
-  //else if (errorMessage.toUpperCase().trim().includes('')) return ''
-  else return 'Infelizmente ainda não há uma solução para este problemas';
+  else if (errorMessage.toLowerCase().trim().includes('não pode ser vazio ou nulo'))
+    return 'Preencha o campo informado corretamente e tente novamente';
+  else return 'Infelizmente ainda não há uma solução para este problema';
 }
