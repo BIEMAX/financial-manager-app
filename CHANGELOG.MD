@@ -3,6 +3,7 @@
 - Fixed users can't access submenu 'tags' in 'financial manager'
 - Fixed an issue that prevents user query tags in mobile devices
 - Fixed user sessions expired but never show errors
+- Update - Home screen always show icons instead text and icon for menu
 
 ## [1.2.3]
 

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSidenav } from '@angular/material/sidenav'
 
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
@@ -22,9 +23,15 @@ export class HeaderComponent implements OnInit {
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
 
-  public isExpanded = true;
+  /**
+   * True to show menu side bar expanded, false to show only icons.
+   */
+  public isExpanded = false;
   public showSubmenu: Boolean = true;
   public isShowing: Boolean = false;
+  /**
+   * True to show sub menus in main menus (level two)
+   */
   public showSubSubMenu: boolean = true;
 
   public userNameComplete: String = "";
@@ -39,6 +46,8 @@ export class HeaderComponent implements OnInit {
    * Define if the side bar start opened or close (for mobile devices).
    */
   public startSideNavOpened: Boolean = false;
+
+  @ViewChild(MatSidenav) sideNav: MatSidenav;
 
   constructor(
     private userService: UserService,
@@ -63,13 +72,13 @@ export class HeaderComponent implements OnInit {
   }
 
   mouseenter () {
-    if (!this.isExpanded) {
+    if (!this.isMobileDevice && !this.isExpanded) {
       this.isShowing = true;
     }
   }
 
   mouseleave () {
-    if (!this.isExpanded) {
+    if (!this.isMobileDevice && !this.isExpanded) {
       this.isShowing = false;
     }
   }
@@ -118,6 +127,17 @@ export class HeaderComponent implements OnInit {
         this.showNotification(error.error.message, 'Erro');
       }
     );
+  }
+
+  /**
+   * Function to validate if is to toggle sidenav menu, based
+   * on device (if is web device, never toggle, in mobile devices,
+   * always toggle)
+   */
+  isToToggleSideNav () {
+    if (this.isMobileDevice) {
+      this.sideNav.toggle();
+    }
   }
 
   /**
