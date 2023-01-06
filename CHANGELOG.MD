@@ -2,6 +2,7 @@
 
 - Fixed users can't access submenu 'tags' in 'financial manager'
 - Fixed an issue that prevents user query tags in mobile devices
+- Fixed user sessions expired but never show errors
 
 ## [1.2.3]
 

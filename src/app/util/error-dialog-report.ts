@@ -92,9 +92,21 @@ export class DialogReport {
    */
   private extractInfoFromException (exception: any) {
     this.title = "Erro";
-    this.isException = ResponseStatusCode(exception?.error?.error || exception?.message) != '';
-    this.message = exception?.message ? exception?.message : exception?.error?.error;
-    this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+
+    let status = exception?.status != undefined ? exception?.status.toString() : '';
+
+    //Exception will be if the API return a status as error/exception
+    this.isException = ResponseStatusCode(status) != '';
+
+    //If is an exception, it's an API error
+    if (this.isException) {
+      this.message = exception?.error;
+      this.solution = ExceptionSolutionResponse(exception?.error);
+    }
+    else { //If not is an exception, it's just a message from frontend
+      this.message = exception?.message ? exception?.message : exception?.error?.error;
+      this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+    }
   }
 
   /**
