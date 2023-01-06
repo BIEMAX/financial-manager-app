@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { LogginModel } from "../models/login.model";
+import { LoginModel } from "../models/login.model";
 import { UserModel, UserUpdateModel } from "../models/user.model";
 
 @Injectable({
@@ -35,7 +35,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  doLogin (user: LogginModel) {
+  doLogin (user: LoginModel) {
     return this.http.post(`${this.apiUrl}/user/login`, JSON.stringify(user), this.apiHeader);
   }
 

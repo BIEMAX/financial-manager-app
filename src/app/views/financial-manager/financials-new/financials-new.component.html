@@ -26,14 +26,14 @@
       <div>
         <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
           <mat-label>Tipo de movimento da conta</mat-label>
-          <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashIn">
-            <div *ngIf="isCashIn">Entrada</div>
-            <div *ngIf="!isCashIn">Saída</div>
+          <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashEntry">
+            <div *ngIf="isCashEntry">Entrada</div>
+            <div *ngIf="!isCashEntry">Saída</div>
           </mat-slide-toggle>
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashIn">
+        <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashEntry">
           Conta paga? {{isBillPayed == true ? 'Sim' : 'Não' }}
         </mat-checkbox>
       </div>
@@ -69,12 +69,13 @@
             Número de prestações
             <mat-icon>123</mat-icon>
           </mat-label>
-          <input matInput [(disabled)]="isCashIn" matTooltip="Informe um valor maior que um para habilitar novos campos"
-            type=" number" placeholder="1" value="1" [(ngModel)]="billAmountQuantity">
+          <input matInput [(disabled)]="isCashEntry"
+            matTooltip="Informe um valor maior que um para habilitar novos campos" type=" number" placeholder="1"
+            value="1" [(ngModel)]="billAmountQuantity">
         </mat-form-field>
 
         <div *ngIf="billAmountQuantity > 1">
-          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashIn">
+          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashEntry">
             Dividir "valor total" pelo "número de prestações"? {{isBillValueToDivide == true ? 'Sim' : 'Não' }}
           </mat-checkbox>
 
@@ -126,7 +127,7 @@
 
   <div mat-dialog-actions>
     <button mat-button (click)="onExitClick()">Sair</button>
-    <button mat-button (click)="onSaveClick()" cdkFocusInitial>Salvar</button>
+    <button mat-button (click)="onSaveClick()" cdkFocusInitial mat-raised-button color="{{uiColor}}">Salvar</button>
   </div>
 
 </div>

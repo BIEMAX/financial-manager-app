@@ -1,4 +1,9 @@
-.mat-card-title {
+.bills-close-to-overdue {
+  font-size: 18px;
+  color: #6f6b6b;
+}
+
+.bills-overdue {
   font-size: 18px;
   color: #ff4d4d;
 }

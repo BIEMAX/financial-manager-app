@@ -20,6 +20,7 @@ import { BillsService } from 'src/app/services/bills.service';
 import { environment } from 'src/environments/environment';
 import { FinancialModel } from 'src/app/models/financial.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 export const MY_FORMATS = {
   parse: {
@@ -52,39 +53,41 @@ export const MY_FORMATS = {
 })
 export class FinancialsListComponent implements OnInit {
 
-  public description: string = "";
-  public tag: string = "";
+  /**
+   * Description to filter bills
+   */
+  public descToFilter: string = "";
+  /**
+   * Tag to filter bills
+   */
+  public tagToFilter: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
-  public displayedColumns: string[] = [
-    'type',
-    'name',
-    'dueDate',
-    'value',
-    'quantityAmount',
-    'tags',
-    'isBillPayed',
-    'update',
-    'delete'
-  ];
+  public displayedColumns: string[];
   public date = new FormControl(moment());
 
   /**
    * Define default color on UI (User Interface)
    */
-  uiColor: string = ui.color;
+  public uiColor: string = ui.color;
+  public isMobileDevice: Boolean = false;
 
-  // @ViewChild(MatSort) sort: MatSort;
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private billsService: BillsService,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions
   ) { }
 
-  ngOnInit () { }
+  ngOnInit () {
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
+    this.setDisplayedColumnsByDevice();
+    this.paginator._intl.itemsPerPageLabel = "Items por página";
+  }
 
   setMonthAndYear (normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     const ctrlValue = this.date.value!;
@@ -101,15 +104,35 @@ export class FinancialsListComponent implements OnInit {
     this.hasToWait = true;
     let month = this.date.value != undefined ? Number.parseInt(this.date.value.format("MM").toString()) : undefined;
     let year = this.date.value != undefined ? this.date.value.year() : undefined;
-    let description = this.description != undefined && this.description != '' ? this.description : undefined;
-    let tag = this.tag != undefined && this.tag != '' ? this.tag : undefined;
+    let description = this.descToFilter != undefined && this.descToFilter != '' ? this.descToFilter : undefined;
+    let tag = this.tagToFilter != undefined && this.tagToFilter != '' ? this.tagToFilter : undefined;
     this.billsService.getBills(month, year, description, tag).subscribe(
       response => {
         if (this.listBills != undefined) this.listBills = undefined;
         let data: any = response;
-        this.listBills = new MatTableDataSource(data);
-        //this.listBills.sort = this.sort;
-        //this.listBills.paginator = this.paginator;
+
+        if ((this.descToFilter || this.tagToFilter) && data.length > 0) {
+          let sumBillsValues = {
+            id: '123',
+            user: '',
+            name: 'Somatório dos valores',
+            dueDate: '',
+            description: '',
+            isBillPayed: false,
+            isCashEntry: null,
+            isToDivideValue: false,
+            quantityAmount: 0,
+            tags: ['Somatório'],
+            value: parseFloat(data.map((b) => b.value).reduce((b1, b2) => b1 + b2)).toFixed(2),
+            disableEdit: true,
+            disableDelete: true
+          };
+          data.push(sumBillsValues);
+          this.listBills = new MatTableDataSource(data);
+        } else this.listBills = new MatTableDataSource(data);
+
+        this.listBills.sort = this.sort;
+        this.listBills.paginator = this.paginator;
         this.hasToWait = false;
         this.showNotification('Dados pesquisados', '');
       },
@@ -137,7 +160,7 @@ export class FinancialsListComponent implements OnInit {
   openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: '40%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
       autoFocus: true,
       data: bill
     });
@@ -216,15 +239,46 @@ export class FinancialsListComponent implements OnInit {
     else return;
   }
 
+  /**
+   * Set the next month and get the bills
+   */
   nextMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() + 1);
     this.date.setValue(ctrlValue);
   }
 
+  /**
+   * Set the previous month and get the bills
+   */
   previousMonth () {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() - 1);
     this.date.setValue(ctrlValue);
+  }
+
+  setDisplayedColumnsByDevice () {
+    if (this.isMobileDevice) {
+      this.displayedColumns = [
+        'name',
+        'dueDate',
+        'value',
+        'update',
+        'delete'
+      ];
+    }
+    else {
+      this.displayedColumns = [
+        'type',
+        'name',
+        'dueDate',
+        'value',
+        'quantityAmount',
+        'tags',
+        'isBillPayed',
+        'update',
+        'delete'
+      ];
+    }
   }
 }

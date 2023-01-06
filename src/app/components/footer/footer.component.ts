@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 @Component({
   selector: 'app-footer',
@@ -9,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  public isMobileDevice: Boolean = false;
+
+  constructor(
+    private genericFunctions: GenericFunctions
+  ) { }
 
   ngOnInit (): void {
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
   }
 
 }

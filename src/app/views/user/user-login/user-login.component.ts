@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ui, environment } from 'src/environments/environment';
+import { ui, environment, user } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UserService } from 'src/app/services/user.service';
-import { LogginModel } from 'src/app/models/login.model';
+import { LoginModel } from 'src/app/models/login.model';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserNewComponent } from 'src/app/views/user/user-new/user-new.component';
 import { UserModel } from 'src/app/models/user.model';
-import { BillsService } from 'src/app/services/bills.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
+import Encrypt from 'src/app/util/encrypt-data';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,8 @@ import { DialogReport } from 'src/app/util/error-dialog-report';
 })
 export class UserLoginComponent implements OnInit {
 
-  public userLogin: string = "";
-  public userPassword: string = "";
+  public userLogin: string = user?.login || "";
+  public userPassword: string = user?.password || "";
   /**
    * Define true to show waiting progress spinner on front.
    */
@@ -30,39 +31,63 @@ export class UserLoginComponent implements OnInit {
      */
   public uiColor: string = ui.color;
   public showPassword: Boolean = false;
+  public keepUserConnected: Boolean = false;
 
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
     private userService: UserService,
-    private billsService: BillsService,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions,
+    private encrypt: Encrypt
   ) { }
 
   ngOnInit () {
-    this.clearOldLocalStorage();
+    this.clearLocalStorageVariables();
+    this.isToKeepUserConnected();
   }
 
+  /**
+   * Clear local storage only if the user not checked the option to keep connected.
+   */
+  clearLocalStorageVariables () {
+    if (localStorage.getItem('keepUserConnected') == null || localStorage.getItem('keepUserConnected') == 'false') {
+      localStorage.removeItem('userBearerKey');
+      localStorage.removeItem('userLogin');
+      localStorage.removeItem('userName');
+    }
+  }
+
+  /**
+   * Do the user login and validations (if is active, enable, and others)
+   */
   doLogin () {
     this.hasToWait = true;
     try {
       if (this.userLogin && this.userPassword) {
-        this.userService.doLogin(new LogginModel(this.userLogin, this.userPassword))
+        this.userService.doLogin(new LoginModel(this.userLogin, this.userPassword))
           .subscribe(
             response => {
               let loginData: any = response;
               localStorage.setItem('userBearerKey', loginData.bearerKey);
               localStorage.setItem('userLogin', this.userLogin);
               localStorage.setItem('userName', loginData.data.userName);
+              localStorage.setItem('userSecret', this.encrypt.encrypt(this.userPassword));
+              localStorage.setItem('keepUserConnected', this.keepUserConnected.toString());
 
               this.userAccessService.userAuthenticated = true;
               this.userAccessService.user = loginData.data;
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.permissions = loginData.data.permissions;
 
-              this.getOverdueBills(loginData.bearerKey);
+              // this.getBillsCloseToOverdue(loginData.bearerKey);
+              this.hasToWait = false;
+
+              this.userService.enableMenusOnScreen.emit(true);
+              this.showNotification('Login efetuado com êxito', '');
+              this.router.navigate(['home']);
             },
             error => {
               this.userService.enableMenusOnScreen.emit(false);
@@ -92,7 +117,7 @@ export class UserLoginComponent implements OnInit {
   openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
-      width: '30%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
       autoFocus: true
     });
 
@@ -117,47 +142,21 @@ export class UserLoginComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.dialogReport.showMessageDialog(error, true, true);
+        this.dialogReport.showMessageDialog_UserCreation(error, user, true, true);
       }
     );
   }
 
   /**
-   * Get the bills that will overdue or already overdue.
+   * Validate if the user turn on the button to keep him connected.
    */
-  getOverdueBills (bearer: String) {
-    this.billsService.getBillByPayed(bearer, false).subscribe(
-      response => {
-        let resp: any = response;
-
-        this.userAccessService.user.notifications = resp.data.map((b) => {
-          return {
-            id: b.id,
-            title: b.name,
-            description: b.description,
-            done: false,
-            date: b.dueDate
-          };
-        });
-
-        this.userService.enableMenusOnScreen.emit(true);
-        this.hasToWait = false;
-
-        this.showNotification('Login efetuado com êxito', '');
-        this.router.navigate(['home']);
-      },
-      error => {
-        this.hasToWait = false;
-        if (environment.logInfo) console.log('erro ao consultar notificações: ', error);
-        this.dialogReport.showMessageDialog(error, true, true);
-      }
-    );
-  }
-
-  clearOldLocalStorage () {
-    localStorage.removeItem('userBearerKey');
-    localStorage.removeItem('userLogin');
-    localStorage.removeItem('userName');
+  isToKeepUserConnected () {
+    this.keepUserConnected = localStorage.getItem('keepUserConnected').toLowerCase() == 'true';
+    if (this.keepUserConnected) {
+      this.userLogin = localStorage.getItem('userLogin');
+      this.userPassword = this.encrypt.decrypt(localStorage.getItem('userSecret'));
+      this.doLogin();
+    }
   }
 
   /**

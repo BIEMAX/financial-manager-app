@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
 import { UserUpdateModel } from 'src/app/models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 @Component({
   selector: 'app-header',
@@ -20,21 +21,32 @@ export class HeaderComponent implements OnInit {
 
   public enableMenu: Boolean = false;
   public applicationName: string = environment.applicationName;
+
   public isExpanded = true;
-  public showSubmenu: boolean = true;
-  public isShowing = false;
+  public showSubmenu: Boolean = true;
+  public isShowing: Boolean = false;
   public showSubSubMenu: boolean = true;
+
   public userNameComplete: String = "";
   public userFirstName: String = "";
   public qtyNotification: any = 0;
   public descNotifications: String = "";
+  /**
+   * True if is a mobile device
+   */
+  public isMobileDevice: Boolean = false;
+  /**
+   * Define if the side bar start opened or close (for mobile devices).
+   */
+  public startSideNavOpened: Boolean = false;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit () {
@@ -43,8 +55,11 @@ export class HeaderComponent implements OnInit {
     this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
-    this.qtyNotification = this.userAccessService.user.notifications.length;
+    this.qtyNotification = this.userAccessService.user.notifications?.length || 0;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
+    this.isMobileDevice = this.genericFunctions.isMobileDevice();
+    this.startSideNavOpened = !this.isMobileDevice;
+    this.isShowing = this.isMobileDevice;
   }
 
   mouseenter () {
@@ -78,7 +93,7 @@ export class HeaderComponent implements OnInit {
   openDialogUpdateUser (): void {
     const dialogRef = this.dialog.open(UserUpdateInfoComponent, {
       disableClose: true,
-      width: '30%',
+      width: this.isMobileDevice ? '100%' : '30%',
       autoFocus: true
     });
 
