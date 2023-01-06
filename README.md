@@ -2,7 +2,7 @@
 
 # Financial Manager App
 
-Project to controls personal/profissional costs and receiveds.
+Project to control personal/professional costs and receives.
 
 # Bills screen
 
