@@ -4,3 +4,4 @@
 - [Resolvido um problema que impedia usuários de consultarem as tags](https://github.com/BIEMAX/financial-manager-app/issues/105)
 - [Resolvido um problema de não aprensetar erros quando a sessão do usuário expirou](https://github.com/BIEMAX/financial-manager-app/issues/106)
 - [Implementado uma melhoria para apresentar sempre os ícones no menu inicial em dispositivos web](https://github.com/BIEMAX/financial-manager-app/issues/109)
+- 
