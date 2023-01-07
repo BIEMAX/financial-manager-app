@@ -4,10 +4,10 @@
  * @returns String with message
  */
 export let ResponseStatusCode = (statusCode: string) => {
-  if (statusCode.includes('0')) return 'Servidor indisponível no momento';
+  if (statusCode.trim() == '0') return 'Servidor indisponível no momento';
   if (statusCode.includes('401')) return 'Não autorizado';
-  if (statusCode.includes('404')) return 'Registro não encontrado com base nos filtros determinados';
-  if (statusCode.includes('500')) return 'Erro interno do servidor';
+  if (statusCode.trim() == '404') return 'Registro não encontrado com base nos filtros determinados';
+  if (statusCode.trim() == '500') return 'Erro interno do servidor';
   else return '';
 }
 

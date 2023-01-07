@@ -1,8 +1,8 @@
 <!--Title-->
-<h2 mat-dialog-title>{{data.isException == true ? 'Erro inesperado' : data.title}}</h2>
+<h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content>
 
-  <div *ngIf="data.isException == true">
+  <div *ngIf="data.isException == true && data.showReportLink == true">
     <p>
       {{firstMessage}}
       {{secondMessage}}
