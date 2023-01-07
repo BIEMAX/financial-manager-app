@@ -10,7 +10,7 @@ that consists in:
 - Control bills close to overdue ou already overdue
 - View your money (spend, save and remaining) in charts
 
-If you want to test it, you can access our demo accessing the link [financial-manager-staging.web.app](financial-manager-staging.web.app).
+If you want to test it, you can access our demo accessing the link [financial-manager-staging.web.app](https://financial-manager-staging.web.app).
 
 Some features that this application have:
 - Automatic deploys via Heroku
