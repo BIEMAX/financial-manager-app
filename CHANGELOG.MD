@@ -1,6 +1,7 @@
 ## [1.2.5 - Preview]
 
 - Fix 'Progress spinner - Disable other components during his visibility #119'
+- Fix 'Create a generic show notification #123'
 - 
 
 ## [1.2.4]

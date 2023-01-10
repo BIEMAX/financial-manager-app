@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment, ui } from 'src/environments/environment';
 import { MatAccordion } from '@angular/material/expansion';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
-import { FinancialModel } from 'src/app/models/financial.model';
 import { BillsService } from 'src/app/services/bills.service';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 
 @Component({
   selector: 'app-home',
@@ -26,10 +25,10 @@ export class HomeComponent implements OnInit {
   public hasToWait: boolean = false;
 
   constructor(
-    private snackBar: MatSnackBar,
     private userAccessService: UserAccessService,
     private dialogReport: DialogReport,
-    private billsService: BillsService
+    private billsService: BillsService,
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit (): void {
@@ -129,7 +128,7 @@ export class HomeComponent implements OnInit {
   payBillOverdue (bill: any) {
     if (bill.id && confirm("Deseja atualizar a conta como paga?")) {
       this.billsService.payBillOverdue(bill.id).subscribe(
-        resp => { this.showNotification('Sucesso ao atualizar a conta'); },
+        resp => { this.genericFunctions.showNotification('Sucesso ao atualizar a conta'); },
         error => { this.dialogReport.showMessageDialog(error, true, true); }
       );
     }
@@ -149,16 +148,6 @@ export class HomeComponent implements OnInit {
 
   prevStep () {
     this.step--;
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string = '', duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

@@ -6,11 +6,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { TagModel } from 'src/app/models/tag.model';
 import { environment, ui } from 'src/environments/environment';
-import { TagsService } from 'src/app/services/tags.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 
 @Component({
@@ -28,8 +26,6 @@ export class FinancialsTagNewComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FinancialsTagNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
-    private tagsService: TagsService,
     private dialogReport: DialogReport
   ) { }
 
@@ -63,16 +59,6 @@ export class FinancialsTagNewComponent implements OnInit {
       else return false;
     }
     return true;
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration });
   }
 
 }

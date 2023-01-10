@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSidenav } from '@angular/material/sidenav'
 
 import { UserService } from 'src/app/services/user.service';
@@ -54,7 +53,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private userAccessService: UserAccessService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar,
     private genericFunctions: GenericFunctions
   ) { }
 
@@ -120,11 +118,11 @@ export class HeaderComponent implements OnInit {
         console.log('response from user update: ', response);
         this.userAccessService.user.userName = user.newUserName;
         this.userAccessService.user.email = user.newEmail;
-        this.showNotification('Usuário atualizado com sucesso', '');
+        this.genericFunctions.showNotification('Usuário atualizado com sucesso');
       },
       error => {
         if (environment.logInfo) console.log(error);
-        this.showNotification(error.error.message, 'Erro');
+        this.genericFunctions.showNotification(error.error.message); //TODO: Convert to this.dialogReport.showMessageDialog()
       }
     );
   }
@@ -138,16 +136,6 @@ export class HeaderComponent implements OnInit {
     if (this.isMobileDevice) {
       this.sideNav.toggle();
     }
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

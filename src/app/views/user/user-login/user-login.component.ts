@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ui, environment, user } from 'src/environments/environment';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -34,7 +33,6 @@ export class UserLoginComponent implements OnInit {
   public keepUserConnected: Boolean = false;
 
   constructor(
-    private snackBar: MatSnackBar,
     private router: Router,
     private userService: UserService,
     private userAccessService: UserAccessService,
@@ -82,11 +80,10 @@ export class UserLoginComponent implements OnInit {
               this.userAccessService.user.userBearer = loginData.bearerKey;
               this.userAccessService.permissions = loginData.data.permissions;
 
-              // this.getBillsCloseToOverdue(loginData.bearerKey);
               this.hasToWait = false;
 
               this.userService.enableMenusOnScreen.emit(true);
-              this.showNotification('Login efetuado com êxito', '');
+              this.genericFunctions.showNotification('Login efetuado com êxito');
               this.router.navigate(['home']);
             },
             error => {
@@ -98,7 +95,7 @@ export class UserLoginComponent implements OnInit {
       }
       else {
         this.hasToWait = false;
-        this.showNotification('Preencha os campos login e senha e tente novamente', '');
+        this.genericFunctions.showNotification('Preencha os campos login e senha e tente novamente');
       }
     }
     catch (error) {
@@ -127,7 +124,7 @@ export class UserLoginComponent implements OnInit {
         if (result) this.createNewUser(result);
       }
       else {
-        this.showNotification('Não foi possível cadastrar uma nova conta', '');
+        this.genericFunctions.showNotification('Não foi possível cadastrar uma nova conta');
         if (environment.logInfo) console.log('The dialog was closed');
       }
     });
@@ -138,7 +135,7 @@ export class UserLoginComponent implements OnInit {
     this.userService.createUser(user).subscribe(
       response => {
         this.hasToWait = false;
-        this.showNotification('Conta criada com sucesso', 'Sucesso');
+        this.genericFunctions.showNotification('Conta criada com sucesso');
       },
       error => {
         this.hasToWait = false;
@@ -157,16 +154,6 @@ export class UserLoginComponent implements OnInit {
       this.userPassword = this.encrypt.decrypt(localStorage.getItem('userSecret'));
       this.doLogin();
     }
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }
