@@ -1,4 +1,9 @@
-## [1.2.4 - Preview]
+## [1.2.5 - Preview]
+
+- Fix 'Progress spinner - Disable other components during his visibility #119'
+- 
+
+## [1.2.4]
 
 - Fixed users can't access submenu 'tags' in 'financial manager'
 - Fixed an issue that prevents user query tags in mobile devices
