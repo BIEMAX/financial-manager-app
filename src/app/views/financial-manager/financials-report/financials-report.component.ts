@@ -77,7 +77,7 @@ export class FinancialsReportComponent implements OnInit {
         if (charts.data[0] != undefined && charts.data[0].charts.length > 0) {
           this.listCharts = charts.data[0].charts.filter(c => c.hasAccess == true);
           this.updateChartData(this.currentMonth, this.currentYear);
-        } else this.genericFunctions.showNotification("Não há relatórios disponíveis para seu usuário", "");
+        } else this.genericFunctions.showNotification("Não há relatórios disponíveis para seu usuário");
       },
       error => {
         this.hasToWait = false;
@@ -204,7 +204,7 @@ export class FinancialsReportComponent implements OnInit {
         default: break;
       }
 
-      this.genericFunctions.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`, "");
+      this.genericFunctions.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`);
     });
   }
 

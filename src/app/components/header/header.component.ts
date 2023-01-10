@@ -9,6 +9,7 @@ import { UserAccessService } from 'src/app/services/user-access-permissions.serv
 import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/user-update-info.component';
 import { UserUpdateModel } from 'src/app/models/user.model';
 import { GenericFunctions } from 'src/app/util/generic-functions';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 @Component({
   selector: 'app-header',
@@ -52,8 +53,9 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private userAccessService: UserAccessService,
-    public dialog: MatDialog,
-    private genericFunctions: GenericFunctions
+    private genericFunctions: GenericFunctions,
+    private dialogReport: DialogReport,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit () {
@@ -124,7 +126,7 @@ export class HeaderComponent implements OnInit {
       },
       error => {
         if (environment.logInfo) console.log(error);
-        this.genericFunctions.showNotification(error.error.message); //TODO: Convert to this.dialogReport.showMessageDialog()
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }

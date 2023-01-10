@@ -2,7 +2,9 @@
 
 - Fix 'Progress spinner - Disable other components during his visibility #119'
 - Fix 'Create a generic show notification #123'
-- 
+- Fix 'Progress spinner not centered at screen (all windows) #122'
+- Fix 'After logout, password field still have the old value #125'
+- Run 'tests in case of exception/error in all forms #121'
 
 ## [1.2.4]
 

@@ -104,7 +104,7 @@ export class DialogReport {
 
     //If is an exception, it's an API error
     if (this.isException) {
-      this.message = exception?.error?.message || exception?.error;
+      this.message = exception?.error?.message || exception?.error || exception?.message;
       this.solution = ExceptionSolutionResponse(this.message);
     }
     else { //If not is an exception, it's just a message from frontend
