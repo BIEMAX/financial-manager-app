@@ -85,6 +85,8 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userBearerKey');
     localStorage.removeItem('userLogin');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userSecret');
+    localStorage.removeItem('keepUserConnected');
 
     this.userAccessService.userAuthenticated = false;
     this.userAccessService.user = [];
