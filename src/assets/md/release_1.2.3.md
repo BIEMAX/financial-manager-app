@@ -1,4 +1,4 @@
-## Release 1.2.3 - Hotfix - 30, January, 2023
+## Release 1.2.3 - Hotfix - 05, January, 2023
 
 - [Resolvido o problema de não salvar contas do tipo entrada](https://github.com/BIEMAX/financial-manager-api/issues/68)
 - Resolvido o problema de não apresentar o ícone do site em alguns dispositivos
