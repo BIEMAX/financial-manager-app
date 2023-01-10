@@ -30,8 +30,16 @@ export class FinancialsTagsComponent implements OnInit {
    */
   public tagToFilter: string = "";
   public hasToWait: Boolean = false;
-  public listTags: MatTableDataSource<any>;
+  /**
+   * Contains a data source with tags and some properties.
+   */
+  public dsListTags: MatTableDataSource<any>;
   public displayedColumns: string[];
+  /**
+   * Contains original list tags data from api to filter to
+   * validate if a tag already exist.
+   */
+  public listTags: string[];
 
   /**
    * Define default color on UI (User Interface)
@@ -54,6 +62,7 @@ export class FinancialsTagsComponent implements OnInit {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
     this.setDisplayedColumnsByDevice();
     this.paginator._intl.itemsPerPageLabel = "Items por página";
+    this.getTags();
   }
 
   /**
@@ -64,20 +73,21 @@ export class FinancialsTagsComponent implements OnInit {
     let description = this.descToFilter != undefined && this.descToFilter != '' ? this.descToFilter : undefined;
     this.tagsService.getTags().subscribe(
       response => {
-        if (this.listTags != undefined) this.listTags = undefined;
+        if (this.dsListTags != undefined) this.dsListTags = undefined;
         let data: any = response;
+        this.listTags = data.data.tags;
 
-        this.listTags = new MatTableDataSource(data.data.tags.map(
+        this.dsListTags = new MatTableDataSource(data.data.tags.map(
           (t) => { return { name: t.toString() } }
         ));
 
-        this.listTags.sort = this.sort;
-        this.listTags.paginator = this.paginator;
+        this.dsListTags.sort = this.sort;
+        this.dsListTags.paginator = this.paginator;
         this.hasToWait = false;
         this.showNotification('Dados pesquisados', '');
       },
       error => {
-        if (this.listTags != undefined) this.listTags = undefined;
+        if (this.dsListTags != undefined) this.dsListTags = undefined;
         this.hasToWait = false;
         this.dialogReport.showMessageDialog(error, true, true);
       }
@@ -114,20 +124,26 @@ export class FinancialsTagsComponent implements OnInit {
    */
   saveTag (tag: any) {
     this.hasToWait = true;
-    this.tagsService.createTag(tag.name).subscribe(
-      response => {
-        this.hasToWait = false;
-        if (environment.logInfo) console.log(response);
-        this.showNotification('Tag salva com êxito', '');
+    if (!this.isNewTag(tag.name)) {
+      this.tagsService.createTag(tag.name).subscribe(
+        response => {
+          this.hasToWait = false;
+          if (environment.logInfo) console.log(response);
+          this.showNotification("Tag salva com êxito");
 
-        this.getTags(); //Update the screen
-      },
-      error => {
-        this.hasToWait = false;
-        if (environment.logInfo) console.log(error);
-        this.dialogReport.showMessageDialog(error, true, true);
-      }
-    );
+          this.getTags(); //Update the screen
+        },
+        error => {
+          this.hasToWait = false;
+          if (environment.logInfo) console.log(error);
+          this.dialogReport.showMessageDialog(error, true, true);
+        }
+      );
+    }
+    else {
+      this.hasToWait = false;
+      this.showNotification("Tag já existe");
+    }
   }
 
   updateBill (bill: any) {
@@ -169,6 +185,19 @@ export class FinancialsTagsComponent implements OnInit {
     else return;
   }
 
+  /**
+   * Validate if is a new tag.
+   * @param tagName tag name
+   * @returns 
+   */
+  isNewTag (tagName: string): boolean {
+    if (this.listTags.length <= 0) this.getTags();
+
+    return this.listTags.filter(
+      t => t.toString().toUpperCase().trim().includes(tagName.toUpperCase().trim())
+    ).length > 0;
+  }
+
   setDisplayedColumnsByDevice () {
     this.displayedColumns = [
       'name',
@@ -183,7 +212,7 @@ export class FinancialsTagsComponent implements OnInit {
    * @param action Origin event
    * @param duration Integer containing the value to animation time
    */
-  showNotification (message: string, action: string, duration = 2000) {
+  showNotification (message: string, action: string = "", duration = 2000) {
     this.snackBar.open(message, action, { duration: duration })
   }
 }

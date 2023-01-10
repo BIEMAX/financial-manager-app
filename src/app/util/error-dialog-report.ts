@@ -21,6 +21,7 @@ export class DialogReport {
   private message: string;
   private solution: string;
   private isException: boolean = false;
+  private showReportLink: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -53,7 +54,8 @@ export class DialogReport {
         title: this.title,
         message: this.message,
         solution: this.solution,
-        isException: this.isException
+        isException: this.isException,
+        showReportLink: this.showReportLink
       }
     });
 
@@ -92,9 +94,23 @@ export class DialogReport {
    */
   private extractInfoFromException (exception: any) {
     this.title = "Erro";
-    this.isException = ResponseStatusCode(exception?.error?.error || exception?.message) != '';
-    this.message = exception?.message ? exception?.message : exception?.error?.error;
-    this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+
+    let status = exception?.status != undefined ? exception?.status.toString() : '';
+
+    this.showReportLink = exception?.error?.path != "/v1/user/login";
+
+    //Exception will be if the API return a status as error/exception
+    this.isException = ResponseStatusCode(status) != '';
+
+    //If is an exception, it's an API error
+    if (this.isException) {
+      this.message = exception?.error?.message || exception?.error;
+      this.solution = ExceptionSolutionResponse(this.message);
+    }
+    else { //If not is an exception, it's just a message from frontend
+      this.message = exception?.message ? exception?.message : exception?.error?.error;
+      this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+    }
   }
 
   /**
