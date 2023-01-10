@@ -9,7 +9,7 @@ import { GenericFunctions } from 'src/app/util/generic-functions';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
-import { ResponseStatusCode } from 'src/app/util/response-message';
+import { IsAKnownErrorCode } from 'src/app/util/response-message';
 
 // tslint:disable-next-line:no-duplicate-imports
 import * as _moment from 'moment';
@@ -82,7 +82,7 @@ export class FinancialsReportComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.showNotification(ResponseStatusCode((error.error.message)), 'Erro');
+        this.showNotification(IsAKnownErrorCode((error.error.message)), 'Erro');//TODO: #120 Refactor this error
       }
     );
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from 'src/app/views/generic/user-dialog-report/user-dialog-report.component';
-import { ResponseStatusCode, ExceptionSolutionResponse } from './response-message';
+import { IsAKnownErrorCode, ExceptionSolutionResponse } from './response-message';
 import { LogService } from 'src/app/services/log.service';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
@@ -99,8 +99,8 @@ export class DialogReport {
 
     this.showReportLink = exception?.error?.path != "/v1/user/login";
 
-    //Exception will be if the API return a status as error/exception
-    this.isException = ResponseStatusCode(status) != '';
+    //Exception will be if the API didn't return a expected code/status as error/exception
+    this.isException = IsAKnownErrorCode(status) == '';
 
     //If is an exception, it's an API error
     if (this.isException) {
