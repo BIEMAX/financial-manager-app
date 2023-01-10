@@ -128,13 +128,12 @@ export class HomeComponent implements OnInit {
   payBillOverdue (bill: any) {
     if (bill.id && confirm("Deseja atualizar a conta como paga?")) {
       this.billsService.payBillOverdue(bill.id).subscribe(
-        resp => { this.genericFunctions.showNotification('Sucesso ao atualizar a conta'); },
+        resp => {
+          this.getBillsOverdue();
+          this.genericFunctions.showNotification('Sucesso ao atualizar a conta');
+        },
         error => { this.dialogReport.showMessageDialog(error, true, true); }
       );
-    }
-    else {
-      bill.done = false;
-      return;
     }
   }
 

@@ -1,10 +1,11 @@
 ## [1.2.5 - Preview]
 
-- Fix 'Progress spinner - Disable other components during his visibility #119'
-- Fix 'Create a generic show notification #123'
-- Fix 'Progress spinner not centered at screen (all windows) #122'
-- Fix 'After logout, password field still have the old value #125'
+- Fixed 'Progress spinner - Disable other components during his visibility #119'
+- Fixed 'Create a generic show notification #123'
+- Fixed 'Progress spinner not centered at screen (all windows) #122'
+- Fixed 'After logout, password field still have the old value #125'
 - Run 'tests in case of exception/error in all forms #121'
+- Fixed 'Bill update at homescreen not reloading pending bills #97'
 
 ## [1.2.4]
 
