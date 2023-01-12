@@ -39,6 +39,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -57,6 +58,8 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
 import { FinancialsTagNewComponent } from './views/financial-manager/financials-tag-new/financials-tag-new.component';
+import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
+import { FinancialsDefaultersNewComponent } from './views/financial-manager/financials-defaulters-new/financials-defaulters-new.component';
 
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -79,6 +82,8 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     PageNotFoundComponent,
     ReleaseNotesComponent,
     //Financials
+    FinancialsDefaultersComponent,
+    FinancialsDefaultersNewComponent,
     FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
@@ -130,6 +135,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatCheckboxModule,
     NgChartsModule,
     MatSortModule,
+    MatStepperModule,
     MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
   ],
   providers: [],

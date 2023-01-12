@@ -5,7 +5,7 @@
 - Fixed 'Progress spinner not centered at screen (all windows) #122'
 - Fixed 'After logout, password field still have the old value #125'
 - Run 'tests in case of exception/error in all forms #121'
-- Fixed 'Bill update at homescreen not reloading pending bills #97'
+- Fixed 'Bill update at home screen not reloading pending bills #97'
 
 ## [1.2.4]
 

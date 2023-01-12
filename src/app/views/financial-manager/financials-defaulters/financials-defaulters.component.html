@@ -1,0 +1,157 @@
+<div>
+
+  <div class="loading-indicator">
+    <mat-progress-spinner mode="indeterminate" *ngIf="hasToWait" diameter="50"> </mat-progress-spinner>
+  </div>
+
+  <!--Card with filters-->
+  <mat-card>
+    <mat-card-title>Inadimplentes</mat-card-title>
+    <mat-card-actions>
+
+      <!--For Web devices-->
+      <table *ngIf="!isMobileDevice" class="table-filter-fields" cellspacing="0">
+        <td>
+          <!--Name field-->
+          <mat-form-field>
+            <mat-label>Insira o nome da pessoa</mat-label>
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getDefaulters()" placeholder="Ex.: João..."
+              [(ngModel)]="descToFilter">
+          </mat-form-field>
+
+          <!--Tags field-->
+          <mat-form-field>
+            <mat-label>Insira uma tag</mat-label>
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getDefaulters()" placeholder="Ex.: Conta fixa..."
+              [(ngModel)]="tagToFilter">
+          </mat-form-field>
+
+          <!--Button search-->
+          <button mat-raised-button matTooltip="Criar conta" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="openDialogAddNewDefaulter()">
+            <mat-icon>add</mat-icon>
+            Criar
+          </button>
+          <button mat-raised-button matTooltip="Pesquisar contas" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="getDefaulters()">
+            <mat-icon>search</mat-icon>
+            Pesquisar
+          </button>
+      </table>
+
+      <!--For mobile devices-->
+      <table *ngIf="isMobileDevice" class="table-filter-fields" cellspacing="1">
+
+        <tr>
+          <!--Description field-->
+          <mat-form-field>
+            <mat-label style="font-size: 14px;">Insira uma descrição</mat-label>
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: NuBank..." [(ngModel)]="description">
+          </mat-form-field>
+          <!--Tags field-->
+          <mat-form-field>
+            <mat-label style="font-size: 14px;">Insira uma tag</mat-label>
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
+          </mat-form-field>
+        </tr>
+        <!--Button search-->
+        <tr>
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Criar conta" color="{{uiColor}}"
+            (click)="openDialogAddNewBill()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Pesquisar contas" color="{{uiColor}}"
+            (click)="getDefaulters()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </tr>
+      </table>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-paginator [(disabled)]="hasToWait" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
+    aria-label="Select page of users"></mat-paginator>
+
+  <table mat-table [dataSource]="listBills" matSort>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Column 'Entrada ou saída' -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip *ngIf="element.isCashEntry == true">Entrada</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry == false">Saída</mat-chip>
+          <mat-chip *ngIf="element.isCashEntry == null">Somatório</mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <!-- Column 'Nome da conta' -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome da conta </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Column 'Data de vencimento' -->
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de vencimento </th>
+      <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+    </ng-container>
+
+    <!-- Column 'Valor' -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+      <td mat-cell *matCellDef="let element">
+        <span matPrefix>R$&nbsp;</span>
+        {{element.value}}
+      </td>
+    </ng-container>
+
+    <!-- Column 'Qtd Parcelas' -->
+    <ng-container matColumnDef="quantityAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Qtd Parcelas </th>
+      <td mat-cell *matCellDef="let element"> {{element.quantityAmount}} </td>
+    </ng-container>
+
+    <!-- Column 'tags' -->
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef> Tags </th>
+      <td mat-cell *matCellDef="let element"> {{element.tags}} </td>
+    </ng-container>
+
+    <!-- Column 'isBillPayed' -->
+    <ng-container matColumnDef="isBillPayed">
+      <th mat-header-cell *matHeaderCellDef> Conta paga </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [ngModel]="element.isBillPayed" color="{{uiColor}}" [disabled]="true"></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Column 'Button Edit' -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let element">
+        <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
+          (click)="openDialogAddNewBill(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Column 'Button Remove'-->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Remover</th>
+      <td mat-cell *matCellDef="let element">
+        <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="deleteBill(element)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  </table>
+
+</div>
