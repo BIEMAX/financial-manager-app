@@ -136,7 +136,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     NgChartsModule,
     MatSortModule,
     MatStepperModule,
-    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
+    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }),
   ],
   providers: [],
   bootstrap: [AppComponent]

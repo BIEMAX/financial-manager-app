@@ -27,27 +27,42 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class FinancialsDefaultersNewComponent implements OnInit {
 
+  /**
+   * Existing defaulter ID
+   */
+  public defaulterId: string;
   public defaulterName: string;
   public defaulterCpf: string;
   public defaulterMail: string;
   public defaulterPhone: string;
+
+  public defaulterZipCode: String;
   public defaulterAddress: string;
   public defaulterNumber: string;
+  public defaulterComplement: string;
 
-
-  public billDescription: string;
-  public billTotalValue: Number;
-  public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
-  public isCashEntry: Boolean = false;
+  /**
+   * Total value of debt/credit
+   */
+  public defaulterValue: Number = 0;
+  /**
+   * false = CREDITOR, true = DEBTOR
+   */
+  public defaulterIsDebtor: Boolean = false;
+  /**
+   * True if the defaulter will pay more than once time.
+   */
+  public isDefaulterPayInInstallments: Boolean = false;
+  /**
+   * Quantity times will pay the value  
+   */
+  public defaulterQuantity: Number = 1;
 
   public uiColor: string = ui.color;
 
-  public billId: string;
-  public isBillPayed: boolean = false;
-  public isBillValueToDivide: boolean = false;
-
   public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
   public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
+  public thirdFormGroup: FormGroup = this.formBuilder.group({ thirdCtrl: [''] });
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
@@ -62,16 +77,19 @@ export class FinancialsDefaultersNewComponent implements OnInit {
 
   ngOnInit (): void {
     if (this.data) { //Its an update
-      this.billId = this.data.id;
+      this.defaulterId = this.data.id;
       this.defaulterName = this.data.name;
       this.defaulterCpf = this.data.cpf;
-      this.billDescription = this.data.description;
-      this.billTotalValue = this.data.value;
-      this.billAmountQuantity = this.data.quantityAmount;
-      this.isCashEntry = this.data.isCashEntry;
-      this.isBillPayed = this.data.isBillPayed;
-    } else {
-      this.defaulterCpf = new Date().toISOString().split("T")[0];
+      this.defaulterMail = this.data.description;
+      this.defaulterPhone = this.data.value;
+      this.defaulterZipCode = this.data.quantityAmount;
+      this.defaulterAddress = this.data.isCashEntry;
+      this.defaulterNumber = this.data.isBillPayed;
+      this.defaulterComplement = this.data.isBillPayed;
+      this.defaulterValue = this.data.isBillPayed;
+      this.defaulterIsDebtor = this.data.isBillPayed;
+      this.isDefaulterPayInInstallments = this.data.isBillPayed;
+      this.defaulterQuantity = this.data.isBillPayed;
     }
     this.getTagsByUser();
   }
@@ -126,7 +144,7 @@ export class FinancialsDefaultersNewComponent implements OnInit {
   }
 
   validateBeforeExit () {
-    if (this.defaulterName || this.billDescription || this.defaulterCpf || this.billTotalValue || this.billAmountQuantity) {
+    if (this.defaulterName) {
       if (confirm("Você deseja realmente sair?")) return true;
       else return false;
     } else return true;
