@@ -44,6 +44,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
+import { TextMaskModule } from 'angular2-text-mask';
 
 //Application packages
 import { AppRoutingModule } from './app-routing.module';
@@ -137,6 +138,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatSortModule,
     MatStepperModule,
     MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }),
+    TextMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

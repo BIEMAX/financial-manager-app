@@ -1,47 +1,110 @@
 import { EmptyFieldException } from 'src/app/exceptions/empty.field.exception';
 
+export class Phone {
+  number: String;
+  areaCode: String;
+  phoneType: PhoneType
+
+  constructor(Number: String, AreaCode: String, PhoneType: PhoneType) {
+    this.number = Number;
+    this.areaCode = AreaCode;
+    this.phoneType = PhoneType;
+  }
+}
+
+export enum PhoneType {
+  CELLPHONE,
+  RESIDENTIAL,
+  CONTACT,
+  SPOUSE
+}
+
+export class Address {
+  zipCode: String;
+  street: String;
+  number: String;
+  complement: String;
+
+  constructor(ZipCode: String, Street: String, Number: String, Complement: String) {
+    this.number = ZipCode;
+    this.street = Street;
+    this.number = Number;
+    this.complement = Complement;
+  }
+}
+
+export enum DefaulterStatus {
+  ACTIVE,
+  CANCELLED,
+  BLOCKED
+}
+
+export enum DefaulterType {
+  DEBTOR,
+  CREDITOR
+}
+
+export class PaymentDeal {
+  value: Number;
+  type: DefaulterType;
+  payByInstallments: Boolean = false;
+  quantity: Number;
+
+  constructor(Value: Number, Type: DefaulterType, Quantity: Number, PayByInstallments: Boolean = false) {
+    this.value = Value;
+    this.type = Type;
+    this.quantity = Quantity;
+    this.payByInstallments = PayByInstallments;
+  }
+}
+
+export class DefaulterHistory {
+  description: String;
+  date: String
+
+  constructor(Description: String, Date: String) {
+    this.description = Description;
+    this.date = Date;
+  }
+}
+
 export class DefaulterModel {
   id: String;
-  user: String;
   name: String;
-  dueDate: String;
-  description: String;
-  value: Number;
-  quantityAmount: Number;
-  tags: Array<String>;
-  isCashEntry: Boolean;
-  isBillPayed: Boolean = false;
-  isToDivideValue: Boolean = false;
+  cpf: String;
+  mail: String;
+  phone: Phone;
+  address: Address;
+  status: DefaulterStatus.ACTIVE;
+  paymentDeal: PaymentDeal;
+  history: Array<DefaulterHistory>;
 
   constructor(
     Id: String,
-    User: String,
     Name: String,
-    DueDate: String,
-    Description: String,
-    Value: Number,
-    QuantityAmount: Number,
-    Tags: Array<String>,
-    IsCashEntry: Boolean,
-    IsBillPayed: Boolean,
-    IsToDivideValue: Boolean
+    Cpf: String,
+    Mail: String,
+    Phone: Phone,
+    Address: Address,
+    PaymentDeal: PaymentDeal,
+    Status: DefaulterStatus.ACTIVE,
+    History: Array<DefaulterHistory> = [],
   ) {
     if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException("Id");
-    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException("Nome da conta");
-    else if (typeof (DueDate) == "undefined" || !DueDate) throw new EmptyFieldException("Data de vencimento");
-    else if (typeof (Value) == "undefined" || !Value) throw new EmptyFieldException("Valor");
+    else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException("Nome do inadimplente");
+    else if (typeof (Mail) == "undefined" || !Mail) throw new EmptyFieldException("E-mail");
+    else if (typeof (Phone) == "undefined" || !Phone) throw new EmptyFieldException("Telefone");
+    else if (typeof (PaymentDeal) == "undefined" || !PaymentDeal) throw new EmptyFieldException("Pagamento");
     else {
       this.id = Id;
-      this.user = User;
       this.name = Name;
-      this.dueDate = DueDate;
-      this.description = Description;
-      this.value = Value;
-      this.quantityAmount = QuantityAmount || 1;
-      this.tags = Tags;
-      this.isCashEntry = IsCashEntry;
-      this.isBillPayed = IsBillPayed;
-      this.isToDivideValue = IsToDivideValue;
+      this.cpf = Cpf;
+      this.mail = Mail;
+      this.phone = Phone;
+      this.address = Address;
+      this.paymentDeal = PaymentDeal;
+      this.status = Status;
+      this.history = History;
     }
   }
 }

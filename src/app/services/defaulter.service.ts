@@ -13,29 +13,29 @@ export class DefaultersService {
   private readonly apiUrl = `${environment.apiUrl}/${environment.apiVersion}`;
   private apiHeader = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8',
       'Authorization': localStorage.getItem('userBearerKey')
     })
   };
 
   getDefaulter (name?: string, tag?: string) {
     let query: String = '';
-    if (name != undefined) query += `description=${name}&`;
+    if (name != undefined) query += `name=${name}&`;
     if (tag != undefined) query += `tag=${tag}&`;
 
     query = query.endsWith("&") ? query.substring(0, query.lastIndexOf('&')) : query
-    return this.http.get(`${this.apiUrl}/defaulter/list${query != '' ? '?' + query : ''}`, this.apiHeader)
+    return this.http.get(`${this.apiUrl}/defaulters/list${query != '' ? '?' + query : ''}`, this.apiHeader)
   }
 
   createDefaulter (defaulter: DefaulterModel) {
-    return this.http.post(`${this.apiUrl}/defaulter/new`, defaulter, this.apiHeader);
+    return this.http.post(`${this.apiUrl}/defaulters/new`, defaulter, this.apiHeader);
   }
 
   updateDefaulter (financial: DefaulterModel) {
-    return this.http.post(`${this.apiUrl}/defaulter/update/${financial.id}`, financial, this.apiHeader);
+    return this.http.post(`${this.apiUrl}/defaulters/update/${financial.id}`, financial, this.apiHeader);
   }
 
   deleteDefaulter (id: any) {
-    return this.http.delete(`${this.apiUrl}/defaulter/delete/${id}`, this.apiHeader);
+    return this.http.delete(`${this.apiUrl}/defaulters/delete/${id}`, this.apiHeader);
   }
 }

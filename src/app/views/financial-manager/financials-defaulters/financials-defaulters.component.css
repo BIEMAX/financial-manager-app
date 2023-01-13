@@ -28,3 +28,19 @@ table {
   margin-left: 8px;
   width: 150px;
 }
+
+.active-status {
+  background-color: #40b52d;
+}
+
+.cancelled-status {
+  background-color: #d11919;
+}
+
+.blocked-status {
+  background-color: #f3ef1a;
+}
+
+.done-status {
+  background-color: #199cdd;
+}

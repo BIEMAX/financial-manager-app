@@ -19,7 +19,8 @@
             CPF
             <mat-icon>person</mat-icon>
           </mat-label>
-          <input matInput type="number" maxlength="11" placeholder="xxxxxxxxxxx" [(ngModel)]="defaulterCpf">
+          <input matInput type="number" maxlength="11" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
+            [textMask]="{mask: cpfMask}">
         </mat-form-field>
 
         <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
@@ -35,7 +36,8 @@
             Telefone
             <mat-icon>phone</mat-icon>
           </mat-label>
-          <input matInput type="tel" placeholder="(00) 00000-0000" [(ngModel)]="defaulterPhone">
+          <input matInput type="tel" placeholder="(000) 00000-0000" [(ngModel)]="defaulterPhone"
+            [textMask]="{mask: phoneMask}">
         </mat-form-field>
       </div>
       <div>
