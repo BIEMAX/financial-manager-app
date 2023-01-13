@@ -38,7 +38,7 @@ export class FinancialsDefaultersNewComponent implements OnInit {
 
   public defaulterZipCode: String;
   public defaulterAddress: string;
-  public defaulterNumber: string;
+  public defaulterNumber: Number = 0;
   public defaulterComplement: string;
 
   /**
@@ -48,7 +48,7 @@ export class FinancialsDefaultersNewComponent implements OnInit {
   /**
    * false = CREDITOR, true = DEBTOR
    */
-  public defaulterIsDebtor: Boolean = false;
+  public defaulterIsDebtor: Boolean = true;
   /**
    * True if the defaulter will pay more than once time.
    */
@@ -57,41 +57,37 @@ export class FinancialsDefaultersNewComponent implements OnInit {
    * Quantity times will pay the value  
    */
   public defaulterQuantity: Number = 1;
-
   public uiColor: string = ui.color;
 
   public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
   public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
-  public thirdFormGroup: FormGroup = this.formBuilder.group({ thirdCtrl: [''] });
-
-  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  public thirdFormGroup: FormGroup = this.formBuilder.group({ thirdControl: [''] })
 
   constructor(
     public dialogRef: MatDialogRef<FinancialsDefaultersNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private tagsService: TagsService,
     private dialogReport: DialogReport,
     private genericFunctions: GenericFunctions,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit (): void {
-    if (this.data) { //Its an update
-      this.defaulterId = this.data.id;
-      this.defaulterName = this.data.name;
-      this.defaulterCpf = this.data.cpf;
-      this.defaulterMail = this.data.description;
-      this.defaulterPhone = this.data.value;
-      this.defaulterZipCode = this.data.quantityAmount;
-      this.defaulterAddress = this.data.isCashEntry;
-      this.defaulterNumber = this.data.isBillPayed;
-      this.defaulterComplement = this.data.isBillPayed;
-      this.defaulterValue = this.data.isBillPayed;
-      this.defaulterIsDebtor = this.data.isBillPayed;
-      this.isDefaulterPayInInstallments = this.data.isBillPayed;
-      this.defaulterQuantity = this.data.isBillPayed;
-    }
-    this.getTagsByUser();
+    // if (this.data) { //Its an update
+    //   this.defaulterId = this.data.id;
+    //   this.defaulterName = this.data.name;
+    //   this.defaulterCpf = this.data.cpf;
+    //   this.defaulterMail = this.data.description;
+    //   this.defaulterPhone = this.data.value;
+    //   this.defaulterZipCode = this.data.quantityAmount;
+    //   this.defaulterAddress = this.data.isCashEntry;
+    //   this.defaulterNumber = this.data.isBillPayed;
+    //   this.defaulterComplement = this.data.isBillPayed;
+    //   this.defaulterValue = this.data.isBillPayed;
+    //   this.defaulterIsDebtor = this.data.isBillPayed;
+    //   this.isDefaulterPayInInstallments = this.data.isBillPayed;
+    //   this.defaulterQuantity = this.data.isBillPayed;
+    // }
+    // this.getTagsByUser();
   }
 
   onSaveClick () {
