@@ -18,6 +18,7 @@ import { FinancialModel } from 'src/app/models/financial.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { FinancialsDefaultersNewComponent } from '../financials-defaulters-new/financials-defaulters-new.component';
+import { DefaulterModel } from 'src/app/models/defaulter.model';
 
 @Component({
   selector: 'financials-defaulters.component',
@@ -172,7 +173,7 @@ export class FinancialsDefaultersComponent implements OnInit {
     );
   }
 
-  deleteDefaulter (bill: FinancialModel) {
+  deleteDefaulter (bill: DefaulterModel) {
     if (confirm("Você deseja realmente excluir o Inadimplente? Uma vez feito, não será possível desfazer")) {
       this.hasToWait = true;
       this.defaultersService.deleteDefaulter(bill.id).subscribe(
@@ -193,6 +194,14 @@ export class FinancialsDefaultersComponent implements OnInit {
     else return;
   }
 
+  subtractValue (defaulter: DefaulterModel) {
+
+  }
+
+  history (defaulter: DefaulterModel) {
+
+  }
+
   setDisplayedColumnsByDevice () {
     this.displayedColumns = [
       'status',
@@ -201,7 +210,9 @@ export class FinancialsDefaultersComponent implements OnInit {
       'cpf',
       'value',
       'update',
-      'delete'
+      'delete',
+      'subtract',
+      'history'
     ];
   }
 }

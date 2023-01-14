@@ -30,11 +30,12 @@ table {
 }
 
 .active-status {
-  background-color: #40b52d;
+  background-color: #5cb85c;
+
 }
 
 .cancelled-status {
-  background-color: #d11919;
+  background-color: #f94449;
 }
 
 .blocked-status {
@@ -42,5 +43,5 @@ table {
 }
 
 .done-status {
-  background-color: #199cdd;
+  background-color: #5bc0de;
 }

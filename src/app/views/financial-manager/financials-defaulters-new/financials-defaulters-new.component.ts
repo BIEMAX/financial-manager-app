@@ -70,16 +70,16 @@ export class FinancialsDefaultersNewComponent implements OnInit {
       this.defaulterId = this.data.id;
       this.defaulterName = this.data.name;
       this.defaulterCpf = this.data.cpf;
-      this.defaulterMail = this.data.description;
-      this.defaulterPhone = this.data.value;
-      this.defaulterZipCode = this.data.quantityAmount;
-      this.defaulterAddress = this.data.isCashEntry;
-      this.defaulterNumber = this.data.isBillPayed;
-      this.defaulterComplement = this.data.isBillPayed;
-      this.defaulterValue = this.data.isBillPayed;
-      this.defaulterIsDebtor = this.data.isBillPayed;
-      this.isDefaulterPayInInstallments = this.data.isBillPayed;
-      this.defaulterQuantity = this.data.isBillPayed;
+      this.defaulterMail = this.data.mail;
+      this.defaulterPhone = `(${this.data.phone.areaCode}) ${this.data.phone.number}`;
+      this.defaulterZipCode = this.data.address.zipCode;
+      this.defaulterAddress = this.data.address.street;
+      this.defaulterNumber = this.data.address.number;
+      this.defaulterComplement = this.data.address.complement;
+      this.defaulterValue = this.data.paymentDeal.value;
+      this.defaulterIsDebtor = this.data.paymentDeal.type == "DEBTOR";
+      this.isDefaulterPayInInstallments = this.data.paymentDeal.payByInstallments;
+      this.defaulterQuantity = this.data.paymentDeal.quantity;
     }
   }
 
