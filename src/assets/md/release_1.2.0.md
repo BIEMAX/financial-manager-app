@@ -1,4 +1,4 @@
-## Release 1.2.0 - In development, October, 2022
+## Release 1.2.0 - Hotfix, October, 2022
 
 - Redesenhado a interface do usuário em relação à novas contas
 

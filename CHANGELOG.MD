@@ -6,6 +6,9 @@
 - Fixed 'After logout, password field still have the old value #125'
 - Run 'tests in case of exception/error in all forms #121'
 - Fixed 'Bill update at home screen not reloading pending bills #97'
+- Implemented defaulters manager #108
+- Fixed 'Wrong date in release notes of v1.2.4 #128'
+- Fixed 'Release notes with wrong title #130'
 
 ## [1.2.4]
 
