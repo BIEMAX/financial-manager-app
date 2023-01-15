@@ -8,3 +8,4 @@
 - Implementado a gestão de inadimplentes
 - Ajustado erros de datas, títulos e descrições nas novidades
 - Alterado a criação de novas contas em forma de passos ao invés de abas
+- Ao alterar o mês na listagem de contas, automaticamente consultar as despesas

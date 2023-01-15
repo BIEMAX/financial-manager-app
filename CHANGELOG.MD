@@ -10,6 +10,7 @@
 - Fixed 'Wrong date in release notes of v1.2.4 #128'
 - Fixed 'Release notes with wrong title #130'
 - Implemented 'New bill - Implement creation as stepper instead tabs #132'
+- Implemented 'When change month by step in bills list, run query #126'
 
 ## [1.2.4]
 

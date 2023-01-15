@@ -234,6 +234,7 @@ export class FinancialsListComponent implements OnInit {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() + 1);
     this.date.setValue(ctrlValue);
+    this.getBills();
   }
 
   /**
@@ -243,6 +244,7 @@ export class FinancialsListComponent implements OnInit {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() - 1);
     this.date.setValue(ctrlValue);
+    this.getBills();
   }
 
   setDisplayedColumnsByDevice () {
