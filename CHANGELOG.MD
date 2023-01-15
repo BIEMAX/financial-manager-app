@@ -12,6 +12,7 @@
 - Implemented 'New bill - Implement creation as stepper instead tabs #132'
 - Implemented 'When change month by step in bills list, run query #126'
 - Fixed 'Release notes versions - Put all versions in a dropdown list #133'
+- Fixed 'Enhance the menu colors at homescreen'
 
 ## [1.2.4]
 

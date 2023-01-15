@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment, ui } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav'
@@ -46,6 +46,7 @@ export class HeaderComponent implements OnInit {
    * Define if the side bar start opened or close (for mobile devices).
    */
   public startSideNavOpened: Boolean = false;
+  public uiColor = ui.color;
 
   @ViewChild(MatSidenav) sideNav: MatSidenav;
 

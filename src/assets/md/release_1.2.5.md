@@ -13,5 +13,6 @@
 - Realizado uma nova bateria de testes e corrigidos diversos problemas em relação a usabilidade
 - Resolvido o problema de ao atualizar uma conta como paga na tela inicial, as contas não eram atualizadas
 - Resolvido o problema de visualização de novas versões em dispositivos mobile
+- Resolvido a coloração dos ícones na tela inicial
 
 # Problemas conhecidos
