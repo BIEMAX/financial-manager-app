@@ -18,6 +18,7 @@ import { environment, ui } from 'src/environments/environment';
 import { TagsService } from 'src/app/services/tags.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-financials-new',
@@ -51,12 +52,16 @@ export class FinancialsNewComponent implements OnInit {
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
+
   constructor(
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private tagsService: TagsService,
     private dialogReport: DialogReport,
-    private genericFunctions: GenericFunctions
+    private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit (): void {
