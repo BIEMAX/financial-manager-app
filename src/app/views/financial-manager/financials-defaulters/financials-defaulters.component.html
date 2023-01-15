@@ -172,7 +172,7 @@
       <th mat-header-cell *matHeaderCellDef>Histórico</th>
       <td mat-cell *matCellDef="let element">
         <button matTooltip="Ver histórico" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
-          (click)="history(element)">
+          (click)="viewHistory(element)">
           <mat-icon>history</mat-icon>
         </button>
       </td>

@@ -48,6 +48,12 @@ export class FinancialsDefaultersNewComponent implements OnInit {
    * Quantity times will pay the value  
    */
   public defaulterQuantity: Number = 1;
+
+  /**
+   * Contains existing history from a defaulter
+   */
+  private defaulterHistory: DefaulterHistory[];
+
   public uiColor: string = ui.color;
 
   public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
@@ -80,6 +86,7 @@ export class FinancialsDefaultersNewComponent implements OnInit {
       this.defaulterIsDebtor = this.data.paymentDeal.type == "DEBTOR";
       this.isDefaulterPayInInstallments = this.data.paymentDeal.payByInstallments;
       this.defaulterQuantity = this.data.paymentDeal.quantity;
+      this.defaulterHistory = this.data.history;
     }
   }
 
@@ -105,7 +112,12 @@ export class FinancialsDefaultersNewComponent implements OnInit {
         this.defaulterQuantity,
         this.isDefaulterPayInInstallments
       );
-      let history = [new DefaulterHistory('Cadastro', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`)];
+      let history = this.defaulterHistory;
+
+      //Is an edition
+      if (this.defaulterHistory.length > 0)
+        history.push(new DefaulterHistory('Atualização de dados', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`));
+      else history.push(new DefaulterHistory('Cadastro', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`));
 
       this.data = new DefaulterModel(
         this.defaulterId ? this.defaulterId : '0',

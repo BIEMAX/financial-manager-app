@@ -19,6 +19,7 @@ import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { FinancialsDefaultersNewComponent } from '../financials-defaulters-new/financials-defaulters-new.component';
 import { DefaulterModel } from 'src/app/models/defaulter.model';
+import { HistoryComponent } from '../../generic/history/history.component';
 
 @Component({
   selector: 'financials-defaulters.component',
@@ -198,8 +199,15 @@ export class FinancialsDefaultersComponent implements OnInit {
 
   }
 
-  history (defaulter: DefaulterModel) {
+  viewHistory (defaulter: DefaulterModel) {
+    const dialogRef = this.dialog.open(HistoryComponent, {
+      disableClose: true,
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      autoFocus: true,
+      data: defaulter.history
+    });
 
+    dialogRef.afterClosed().subscribe(r => { });
   }
 
   setDisplayedColumnsByDevice () {

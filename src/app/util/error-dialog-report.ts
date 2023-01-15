@@ -108,8 +108,9 @@ export class DialogReport {
       this.solution = ExceptionSolutionResponse(this.message);
     }
     else { //If not is an exception, it's just a message from frontend
-      this.message = exception?.message ? exception?.message : exception?.error?.error;
-      this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+      this.message = exception?.error;
+      if (!this.message) this.message = exception?.message ? exception?.message : exception?.error?.error;
+      this.solution = ExceptionSolutionResponse(this.message);
     }
   }
 
