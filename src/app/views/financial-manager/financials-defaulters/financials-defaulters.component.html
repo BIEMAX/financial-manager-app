@@ -135,45 +135,24 @@
     </ng-container>
 
     <!-- Column 'Button Edit' -->
-    <ng-container matColumnDef="update">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
-      <td mat-cell *matCellDef="let element">
-        <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
-          (click)="openDialogAddNewDefaulter(element)">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- Column 'Button Remove'-->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Remover</th>
-      <td mat-cell *matCellDef="let element">
-        <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
-          (click)="deleteDefaulter(element)">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <!-- Column 'Button Subtract value'-->
-    <ng-container matColumnDef="subtract">
-      <th mat-header-cell *matHeaderCellDef>Abater</th>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element">
         <button matTooltip="Abater valor" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
           (click)="subtractValue(element)">
           <mat-icon>remove</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <!-- Column 'Button history'-->
-    <ng-container matColumnDef="history">
-      <th mat-header-cell *matHeaderCellDef>Histórico</th>
-      <td mat-cell *matCellDef="let element">
         <button matTooltip="Ver histórico" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
           (click)="viewHistory(element)">
           <mat-icon>history</mat-icon>
+        </button>
+        <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
+          (click)="openDialogAddNewDefaulter(element)">
+          <mat-icon>edit</mat-icon>
+          <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+            (click)="deleteDefaulter(element)">
+            <mat-icon>clear</mat-icon>
+          </button>
         </button>
       </td>
     </ng-container>

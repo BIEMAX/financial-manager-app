@@ -252,10 +252,7 @@ export class FinancialsDefaultersComponent implements OnInit {
       'name',
       'cpf',
       'value',
-      'subtract',
-      'history',
-      'update',
-      'delete'
+      'actions'
     ];
   }
 }
