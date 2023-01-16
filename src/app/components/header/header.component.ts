@@ -21,7 +21,7 @@ import { DialogReport } from 'src/app/util/error-dialog-report';
 export class HeaderComponent implements OnInit {
 
   public enableMenu: Boolean = false;
-  public applicationName: string = environment.applicationName;
+  public applicationName: string = `${environment.applicationName}${environment.applicationVersion ? ' - ' + environment.applicationVersion : ''}`;
 
   /**
    * True to show menu side bar expanded, false to show only icons.
