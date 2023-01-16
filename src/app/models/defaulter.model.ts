@@ -69,6 +69,7 @@ export class DefaulterHistory {
 }
 
 export class DefaulterModel {
+  user: String;
   id: String;
   name: String;
   cpf: String;
@@ -80,6 +81,7 @@ export class DefaulterModel {
   history: Array<DefaulterHistory>;
 
   constructor(
+    User: String,
     Id: String,
     Name: String,
     Cpf: String,
@@ -90,12 +92,14 @@ export class DefaulterModel {
     Status: DefaulterStatus.ACTIVE,
     History: Array<DefaulterHistory> = [],
   ) {
+    if (typeof (User) == "undefined" || !User) throw new EmptyFieldException("Usuário");
     if (typeof (Id) == "undefined" || !Id) throw new EmptyFieldException("Id");
     else if (typeof (Name) == "undefined" || !Name) throw new EmptyFieldException("Nome do inadimplente");
     else if (typeof (Mail) == "undefined" || !Mail) throw new EmptyFieldException("E-mail");
     else if (typeof (Phone) == "undefined" || !Phone) throw new EmptyFieldException("Telefone");
     else if (typeof (PaymentDeal) == "undefined" || !PaymentDeal) throw new EmptyFieldException("Pagamento");
     else {
+      this.user = User;
       this.id = Id;
       this.name = Name;
       this.cpf = Cpf;

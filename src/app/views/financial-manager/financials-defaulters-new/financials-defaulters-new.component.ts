@@ -120,6 +120,7 @@ export class FinancialsDefaultersNewComponent implements OnInit {
       else history.push(new DefaulterHistory('Cadastro', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`));
 
       this.data = new DefaulterModel(
+        localStorage.getItem('userLogin'),
         this.defaulterId ? this.defaulterId : '0',
         this.defaulterName,
         this.defaulterCpf,
