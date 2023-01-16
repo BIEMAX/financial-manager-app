@@ -38,4 +38,8 @@ export class DefaultersService {
   deleteDefaulter (id: any) {
     return this.http.delete(`${this.apiUrl}/defaulters/delete/${id}`, this.apiHeader);
   }
+
+  subtractValueFromDefaulter (body: any) {
+    return this.http.post(`${this.apiUrl}/defaulters/subtract`, body, this.apiHeader);
+  }
 }

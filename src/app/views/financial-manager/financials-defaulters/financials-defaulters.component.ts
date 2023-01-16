@@ -14,12 +14,12 @@ const moment = _rollupMoment || _moment;
 import { ui } from 'src/environments/environment';
 import { DefaultersService } from 'src/app/services/defaulter.service';
 import { environment } from 'src/environments/environment';
-import { FinancialModel } from 'src/app/models/financial.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { FinancialsDefaultersNewComponent } from '../financials-defaulters-new/financials-defaulters-new.component';
 import { DefaulterModel } from 'src/app/models/defaulter.model';
 import { HistoryComponent } from '../../generic/history/history.component';
+import { FinancialsDefaultersSubtractComponent } from 'src/app/views/financial-manager/financials-defaulters-subtract/financials-defaulters-subtract.component';
 
 @Component({
   selector: 'financials-defaulters.component',
@@ -196,7 +196,42 @@ export class FinancialsDefaultersComponent implements OnInit {
   }
 
   subtractValue (defaulter: DefaulterModel) {
+    const dialogRef = this.dialog.open(FinancialsDefaultersSubtractComponent, {
+      disableClose: true,
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      autoFocus: true,
+      data: defaulter.history
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        if (environment.logInfo) console.log('result from subtractValue: ', result);
+        if (result.valueToSubtract > 0) {
+          let body = {
+            id: defaulter.id,
+            value: result.valueToSubtract
+          }
+          this.defaultersService.subtractValueFromDefaulter(body).subscribe(
+            response => {
+              this.hasToWait = false;
+              if (environment.logInfo) console.log(response);
+              this.genericFunctions.showNotification('Valor abatido com êxito');
+
+              this.getDefaulters(); //Update the screen
+            },
+            error => {
+              this.hasToWait = false;
+              if (environment.logInfo) console.log(error);
+              this.dialogReport.showMessageDialog(error, true, true);
+            }
+          );
+        }
+      }
+      else {
+        this.genericFunctions.showNotification('Inadimplente não foi salvo');
+        if (environment.logInfo) console.log('The dialog was closed');
+      }
+    });
   }
 
   viewHistory (defaulter: DefaulterModel) {
@@ -217,10 +252,10 @@ export class FinancialsDefaultersComponent implements OnInit {
       'name',
       'cpf',
       'value',
-      'update',
-      'delete',
       'subtract',
-      'history'
+      'history',
+      'update',
+      'delete'
     ];
   }
 }
