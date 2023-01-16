@@ -47,39 +47,32 @@
 
       <mat-list-item [routerLink]="'/home'" (click)="showSubmenu = !showSubmenu" class="parent">
         <span class="full-width" *ngIf="isShowing">Página inicial</span>
-        <mat-icon mat-list-icon (click)="isToToggleSideNav()">home</mat-icon>
-        <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more
-        </mat-icon> -->
+        <mat-icon mat-list-icon (click)="isToToggleSideNav()" color="{{uiColor}}">home</mat-icon>
       </mat-list-item>
 
-      <!--Financials menu-->
-      <!-- <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-
-      </div> -->
       <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
-        <mat-icon mat-list-icon>account_balance</mat-icon>
+        <mat-icon mat-list-icon color="{{uiColor}}">account_balance</mat-icon>
         <span class="full-width" *ngIf="isShowing">Financeiro</span>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isShowing">
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isShowing" color="{{uiColor}}">
           expand_more
         </mat-icon>
       </mat-list-item>
 
-      <!--Financials sub-menu-->
       <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing">
         <a mat-list-item [routerLink]="'/financials'" (click)="isToToggleSideNav()">
-          <mat-icon>request_quote</mat-icon>
+          <mat-icon color="{{uiColor}}">request_quote</mat-icon>
           Gastos mensais
         </a>
         <a mat-list-item [routerLink]="'/defaulters'" (click)="isToToggleSideNav()">
-          <mat-icon>assignment_ind</mat-icon>
+          <mat-icon color="{{uiColor}}">assignment_ind</mat-icon>
           Inadimplentes
         </a>
         <a mat-list-item [routerLink]="'/reports'" (click)="isToToggleSideNav()">
-          <mat-icon>insights</mat-icon>
+          <mat-icon color="{{uiColor}}">insights</mat-icon>
           Relatórios
         </a>
         <a mat-list-item [routerLink]="'/tags'" (click)="isToToggleSideNav()">
-          <mat-icon>local_offer</mat-icon>
+          <mat-icon color="{{uiColor}}">local_offer</mat-icon>
           Tags
         </a>
       </div>
