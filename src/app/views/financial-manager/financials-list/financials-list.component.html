@@ -161,21 +161,14 @@
       </td>
     </ng-container>
 
-    <!-- Column 'Button Edit' -->
-    <ng-container matColumnDef="update">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
+    <!-- Column 'Actions' -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element">
         <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
           (click)="openDialogAddNewBill(element)">
           <mat-icon>edit</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <!-- Column 'Button Remove'-->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Remover</th>
-      <td mat-cell *matCellDef="let element">
         <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
           (click)="deleteBill(element)">
           <mat-icon>clear</mat-icon>

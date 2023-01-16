@@ -144,7 +144,7 @@ export class FinancialsTagsComponent implements OnInit {
     }
   }
 
-  updateBill (bill: any) {
+  updateBill (tag: TagModel) {
     // this.hasToWait = true;
     // this.billsService.updateBill(bill).subscribe(
     //   response => {
@@ -199,8 +199,7 @@ export class FinancialsTagsComponent implements OnInit {
   setDisplayedColumnsByDevice () {
     this.displayedColumns = [
       'name',
-      'update',
-      'delete'
+      'actions'
     ];
   }
 }

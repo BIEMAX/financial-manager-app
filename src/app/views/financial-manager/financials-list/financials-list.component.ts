@@ -253,8 +253,7 @@ export class FinancialsListComponent implements OnInit {
         'name',
         'dueDate',
         'value',
-        'update',
-        'delete'
+        'actions'
       ];
     }
     else {
@@ -266,8 +265,7 @@ export class FinancialsListComponent implements OnInit {
         'quantityAmount',
         'tags',
         'isBillPayed',
-        'update',
-        'delete'
+        'actions'
       ];
     }
   }

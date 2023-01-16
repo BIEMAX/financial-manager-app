@@ -4,6 +4,7 @@
 - Ajustado erros de datas, títulos e descrições nas novidades
 - Alterado a criação de novas contas em forma de passos ao invés de abas
 - Ao alterar o mês na listagem de contas, automaticamente consultar as despesas
+- Agrupado ações em apenas uma coluna (anteriormente, eram em colunas separadas)
 
 # Problemas corrigidos
 
