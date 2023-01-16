@@ -19,7 +19,7 @@
             CPF
             <mat-icon>person</mat-icon>
           </mat-label>
-          <input matInput type="number" maxlength="11" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
+          <input matInput type="tel" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
             [textMask]="{mask: cpfMask}">
         </mat-form-field>
 
