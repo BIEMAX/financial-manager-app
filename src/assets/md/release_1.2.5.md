@@ -17,3 +17,6 @@
 - Resolvido a coloração dos ícones na tela inicial
 
 # Problemas conhecidos
+
+- Edição de tags ainda não é possível
+- Edição de inadimplentes ainda não é possível

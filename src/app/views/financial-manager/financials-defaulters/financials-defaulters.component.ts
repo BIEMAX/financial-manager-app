@@ -30,11 +30,11 @@ import { FinancialsDefaultersSubtractComponent } from 'src/app/views/financial-m
 export class FinancialsDefaultersComponent implements OnInit {
 
   /**
-   * Description to filter bills
+   * Description to filter defaulters
    */
   public descToFilter: string = "";
   /**
-   * Tag to filter bills
+   * Tag to filter defaulters
    */
   public tagToFilter: string = "";
   public hasToWait: Boolean = false;
@@ -111,7 +111,7 @@ export class FinancialsDefaultersComponent implements OnInit {
   }
 
   /**
-   * Open a dialog to create a new bill
+   * Open a dialog to create a new defaulter
    */
   openDialogAddNewDefaulter (defaulter?: any): void {
     const dialogRef = this.dialog.open(FinancialsDefaultersNewComponent, {
@@ -124,7 +124,7 @@ export class FinancialsDefaultersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
-        if (defaulter && result.id != '0') this.updateDefaulter(result);//If exist an bill, means its a update
+        if (defaulter && result.id != '0') this.updateDefaulter(result);//If exist an defaulter, means its a update
         else this.saveDefaulter(result);
       }
       else {
@@ -156,9 +156,9 @@ export class FinancialsDefaultersComponent implements OnInit {
     );
   }
 
-  updateDefaulter (bill: any) {
+  updateDefaulter (defaulter: DefaulterModel) {
     this.hasToWait = true;
-    this.defaultersService.updateDefaulter(bill).subscribe(
+    this.defaultersService.updateDefaulter(defaulter).subscribe(
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
@@ -174,10 +174,10 @@ export class FinancialsDefaultersComponent implements OnInit {
     );
   }
 
-  deleteDefaulter (bill: DefaulterModel) {
+  deleteDefaulter (defaulter: DefaulterModel) {
     if (confirm("Você deseja realmente excluir o Inadimplente? Uma vez feito, não será possível desfazer")) {
       this.hasToWait = true;
-      this.defaultersService.deleteDefaulter(bill.id).subscribe(
+      this.defaultersService.deleteDefaulter(defaulter.id).subscribe(
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);

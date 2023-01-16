@@ -31,8 +31,8 @@ export class DefaultersService {
     return this.http.post(`${this.apiUrl}/defaulters/new`, defaulter, this.apiHeader);
   }
 
-  updateDefaulter (financial: DefaulterModel) {
-    return this.http.post(`${this.apiUrl}/defaulters/update/${financial.id}`, financial, this.apiHeader);
+  updateDefaulter (defaulter: DefaulterModel) {
+    return this.http.post(`${this.apiUrl}/defaulters/update/${defaulter.id}`, defaulter, this.apiHeader);
   }
 
   deleteDefaulter (id: any) {
