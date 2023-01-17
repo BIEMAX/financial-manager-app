@@ -110,6 +110,9 @@ export class DialogReport {
     }
     else { //If not is an exception, it's just a message from frontend
       this.message = exception?.error;
+      //In some cases, the exception error (line above) returns object, and we need that always be a string.
+      if (this.message && typeof (this.message) != "string") this.message = undefined;
+
       if (!this.message) this.message = exception?.message ? exception?.message : exception?.error?.error;
       this.solution = ExceptionSolutionResponse(this.message);
     }
