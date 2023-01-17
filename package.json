@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "ng serve --port 4200 -c dev",
+    "lan": "ng serve --port 4200 --host=0.0.0.0 --disable-host-check -c lan",
     "stg": "ng serve --port 4200 -c stg",
     "prd": "ng serve --port 4200 -c prd",
     "build-dev": "ng build -c dev",
