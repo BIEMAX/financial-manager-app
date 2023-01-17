@@ -114,7 +114,8 @@ export class UserLoginComponent implements OnInit {
   openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '50%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true
     });
 
