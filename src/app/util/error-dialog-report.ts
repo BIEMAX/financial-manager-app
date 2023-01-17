@@ -75,7 +75,8 @@ export class DialogReport {
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       disableClose: false,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: {
         isError: isError,

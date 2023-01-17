@@ -116,7 +116,8 @@ export class FinancialsDefaultersComponent implements OnInit {
   openDialogAddNewDefaulter (defaulter?: any): void {
     const dialogRef = this.dialog.open(FinancialsDefaultersNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: defaulter
     });
@@ -201,7 +202,8 @@ export class FinancialsDefaultersComponent implements OnInit {
   subtractValue (defaulter: DefaulterModel) {
     const dialogRef = this.dialog.open(FinancialsDefaultersSubtractComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: defaulter.history
     });
@@ -240,7 +242,8 @@ export class FinancialsDefaultersComponent implements OnInit {
   viewHistory (defaulter: DefaulterModel) {
     const dialogRef = this.dialog.open(HistoryComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: defaulter.history
     });

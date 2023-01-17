@@ -98,7 +98,8 @@ export class FinancialsTagsComponent implements OnInit {
   openDialogAddNewTag (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsTagNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: bill
     });

@@ -148,7 +148,8 @@ export class FinancialsListComponent implements OnInit {
   openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: bill
     });
