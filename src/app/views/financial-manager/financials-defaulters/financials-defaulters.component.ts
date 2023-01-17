@@ -249,13 +249,23 @@ export class FinancialsDefaultersComponent implements OnInit {
   }
 
   setDisplayedColumnsByDevice () {
-    this.displayedColumns = [
-      'status',
-      'type',
-      'name',
-      'cpf',
-      'value',
-      'actions'
-    ];
+    if (this.isMobileDevice) {
+      this.displayedColumns = [
+        'status',
+        'name',
+        'value',
+        'actions'
+      ];
+    }
+    else {
+      this.displayedColumns = [
+        'status',
+        'type',
+        'name',
+        'cpf',
+        'value',
+        'actions'
+      ];
+    }
   }
 }
