@@ -114,7 +114,7 @@ export class UserLoginComponent implements OnInit {
   openDialogAddNewUser (): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
+      width: this.genericFunctions.isMobileDevice() ? '100%' : '50%',
       autoFocus: true
     });
 
@@ -148,11 +148,13 @@ export class UserLoginComponent implements OnInit {
    * Validate if the user turn on the button to keep him connected.
    */
   isToKeepUserConnected () {
-    this.keepUserConnected = localStorage.getItem('keepUserConnected').toLowerCase() == 'true';
-    if (this.keepUserConnected) {
-      this.userLogin = localStorage.getItem('userLogin');
-      this.userPassword = this.encrypt.decrypt(localStorage.getItem('userSecret'));
-      this.doLogin();
+    if (localStorage.length > 0) {
+      this.keepUserConnected = localStorage.getItem('keepUserConnected').toLowerCase() == 'true';
+      if (this.keepUserConnected) {
+        this.userLogin = localStorage.getItem('userLogin');
+        this.userPassword = this.encrypt.decrypt(localStorage.getItem('userSecret'));
+        this.doLogin();
+      }
     }
   }
 
