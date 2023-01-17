@@ -4,6 +4,7 @@ import { environment, ui } from 'src/environments/environment';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateModel } from 'src/app/models/user.model';
 import { GenericFunctions } from 'src/app/util/generic-functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -23,9 +24,13 @@ export class UserUpdateInfoComponent implements OnInit {
 
   public uiColor = ui.color;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
+
   constructor(
     private userAccessService: UserAccessService,
     private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UserUpdateInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }

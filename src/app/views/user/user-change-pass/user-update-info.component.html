@@ -1,56 +1,69 @@
 <div>
+  <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="250">
+    <!--Step 1-->
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Informações</ng-template>
+      <div>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Nome
+            <mat-icon>person</mat-icon>
+          </mat-label>
+          <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userNameNew">
+        </mat-form-field>
 
-  <mat-tab-group>
-    <mat-tab label="Informações">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Email
+            <mat-icon>mail</mat-icon>
+          </mat-label>
+          <input matInput type="text" placeholder="E-mail" [(ngModel)]="userEmailNew">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
+      </div>
 
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>
-          Nome
-          <mat-icon>person</mat-icon>
-        </mat-label>
-        <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userNameNew">
-      </mat-form-field>
+    </mat-step>
 
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>
-          Email
-          <mat-icon>mail</mat-icon>
-        </mat-label>
-        <input matInput type="text" placeholder="E-mail" [(ngModel)]="userEmailNew">
-      </mat-form-field>
+    <!--Step 2-->
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Senha</ng-template>
+      <div>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Senha atual
+            <mat-icon>key</mat-icon>
+          </mat-label>
+          <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userPassOld">
+        </mat-form-field>
 
-    </mat-tab>
-    <mat-tab label="Senha">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Nova senha
+            <mat-icon>key</mat-icon>
+          </mat-label>
+          <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userPassNew">
+        </mat-form-field>
 
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>
-          Senha atual
-          <mat-icon>key</mat-icon>
-        </mat-label>
-        <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userPassOld">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>
-          Nova senha
-          <mat-icon>key</mat-icon>
-        </mat-label>
-        <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userPassNew">
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>
-          Repita a nova senha
-          <mat-icon>key</mat-icon>
-        </mat-label>
-        <input matInput type="password" placeholder="Repita a senha nova" [(ngModel)]="userPassRepeatNew">
-      </mat-form-field>
-
-    </mat-tab>
-  </mat-tab-group>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>
+            Repita a nova senha
+            <mat-icon>key</mat-icon>
+          </mat-label>
+          <input matInput type="password" placeholder="Repita a senha nova" [(ngModel)]="userPassRepeatNew">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
+        <button mat-button mat-raised-button color="{{uiColor}}" (click)="onSaveClick()"
+          [mat-dialog-close]="data">Finalizar</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
 
   <div mat-dialog-actions>
-    <button mat-button color="{{uiColor}}" (click)="onExitClick()">Sair</button>
-    <button mat-button color="{{uiColor}}" (click)="onSaveClick()" [mat-dialog-close]="data">Salvar</button>
+    <button mat-button (click)="onExitClick()" mat-stroked-button color="{{uiColor}}">Sair</button>
   </div>
+
 </div>
