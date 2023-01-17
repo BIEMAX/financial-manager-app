@@ -14,6 +14,7 @@
 - Fixed 'Release notes versions - Put all versions in a dropdown list #133'
 - Fixed 'Enhance the menu colors at home screen'
 - Update the actions in list (bills, tags and defaulters)
+- Implemented 'User update - Change to stepper actions instead tabs #135'
 
 ## [1.2.4]
 

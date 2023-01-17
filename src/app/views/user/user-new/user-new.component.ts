@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserModel } from 'src/app/models/user.model';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { ui, environment } from 'src/environments/environment';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-new',
@@ -27,15 +28,17 @@ export class UserNewComponent implements OnInit {
   public showPassword: Boolean = false;
   public showPassword2: Boolean = false;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
 
   constructor(
     private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UserNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit (): void {
-  }
+  ngOnInit (): void { }
 
   onExitClick () {
     if (this.validateBeforeExit()) this.dialogRef.close();

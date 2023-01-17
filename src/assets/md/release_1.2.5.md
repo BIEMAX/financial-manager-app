@@ -1,10 +1,12 @@
-## Release 1.2.5 - In development - 15, January, 2023
+## Release 1.2.5 - In development - 20, January, 2023
 
 - Implementado a gestão de inadimplentes (criação, atualização, histórico e remoção)
 - Ajustado erros de datas, títulos e descrições nas novidades
 - Alterado a criação de novas contas em forma de passos ao invés de abas
 - Ao alterar o mês na listagem de contas, automaticamente consultar as despesas
 - Agrupado ações em apenas uma coluna (anteriormente, eram em colunas separadas)
+- Implementado diversas melhorias visuais relacionadas às cores de interface
+- Melhorado a criação de novos usuários em dispositivos mobile e web
 
 # Problemas corrigidos
 
