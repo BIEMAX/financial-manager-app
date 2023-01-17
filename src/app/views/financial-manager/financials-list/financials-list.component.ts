@@ -161,7 +161,7 @@ export class FinancialsListComponent implements OnInit {
       }
       else {
         this.genericFunctions.showNotification('Nova conta a pagar não foi salva');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewBill was closed');
       }
     });
   }

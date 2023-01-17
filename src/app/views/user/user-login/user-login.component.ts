@@ -125,7 +125,7 @@ export class UserLoginComponent implements OnInit {
       }
       else {
         this.genericFunctions.showNotification('Não foi possível cadastrar uma nova conta');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewUser was closed');
       }
     });
   }

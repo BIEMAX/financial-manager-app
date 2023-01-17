@@ -111,7 +111,7 @@ export class FinancialsTagsComponent implements OnInit {
       }
       else {
         this.genericFunctions.showNotification('Nova tag não foi salva');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewTag was closed');
       }
     });
   }
