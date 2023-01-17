@@ -153,10 +153,10 @@
         <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
           (click)="openDialogAddNewDefaulter(element)">
           <mat-icon>edit</mat-icon>
-          <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
-            (click)="deleteDefaulter(element)">
-            <mat-icon>clear</mat-icon>
-          </button>
+        </button>
+        <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="deleteDefaulter(element)">
+          <mat-icon>clear</mat-icon>
         </button>
       </td>
     </ng-container>

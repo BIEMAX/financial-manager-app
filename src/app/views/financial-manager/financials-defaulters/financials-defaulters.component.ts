@@ -124,12 +124,15 @@ export class FinancialsDefaultersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
         if (environment.logInfo) console.log('result: ', result);
-        if (defaulter && result.id != '0') this.updateDefaulter(result);//If exist an defaulter, means its a update
+        if (defaulter && result.id != '0') {
+          result.history = [];
+          this.updateDefaulter(result);//If exist an defaulter, means its a update
+        }
         else this.saveDefaulter(result);
       }
       else {
         this.genericFunctions.showNotification('Inadimplente não foi salvo');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewDefaulter was closed');
       }
     });
   }
@@ -229,7 +232,7 @@ export class FinancialsDefaultersComponent implements OnInit {
       }
       else {
         this.genericFunctions.showNotification('Inadimplente não foi salvo');
-        if (environment.logInfo) console.log('The dialog was closed');
+        if (environment.logInfo) console.log('The dialog subtractValue was closed');
       }
     });
   }

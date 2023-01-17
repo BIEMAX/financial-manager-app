@@ -62,12 +62,12 @@ export class FinancialsDefaultersNewComponent implements OnInit {
 
   public phoneMask = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public cpfMask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/, /\d/];
+  public zipCodeMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];
 
   constructor(
     public dialogRef: MatDialogRef<FinancialsDefaultersNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogReport: DialogReport,
-    private genericFunctions: GenericFunctions,
     private formBuilder: FormBuilder
   ) { }
 
@@ -92,8 +92,11 @@ export class FinancialsDefaultersNewComponent implements OnInit {
 
   onSaveClick () {
     try {
-      let areaCode = this.defaulterPhone.split(' ')[0].replace('(', '').replace(')', '');
-      let phoneNumber = this.defaulterPhone.split(' ')[1];
+      let areaCode = "", phoneNumber = "";
+      if (this.defaulterPhone) {
+        areaCode = this.defaulterPhone.split(' ')[0].replace('(', '').replace(')', '');
+        phoneNumber = this.defaulterPhone.split(' ')[1];
+      }
 
       let phone = new Phone(
         phoneNumber,
@@ -112,10 +115,10 @@ export class FinancialsDefaultersNewComponent implements OnInit {
         this.defaulterQuantity,
         this.isDefaulterPayInInstallments
       );
-      let history = this.defaulterHistory;
+      let history = this.defaulterHistory || [];
 
       //Is an edition
-      if (this.defaulterHistory.length > 0)
+      if (this.defaulterHistory && this.defaulterHistory.length > 0)
         history.push(new DefaulterHistory('Atualização de dados', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`));
       else history.push(new DefaulterHistory('Cadastro', `${new Date().toISOString().split('T')[0]}T${new Date().toLocaleTimeString('pt-BR')}.000Z`));
 

@@ -56,7 +56,7 @@
             CEP
             <mat-icon>pin</mat-icon>
           </mat-label>
-          <input matInput required="true" type="number" maxlength="9" placeholder="XXXXX-XXX"
+          <input matInput required="true" type="tel" placeholder="XXXXX-XXX" [textMask]="{mask: zipCodeMask}"
             [(ngModel)]="defaulterZipCode">
         </mat-form-field>
 
