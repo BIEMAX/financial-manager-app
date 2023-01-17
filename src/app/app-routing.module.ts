@@ -11,6 +11,7 @@ import { FinancialsListComponent } from './views/financial-manager/financials-li
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
+import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
 
 //Router to access through angular
 const routes: Routes = [
@@ -39,6 +40,12 @@ const routes: Routes = [
     component: FinancialsTagsComponent,
     canActivate: [UserHasAccess]
   },
+  {
+    path: 'defaulters',
+    component: FinancialsDefaultersComponent,
+    canActivate: [UserHasAccess]
+  },
+  //Generics
   {
     path: 'whatsnew',
     component: ReleaseNotesComponent

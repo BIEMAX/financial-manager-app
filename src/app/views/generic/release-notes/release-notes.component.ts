@@ -25,7 +25,8 @@ export class ReleaseNotesComponent implements OnInit {
   getAvailableVersions () {
     return [
       { name: "Versões", icon: "" },
-      { name: "1.2.4", icon: "new_releases" },
+      { name: "1.2.5", icon: "new_releases" },
+      { name: "1.2.4", icon: "done" },
       { name: "1.2.3", icon: "done" },
       { name: "1.2.2", icon: "done" },
       { name: "1.2.1", icon: "done" },

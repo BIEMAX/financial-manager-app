@@ -48,6 +48,8 @@ Currently, we only have support to *portuguese*, but we're of necessity of imple
 export const environment = {
   production: false,
   applicationName: 'Financial Manager',
+  //Version to show in title
+  applicationVersion: 'v1.2.5',
   //Your backend url (without slash at the end)
   apiUrl: 'http://localhost:8080',
   //Version of your endpoints (without slash at the end)
@@ -84,13 +86,33 @@ export const user = {
 npm install
 ```
 
-4. To run the project in localhost, run in terminal:
+4. To run the project in you can run with the following commands:
 ```bash
+# run in localhost (localhost:4200)
 npm run dev
+
+# run with staging settings
+npm run stg
+
+# run with production settings
+npm run prd
+
+# Or, if you want to test with your mobile device in your network, run:
+npm run lan
 ```
 
 5. Access the web app in your browser with the following link:
 
 ```bash
 http://localhost:4200
+```
+
+6. Some variables that are stored in localStorage:
+```javascript
+localStorage.getItem('userBearerKey');
+localStorage.getItem('userLogin');
+localStorage.getItem('userName');
+localStorage.getItem('userSecret');
+localStorage.getItem('keepUserConnected');
+localStorage.getItem('isDarkModeEnable')
 ```

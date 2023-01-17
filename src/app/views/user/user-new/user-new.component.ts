@@ -4,9 +4,10 @@ import {
   OnInit
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserModel } from 'src/app/models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
 import { ui, environment } from 'src/environments/environment';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-new',
@@ -27,15 +28,17 @@ export class UserNewComponent implements OnInit {
   public showPassword: Boolean = false;
   public showPassword2: Boolean = false;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
 
   constructor(
-    private snackBar: MatSnackBar,
+    private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UserNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit (): void {
-  }
+  ngOnInit (): void { }
 
   onExitClick () {
     if (this.validateBeforeExit()) this.dialogRef.close();
@@ -65,23 +68,23 @@ export class UserNewComponent implements OnInit {
 
   validateUser () {
     if (this.validateField(this.userName)) {
-      this.showNotification('O nome possuí caracteres inválidos', 'Nome inválido');
+      this.genericFunctions.showNotification('O nome possuí caracteres inválidos', 'Nome inválido');
       return false;
     }
     else if (this.validateField(this.userLogin)) {
-      this.showNotification('Login não respeita as regras de cadastro', 'Login inválido');
+      this.genericFunctions.showNotification('Login não respeita as regras de cadastro', 'Login inválido');
       return false;
     }
     else if (this.validateField(this.userPass)) {
-      this.showNotification('Senha não respeita as regras de cadastro', 'Senha inválida');
+      this.genericFunctions.showNotification('Senha não respeita as regras de cadastro', 'Senha inválida');
       return false;
     }
     else if (this.userPass != this.userConfirmPass) {
-      this.showNotification('Senhas não conferem', 'Senhas diferentes');
+      this.genericFunctions.showNotification('Senhas não conferem', 'Senhas diferentes');
       return false;
     }
     else if (this.validateField(this.userEmail) && !this.userEmail.includes("@") && !this.userEmail.includes(".")) {
-      this.showNotification('E-mail incoerente ou incompleto', 'E-mail inválido');
+      this.genericFunctions.showNotification('E-mail incoerente ou incompleto', 'E-mail inválido');
       return false;
     }
     else return true;
@@ -102,16 +105,6 @@ export class UserNewComponent implements OnInit {
 
   toggleRepeatPasswordVisibility () {
     this.showPassword2 = !this.showPassword2;
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

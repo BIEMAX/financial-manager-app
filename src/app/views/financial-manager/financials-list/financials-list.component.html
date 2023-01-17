@@ -15,38 +15,45 @@
           <!--Description field-->
           <mat-form-field>
             <mat-label>Insira o nome da conta</mat-label>
-            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: NuBank..." [(ngModel)]="descToFilter">
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getBills()" placeholder="Ex.: NuBank..."
+              [(ngModel)]="descToFilter">
           </mat-form-field>
 
           <!--Tags field-->
           <mat-form-field>
             <mat-label>Insira uma tag</mat-label>
-            <input matInput (keydown.enter)="getBills()" placeholder="Ex.: Conta fixa..." [(ngModel)]="tagToFilter">
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getBills()" placeholder="Ex.: Conta fixa..."
+              [(ngModel)]="tagToFilter">
           </mat-form-field>
 
           <!--Month selection-->
-          <button style="margin-left: 8px;" mat-icon-button color="{{uiColor}}" (click)="previousMonth()">
+          <button mat-icon-button [(disabled)]="hasToWait" style="margin-left: 8px;" color="{{uiColor}}"
+            (click)="previousMonth()">
             <mat-icon matTooltip="Mês anterior">arrow_back_ios_new</mat-icon>
           </button>
 
           <mat-form-field style="width: 100px;">
             <mat-label>Mês e ano</mat-label>
-            <input matInput [matDatepicker]="dp" placeholder="Escolha uma data" [formControl]="date">
+            <input matInput [(disabled)]="hasToWait" [matDatepicker]="dp" placeholder="Escolha uma data"
+              [formControl]="date">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
               panelClass="example-month-picker"></mat-datepicker>
           </mat-form-field>
 
-          <button style="margin-left: 8px;" mat-icon-button color="{{uiColor}}" (click)="nextMonth()">
+          <button mat-icon-button [(disabled)]="hasToWait" style="margin-left: 8px;" color="{{uiColor}}"
+            (click)="nextMonth()">
             <mat-icon matTooltip="Mês posterior">arrow_forward_ios</mat-icon>
           </button>
 
           <!--Button search-->
-          <button matTooltip="Criar conta" mat-raised-button color="{{uiColor}}" (click)="openDialogAddNewBill()">
+          <button mat-raised-button matTooltip="Criar conta" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="openDialogAddNewBill()">
             <mat-icon>add</mat-icon>
             Criar
           </button>
-          <button matTooltip="Pesquisar contas" mat-raised-button color="{{uiColor}}" (click)="getBills()">
+          <button mat-raised-button matTooltip="Pesquisar contas" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="getBills()">
             <mat-icon>search</mat-icon>
             Pesquisar
           </button>
@@ -59,19 +66,20 @@
           <!--Description field-->
           <mat-form-field>
             <mat-label style="font-size: 14px;">Insira uma descrição</mat-label>
-            <input matInput placeholder="Ex.: NuBank..." [(ngModel)]="description">
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: NuBank..." [(ngModel)]="description">
           </mat-form-field>
           <!--Tags field-->
           <mat-form-field>
             <mat-label style="font-size: 14px;">Insira uma tag</mat-label>
-            <input matInput placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
           </mat-form-field>
         </tr>
         <!--Month selection-->
         <tr>
           <mat-form-field style="width: 100px;">
             <mat-label>Mês e ano</mat-label>
-            <input matInput [matDatepicker]="dp" placeholder="Escolha uma data" [formControl]="date">
+            <input matInput [(disabled)]="hasToWait" [matDatepicker]="dp" placeholder="Escolha uma data"
+              [formControl]="date">
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
               panelClass="example-month-picker"></mat-datepicker>
@@ -79,10 +87,12 @@
         </tr>
         <!--Button search-->
         <tr>
-          <button matTooltip="Criar conta" mat-icon-button color="{{uiColor}}" (click)="openDialogAddNewBill()">
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Criar conta" color="{{uiColor}}"
+            (click)="openDialogAddNewBill()">
             <mat-icon>add</mat-icon>
           </button>
-          <button matTooltip="Pesquisar contas" mat-icon-button color="{{uiColor}}" (click)="getBills()">
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Pesquisar contas" color="{{uiColor}}"
+            (click)="getBills()">
             <mat-icon>search</mat-icon>
           </button>
         </tr>
@@ -90,7 +100,8 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator [(disabled)]="hasToWait" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
+    aria-label="Select page of users"></mat-paginator>
 
   <table mat-table [dataSource]="listBills" matSort>
 
@@ -150,21 +161,14 @@
       </td>
     </ng-container>
 
-    <!-- Column 'Button Edit' -->
-    <ng-container matColumnDef="update">
-      <th mat-header-cell *matHeaderCellDef>Editar</th>
+    <!-- Column 'Actions' -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
       <td mat-cell *matCellDef="let element">
         <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
           (click)="openDialogAddNewBill(element)">
           <mat-icon>edit</mat-icon>
         </button>
-      </td>
-    </ng-container>
-
-    <!-- Column 'Button Remove'-->
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef>Remover</th>
-      <td mat-cell *matCellDef="let element">
         <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
           (click)="deleteBill(element)">
           <mat-icon>clear</mat-icon>

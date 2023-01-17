@@ -6,7 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
@@ -18,6 +17,8 @@ import { FinancialModel } from 'src/app/models/financial.model';
 import { environment, ui } from 'src/environments/environment';
 import { TagsService } from 'src/app/services/tags.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+import { GenericFunctions } from 'src/app/util/generic-functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-financials-new',
@@ -51,12 +52,16 @@ export class FinancialsNewComponent implements OnInit {
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
+
   constructor(
     public dialogRef: MatDialogRef<FinancialsNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private snackBar: MatSnackBar,
     private tagsService: TagsService,
-    private dialogReport: DialogReport
+    private dialogReport: DialogReport,
+    private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit (): void {
@@ -180,23 +185,13 @@ export class FinancialsNewComponent implements OnInit {
             map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
           );
         }
-        else this.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
+        else this.genericFunctions.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
       },
       error => {
         if (environment.logInfo) console.log('error on save: ', error);
         this.dialogReport.showMessageDialog(error, true, true);
       }
     )
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration });
   }
 
 }

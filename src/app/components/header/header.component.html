@@ -4,8 +4,8 @@
       <mat-icon (click)="isToToggleSideNav()">menu</mat-icon>
     </button>
     <!--Only show application name if is a web device-->
-    <h1 *ngIf="!isMobileDevice">{{applicationName}}</h1>
-    <span class="menu-spacer"></span>
+    <h2 *ngIf="!isMobileDevice">{{applicationName}}</h2>
+
     <div class="right-align">
 
       <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
@@ -13,28 +13,53 @@
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
       <a mat-button [routerLink]="'/'"> Sair... </a> -->
 
+      <!--Welcome back user-->
       <a mat-button *ngIf="isMobileDevice">
         Olá {{userFirstName}}
       </a>
       <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
 
+      <!--Notifications badge-->
       <button mat-icon-button>
         <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
           notifications_active
         </mat-icon>
       </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Atualizar dados" (click)="openDialogUpdateUser()">settings</mat-icon>
+      <!--Vertical options-->
+      <button mat-icon-button matTooltip="Opções" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Novidades" [routerLink]="'/whatsnew'">verified_user</mat-icon>
-      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon class="mr-8">brightness_5</mat-icon>
+          <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive"
+            class="mr-8"></mat-slide-toggle>
+          <mat-icon>bedtime</mat-icon>
+          <span>Trocar tema</span>
+        </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Sair..." (click)="logout()" [routerLink]="'/'">logout</mat-icon>
-      </button>
+        <button mat-menu-item (click)="openDialogUpdateUser()">
+          <mat-icon matTooltip="Atualizar dados">settings</mat-icon>
+          <span>Atualizar dados</span>
+        </button>
+
+        <button mat-menu-item [routerLink]="'/whatsnew'">
+          <mat-icon matTooltip="Novidades">verified_user</mat-icon>
+          <span>Notas de atualização</span>
+        </button>
+
+        <button mat-menu-item (click)="about()" disabled>
+          <mat-icon matTooltip="Sobre">info</mat-icon>
+          <span>Sobre</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()" [routerLink]="'/'">
+          <mat-icon matTooltip="Sair...">logout</mat-icon>
+          <span>Sair...</span>
+        </button>
+      </mat-menu>
 
     </div>
   </mat-toolbar-row>
@@ -47,38 +72,32 @@
 
       <mat-list-item [routerLink]="'/home'" (click)="showSubmenu = !showSubmenu" class="parent">
         <span class="full-width" *ngIf="isShowing">Página inicial</span>
-        <mat-icon mat-list-icon (click)="isToToggleSideNav()">home</mat-icon>
-        <!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more
-        </mat-icon> -->
+        <mat-icon mat-list-icon (click)="isToToggleSideNav()" color="{{uiColor}}">home</mat-icon>
       </mat-list-item>
 
-      <!--Financials menu-->
-      <!-- <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-
-      </div> -->
       <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
-        <mat-icon mat-list-icon>account_balance</mat-icon>
+        <mat-icon mat-list-icon color="{{uiColor}}">account_balance</mat-icon>
         <span class="full-width" *ngIf="isShowing">Financeiro</span>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isShowing">
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isShowing" color="{{uiColor}}">
           expand_more
         </mat-icon>
       </mat-list-item>
 
-      <!--Financials sub-menu-->
       <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing">
         <a mat-list-item [routerLink]="'/financials'" (click)="isToToggleSideNav()">
-          <mat-icon>request_quote</mat-icon>
+          <mat-icon color="{{uiColor}}">request_quote</mat-icon>
           Gastos mensais
         </a>
-        <!-- <a mat-list-item [routerLink]="'/defaulters'" (click)="isToToggleSideNav()">
-                  <img src="../../../assets/icons/money_receipt.png"> Inadimplentes
-                </a> -->
+        <a mat-list-item [routerLink]="'/defaulters'" (click)="isToToggleSideNav()">
+          <mat-icon color="{{uiColor}}">assignment_ind</mat-icon>
+          Inadimplentes
+        </a>
         <a mat-list-item [routerLink]="'/reports'" (click)="isToToggleSideNav()">
-          <mat-icon>insights</mat-icon>
+          <mat-icon color="{{uiColor}}">insights</mat-icon>
           Relatórios
         </a>
         <a mat-list-item [routerLink]="'/tags'" (click)="isToToggleSideNav()">
-          <mat-icon>local_offer</mat-icon>
+          <mat-icon color="{{uiColor}}">local_offer</mat-icon>
           Tags
         </a>
       </div>

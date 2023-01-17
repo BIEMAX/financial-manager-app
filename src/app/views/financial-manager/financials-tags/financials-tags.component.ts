@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
@@ -51,7 +50,6 @@ export class FinancialsTagsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
-    private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private tagsService: TagsService,
     private dialogReport: DialogReport,
@@ -84,7 +82,7 @@ export class FinancialsTagsComponent implements OnInit {
         this.dsListTags.sort = this.sort;
         this.dsListTags.paginator = this.paginator;
         this.hasToWait = false;
-        this.showNotification('Dados pesquisados', '');
+        this.genericFunctions.showNotification('Tags pesquisados');
       },
       error => {
         if (this.dsListTags != undefined) this.dsListTags = undefined;
@@ -100,7 +98,8 @@ export class FinancialsTagsComponent implements OnInit {
   openDialogAddNewTag (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsTagNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: bill
     });
@@ -112,8 +111,8 @@ export class FinancialsTagsComponent implements OnInit {
         else this.saveTag(result);
       }
       else {
-        this.showNotification('Nova tag não foi salva', '');
-        if (environment.logInfo) console.log('The dialog was closed');
+        this.genericFunctions.showNotification('Nova tag não foi salva');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewTag was closed');
       }
     });
   }
@@ -129,7 +128,7 @@ export class FinancialsTagsComponent implements OnInit {
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);
-          this.showNotification("Tag salva com êxito");
+          this.genericFunctions.showNotification("Tag salva com êxito");
 
           this.getTags(); //Update the screen
         },
@@ -142,17 +141,17 @@ export class FinancialsTagsComponent implements OnInit {
     }
     else {
       this.hasToWait = false;
-      this.showNotification("Tag já existe");
+      this.genericFunctions.showNotification("Tag já existe");
     }
   }
 
-  updateBill (bill: any) {
+  updateBill (tag: TagModel) {
     // this.hasToWait = true;
     // this.billsService.updateBill(bill).subscribe(
     //   response => {
     //     this.hasToWait = false;
     //     if (environment.logInfo) console.log(response);
-    //     this.showNotification('Conta atualizada com êxito', '');
+    //     this.genericFunctions.showNotification('Conta atualizada com êxito', '');
 
     //     this.getBills(); //Update the screen
     //   },
@@ -171,7 +170,7 @@ export class FinancialsTagsComponent implements OnInit {
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);
-          this.showNotification('Tag excluída com êxito', '');
+          this.genericFunctions.showNotification('Tag excluída com êxito');
 
           this.getTags(); //Update the screen
         },
@@ -201,18 +200,7 @@ export class FinancialsTagsComponent implements OnInit {
   setDisplayedColumnsByDevice () {
     this.displayedColumns = [
       'name',
-      'update',
-      'delete'
+      'actions'
     ];
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string = "", duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 }

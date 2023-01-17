@@ -1,14 +1,18 @@
 <div>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Escolha uma versao</mat-label>
+    <mat-select [disabled]="false">
+      <div *ngFor="let release of listReleases">
+        <mat-option [value]="release.name" (click)="getReleaseNotes(release.name)">
+          <!-- <mat-icon *ngIf="release.name != 'Versões'">{{release.icon}}</mat-icon> -->
+          {{release.name}}
+        </mat-option>
+      </div>
+    </mat-select>
+  </mat-form-field>
+
   <mat-sidenav-container class="example-container" autosize>
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
-      <mat-nav-list *ngFor="let version of listReleases">
-        <mat-list-item (click)="getReleaseNotes(version.name)">
-          <mat-icon *ngIf="version.name != 'Versões'">{{version.icon}}</mat-icon>
-          {{version.name}}
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
     <mat-sidenav-content>
       <div style="height: 100vh;">
         <router-outlet>

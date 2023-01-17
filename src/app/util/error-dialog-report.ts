@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from 'src/app/views/generic/user-dialog-report/user-dialog-report.component';
-import { ResponseStatusCode, ExceptionSolutionResponse } from './response-message';
+import { IsAKnownErrorCode, ExceptionSolutionResponse } from './response-message';
 import { LogService } from 'src/app/services/log.service';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
@@ -75,7 +75,8 @@ export class DialogReport {
 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       disableClose: false,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '30%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: {
         isError: isError,
@@ -99,17 +100,21 @@ export class DialogReport {
 
     this.showReportLink = exception?.error?.path != "/v1/user/login";
 
-    //Exception will be if the API return a status as error/exception
-    this.isException = ResponseStatusCode(status) != '';
+    //Exception will be if the API didn't return a expected code/status as error/exception
+    this.isException = IsAKnownErrorCode(status) == '';
 
     //If is an exception, it's an API error
     if (this.isException) {
-      this.message = exception?.error?.message || exception?.error;
+      this.message = exception?.error?.message || exception?.error || exception?.message;
       this.solution = ExceptionSolutionResponse(this.message);
     }
     else { //If not is an exception, it's just a message from frontend
-      this.message = exception?.message ? exception?.message : exception?.error?.error;
-      this.solution = ExceptionSolutionResponse(exception?.message ? exception?.message : exception?.error?.message);
+      this.message = exception?.error;
+      //In some cases, the exception error (line above) returns object, and we need that always be a string.
+      if (this.message && typeof (this.message) != "string") this.message = undefined;
+
+      if (!this.message) this.message = exception?.message ? exception?.message : exception?.error?.error;
+      this.solution = ExceptionSolutionResponse(this.message);
     }
   }
 

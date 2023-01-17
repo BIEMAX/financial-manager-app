@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment, ui } from 'src/environments/environment';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
 import { UserUpdateModel } from 'src/app/models/user.model';
+import { GenericFunctions } from 'src/app/util/generic-functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -23,9 +24,13 @@ export class UserUpdateInfoComponent implements OnInit {
 
   public uiColor = ui.color;
 
+  public firstFormGroup: FormGroup = this.formBuilder.group({ firstCtrl: [''] });
+  public secondFormGroup: FormGroup = this.formBuilder.group({ secondCtrl: [''] });
+
   constructor(
     private userAccessService: UserAccessService,
-    private snackBar: MatSnackBar,
+    private genericFunctions: GenericFunctions,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UserUpdateInfoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -60,9 +65,9 @@ export class UserUpdateInfoComponent implements OnInit {
         );
         if (environment.logInfo) console.log('this.data from user update interface: ', this.data);
         this.dialogRef.close(this.data);
-      } else this.showNotification('Nova senha não coincidem', 'Nova senha inválida');
+      } else this.genericFunctions.showNotification('Nova senha não coincidem', 'Nova senha inválida');
     }
-    else this.showNotification('Preencha ao menos um dado para prosseguir', 'Dados inválidos');
+    else this.genericFunctions.showNotification('Preencha ao menos um dado para prosseguir', 'Dados inválidos');
   }
 
   validateBeforeExit () {
@@ -79,16 +84,6 @@ export class UserUpdateInfoComponent implements OnInit {
 
   validateEmailChange () {
     return this.userEmailNew.includes("@") && this.userEmailNew.includes(".");
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

@@ -3,8 +3,9 @@
  * @param statusCode http status code
  * @returns String with message
  */
-export let ResponseStatusCode = (statusCode: string) => {
+export let IsAKnownErrorCode = (statusCode: string) => {
   if (statusCode.trim() == '0') return 'Servidor indisponível no momento';
+  if (statusCode.trim() == '204') return 'Campo obrigatório não preenchido';
   if (statusCode.includes('401')) return 'Não autorizado';
   if (statusCode.trim() == '404') return 'Registro não encontrado com base nos filtros determinados';
   if (statusCode.trim() == '500') return 'Erro interno do servidor';
@@ -34,5 +35,7 @@ export let ExceptionSolutionResponse = (errorMessage: string) => {
     return 'Preencha o campo informado corretamente e tente novamente';
   else if (errorMessage.toLowerCase().trim().includes('token do usuario expirado'))
     return 'Recarregue a página ou efetue novamente o login';
+  else if (errorMessage.toLowerCase().trim().includes("http failure response"))
+    return 'Servidor indisponível no momento, tente novamente mais tarde.';
   else return 'Infelizmente ainda não há uma solução para este problema';
 }

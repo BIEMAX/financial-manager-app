@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -76,7 +75,6 @@ export class FinancialsListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
-    private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private billsService: BillsService,
     private dialogReport: DialogReport,
@@ -134,7 +132,7 @@ export class FinancialsListComponent implements OnInit {
         this.listBills.sort = this.sort;
         this.listBills.paginator = this.paginator;
         this.hasToWait = false;
-        this.showNotification('Dados pesquisados', '');
+        this.genericFunctions.showNotification('Contas pesquisados');
       },
       error => {
         if (this.listBills != undefined) this.listBills = undefined;
@@ -145,22 +143,13 @@ export class FinancialsListComponent implements OnInit {
   }
 
   /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
-  }
-
-  /**
    * Open a dialog to create a new bill
    */
   openDialogAddNewBill (bill?: any): void {
     const dialogRef = this.dialog.open(FinancialsNewComponent, {
       disableClose: true,
-      width: this.genericFunctions.isMobileDevice() ? '100%' : '40%',
+      width: 'auto',
+      height: 'auto',
       autoFocus: true,
       data: bill
     });
@@ -172,8 +161,8 @@ export class FinancialsListComponent implements OnInit {
         else this.saveBill(result);
       }
       else {
-        this.showNotification('Nova conta a pagar não foi salva', '');
-        if (environment.logInfo) console.log('The dialog was closed');
+        this.genericFunctions.showNotification('Nova conta a pagar não foi salva');
+        if (environment.logInfo) console.log('The dialog openDialogAddNewBill was closed');
       }
     });
   }
@@ -188,7 +177,7 @@ export class FinancialsListComponent implements OnInit {
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
-        this.showNotification('Conta salva com êxito', '');
+        this.genericFunctions.showNotification('Conta salva com êxito');
 
         this.getBills(); //Update the screen
       },
@@ -206,7 +195,7 @@ export class FinancialsListComponent implements OnInit {
       response => {
         this.hasToWait = false;
         if (environment.logInfo) console.log(response);
-        this.showNotification('Conta atualizada com êxito', '');
+        this.genericFunctions.showNotification('Conta atualizada com êxito');
 
         this.getBills(); //Update the screen
       },
@@ -225,7 +214,7 @@ export class FinancialsListComponent implements OnInit {
         response => {
           this.hasToWait = false;
           if (environment.logInfo) console.log(response);
-          this.showNotification('Conta excluída com êxito', '');
+          this.genericFunctions.showNotification('Conta excluída com êxito');
 
           this.getBills(); //Update the screen
         },
@@ -246,6 +235,7 @@ export class FinancialsListComponent implements OnInit {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() + 1);
     this.date.setValue(ctrlValue);
+    this.getBills();
   }
 
   /**
@@ -255,6 +245,7 @@ export class FinancialsListComponent implements OnInit {
     const ctrlValue = this.date.value!;
     ctrlValue.month(ctrlValue.month() - 1);
     this.date.setValue(ctrlValue);
+    this.getBills();
   }
 
   setDisplayedColumnsByDevice () {
@@ -263,8 +254,7 @@ export class FinancialsListComponent implements OnInit {
         'name',
         'dueDate',
         'value',
-        'update',
-        'delete'
+        'actions'
       ];
     }
     else {
@@ -276,8 +266,7 @@ export class FinancialsListComponent implements OnInit {
         'quantityAmount',
         'tags',
         'isBillPayed',
-        'update',
-        'delete'
+        'actions'
       ];
     }
   }

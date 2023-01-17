@@ -1,0 +1,33 @@
+<div>
+
+  <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="250">
+
+    <!--Step 1-->
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Valor</ng-template>
+
+      <div>
+        <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Valor para abater
+            <mat-icon>123</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="number" placeholder="0" [(ngModel)]="valueToSubtract">
+          <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+      </div>
+
+      <div>
+        <button mat-button (click)="onSaveClick()" mat-raised-button color="{{uiColor}}">Finalizar</button>
+      </div>
+
+    </mat-step>
+
+  </mat-vertical-stepper>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-stroked-button color="{{uiColor}}" (click)="onExitClick()">Sair</button>
+  </div>
+
+</div>

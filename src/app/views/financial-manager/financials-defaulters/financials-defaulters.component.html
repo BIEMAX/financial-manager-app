@@ -1,0 +1,166 @@
+<div>
+
+  <div class="loading-indicator">
+    <mat-progress-spinner mode="indeterminate" *ngIf="hasToWait" diameter="50"> </mat-progress-spinner>
+  </div>
+
+  <!--Card with filters-->
+  <mat-card>
+    <mat-card-title>Inadimplentes</mat-card-title>
+    <mat-card-actions>
+
+      <!--For Web devices-->
+      <table *ngIf="!isMobileDevice" class="table-filter-fields" cellspacing="0">
+        <td>
+          <!--Name field-->
+          <mat-form-field>
+            <mat-label>Insira o nome da pessoa</mat-label>
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getDefaulters()" placeholder="Ex.: João..."
+              [(ngModel)]="descToFilter">
+          </mat-form-field>
+
+          <!--Tags field-->
+          <mat-form-field>
+            <mat-label>Insira uma tag</mat-label>
+            <input matInput [(disabled)]="hasToWait" (keydown.enter)="getDefaulters()" placeholder="Ex.: Conta fixa..."
+              [(ngModel)]="tagToFilter">
+          </mat-form-field>
+
+          <!--Button search-->
+          <button mat-raised-button matTooltip="Criar conta" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="openDialogAddNewDefaulter()">
+            <mat-icon>add</mat-icon>
+            Criar
+          </button>
+          <button mat-raised-button matTooltip="Pesquisar contas" [(disabled)]="hasToWait" color="{{uiColor}}"
+            (click)="getDefaulters()">
+            <mat-icon>search</mat-icon>
+            Pesquisar
+          </button>
+      </table>
+
+      <!--For mobile devices-->
+      <table *ngIf="isMobileDevice" class="table-filter-fields" cellspacing="1">
+
+        <tr>
+          <!--Description field-->
+          <mat-form-field>
+            <mat-label style="font-size: 14px;">Insira uma descrição</mat-label>
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: NuBank..." [(ngModel)]="description">
+          </mat-form-field>
+          <!--Tags field-->
+          <mat-form-field>
+            <mat-label style="font-size: 14px;">Insira uma tag</mat-label>
+            <input matInput [(disabled)]="hasToWait" placeholder="Ex.: Conta fixa..." [(ngModel)]="tag">
+          </mat-form-field>
+        </tr>
+        <!--Button search-->
+        <tr>
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Criar conta" color="{{uiColor}}"
+            (click)="openDialogAddNewDefaulter()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-icon-button [(disabled)]="hasToWait" matTooltip="Pesquisar contas" color="{{uiColor}}"
+            (click)="getDefaulters()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </tr>
+      </table>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-paginator [(disabled)]="hasToWait" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"
+    aria-label="Select page of users"></mat-paginator>
+
+  <table mat-table [dataSource]="listDefaulters" matSort>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Column 'Status' -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element">
+
+        <div *ngIf="element.status == 'ACTIVE'">
+          <mat-icon matTooltip="Ativo" [ngStyle]="{'color':'#5cb85c'}">circle</mat-icon>
+          <!-- <mat-label>Ativo</mat-label> -->
+        </div>
+
+        <div *ngIf="element.status == 'CANCELLED'">
+          <mat-icon matTooltip="Cancelado" [ngStyle]="{'color':'#f94449'}">circle</mat-icon>
+          <!-- <mat-label>Cancelado</mat-label> -->
+        </div>
+
+        <div *ngIf="element.status == 'BLOCKED'">
+          <mat-icon matTooltip="Bloqueado" [ngStyle]="{'color':'#f3ef1a'}">circle</mat-icon>
+          <!-- <mat-label>Bloqueado</mat-label> -->
+        </div>
+
+        <div *ngIf="element.status == 'DONE'">
+          <mat-icon matTooltip="Concluido" [ngStyle]="{'color':'#5bc0de'}">circle</mat-icon>
+          <!-- <mat-label>Concluído</mat-label> -->
+        </div>
+
+      </td>
+    </ng-container>
+
+    <!-- Column 'type' -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-list>
+          <mat-chip *ngIf="element.paymentDeal.type == 'CREDITOR'">Credor</mat-chip>
+          <mat-chip *ngIf="element.paymentDeal.type == 'DEBTOR'">Devedor</mat-chip>
+          <!-- <mat-chip *ngIf="element.isCashEntry == null">Somatório</mat-chip> -->
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <!-- Column 'Defaulters name' -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome do inadimplente </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Column 'CPF/ID' -->
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CPF </th>
+      <td mat-cell *matCellDef="let element"> {{element.cpf}} </td>
+    </ng-container>
+
+    <!-- Column 'Valor' -->
+    <ng-container matColumnDef="value">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+      <td mat-cell *matCellDef="let element">
+        <span matPrefix>R$&nbsp;</span>
+        {{element.paymentDeal.value}}
+      </td>
+    </ng-container>
+
+    <!-- Column 'Actions' -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Ações</th>
+      <td mat-cell *matCellDef="let element">
+        <button matTooltip="Abater valor" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="subtractValue(element)">
+          <mat-icon>remove</mat-icon>
+        </button>
+        <button matTooltip="Ver histórico" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="viewHistory(element)">
+          <mat-icon>history</mat-icon>
+        </button>
+        <button matTooltip="Editar conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableEdit"
+          (click)="openDialogAddNewDefaulter(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button matTooltip="Excluir conta" mat-icon-button color="{{uiColor}}" [disabled]="element.disableDelete"
+          (click)="deleteDefaulter(element)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+  </table>
+
+</div>

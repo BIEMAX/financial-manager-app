@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
- * Generic class that open a dialog to show user that an error ocurrered
- * (with more info than usual).
- * Maybe in some cases, show the solution to fix the error.
+ * Generic class that contains generic functions (didn't depends from other dependencies),
+ * for example, validate if is a mobile device and show notifications on the screen.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class GenericFunctions {
+
+  constructor(private snackBar: MatSnackBar) { }
 
   /**
    * Check if is an mobile device
@@ -16,5 +18,15 @@ export class GenericFunctions {
    */
   public isMobileDevice () {
     return screen.height <= 1080 && screen.width <= 768;
+  }
+
+  /**
+   * Show a notification in the main page
+   * @param message Message to display
+   * @param action Origin event (default '')
+   * @param duration Integer containing the value to animation time (default 2ms)
+   */
+  public showNotification (message: string, action: string = '', duration = 2000) {
+    this.snackBar.open(message, action, { duration: duration })
   }
 }

@@ -1,0 +1,157 @@
+<div>
+  <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="250">
+
+    <!--Step 1-->
+    <mat-step [stepControl]="firstFormGroup">
+      <ng-template matStepLabel>Dados do inadimplente</ng-template>
+
+      <div>
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Nome do inadimplente
+            <mat-icon>person</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="text" placeholder="Nome da pessoa" [(ngModel)]="defaulterName">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            CPF
+            <mat-icon>person</mat-icon>
+          </mat-label>
+          <input matInput type="tel" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
+            [textMask]="{mask: cpfMask}">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            E-mail
+            <mat-icon>mail</mat-icon>
+          </mat-label>
+          <input matInput type="email" placeholder="clientemail@host.com" [(ngModel)]="defaulterMail">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Telefone
+            <mat-icon>phone</mat-icon>
+          </mat-label>
+          <input matInput type="tel" placeholder="(000) 00000-0000" [(ngModel)]="defaulterPhone"
+            [textMask]="{mask: phoneMask}">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
+      </div>
+
+    </mat-step>
+
+    <!--Step 2-->
+    <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Endereço</ng-template>
+
+      <div>
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            CEP
+            <mat-icon>pin</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="tel" placeholder="XXXXX-XXX" [textMask]="{mask: zipCodeMask}"
+            [(ngModel)]="defaulterZipCode">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Endereço
+            <mat-icon>home_filled</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="text" placeholder="Rua xxx." [(ngModel)]="defaulterAddress">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Número
+            <mat-icon>123</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="number" maxlength="4" placeholder="xxx" [(ngModel)]="defaulterNumber">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Complemento
+            <mat-icon>gite</mat-icon>
+          </mat-label>
+          <input matInput type="text" placeholder="Casa/apartamento n17" [(ngModel)]="defaulterComplement">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
+        <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
+      </div>
+
+    </mat-step>
+
+    <!--Step 3-->
+    <mat-step [stepControl]="thirdFormGroup">
+      <ng-template matStepLabel>Valor</ng-template>
+
+      <div>
+        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-label>
+            Valor
+            <mat-icon>money</mat-icon>
+          </mat-label>
+          <input matInput required="true" type="number" placeholder="0" [(ngModel)]="defaulterValue">
+          <span matPrefix>R$&nbsp;</span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%;">
+          <mat-label>Tipo de inadimplente</mat-label>
+          <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="defaulterIsDebtor">
+            <div *ngIf="defaulterIsDebtor">Devedor</div>
+            <div *ngIf="!defaulterIsDebtor">Credor</div>
+          </mat-slide-toggle>
+          <textarea matInput hidden></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
+          <mat-label *ngIf="defaulterIsDebtor">Devedor irá parcelar?</mat-label>
+          <mat-label *ngIf="!defaulterIsDebtor">Credor irá parcelar?</mat-label>
+          <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isDefaulterPayInInstallments">
+            <div *ngIf="isDefaulterPayInInstallments">Sim</div>
+            <div *ngIf="!isDefaulterPayInInstallments">Não</div>
+          </mat-slide-toggle>
+          <textarea matInput hidden></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 47.5%;">
+          <mat-label>
+            Número de prestações
+            <mat-icon>123</mat-icon>
+          </mat-label>
+          <input matInput type="number" placeholder="1" [(ngModel)]="defaulterQuantity"
+            [(disabled)]="!isDefaulterPayInInstallments">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
+        <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Finalizar</ng-template>
+      <!-- You are now done. -->
+      Todos os campos preenchidos, basta salvar para concluir.
+      <div>
+        <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
+        <button mat-button mat-stroked-button (click)="stepper.reset()">Reiniciar o cadastro</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="onExitClick()" mat-stroked-button color="{{uiColor}}">Sair</button>
+    <button mat-button (click)="onSaveClick()" cdkFocusInitial mat-raised-button color="{{uiColor}}">Salvar</button>
+  </div>
+</div>

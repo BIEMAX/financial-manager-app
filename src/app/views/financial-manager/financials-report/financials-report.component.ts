@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -9,7 +8,7 @@ import { GenericFunctions } from 'src/app/util/generic-functions';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
-import { ResponseStatusCode } from 'src/app/util/response-message';
+import { IsAKnownErrorCode } from 'src/app/util/response-message';
 
 // tslint:disable-next-line:no-duplicate-imports
 import * as _moment from 'moment';
@@ -63,7 +62,7 @@ export class FinancialsReportComponent implements OnInit {
 
   constructor(
     private chartsService: ChartsService,
-    private snackBar: MatSnackBar
+    private genericFunctions: GenericFunctions
   ) { }
 
   ngOnInit () {
@@ -78,11 +77,11 @@ export class FinancialsReportComponent implements OnInit {
         if (charts.data[0] != undefined && charts.data[0].charts.length > 0) {
           this.listCharts = charts.data[0].charts.filter(c => c.hasAccess == true);
           this.updateChartData(this.currentMonth, this.currentYear);
-        } else this.showNotification("Não há relatórios disponíveis para seu usuário", "");
+        } else this.genericFunctions.showNotification("Não há relatórios disponíveis para seu usuário");
       },
       error => {
         this.hasToWait = false;
-        this.showNotification(ResponseStatusCode((error.error.message)), 'Erro');
+        this.genericFunctions.showNotification(IsAKnownErrorCode((error.error.message)), 'Erro');//TODO: #120 Refactor this error
       }
     );
   }
@@ -205,22 +204,12 @@ export class FinancialsReportComponent implements OnInit {
         default: break;
       }
 
-      this.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`, "");
+      this.genericFunctions.showNotification(`Sucesso ao ${reportNumber ? 'atualizar' : 'consultar'} os relatórios`);
     });
   }
 
   toggleGridColumns () {
     this.gridColumnsToShow = this.gridColumnsToShow === 2 ? 4 : 2;
-  }
-
-  /**
-   * Show a notification in the main page
-   * @param message Message to display
-   * @param action Origin event
-   * @param duration Integer containing the value to animation time
-   */
-  showNotification (message: string, action: string, duration = 2000) {
-    this.snackBar.open(message, action, { duration: duration })
   }
 
 }

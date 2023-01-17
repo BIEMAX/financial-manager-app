@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "ng serve --port 4200 -c dev",
+    "lan": "ng serve --port 4200 --host=0.0.0.0 --disable-host-check -c lan",
     "stg": "ng serve --port 4200 -c stg",
     "prd": "ng serve --port 4200 -c prd",
     "build-dev": "ng build -c dev",
@@ -50,6 +51,7 @@
     "@angular/localize": "^14.2.1",
     "@angular/material": "~14.2.1",
     "@angular/material-moment-adapter": "^14.2.1",
+    "angular2-text-mask": "^9.0.0",
     "chart.js": "^3.9.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",

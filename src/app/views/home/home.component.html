@@ -28,8 +28,9 @@
                 <mat-card-title class="{{panel.class}}">{{task.title}}</mat-card-title>
                 <mat-card-subtitle>Data de vencimento: {{task.date}}</mat-card-subtitle>
                 <mat-card-content *ngIf="task.description != ''">Descrição: {{task.description}}</mat-card-content>
-                <mat-checkbox [ngModel]="task.done" [disabled]="false" color="{{uiColor}}"
-                  (click)="payBillOverdue(task)">Atualizar conta como paga</mat-checkbox>
+                <button mat-button mat-raised-button (click)="payBillOverdue(task)" [disabled]="false"
+                  color="{{uiColor}}">Atualizar conta
+                  como paga?</button>
               </mat-card>
             </div>
 

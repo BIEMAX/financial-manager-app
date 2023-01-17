@@ -1,4 +1,23 @@
-## [1.2.4 - Preview]
+## [1.2.5 - Preview]
+
+- Fixed 'Progress spinner - Disable other components during his visibility #119'
+- Fixed 'Create a generic show notification #123'
+- Fixed 'Progress spinner not centered at screen (all windows) #122'
+- Fixed 'After logout, password field still have the old value #125'
+- Run 'tests in case of exception/error in all forms #121'
+- Fixed 'Bill update at home screen not reloading pending bills #97'
+- Implemented defaulters manager #108
+- Fixed 'Wrong date in release notes of v1.2.4 #128'
+- Fixed 'Release notes with wrong title #130'
+- Implemented 'New bill - Implement creation as stepper instead tabs #132'
+- Implemented 'When change month by step in bills list, run query #126'
+- Fixed 'Release notes versions - Put all versions in a dropdown list #133'
+- Fixed 'Enhance the menu colors at home screen'
+- Update the actions in list (bills, tags and defaulters)
+- Implemented 'User update - Change to stepper actions instead tabs #135'
+- Implemented 'User Dark theme #142'
+
+## [1.2.4]
 
 - Fixed users can't access submenu 'tags' in 'financial manager'
 - Fixed an issue that prevents user query tags in mobile devices

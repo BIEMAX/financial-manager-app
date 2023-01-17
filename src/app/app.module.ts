@@ -39,10 +39,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { NgChartsModule } from 'ng2-charts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
+import { TextMaskModule } from 'angular2-text-mask';
 
 //Application packages
 import { AppRoutingModule } from './app-routing.module';
@@ -50,6 +52,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { UserLoginComponent } from './views/user/user-login/user-login.component';
 import { CustomDialogComponent } from './views/generic/dialog/custom-dialog.component';
+import { HistoryComponent } from './views/generic/history/history.component';
 import { PageNotFoundComponent } from './views/generic/page-not-found/page-not-found.component';
 
 import { FinancialsListComponent } from './views/financial-manager/financials-list/financials-list.component';
@@ -57,6 +60,9 @@ import { FinancialsNewComponent } from './views/financial-manager/financials-new
 import { FinancialsReportComponent } from './views/financial-manager/financials-report/financials-report.component';
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
 import { FinancialsTagNewComponent } from './views/financial-manager/financials-tag-new/financials-tag-new.component';
+import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
+import { FinancialsDefaultersNewComponent } from './views/financial-manager/financials-defaulters-new/financials-defaulters-new.component';
+import { FinancialsDefaultersSubtractComponent } from './views/financial-manager/financials-defaulters-subtract/financials-defaulters-subtract.component';
 
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -75,10 +81,14 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     UserUpdateInfoComponent,
     //Generic
     CustomDialogComponent,
-    UserDialogComponent,
+    HistoryComponent,
     PageNotFoundComponent,
     ReleaseNotesComponent,
+    UserDialogComponent,
     //Financials
+    FinancialsDefaultersComponent,
+    FinancialsDefaultersNewComponent,
+    FinancialsDefaultersSubtractComponent,
     FinancialsListComponent,
     FinancialsNewComponent,
     FinancialsReportComponent,
@@ -130,7 +140,9 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     MatCheckboxModule,
     NgChartsModule,
     MatSortModule,
-    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE })
+    MatStepperModule,
+    MarkdownModule.forRoot({ loader: HttpClient, sanitize: SecurityContext.NONE }),
+    TextMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,10 +23,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
-            ],
+            "styles": [],
             "scripts": [],
             "allowedCommonJsDependencies": [
               "moment"
@@ -103,6 +100,24 @@
                   "maximumWarning": "6kb"
                 }
               ]
+            },
+            "lan": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.lan.ts"
+                }
+              ],
+              "buildOptimizer": false,
+              "optimization": {
+                "scripts": false,
+                "styles": false,
+                "fonts": false
+              },
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": ""
@@ -113,7 +128,7 @@
             "browserTarget": "app:build"
           },
           "configurations": {
-            "production": {
+            "prd": {
               "browserTarget": "financial-manager-app:build:prd"
             },
             "dev": {
@@ -121,6 +136,9 @@
             },
             "stg": {
               "browserTarget": "financial-manager-app:build:hml"
+            },
+            "lan": {
+              "browserTarget": "financial-manager-app:build:lan"
             }
           }
         },
@@ -163,10 +181,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
-            ],
+            "styles": [],
             "scripts": []
           }
         },
