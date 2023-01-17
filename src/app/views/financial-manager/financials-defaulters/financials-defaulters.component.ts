@@ -100,7 +100,7 @@ export class FinancialsDefaultersComponent implements OnInit {
         this.listDefaulters.sort = this.sort;
         this.listDefaulters.paginator = this.paginator;
         this.hasToWait = false;
-        this.genericFunctions.showNotification('Dados pesquisados');
+        this.genericFunctions.showNotification('Inadimplentes pesquisados');
       },
       error => {
         if (this.listDefaulters != undefined) this.listDefaulters = undefined;

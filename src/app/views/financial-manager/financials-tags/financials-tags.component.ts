@@ -82,7 +82,7 @@ export class FinancialsTagsComponent implements OnInit {
         this.dsListTags.sort = this.sort;
         this.dsListTags.paginator = this.paginator;
         this.hasToWait = false;
-        this.genericFunctions.showNotification('Dados pesquisados');
+        this.genericFunctions.showNotification('Tags pesquisados');
       },
       error => {
         if (this.dsListTags != undefined) this.dsListTags = undefined;

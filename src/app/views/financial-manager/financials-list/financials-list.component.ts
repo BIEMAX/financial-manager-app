@@ -132,7 +132,7 @@ export class FinancialsListComponent implements OnInit {
         this.listBills.sort = this.sort;
         this.listBills.paginator = this.paginator;
         this.hasToWait = false;
-        this.genericFunctions.showNotification('Dados pesquisados');
+        this.genericFunctions.showNotification('Contas pesquisados');
       },
       error => {
         if (this.listBills != undefined) this.listBills = undefined;
