@@ -15,6 +15,7 @@
 - Fixed 'Enhance the menu colors at home screen'
 - Update the actions in list (bills, tags and defaulters)
 - Implemented 'User update - Change to stepper actions instead tabs #135'
+- Implemented 'User Dark theme #142'
 
 ## [1.2.4]
 

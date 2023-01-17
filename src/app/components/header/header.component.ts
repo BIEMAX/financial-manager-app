@@ -190,4 +190,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  /**
+   * Show 'about' dialog
+   */
+  about () {
+
+  }
+
 }

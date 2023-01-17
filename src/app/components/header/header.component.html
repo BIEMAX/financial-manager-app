@@ -5,7 +5,7 @@
     </button>
     <!--Only show application name if is a web device-->
     <h2 *ngIf="!isMobileDevice">{{applicationName}}</h2>
-    <span class="menu-spacer"></span>
+
     <div class="right-align">
 
       <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
@@ -13,32 +13,53 @@
       <a mat-button [routerLink]="'/reports'"> Relatórios </a>
       <a mat-button [routerLink]="'/'"> Sair... </a> -->
 
+      <!--Welcome back user-->
       <a mat-button *ngIf="isMobileDevice">
         Olá {{userFirstName}}
       </a>
       <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
 
-      <mat-icon class="mr-8">brightness_5</mat-icon>
-      <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive" class="mr-8"></mat-slide-toggle>
-      <mat-icon>bedtime</mat-icon>
-
+      <!--Notifications badge-->
       <button mat-icon-button>
         <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
           notifications_active
         </mat-icon>
       </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Atualizar dados" (click)="openDialogUpdateUser()">settings</mat-icon>
+      <!--Vertical options-->
+      <button mat-icon-button matTooltip="Opções" [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Novidades" [routerLink]="'/whatsnew'">verified_user</mat-icon>
-      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon class="mr-8">brightness_5</mat-icon>
+          <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive"
+            class="mr-8"></mat-slide-toggle>
+          <mat-icon>bedtime</mat-icon>
+          <span>Trocar tema</span>
+        </button>
 
-      <button mat-icon-button>
-        <mat-icon matTooltip="Sair..." (click)="logout()" [routerLink]="'/'">logout</mat-icon>
-      </button>
+        <button mat-menu-item (click)="openDialogUpdateUser()">
+          <mat-icon matTooltip="Atualizar dados">settings</mat-icon>
+          <span>Atualizar dados</span>
+        </button>
+
+        <button mat-menu-item [routerLink]="'/whatsnew'">
+          <mat-icon matTooltip="Novidades">verified_user</mat-icon>
+          <span>Notas de atualização</span>
+        </button>
+
+        <button mat-menu-item (click)="about()" disabled>
+          <mat-icon matTooltip="Sobre">info</mat-icon>
+          <span>Sobre</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()" [routerLink]="'/'">
+          <mat-icon matTooltip="Sair...">logout</mat-icon>
+          <span>Sair...</span>
+        </button>
+      </mat-menu>
 
     </div>
   </mat-toolbar-row>
