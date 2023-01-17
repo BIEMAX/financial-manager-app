@@ -149,8 +149,7 @@
       Todos os campos preenchidos, basta salvar para concluir.
       <div>
         <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
-        <button mat-button (click)="onSaveClick()" cdkFocusInitial mat-raised-button
-          color="{{uiColor}}">Finalizar</button>
+        <button mat-button (click)="onSaveClick()" mat-raised-button color="{{uiColor}}">Finalizar</button>
       </div>
     </mat-step>
 
@@ -158,7 +157,6 @@
 
   <div mat-dialog-actions>
     <button mat-button mat-stroked-button color="{{uiColor}}" (click)="onExitClick()">Sair</button>
-    <!-- <button mat-button (click)="onSaveClick()" cdkFocusInitial mat-raised-button color="{{uiColor}}">Salvar</button> -->
   </div>
 
 </div>

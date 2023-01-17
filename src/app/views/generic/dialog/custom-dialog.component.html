@@ -7,9 +7,7 @@
     <mat-form-field class="input">
       <mat-label>
         {{field.fieldName}}
-        <!-- <mat-icon>login</mat-icon> -->
       </mat-label>
-      <!-- <input matInput placeholder="Ex. 0012482" value=""> -->
 
       <input matInput type="{{field.fieldType}}" placeholder="{{field.fieldDescription}}" value=""
         [(ngModel)]="field.fieldValue">
@@ -18,8 +16,7 @@
 
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Exit</button>
-    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="data">Save</button>
   </div>
 
 </mat-form-field>
