@@ -26,7 +26,7 @@ export class Address {
   complement: String;
 
   constructor(ZipCode: String, Street: String, Number: String, Complement: String) {
-    this.number = ZipCode;
+    this.zipCode = ZipCode;
     this.street = Street;
     this.number = Number;
     this.complement = Complement;
@@ -98,6 +98,7 @@ export class DefaulterModel {
     else if (typeof (Mail) == "undefined" || !Mail) throw new EmptyFieldException("E-mail");
     else if (typeof (Phone) == "undefined" || !Phone) throw new EmptyFieldException("Telefone");
     else if (typeof (PaymentDeal) == "undefined" || !PaymentDeal) throw new EmptyFieldException("Pagamento");
+    else if (typeof (PaymentDeal.value) == "undefined" || !PaymentDeal.value) throw new EmptyFieldException("Valor");
     else {
       this.user = User;
       this.id = Id;
