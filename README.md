@@ -106,3 +106,13 @@ npm run lan
 ```bash
 http://localhost:4200
 ```
+
+6. Some variables that are stored in localStorage:
+```javascript
+localStorage.getItem('userBearerKey');
+localStorage.getItem('userLogin');
+localStorage.getItem('userName');
+localStorage.getItem('userSecret');
+localStorage.getItem('keepUserConnected');
+localStorage.getItem('isDarkModeEnable')
+```

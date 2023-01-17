@@ -18,6 +18,10 @@
       </a>
       <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
 
+      <mat-icon class="mr-8">brightness_5</mat-icon>
+      <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive" class="mr-8"></mat-slide-toggle>
+      <mat-icon>bedtime</mat-icon>
+
       <button mat-icon-button>
         <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
           notifications_active

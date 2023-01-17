@@ -7,6 +7,7 @@
 - Agrupado ações em apenas uma coluna (anteriormente, eram em colunas separadas)
 - Implementado diversas melhorias visuais relacionadas às cores de interface
 - Melhorado a criação de novos usuários em dispositivos mobile e web
+- Implementado o modo escuro e claro através de uma configuração
 
 # Problemas corrigidos
 

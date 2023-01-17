@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, HostBinding } from '@angular/core';
 import { environment, ui } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSidenav } from '@angular/material/sidenav'
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
@@ -10,6 +11,10 @@ import { UserUpdateInfoComponent } from 'src/app/views/user/user-change-pass/use
 import { UserUpdateModel } from 'src/app/models/user.model';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { DialogReport } from 'src/app/util/error-dialog-report';
+
+//Dark/light mode
+import { FormControl } from '@angular/forms';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-header',
@@ -47,8 +52,23 @@ export class HeaderComponent implements OnInit {
    */
   public startSideNavOpened: Boolean = false;
   public uiColor = ui.color;
+  /**
+   * Control to change the them between light and dark.
+   */
+  public isDarkModeActive: boolean = false;
 
   @ViewChild(MatSidenav) sideNav: MatSidenav;
+
+  /**
+   * On screen's resize, auto close sidenav
+   * @param event 
+   */
+  @HostListener('window:resize', ['$event'])
+  onResize (event) {
+    if (event.target.innerWidth < 500) this.sideNav.close();
+    else if (event.target.innerWidth > 500) this.sideNav.open();
+  }
+  @HostBinding('class') className = '';
 
   constructor(
     private userService: UserService,
@@ -56,20 +76,46 @@ export class HeaderComponent implements OnInit {
     private userAccessService: UserAccessService,
     private genericFunctions: GenericFunctions,
     private dialogReport: DialogReport,
+    private overlay: OverlayContainer,
     public dialog: MatDialog
   ) { }
 
-  ngOnInit () {
+  ngOnInit (): void {
+    //Validate if dark mode is previously active
+    if (localStorage.length > 0 && localStorage.getItem('isDarkModeEnable') == 'true') {
+      this.isDarkModeActive = true;
+      this.changeTheme({ checked: true });
+    } else {
+      this.isDarkModeActive = false;
+      this.changeTheme({ checked: false });
+    }
+
     this.userNameComplete = localStorage.getItem('userName');
     this.userFirstName = localStorage.getItem('userName').split(" ")[0];
+
     this.userService.enableMenusOnScreen.subscribe(
       menu => this.enableMenu = menu
     );
+
     this.qtyNotification = this.userAccessService.user.notifications?.length || 0;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
     this.startSideNavOpened = !this.isMobileDevice;
     this.isShowing = this.isMobileDevice;
+  }
+
+  changeTheme (event: any) {
+    const darkClassName = 'darkMode';
+    if (event.checked) {
+      this.className = darkClassName;
+      localStorage.setItem('isDarkModeEnable', 'true');
+      this.overlay.getContainerElement().classList.add(darkClassName);
+    }
+    else {
+      this.className = '';
+      localStorage.setItem('isDarkModeEnable', 'false');
+      this.overlay.getContainerElement().classList.remove(darkClassName);
+    }
   }
 
   mouseenter () {
@@ -90,6 +136,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('userName');
     localStorage.removeItem('userSecret');
     localStorage.removeItem('keepUserConnected');
+    localStorage.removeItem('isDarkModeEnable');
 
     this.userAccessService.userAuthenticated = false;
     this.userAccessService.user = [];
