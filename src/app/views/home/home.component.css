@@ -7,3 +7,8 @@
   font-size: 18px;
   color: #ff4d4d;
 }
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}

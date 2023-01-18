@@ -1,4 +1,9 @@
-[![Deploy to Staging](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml/badge.svg?branch=develop)](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml)
+## Status
+
+|  Dev environment | Stg environment | Prd environment |
+|:----------------:|:--------------:|:---------------:|
+| N/A | [![Deploy to Firebase](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml/badge.svg?branch=develop)](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml) | [![Deploy to Firebase](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml/badge.svg?branch=main)](https://github.com/BIEMAX/financial-manager-app/actions/workflows/firebase-deploy.yml) |
+
 
 
 # Introduction

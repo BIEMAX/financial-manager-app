@@ -16,6 +16,7 @@
 - Update the actions in list (bills, tags and defaulters)
 - Implemented 'User update - Change to stepper actions instead tabs #135'
 - Implemented 'User Dark theme #142'
+- Fixed 'Mat stepper - implement flex layout and align on component per column #140'
 
 ## [1.2.4]
 

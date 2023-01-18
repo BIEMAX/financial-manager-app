@@ -6,39 +6,47 @@
       <ng-template matStepLabel>Dados do inadimplente</ng-template>
 
       <div>
-        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
-          <mat-label>
-            Nome do inadimplente
-            <mat-icon>person</mat-icon>
-          </mat-label>
-          <input matInput required="true" type="text" placeholder="Nome da pessoa" [(ngModel)]="defaulterName">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              Nome do inadimplente
+              <mat-icon>person</mat-icon>
+            </mat-label>
+            <input matInput required="true" type="text" placeholder="Nome da pessoa" [(ngModel)]="defaulterName">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%;">
-          <mat-label>
-            CPF
-            <mat-icon>person</mat-icon>
-          </mat-label>
-          <input matInput type="tel" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
-            [textMask]="{mask: cpfMask}">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              CPF
+              <mat-icon>person</mat-icon>
+            </mat-label>
+            <input matInput type="tel" placeholder="xxx.xxx.xxx-xx" [(ngModel)]="defaulterCpf"
+              [textMask]="{mask: cpfMask}">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
-          <mat-label>
-            E-mail
-            <mat-icon>mail</mat-icon>
-          </mat-label>
-          <input matInput type="email" placeholder="clientemail@host.com" [(ngModel)]="defaulterMail">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              E-mail
+              <mat-icon>mail</mat-icon>
+            </mat-label>
+            <input matInput type="email" placeholder="clientemail@host.com" [(ngModel)]="defaulterMail">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%;">
-          <mat-label>
-            Telefone
-            <mat-icon>phone</mat-icon>
-          </mat-label>
-          <input matInput type="tel" placeholder="(000) 00000-0000" [(ngModel)]="defaulterPhone"
-            [textMask]="{mask: phoneMask}">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              Telefone
+              <mat-icon>phone</mat-icon>
+            </mat-label>
+            <input matInput type="tel" placeholder="(000) 00000-0000" [(ngModel)]="defaulterPhone"
+              [textMask]="{mask: phoneMask}">
+          </mat-form-field>
+        </div>
       </div>
       <div>
         <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
@@ -51,38 +59,46 @@
       <ng-template matStepLabel>Endereço</ng-template>
 
       <div>
-        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
-          <mat-label>
-            CEP
-            <mat-icon>pin</mat-icon>
-          </mat-label>
-          <input matInput required="true" type="tel" placeholder="XXXXX-XXX" [textMask]="{mask: zipCodeMask}"
-            [(ngModel)]="defaulterZipCode">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              CEP
+              <mat-icon>pin</mat-icon>
+            </mat-label>
+            <input matInput required="true" type="tel" placeholder="XXXXX-XXX" [textMask]="{mask: zipCodeMask}"
+              [(ngModel)]="defaulterZipCode">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%;">
-          <mat-label>
-            Endereço
-            <mat-icon>home_filled</mat-icon>
-          </mat-label>
-          <input matInput required="true" type="text" placeholder="Rua xxx." [(ngModel)]="defaulterAddress">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              Endereço
+              <mat-icon>home_outlineed</mat-icon>
+            </mat-label>
+            <input matInput required="true" type="text" placeholder="Rua xxx." [(ngModel)]="defaulterAddress">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
-          <mat-label>
-            Número
-            <mat-icon>123</mat-icon>
-          </mat-label>
-          <input matInput required="true" type="number" maxlength="4" placeholder="xxx" [(ngModel)]="defaulterNumber">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              Número
+              <mat-icon>123</mat-icon>
+            </mat-label>
+            <input matInput required="true" type="number" maxlength="4" placeholder="xxx" [(ngModel)]="defaulterNumber">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="fill" style="width: 47.5%;">
-          <mat-label>
-            Complemento
-            <mat-icon>gite</mat-icon>
-          </mat-label>
-          <input matInput type="text" placeholder="Casa/apartamento n17" [(ngModel)]="defaulterComplement">
-        </mat-form-field>
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>
+              Complemento
+              <mat-icon>gite</mat-icon>
+            </mat-label>
+            <input matInput type="text" placeholder="Casa/apartamento n17" [(ngModel)]="defaulterComplement">
+          </mat-form-field>
+        </div>
       </div>
       <div>
         <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
@@ -96,7 +112,7 @@
       <ng-template matStepLabel>Valor</ng-template>
 
       <div>
-        <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Valor
             <mat-icon>money</mat-icon>
@@ -105,7 +121,7 @@
           <span matPrefix>R$&nbsp;</span>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%;">
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
           <mat-label>Tipo de inadimplente</mat-label>
           <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="defaulterIsDebtor">
             <div *ngIf="defaulterIsDebtor">Devedor</div>
@@ -114,7 +130,7 @@
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
+        <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
           <mat-label *ngIf="defaulterIsDebtor">Devedor irá parcelar?</mat-label>
           <mat-label *ngIf="!defaulterIsDebtor">Credor irá parcelar?</mat-label>
           <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isDefaulterPayInInstallments">
@@ -124,7 +140,7 @@
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 47.5%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Número de prestações
             <mat-icon>123</mat-icon>
@@ -145,13 +161,12 @@
       Todos os campos preenchidos, basta salvar para concluir.
       <div>
         <button mat-button matStepperPrevious mat-stroked-button color="{{uiColor}}">Voltar</button>
-        <button mat-button mat-stroked-button (click)="stepper.reset()">Reiniciar o cadastro</button>
+        <button mat-button (click)="onSaveClick()" mat-raised-button color="{{uiColor}}">Finalizar</button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
 
   <div mat-dialog-actions>
     <button mat-button (click)="onExitClick()" mat-stroked-button color="{{uiColor}}">Sair</button>
-    <button mat-button (click)="onSaveClick()" cdkFocusInitial mat-raised-button color="{{uiColor}}">Salvar</button>
   </div>
 </div>

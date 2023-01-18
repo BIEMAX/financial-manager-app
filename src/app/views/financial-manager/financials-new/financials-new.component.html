@@ -5,18 +5,20 @@
     <!--Step 1-->
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Detalhes</ng-template>
-
       <div>
+
         <div>
-          <mat-form-field appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-form-field appearance="outline">
             <mat-label>
               Nome da conta
               <mat-icon>payments</mat-icon>
             </mat-label>
             <input matInput required="true" type="text" placeholder="Título da conta a pagar" [(ngModel)]="billName">
           </mat-form-field>
+        </div>
 
-          <mat-form-field appearance="fill" style="width: 47.5%;">
+        <div>
+          <mat-form-field>
             <mat-label>
               Data de vencimento
               <mat-icon>calendar_month</mat-icon>
@@ -27,7 +29,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="fill" floatLabel="always" style="width: 47.5%; margin-right: 5%;">
+          <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
             <mat-label>Tipo de movimento da conta</mat-label>
             <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashEntry">
               <div *ngIf="isCashEntry">Entrada</div>
@@ -42,7 +44,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-form-field>
             <mat-label>
               Descrição da conta
               <mat-icon>description</mat-icon>
@@ -52,21 +54,20 @@
             </textarea>
           </mat-form-field>
         </div>
+
       </div>
       <div>
         <button mat-button matStepperNext mat-raised-button color="{{uiColor}}">Próximo</button>
       </div>
-
     </mat-step>
 
     <!--Step 2-->
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Valores</ng-template>
-
       <div>
 
         <div>
-          <mat-form-field class="number-1" appearance="fill" style="width: 47.5%; margin-right: 5%;">
+          <mat-form-field class="number-1">
             <mat-label>
               Valor total da conta
               <mat-icon>123</mat-icon>
@@ -74,8 +75,10 @@
             <input matInput required="true" type="number" placeholder="0" [(ngModel)]="billTotalValue">
             <span matPrefix>R$&nbsp;</span>
           </mat-form-field>
+        </div>
 
-          <mat-form-field appearance="fill" style="width: 47.5%;">
+        <div>
+          <mat-form-field>
             <mat-label>
               Número de prestações
               <mat-icon>123</mat-icon>
@@ -84,37 +87,36 @@
               matTooltip="Informe um valor maior que um para habilitar novos campos" type=" number" placeholder="1"
               value="1" [(ngModel)]="billAmountQuantity">
           </mat-form-field>
+        </div>
 
-          <div *ngIf="billAmountQuantity > 1">
-            <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashEntry">
-              Dividir "valor total" pelo "número de prestações"? {{isBillValueToDivide == true ? 'Sim' : 'Não' }}
-            </mat-checkbox>
+        <div *ngIf="billAmountQuantity > 1">
+          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashEntry">
+            Dividir "valor total" pelo "número de prestações"? {{isBillValueToDivide == true ? 'Sim' : 'Não' }}
+          </mat-checkbox>
 
-            <div>
-              <mat-label *ngIf="billAmountQuantity > 1 && billTotalValue > 1">
-                <mat-card style="width: 95%; height: 10%;">
-                  <mat-icon>help</mat-icon>
-                  Exemplo:
-                  {{isBillValueToDivide == true ? 'O valor por prestação ficará: ' + ( billTotalValue /
-                  billAmountQuantity) : 'O valor final ficará: ' + ( billTotalValue *
-                  billAmountQuantity)}}
+          <div>
+            <mat-label *ngIf="billAmountQuantity > 1 && billTotalValue > 1">
+              <mat-card style="width: 95%; height: 10%;">
+                <mat-icon>help</mat-icon>
+                Exemplo:
+                {{isBillValueToDivide == true ? 'O valor por prestação ficará: ' + ( billTotalValue /
+                billAmountQuantity) : 'O valor final ficará: ' + ( billTotalValue *
+                billAmountQuantity)}}
 
-                  <strong>
-                    <p>No caso da opção '{{isBillValueToDivide == true ? 'marcada' : 'desmarcada'}}', o cálculo será:
-                    </p>
-                    '{{isBillValueToDivide == true ? 'valorTotal / numeroPrestacoes = valor por prestação' : 'valorTotal
-                    *
-                    numeroPrestacoes = valor por prestação'}}'
-                  </strong>
-                </mat-card>
-              </mat-label>
-            </div>
+                <strong>
+                  <p>No caso da opção '{{isBillValueToDivide == true ? 'marcada' : 'desmarcada'}}', o cálculo será:
+                  </p>
+                  '{{isBillValueToDivide == true ? 'valorTotal / numeroPrestacoes = valor por prestação' : 'valorTotal
+                  *
+                  numeroPrestacoes = valor por prestação'}}'
+                </strong>
+              </mat-card>
+            </mat-label>
           </div>
-
         </div>
 
         <div>
-          <mat-form-field class="" appearance="fill" style="width: 100%;">
+          <mat-form-field class="">
             <mat-label>Tags</mat-label>
             <mat-chip-list #chipList aria-label=" Seleção de tags">
               <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
