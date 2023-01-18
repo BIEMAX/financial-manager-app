@@ -4,22 +4,26 @@
     <div style="height: 100%;">
 
       <div class="example-action-buttons">
-        <button mat-button (click)="accordion.openAll()">Expandir todos</button>
-        <button mat-button (click)="accordion.closeAll()">Recolher todos</button>
+        <button mat-button mat-stroked-button color="{{uiColor}}" (click)="accordion.openAll()">Expandir todos</button>
+        <button mat-button mat-stroked-button color="{{uiColor}}" (click)="accordion.closeAll()">Recolher todos</button>
       </div>
-      <mat-accordion multi>
+
+      <mat-accordion class="headers-align" multi>
 
         <div *ngFor="let panel of panels">
-          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel>
             <!--First expansion panel-->
             <mat-expansion-panel-header>
+
               <mat-panel-title>
                 {{panel.name}}
               </mat-panel-title>
+
               <mat-panel-description>
                 {{panel.description}}
                 <mat-icon>{{panel.icon}}</mat-icon>
               </mat-panel-description>
+
             </mat-expansion-panel-header>
 
             <!-- Lists -->
@@ -34,14 +38,16 @@
               </mat-card>
             </div>
 
-            <mat-action-row>
-              <button mat-button color="primary" (click)="nextStep()">Next</button>
-            </mat-action-row>
+            <!-- <mat-action-row>
+              <button mat-button mat-stroked-button color="{{uiColor}}" (click)="prevStep()">Voltar</button>
+              <button mat-button mat-raised-button color="{{uiColor}}" (click)="nextStep()">Próximo</button>
+            </mat-action-row> -->
 
           </mat-expansion-panel>
         </div>
 
       </mat-accordion>
+
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -4,7 +4,7 @@
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Informações</ng-template>
       <div>
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Nome
             <mat-icon>person</mat-icon>
@@ -12,7 +12,7 @@
           <input matInput type="text" placeholder="Nome completo" [(ngModel)]="userNameNew">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Email
             <mat-icon>mail</mat-icon>
@@ -30,7 +30,7 @@
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Senha</ng-template>
       <div>
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Senha atual
             <mat-icon>key</mat-icon>
@@ -38,7 +38,7 @@
           <input matInput type="password" placeholder="Senha antiga" [(ngModel)]="userPassOld">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Nova senha
             <mat-icon>key</mat-icon>
@@ -46,7 +46,7 @@
           <input matInput type="password" placeholder="Senha nova" [(ngModel)]="userPassNew">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-form-field appearance="outline" style="width: 100%;">
           <mat-label>
             Repita a nova senha
             <mat-icon>key</mat-icon>
