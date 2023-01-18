@@ -75,6 +75,10 @@ export class UserLoginComponent implements OnInit {
               localStorage.setItem('userSecret', this.encrypt.encrypt(this.userPassword));
               localStorage.setItem('keepUserConnected', this.keepUserConnected.toString());
 
+              //If does not have the variable yet, create it
+              if (!localStorage.getItem('isDarkModeEnable'))
+                localStorage.setItem('isDarkModeEnable', 'false');
+
               this.userAccessService.userAuthenticated = true;
               this.userAccessService.user = loginData.data;
               this.userAccessService.user.userBearer = loginData.bearerKey;
