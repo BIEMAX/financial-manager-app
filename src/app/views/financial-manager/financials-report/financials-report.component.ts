@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartOptions } from 'chart.js';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Chart, ChartOptions } from 'chart.js';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -8,7 +8,7 @@ import { GenericFunctions } from 'src/app/util/generic-functions';
 
 import { ui } from 'src/environments/environment';
 import { ChartsService } from 'src/app/services/chart.service';
-import { IsAKnownErrorCode } from 'src/app/util/response-message';
+import { DialogReport } from 'src/app/util/error-dialog-report';
 
 // tslint:disable-next-line:no-duplicate-imports
 import * as _moment from 'moment';
@@ -43,10 +43,34 @@ const moment = _rollupMoment || _moment;
 })
 export class FinancialsReportComponent implements OnInit {
 
-  // Pie
-  private genericOptions: ChartOptions<'pie'> = {
-    responsive: false
+  /**
+   * Global options
+   */
+  private globalOptions: ChartOptions<'doughnut'> = {
+    responsive: false,
+    plugins: {
+      title: {
+        display: false,
+      }
+    }
   };
+  private globalPlugins: {
+    legend: {
+      onHover: 'handleHover',
+      onLeave: 'handleLeave'
+    },
+    title: {
+      display: false,
+    }
+  };
+  private globalBackgroundColors = [
+    'rgba(255, 99, 132, 0.2)',
+    'rgba(54, 162, 235, 0.2)',
+    'rgba(255, 206, 86, 0.2)',
+    'rgba(75, 192, 192, 0.2)',
+    'rgba(153, 102, 255, 0.2)',
+    'rgba(255, 159, 64, 0.2)'
+  ];
 
   /**
    * Define default color on UI (User Interface)
@@ -56,17 +80,29 @@ export class FinancialsReportComponent implements OnInit {
   public hasToWait: Boolean = false;
   public dateToSelect: any = new FormControl(moment());
   public gridColumnsToShow: Number = 2;
+  /**
+   * Contains a list of available charts to user select
+   */
+  public availableChartTypes = [
+    'pie',
+    'doughnut',
+    'bar'
+  ];
 
   private currentMonth: number = new Date().getMonth() + 1;
   private currentYear: number = new Date().getFullYear();
 
+  @ViewChild('chart', { static: false }) chart: Chart;
+
   constructor(
     private chartsService: ChartsService,
-    private genericFunctions: GenericFunctions
+    private genericFunctions: GenericFunctions,
+    private dialogReport: DialogReport,
   ) { }
 
   ngOnInit () {
     this.getUserCharts();
+    // this.generateRandomColorsCharts();
   }
 
   getUserCharts () {
@@ -81,7 +117,7 @@ export class FinancialsReportComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.genericFunctions.showNotification(IsAKnownErrorCode((error.error.message)), 'Erro');//TODO: #120 Refactor this error
+        this.dialogReport.showMessageDialog(error, true, true);
       }
     );
   }
@@ -91,11 +127,14 @@ export class FinancialsReportComponent implements OnInit {
       response => {
         let data: any = response;
 
-        chart.type = 'pie';
-        chart.dataset = [{ data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)) }]; //Ordena os verdadeiros primeiro
+        chart.type = 'doughnut';
+        chart.dataset = [{
+          data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)), //Ordena os verdadeiros primeiro
+          backgroundColor: this.globalBackgroundColors
+        }];
         chart.labels = [data.data.labels[0], data.data.labels[1]];
-        chart.options = this.genericOptions;
-        chart.plugins = [];
+        chart.options = this.globalOptions;
+        chart.plugins = this.globalPlugins;
         chart.legend = true;
 
         return chart;
@@ -109,10 +148,13 @@ export class FinancialsReportComponent implements OnInit {
       response => {
         let data: any = response;
         chart.type = 'pie';
-        chart.dataset = [{ data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)) }]; //Ordena os verdadeiros primeiro
+        chart.dataset = [{
+          data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)), //Ordena os verdadeiros primeiro
+          backgroundColor: this.globalBackgroundColors
+        }];
         chart.labels = [data.data.labels[0], data.data.labels[1]];
-        chart.options = this.genericOptions;
-        chart.plugins = [];
+        chart.options = this.globalOptions;
+        chart.plugins = this.globalPlugins;
         chart.legend = true;
 
         return chart;
@@ -131,10 +173,13 @@ export class FinancialsReportComponent implements OnInit {
         let dataSet = spendData.map((c: { value: any; }) => c.value);
         let labels = spendData.map((c: { name: any; }) => [c.name]);
 
-        chart.type = 'pie';
-        chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
+        chart.type = 'doughnut';
+        chart.dataset = [{
+          data: dataSet,
+          backgroundColor: this.globalBackgroundColors
+        }];
         chart.labels = labels;
-        chart.options = this.genericOptions;
+        chart.options = this.globalOptions;
         chart.legend = true;
 
         return chart;
@@ -153,10 +198,14 @@ export class FinancialsReportComponent implements OnInit {
         let dataSet = [receivedData.data.entriesValues, receivedData.data.exitsValues, receivedData.data.remainValues];
         let labels = receivedData.labels.map((c) => [c]);
 
-        chart.type = 'pie';
-        chart.dataset = [{ data: dataSet }]; //Ordena os verdadeiros primeiro
+        chart.type = 'doughnut';
+        chart.dataset = [{
+          data: dataSet,
+          backgroundColor: this.globalBackgroundColors
+        }];
         chart.labels = labels;
-        chart.options = this.genericOptions;
+        chart.options = this.globalOptions;
+        chart.plugins = this.globalPlugins;
         chart.legend = true;
 
         return chart;
@@ -210,6 +259,31 @@ export class FinancialsReportComponent implements OnInit {
 
   toggleGridColumns () {
     this.gridColumnsToShow = this.gridColumnsToShow === 2 ? 4 : 2;
+  }
+
+  /**
+   * Function to change chart type based on user selection
+   * @param chart 
+   * @param newType 
+   * @returns 
+   */
+  changeChartType (chart: any, newType: string) {
+    if (this.chart) this.chart.destroy();
+    if (typeof (newType) != "undefined" && newType) { //User can just click above control
+      chart.type = newType;
+      return chart;
+    }
+  }
+
+  /**
+   * Function that generate (by default), 4 colors to show in the charts
+   * @param qtdLabels 
+   */
+  generateRandomColorsCharts (qtdLabels: Number = 4) {
+    for (let index = 0;index < qtdLabels;index++) {
+      let randomColor = '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
+      this.globalBackgroundColors.push(randomColor);
+    }
   }
 
 }
