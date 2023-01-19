@@ -3,7 +3,6 @@ import { environment, ui } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
@@ -13,7 +12,6 @@ import { GenericFunctions } from 'src/app/util/generic-functions';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 
 //Dark/light mode
-import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
