@@ -118,7 +118,7 @@
         <div>
           <mat-form-field class="">
             <mat-label>Tags</mat-label>
-            <mat-chip-list #chipList aria-label=" Seleção de tags">
+            <mat-chip-listbox #chipList aria-label=" Seleção de tags">
               <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
                 {{tag}}
                 <button matChipRemove>
@@ -128,7 +128,7 @@
               <input placeholder="Nova tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
                 [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (matChipInputTokenEnd)="addTag($event)">
-            </mat-chip-list>
+            </mat-chip-listbox>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
               <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
                 {{tag}}

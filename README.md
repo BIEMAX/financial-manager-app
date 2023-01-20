@@ -91,6 +91,21 @@ export const user = {
 npm install
 ```
 
+> **Note:** If you are having issues to run, install these other packages separately:
+
+```bash
+npm i @angular-devkit/build-angular
+
+npm i @ngtools/webpack
+
+npm i mini-css-extract-plugin
+
+npm i postcss-loader
+
+# For 'ngx-markdown' dependency
+npm install --save @types/marked
+```
+
 4. To run the project in you can run with the following commands:
 ```bash
 # run in localhost (localhost:4200)
