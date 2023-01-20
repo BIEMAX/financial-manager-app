@@ -64,12 +64,12 @@ export class FinancialsReportComponent implements OnInit {
     }
   };
   private globalBackgroundColors = [
-    'rgba(255, 99, 132, 0.2)',
-    'rgba(54, 162, 235, 0.2)',
-    'rgba(255, 206, 86, 0.2)',
-    'rgba(75, 192, 192, 0.2)',
-    'rgba(153, 102, 255, 0.2)',
-    'rgba(255, 159, 64, 0.2)'
+    // 'rgba(255, 99, 132, 0.2)',
+    // 'rgba(54, 162, 235, 0.2)',
+    // 'rgba(255, 206, 86, 0.2)',
+    // 'rgba(75, 192, 192, 0.2)',
+    // 'rgba(153, 102, 255, 0.2)',
+    // 'rgba(255, 159, 64, 0.2)'
   ];
 
   /**
@@ -102,7 +102,6 @@ export class FinancialsReportComponent implements OnInit {
 
   ngOnInit () {
     this.getUserCharts();
-    // this.generateRandomColorsCharts();
   }
 
   getUserCharts () {
@@ -130,7 +129,7 @@ export class FinancialsReportComponent implements OnInit {
         chart.type = 'doughnut';
         chart.dataset = [{
           data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)), //Ordena os verdadeiros primeiro
-          backgroundColor: this.globalBackgroundColors
+          //backgroundColor: this.globalBackgroundColors
         }];
         chart.labels = [data.data.labels[0], data.data.labels[1]];
         chart.options = this.globalOptions;
@@ -150,7 +149,7 @@ export class FinancialsReportComponent implements OnInit {
         chart.type = 'pie';
         chart.dataset = [{
           data: data.data.data.map(c => c.total_value).sort((x, y) => Number(y) - Number(x)), //Ordena os verdadeiros primeiro
-          backgroundColor: this.globalBackgroundColors
+          //backgroundColor: this.globalBackgroundColors
         }];
         chart.labels = [data.data.labels[0], data.data.labels[1]];
         chart.options = this.globalOptions;
@@ -176,7 +175,7 @@ export class FinancialsReportComponent implements OnInit {
         chart.type = 'doughnut';
         chart.dataset = [{
           data: dataSet,
-          backgroundColor: this.globalBackgroundColors
+          ////backgroundColor: this.globalBackgroundColors
         }];
         chart.labels = labels;
         chart.options = this.globalOptions;
@@ -201,7 +200,7 @@ export class FinancialsReportComponent implements OnInit {
         chart.type = 'doughnut';
         chart.dataset = [{
           data: dataSet,
-          backgroundColor: this.globalBackgroundColors
+          //backgroundColor: this.globalBackgroundColors
         }];
         chart.labels = labels;
         chart.options = this.globalOptions;
@@ -272,17 +271,6 @@ export class FinancialsReportComponent implements OnInit {
     if (typeof (newType) != "undefined" && newType) { //User can just click above control
       chart.type = newType;
       return chart;
-    }
-  }
-
-  /**
-   * Function that generate (by default), 4 colors to show in the charts
-   * @param qtdLabels 
-   */
-  generateRandomColorsCharts (qtdLabels: Number = 4) {
-    for (let index = 0;index < qtdLabels;index++) {
-      let randomColor = '#' + (0x1000000 + Math.random() * 0xffffff).toString(16).substr(1, 6);
-      this.globalBackgroundColors.push(randomColor);
     }
   }
 
