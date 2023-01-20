@@ -33,6 +33,7 @@
 - Resolvido o problema de visualização de novas versões em dispositivos mobile
 - Resolvido a coloração dos ícones na tela inicial
 - Resolvido erros durante a edição de inadimplentes
+- Caso aconteça algum erro durante a criação do usuário, é apresentado um erro e retornado a tela de cadastro [#149](https://github.com/BIEMAX/financial-manager-app/issues/149)
 
 # Problemas conhecidos
 

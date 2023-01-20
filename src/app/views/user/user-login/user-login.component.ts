@@ -11,6 +11,7 @@ import { UserModel } from 'src/app/models/user.model';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import Encrypt from 'src/app/util/encrypt-data';
+import { UserDialogComponent } from 'src/app/views/generic/user-dialog-report/user-dialog-report.component';
 
 @Component({
   selector: 'app-login',
@@ -36,10 +37,10 @@ export class UserLoginComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private userAccessService: UserAccessService,
-    public dialog: MatDialog,
     private dialogReport: DialogReport,
     private genericFunctions: GenericFunctions,
-    private encrypt: Encrypt
+    private encrypt: Encrypt,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit () {
@@ -114,13 +115,16 @@ export class UserLoginComponent implements OnInit {
 
   /**
    * Open a dialog to create a new user
+   * @param user User that occurs error in creation/register, that will re-open
+   * the dialog to try again.
    */
-  openDialogAddNewUser (): void {
+  openDialogAddNewUser (user: UserModel = null): void {
     const dialogRef = this.dialog.open(UserNewComponent, {
       disableClose: true,
       width: 'auto',
       height: 'auto',
-      autoFocus: true
+      autoFocus: true,
+      data: user
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -144,9 +148,34 @@ export class UserLoginComponent implements OnInit {
       },
       error => {
         this.hasToWait = false;
-        this.dialogReport.showMessageDialog_UserCreation(error, user, true, true);
+        this.openDialogToTryAgainUserRegistration(user, error);
       }
     );
+  }
+
+  /**
+   * Re-open the user creation dialog to try a new registration
+   * after an error/issue during the recent registration.
+   * @param user User model
+   * @param error Exception/error from backend application
+   */
+  openDialogToTryAgainUserRegistration (user: UserModel, error: any) {
+    this.dialogReport.showMessageDialog_UserCreation(error, user, true, true, false);
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      disableClose: false,
+      width: 'auto',
+      height: 'auto',
+      autoFocus: true,
+      data: {
+        isError: true,
+        title: 'Erro',
+        message: error?.error?.message,
+        solution: 'Usuário indisponível para cadastro, tente outro usuário novamente.'
+      }
+    });
+    dialogRef.afterClosed().subscribe(r => {
+      this.openDialogAddNewUser(user);
+    });
   }
 
   /**

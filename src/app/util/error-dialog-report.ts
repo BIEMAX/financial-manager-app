@@ -68,25 +68,26 @@ export class DialogReport {
    * @param isError True if is an error (the method will extract the info)
    * @param saveLog True to send log information to database.
    */
-  public showMessageDialog_UserCreation (exception: any, user: UserModel, isError: Boolean = true, saveLog: Boolean = true) {
+  public showMessageDialog_UserCreation (exception: any, user: UserModel, isError: Boolean = true, saveLog: Boolean = true, showDialog: Boolean = true) {
     this.extractInfoFromException(exception);
 
-    if (saveLog) this.saveLogUserCreation(exception);
+    if (saveLog) this.saveLogUserCreation(exception, user);
 
-    const dialogRef = this.dialog.open(UserDialogComponent, {
-      disableClose: false,
-      width: 'auto',
-      height: 'auto',
-      autoFocus: true,
-      data: {
-        isError: isError,
-        title: this.title,
-        message: this.message,
-        solution: this.solution
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(r => { });
+    if (showDialog) {
+      const dialogRef = this.dialog.open(UserDialogComponent, {
+        disableClose: false,
+        width: 'auto',
+        height: 'auto',
+        autoFocus: true,
+        data: {
+          isError: isError,
+          title: this.title,
+          message: this.message,
+          solution: this.solution
+        }
+      });
+      dialogRef.afterClosed().subscribe(r => { });
+    }
   }
 
   /**

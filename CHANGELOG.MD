@@ -17,6 +17,7 @@
 - Implemented 'User update - Change to stepper actions instead tabs #135'
 - Implemented 'User Dark theme #142'
 - Fixed 'Mat stepper - implement flex layout and align on component per column #140'
+- Implemented 'Show error if the user already exists #149'
 
 ## [1.2.4]
 
