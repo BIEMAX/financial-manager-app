@@ -1,0 +1,16 @@
+<!--Title-->
+<h2 mat-dialog-title>Menu de ajuda</h2>
+<mat-dialog-content>
+
+  <mat-card>
+    <mat-card-content>
+      <div [innerHTML]="data">
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" mat-raised-button color="{{uiColor}}">Voltar</button>
+</div>
