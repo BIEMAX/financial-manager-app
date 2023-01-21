@@ -63,6 +63,7 @@ import { FinancialsTagNewComponent } from './views/financial-manager/financials-
 import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
 import { FinancialsDefaultersNewComponent } from './views/financial-manager/financials-defaulters-new/financials-defaulters-new.component';
 import { FinancialsDefaultersSubtractComponent } from './views/financial-manager/financials-defaulters-subtract/financials-defaulters-subtract.component';
+import { HelpDialogComponent } from './views/generic/help-dialog/help-dialog.component';
 
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -85,6 +86,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     PageNotFoundComponent,
     ReleaseNotesComponent,
     UserDialogComponent,
+    HelpDialogComponent,
     //Financials
     FinancialsDefaultersComponent,
     FinancialsDefaultersNewComponent,
