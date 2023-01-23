@@ -25,6 +25,7 @@
 - Atualizado as bibliotecas do framework, trazendo melhorias no desempenho e correção de problemas
 - Alterado as grades de dados, simplificando a visualização e ajustando o layout
 - Adicionado a possibilidade de recolher ou exibir os filtros aplicados, melhorando a visualização
+- Ajustado as telas para cadastros de novos itens, os quais não alinhavam-se corretamente à tela
 
 # Problemas corrigidos
 
