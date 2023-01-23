@@ -75,42 +75,33 @@ mat-paginator {
   padding: 1px;
 }
 
-table th.mat-sort-header,
-.mat-mdc-header-cell
-
-/*.mat-mdc-row */
-/* Color of table rows */
-  {
-  background-color: #3f51b5 !important;
+/* Define the size of the table */
+table {
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  width: auto;
+  padding: 20px;
 }
 
-// .cls-mat-table-size {
-//   width: 98%;
-//   padding: 1px;
-// }
+/* Table header cells background color */
+table th.mat-sort-header,
+.mat-mdc-header-cell {
+  /* */
+  /* Color of table rows */
+  background-color: #3f51b5 !important;
+  border-radius: 5px;
+}
 
-// table {
-//   margin-top: 0px;
-//   margin-left: 10px;
-//   margin-right: 10px;
-//   margin-bottom: 0px;
-//   border-radius: 10px;
-//   width: auto;
-//   padding: 20px;
-// }
-
-// th.mat-header-cell {
-//   //Header definitions
-//   // border-radius: 10px;
-//   background-color: #3f51b5;
-// }
-
-// td {
-//   //Rows definitions
-//   // border-radius: 10px;
-// }
-
-
+/* Fix the border around the accordion with fields to filter data */
+mat-accordion .mat-expansion-panel {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 
 /****************** Global Loading spinner ******************/
 .loading-indicator {
@@ -164,7 +155,7 @@ table th.mat-sort-header,
 
 /****************** Exclusive for dialogs ******************/
 .cls-form-field-full-width {
-  width: 33%;
+  width: 100%;
   margin-top: 0px;
   margin-left: 10px;
 }
