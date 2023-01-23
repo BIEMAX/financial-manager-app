@@ -1,112 +1,123 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <button mat-icon-button matTooltip="Menu" (click)="isExpanded = !isExpanded">
-      <mat-icon (click)="isToToggleSideNav()">menu</mat-icon>
-    </button>
-    <!--Only show application name if is a web device-->
-    <h2 *ngIf="!isMobileDevice">{{applicationName}}</h2>
-
-    <div class="right-align">
-
-      <!-- <a mat-button [routerLink]="'/home'"> Página inicial </a>
-      <a mat-button [routerLink]="'/financials'"> Minhas finanças </a>
-      <a mat-button [routerLink]="'/reports'"> Relatórios </a>
-      <a mat-button [routerLink]="'/'"> Sair... </a> -->
-
-      <!--Welcome back user-->
-      <a mat-button *ngIf="isMobileDevice">
-        Olá {{userFirstName}}
-      </a>
-      <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
-
-      <!--Notifications badge-->
-      <button mat-icon-button>
-        <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
-          notifications_active
-        </mat-icon>
+<div>
+  <mat-toolbar color="{{uiColor}}">
+    <mat-toolbar-row>
+      <button mat-icon-button matTooltip="Menu" (click)="drawer.toggle()">
+        <mat-icon (click)="isToToggleSideNav()">menu</mat-icon>
       </button>
+      <h2 *ngIf="!isMobileDevice">{{applicationName}}</h2><!--Only show application name if is a web device-->
+      <div class="right-align">
 
-      <!--Vertical options-->
-      <button mat-icon-button matTooltip="Opções" [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon class="mr-8">brightness_5</mat-icon>
-          <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive"
-            class="mr-8"></mat-slide-toggle>
-          <mat-icon>bedtime</mat-icon>
-          <span>Trocar tema</span>
-        </button>
-
-        <button mat-menu-item (click)="openDialogUpdateUser()">
-          <mat-icon matTooltip="Atualizar dados">settings</mat-icon>
-          <span>Atualizar dados</span>
-        </button>
-
-        <button mat-menu-item [routerLink]="'/whatsnew'">
-          <mat-icon matTooltip="Novidades">verified_user</mat-icon>
-          <span>Notas de atualização</span>
-        </button>
-
-        <button mat-menu-item (click)="about()" disabled>
-          <mat-icon matTooltip="Sobre">info</mat-icon>
-          <span>Sobre</span>
-        </button>
-
-        <button mat-menu-item (click)="logout()" [routerLink]="'/'">
-          <mat-icon matTooltip="Sair...">logout</mat-icon>
-          <span>Sair...</span>
-        </button>
-      </mat-menu>
-
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<mat-sidenav-container class="example-container" autosize>
-  <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="startSideNavOpened" (mouseenter)="mouseenter()"
-    (mouseleave)="mouseleave()">
-    <mat-nav-list>
-
-      <mat-list-item [routerLink]="'/home'" (click)="showSubmenu = !showSubmenu" class="parent">
-        <span class="full-width" *ngIf="isShowing">Página inicial</span>
-        <mat-icon mat-list-icon (click)="isToToggleSideNav()" color="{{uiColor}}">home</mat-icon>
-      </mat-list-item>
-
-      <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
-        <mat-icon mat-list-icon color="{{uiColor}}">account_balance</mat-icon>
-        <span class="full-width" *ngIf="isShowing">Financeiro</span>
-        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isShowing" color="{{uiColor}}">
-          expand_more
-        </mat-icon>
-      </mat-list-item>
-
-      <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing">
-        <a mat-list-item [routerLink]="'/financials'" (click)="isToToggleSideNav()">
-          <mat-icon color="{{uiColor}}">request_quote</mat-icon>
-          Gastos mensais
+        <!--Welcome back user-->
+        <a mat-button *ngIf="isMobileDevice">
+          Olá {{userFirstName}}
         </a>
-        <a mat-list-item [routerLink]="'/defaulters'" (click)="isToToggleSideNav()">
-          <mat-icon color="{{uiColor}}">assignment_ind</mat-icon>
-          Inadimplentes
-        </a>
-        <a mat-list-item [routerLink]="'/reports'" (click)="isToToggleSideNav()">
-          <mat-icon color="{{uiColor}}">insights</mat-icon>
-          Relatórios
-        </a>
-        <a mat-list-item [routerLink]="'/tags'" (click)="isToToggleSideNav()">
-          <mat-icon color="{{uiColor}}">local_offer</mat-icon>
-          Tags
-        </a>
+        <a mat-button *ngIf="!isMobileDevice"> Olá {{userFirstName}}, bem-vindo de volta </a>
+
+        <!--Notifications badge-->
+        <button mat-icon-button>
+          <mat-icon [matBadge]="qtyNotification" matBadgeColor="warn" [matTooltip]="descNotifications" click="">
+            notifications_active
+          </mat-icon>
+        </button>
+
+        <!--Vertical options-->
+        <button mat-icon-button matTooltip="Opções" [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon class="mr-8">brightness_5</mat-icon>
+            <mat-slide-toggle (change)="changeTheme($event)" [(ngModel)]="isDarkModeActive"
+              class="mr-8"></mat-slide-toggle>
+            <mat-icon>bedtime</mat-icon>
+            <span>Trocar tema</span>
+          </button>
+
+          <button mat-menu-item (click)="openDialogUpdateUser()">
+            <mat-icon matTooltip="Atualizar dados">settings</mat-icon>
+            <span>Atualizar dados</span>
+          </button>
+
+          <button mat-menu-item [routerLink]="'/whatsnew'">
+            <mat-icon matTooltip="Novidades">verified_user</mat-icon>
+            <span>Notas de atualização</span>
+          </button>
+
+          <button mat-menu-item (click)="about()" disabled>
+            <mat-icon matTooltip="Sobre">info</mat-icon>
+            <span>Sobre</span>
+          </button>
+
+          <button mat-menu-item (click)="logout()" [routerLink]="'/'">
+            <mat-icon matTooltip="Sair...">logout</mat-icon>
+            <span>Sair...</span>
+          </button>
+        </mat-menu>
+
       </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
 
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
+<mat-drawer-container>
+  <mat-drawer #drawer mode="over" [opened]="startSideNavOpened">
+    <!--(mouseenter)="drawer.toggle()" (mouseleave)="drawer.toggle()"-->
+    <!-- <mat-form-field appearance="fill"></mat-form-field> -->
+
+    <!--Home-->
+    <mat-list>
+
+      <mat-list-item>
+        <mat-icon matListItemIcon color="{{uiColor}}">home</mat-icon>
+        <!-- <span matListItemTitle [routerLink]="'/home'">Página inicial</span> -->
+        <span matListItemLine [routerLink]="'/home'" (click)="drawer.toggle()">Página inicial</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      <!--Financials-->
+      <mat-accordion>
+        <!--Menu financials to expand-->
+        <mat-expansion-panel (opened)="showSubmenu = true" (closed)="showSubmenu = false">
+
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon color="{{uiColor}}" style="margin-right: 15%;">account_balance</mat-icon>
+              Financeiro
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <!--Submenu options-->
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListItemIcon color="{{uiColor}}">request_quote</mat-icon>
+              <span matListItemLine [routerLink]="'/financials'" (click)="drawer.toggle()">Gastos mensais</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
+              <span matListItemLine [routerLink]="'/defaulters'" (click)="drawer.toggle()">Inadimplentes</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
+              <span matListItemLine [routerLink]="'/reports'" (click)="drawer.toggle()">insights</span>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>
+              <mat-icon matListItemIcon color="{{uiColor}}">local_offer</mat-icon>
+              <span matListItemLine [routerLink]="'/tags'" (click)="drawer.toggle()">Tags</span>
+            </mat-list-item>
+          </mat-list>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </mat-list>
+
+  </mat-drawer>
+  <mat-drawer-content>
     <div style="height: 88vh;">
       <router-outlet></router-outlet>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-drawer-content>
+</mat-drawer-container>

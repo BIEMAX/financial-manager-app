@@ -32,13 +32,6 @@ $angular-dark-theme: mat.define-dark-theme((color: (primary: $angular-primary,
   @include mat.all-component-colors($angular-dark-theme);
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #3f51b5;
-  /* footer background color */
-}
-
 /****************** Custom definitions globally ******************/
 // mat-form-field {
 //   width: 45.5%;
@@ -46,6 +39,13 @@ body {
 //   margin-right: 3%;
 //   font-size: 14px;
 // }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #3f51b5;
+  /* footer background color */
+}
 
 mat-card-title {
   margin-top: 5px;
@@ -60,6 +60,49 @@ mat-label {
   font-size: calc(12px + 0.390625vw); //Change font size based on device
 }
 
+/****************** Data grid's/tables with data ******************/
+mat-paginator {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+
+.cls-mat-table-size {
+  /* Div containing the table with data*/
+  width: 98.4%;
+  padding: 1px;
+}
+
+// .cls-mat-table-size {
+//   width: 98%;
+//   padding: 1px;
+// }
+
+// table {
+//   margin-top: 0px;
+//   margin-left: 10px;
+//   margin-right: 10px;
+//   margin-bottom: 0px;
+//   border-radius: 10px;
+//   width: auto;
+//   padding: 20px;
+// }
+
+// th.mat-header-cell {
+//   //Header definitions
+//   // border-radius: 10px;
+//   background-color: #3f51b5;
+// }
+
+// td {
+//   //Rows definitions
+//   // border-radius: 10px;
+// }
+
+
+
 /****************** Global Loading spinner ******************/
 .loading-indicator {
   position: fixed;
@@ -72,10 +115,6 @@ mat-label {
   left: 0;
   bottom: 0;
   right: 0;
-}
-
-table {
-  width: 100%;
 }
 
 /****************** Loading spinner exclusive for login screen ******************/
@@ -133,52 +172,4 @@ table {
   margin-left: 10px;
   display: flex;
   align-items: flex-start;
-}
-
-.cls-label-mob {
-  font-size: 14px;
-}
-
-.cls-mat-expansion-filter .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: left;
-}
-
-/****************** Expanded rows in tables ******************/
-tr.cls-detail-row {
-  height: 0;
-}
-
-tr.cls-element-row:not(.cls-expanded-row):hover {
-  background: whitesmoke;
-}
-
-tr.cls-element-row:not(.cls-expanded-row):active {
-  background: #efefef;
-}
-
-.cls-element-row td {
-  border-bottom-width: 0;
-}
-
-.cls-element-detail {
-  overflow: hidden;
-  display: flex;
-}
-
-.cls-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
-}
-
-.cls-element-description {
-  padding: 16px;
-}
-
-.cls-element-description-attribution {
-  opacity: 0.5;
 }

@@ -57,15 +57,6 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild(MatSidenav) sideNav: MatSidenav;
 
-  /**
-   * On screen's resize, auto close sidenav
-   * @param event 
-   */
-  @HostListener('window:resize', ['$event'])
-  onResize (event) {
-    if (event.target.innerWidth < 500) this.sideNav.close();
-    else if (event.target.innerWidth > 500) this.sideNav.open();
-  }
   @HostBinding('class') className = '';
 
   constructor(
@@ -98,7 +89,7 @@ export class HeaderComponent implements OnInit {
     this.qtyNotification = this.userAccessService.user.notifications?.length || 0;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
-    this.startSideNavOpened = !this.isMobileDevice;
+    // this.startSideNavOpened = !this.isMobileDevice;
     this.isShowing = this.isMobileDevice;
   }
 

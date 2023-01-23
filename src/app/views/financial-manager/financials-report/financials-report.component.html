@@ -4,7 +4,7 @@
     <input matInput [matDatepicker]="dp" placeholder="Escolha uma data" [formControl]="dateToSelect">
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp, 1)"
-      panelClass="example-month-picker"></mat-datepicker>
+      panelClass="cls-month-picker"></mat-datepicker>
   </mat-form-field>
 </div>
 
