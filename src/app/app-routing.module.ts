@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'financials',
     component: FinancialsListComponent,
-    //canActivate: [UserHasAccess]
+    canActivate: [UserHasAccess]
   },
   {
     path: 'reports',
