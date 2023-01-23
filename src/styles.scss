@@ -75,6 +75,15 @@ mat-paginator {
   padding: 1px;
 }
 
+table th.mat-sort-header,
+.mat-mdc-header-cell
+
+/*.mat-mdc-row */
+/* Color of table rows */
+  {
+  background-color: #3f51b5 !important;
+}
+
 // .cls-mat-table-size {
 //   width: 98%;
 //   padding: 1px;
