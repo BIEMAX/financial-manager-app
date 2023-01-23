@@ -1,34 +1,20 @@
 /* Fix the border around the accordion with fields */
-mat-accordion .mat-expansion-panel,
+/* mat-accordion .mat-expansion-panel,
 mat-expansion-panel:not(mat-expanded) {
   margin: 10px;
-}
+} */
 
 /* Let the rows gray and when mouse over, turn the background color to white */
-.gray {
-  background-color: #f5f5f5;
-  color: white;
-}
+/* .gray {
+  background-color: #b1b0b0;
+  color: rgb(246, 244, 244);
+} */
 
-/* Define the size of the table */
-table {
-  margin-top: 0px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 0px;
-  border-radius: 10px;
-  width: auto;
-  padding: 20px;
-}
+/* table th.mat-header-cell {
+  background-color: #3f51b5 !important;
+} */
 
-tr.mat-header-row::ng-deep {
-  background-color: #2b3539 important;
-}
-
-th.mat-sort-header {
-  color: #000000;
-}
-
+/* Arrow that are used to sort data in table */
 :host ::ng-deep .mat-sort-header-arrow {
   color: #9b5436;
 }
