@@ -63,6 +63,21 @@ mat-label {
   cursor: pointer;
 }
 
+.mat-card-flex {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.mat-card-content-scrollable {
+  overflow: auto;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /****************** Data grid's/tables with data ******************/
 mat-paginator {
   margin-top: 0;
