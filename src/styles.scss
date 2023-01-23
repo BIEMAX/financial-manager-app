@@ -33,12 +33,6 @@ $angular-dark-theme: mat.define-dark-theme((color: (primary: $angular-primary,
 }
 
 /****************** Custom definitions globally ******************/
-// mat-form-field {
-//   width: 45.5%;
-//   margin-top: 3%;
-//   margin-right: 3%;
-//   font-size: 14px;
-// }
 
 body {
   margin: 0;
@@ -58,6 +52,15 @@ button {
 
 mat-label {
   font-size: calc(12px + 0.390625vw); //Change font size based on device
+}
+
+/****************** Menu sidenav bar options ******************/
+.cls-accordion-financials {}
+
+.cls-accordion-home {}
+
+.cls-lst-item-mouse-over {
+  cursor: pointer;
 }
 
 /****************** Data grid's/tables with data ******************/

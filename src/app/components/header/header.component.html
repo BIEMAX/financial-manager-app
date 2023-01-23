@@ -68,21 +68,34 @@
     <!--Home-->
     <mat-list>
 
-      <mat-list-item>
+      <!--Home-->
+      <mat-accordion class="cls-accordion-home">
+        <!-- Menu home to expand -->
+        <mat-expansion-panel hideToggle="true" (click)="drawer.toggle()" [routerLink]="'/home'">
+          <mat-expansion-panel-header #panelH (click)="panelH._toggle() && drawer.toggle()">
+            <mat-panel-title>
+              <mat-icon color="{{uiColor}}">home</mat-icon>
+              Página inicial
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <!-- <mat-list-item>
         <mat-icon matListItemIcon color="{{uiColor}}">home</mat-icon>
-        <!-- <span matListItemTitle [routerLink]="'/home'">Página inicial</span> -->
+        <span matListItemTitle [routerLink]="'/home'">Página inicial</span>
         <span matListItemLine [routerLink]="'/home'" (click)="drawer.toggle()">Página inicial</span>
       </mat-list-item>
-      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>-->
 
       <!--Financials-->
-      <mat-accordion>
+      <mat-accordion class="cls-accordion-financials">
         <!--Menu financials to expand-->
         <mat-expansion-panel (opened)="showSubmenu = true" (closed)="showSubmenu = false">
 
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <mat-icon color="{{uiColor}}" style="margin-right: 15%;">account_balance</mat-icon>
+              <mat-icon color="{{uiColor}}" style="margin-right: 5%;">account_balance</mat-icon>
               Financeiro
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -90,22 +103,29 @@
           <mat-list>
             <mat-list-item>
               <mat-icon matListItemIcon color="{{uiColor}}">request_quote</mat-icon>
-              <span matListItemLine [routerLink]="'/financials'" (click)="drawer.toggle()">Gastos mensais</span>
+              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/financials'"
+                (click)="drawer.toggle()">Gastos mensais</span>
             </mat-list-item>
             <mat-divider></mat-divider>
+
             <mat-list-item>
               <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
-              <span matListItemLine [routerLink]="'/defaulters'" (click)="drawer.toggle()">Inadimplentes</span>
+              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/defaulters'"
+                (click)="drawer.toggle()">Inadimplentes</span>
             </mat-list-item>
             <mat-divider></mat-divider>
+
             <mat-list-item>
               <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
-              <span matListItemLine [routerLink]="'/reports'" (click)="drawer.toggle()">insights</span>
+              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/reports'"
+                (click)="drawer.toggle()">insights</span>
             </mat-list-item>
             <mat-divider></mat-divider>
+
             <mat-list-item>
               <mat-icon matListItemIcon color="{{uiColor}}">local_offer</mat-icon>
-              <span matListItemLine [routerLink]="'/tags'" (click)="drawer.toggle()">Tags</span>
+              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/tags'"
+                (click)="drawer.toggle()">Tags</span>
             </mat-list-item>
           </mat-list>
 
