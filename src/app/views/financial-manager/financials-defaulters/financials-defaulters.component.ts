@@ -39,6 +39,13 @@ export class FinancialsDefaultersComponent implements OnInit {
   public tagToFilter: string = "";
   public hasToWait: Boolean = false;
   public listDefaulters: MatTableDataSource<any>;
+  /**
+   * Contains all columns from api
+   */
+  public defaultColumns: any[];
+  /**
+   * Contains only visible columns based on device (web or mobile)
+   */
   public displayedColumns: string[];
   public date = new FormControl(moment());
 
@@ -47,6 +54,7 @@ export class FinancialsDefaultersComponent implements OnInit {
    */
   public uiColor: string = ui.color;
   public isMobileDevice: Boolean = false;
+  public expandFilterTab: Boolean;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -60,7 +68,8 @@ export class FinancialsDefaultersComponent implements OnInit {
 
   ngOnInit () {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
-    this.setDisplayedColumnsByDevice();
+    this.expandFilterTab = !this.isMobileDevice;
+    this.loadDefaultColumns();
     this.paginator._intl.itemsPerPageLabel = "Items por página";
   }
 
@@ -251,24 +260,26 @@ export class FinancialsDefaultersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(r => { });
   }
 
-  setDisplayedColumnsByDevice () {
-    if (this.isMobileDevice) {
-      this.displayedColumns = [
-        'status',
-        'name',
-        'value',
-        'actions'
-      ];
-    }
-    else {
-      this.displayedColumns = [
-        'status',
-        'type',
-        'name',
-        'cpf',
-        'value',
-        'actions'
-      ];
-    }
+  loadDefaultColumns () {
+    this.defaultColumns = [
+      { def: 'status', showColumn: true },
+      { def: 'type', showColumn: true },
+      { def: 'name', showColumn: true },
+      { def: 'cpf', showColumn: true },
+      { def: 'value', showColumn: true },
+      { def: 'userActions', showColumn: true }
+    ];
+    this.getDisplayedColumns();
+  }
+
+  /**
+   * Get displayed columns based on device
+   * @returns string[]
+   */
+  getDisplayedColumns () {
+    this.displayedColumns =
+      this.defaultColumns
+        .filter(cd => cd['showColumn'] !== false)
+        .map(cd => typeof cd === 'string' ? cd : cd.def);
   }
 }
