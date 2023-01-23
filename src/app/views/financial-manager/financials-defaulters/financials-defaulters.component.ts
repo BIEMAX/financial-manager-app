@@ -125,8 +125,8 @@ export class FinancialsDefaultersComponent implements OnInit {
   openDialogAddNewDefaulter (defaulter?: any): void {
     const dialogRef = this.dialog.open(FinancialsDefaultersNewComponent, {
       disableClose: true,
-      width: 'auto',
-      height: 'auto',
+      width: this.isMobileDevice ? '100%' : '50%',
+      height: this.isMobileDevice ? '100%' : '80%',
       autoFocus: true,
       data: defaulter
     });

@@ -4,10 +4,10 @@
     <!--Step 1-->
     <mat-step [stepControl]="firstFormGroup">
       <ng-template matStepLabel>Dados do inadimplente</ng-template>
-
       <div>
+
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Nome do inadimplente
               <mat-icon>person</mat-icon>
@@ -17,7 +17,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               CPF
               <mat-icon>person</mat-icon>
@@ -28,7 +28,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               E-mail
               <mat-icon>mail</mat-icon>
@@ -38,7 +38,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Telefone
               <mat-icon>phone</mat-icon>
@@ -60,7 +60,7 @@
 
       <div>
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               CEP
               <mat-icon>pin</mat-icon>
@@ -71,7 +71,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Endereço
               <mat-icon>home_outlineed</mat-icon>
@@ -81,7 +81,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Número
               <mat-icon>123</mat-icon>
@@ -91,7 +91,7 @@
         </div>
 
         <div>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Complemento
               <mat-icon>gite</mat-icon>
@@ -112,7 +112,7 @@
       <ng-template matStepLabel>Valor</ng-template>
 
       <div>
-        <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-form-field class="cls-form-field-full-width">
           <mat-label>
             Valor
             <mat-icon>money</mat-icon>
@@ -121,7 +121,7 @@
           <span matPrefix>R$&nbsp;</span>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-form-field floatLabel="always" class="cls-form-field-full-width">
           <mat-label>Tipo de inadimplente</mat-label>
           <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="defaulterIsDebtor">
             <div *ngIf="defaulterIsDebtor">Devedor</div>
@@ -130,7 +130,7 @@
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+        <mat-form-field floatLabel="always" class="cls-form-field-full-width">
           <mat-label *ngIf="defaulterIsDebtor">Devedor irá parcelar?</mat-label>
           <mat-label *ngIf="!defaulterIsDebtor">Credor irá parcelar?</mat-label>
           <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isDefaulterPayInInstallments">
@@ -140,7 +140,7 @@
           <textarea matInput hidden></textarea>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-form-field class="cls-form-field-full-width">
           <mat-label>
             Número de prestações
             <mat-icon>123</mat-icon>
