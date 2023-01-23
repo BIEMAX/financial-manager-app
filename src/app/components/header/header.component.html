@@ -74,7 +74,7 @@
         <mat-expansion-panel hideToggle="true" (click)="drawer.toggle()" [routerLink]="'/home'">
           <mat-expansion-panel-header #panelH (click)="panelH._toggle() && drawer.toggle()">
             <mat-panel-title>
-              <mat-icon color="{{uiColor}}">home</mat-icon>
+              <mat-icon color="{{uiColor}}" style="margin-right: 5%;">home</mat-icon>
               Página inicial
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -101,31 +101,27 @@
           </mat-expansion-panel-header>
           <!--Submenu options-->
           <mat-list>
-            <mat-list-item>
+            <mat-list-item style="cursor: pointer" [routerLink]="'/financials'">
               <mat-icon matListItemIcon color="{{uiColor}}">request_quote</mat-icon>
-              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/financials'"
-                (click)="drawer.toggle()">Gastos mensais</span>
+              <span matListItemLine (click)="drawer.toggle()">Gastos mensais</span>
             </mat-list-item>
             <mat-divider></mat-divider>
 
-            <mat-list-item>
+            <mat-list-item style="cursor: pointer" [routerLink]="'/defaulters'">
               <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
-              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/defaulters'"
-                (click)="drawer.toggle()">Inadimplentes</span>
+              <span matListItemLine (click)="drawer.toggle()">Inadimplentes</span>
             </mat-list-item>
             <mat-divider></mat-divider>
 
-            <mat-list-item>
-              <mat-icon matListItemIcon color="{{uiColor}}">assignment_ind</mat-icon>
-              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/reports'"
-                (click)="drawer.toggle()">insights</span>
+            <mat-list-item style="cursor: pointer" [routerLink]="'/reports'">
+              <mat-icon matListItemIcon color="{{uiColor}}">leaderboard</mat-icon>
+              <span matListItemLine (click)="drawer.toggle()">Relatórios</span>
             </mat-list-item>
             <mat-divider></mat-divider>
 
-            <mat-list-item>
+            <mat-list-item style="cursor: pointer" [routerLink]="'/tags'">
               <mat-icon matListItemIcon color="{{uiColor}}">local_offer</mat-icon>
-              <span matListItemLine class="cls-lst-item-mouse-over" [routerLink]="'/tags'"
-                (click)="drawer.toggle()">Tags</span>
+              <span matListItemLine (click)="drawer.toggle()">Tags</span>
             </mat-list-item>
           </mat-list>
 
