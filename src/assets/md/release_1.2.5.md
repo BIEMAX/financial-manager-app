@@ -1,4 +1,4 @@
-## Release 1.2.5 - In development - 20, January, 2023
+## Release 1.2.5 - In development - 27, January, 2023
 
 - Implementado a gestão de inadimplentes (criação, atualização, histórico e remoção)
 
@@ -22,6 +22,9 @@
 ![Other settings](/assets/md/img_1.2.5/other_settings.png)
 
 - Melhorado as telas para cadastros (novas contas, inadimplentes, tags, atualização cadastral, etc)
+- Atualizado as bibliotecas do framework, trazendo melhorias no desempenho e correção de problemas
+- Alterado as grades de dados, simplificando a visualização e ajustando o layout
+- Adicionado a possibilidade de recolher ou exibir os filtros aplicados, melhorando a visualização
 
 # Problemas corrigidos
 
