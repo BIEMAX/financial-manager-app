@@ -11,7 +11,7 @@
     "build-dev": "ng build -c dev",
     "build-hml": "ng build -c stg --build-optimizer",
     "build-prd": "ng build -c prd --output-hashing=all",
-    "electron-dev": "electron .",
+    "electron": "electron .",
     "electron-prd": "ng build && electron ."
   },
   "author": "Dionei Beilke dos Santos",
