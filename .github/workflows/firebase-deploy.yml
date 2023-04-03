@@ -21,7 +21,7 @@ jobs:
       - name: 3. Setup Node JS
         uses: actions/setup-node@master
         with:
-          node-version: "14.18.0"
+          node-version: "18.10.0"
       - name: 4. Installing dotenv package
         run: npm install --dotenv-extended
 
