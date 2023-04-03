@@ -121,3 +121,27 @@ localStorage.getItem('userSecret');
 localStorage.getItem('keepUserConnected');
 localStorage.getItem('isDarkModeEnable')
 ```
+
+## Common problems
+
+1. > **Note:** If you are having issues to run, install these other packages separately:
+
+```bash
+npm i @angular-devkit/build-angular
+
+npm i @ngtools/webpack
+
+npm i mini-css-extract-plugin
+
+npm i postcss-loader
+
+# For 'ngx-markdown' dependency
+npm install --save @types/marked
+```
+
+2. > **Note 2:** If you are getting the error `Unknown version 109 of chrome`, just run in your terminal:
+```bash
+npx browserslist --update-db
+```
+
+3. Certified that you are using `node v18.x.x version or high` and `npm 8.19.x version or high`.

@@ -33,6 +33,13 @@ export class FinancialsTagsComponent implements OnInit {
    * Contains a data source with tags and some properties.
    */
   public dsListTags: MatTableDataSource<any>;
+  /**
+   * Contains all columns from api
+   */
+  public defaultColumns: any[];
+  /**
+   * Contains only visible columns based on device (web or mobile)
+   */
   public displayedColumns: string[];
   /**
    * Contains original list tags data from api to filter to
@@ -45,6 +52,7 @@ export class FinancialsTagsComponent implements OnInit {
    */
   public uiColor: string = ui.color;
   public isMobileDevice: Boolean = false;
+  public expandFilterTab: Boolean = false;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -58,7 +66,8 @@ export class FinancialsTagsComponent implements OnInit {
 
   ngOnInit () {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
-    this.setDisplayedColumnsByDevice();
+    this.expandFilterTab = !this.isMobileDevice;
+    this.loadDefaultColumns();
     this.paginator._intl.itemsPerPageLabel = "Items por página";
     this.getTags();
   }
@@ -197,10 +206,22 @@ export class FinancialsTagsComponent implements OnInit {
     ).length > 0;
   }
 
-  setDisplayedColumnsByDevice () {
-    this.displayedColumns = [
-      'name',
-      'actions'
+  loadDefaultColumns () {
+    this.defaultColumns = [
+      { def: 'name', showColumn: true },
+      { def: 'userActions', showColumn: true }
     ];
+    this.getDisplayedColumns();
+  }
+
+  /**
+   * Get displayed columns based on device
+   * @returns string[]
+   */
+  getDisplayedColumns () {
+    this.displayedColumns =
+      this.defaultColumns
+        .filter(cd => cd['showColumn'] !== false)
+        .map(cd => typeof cd === 'string' ? cd : cd.def);
   }
 }

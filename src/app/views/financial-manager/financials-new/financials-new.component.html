@@ -8,7 +8,7 @@
       <div>
 
         <div>
-          <mat-form-field appearance="outline">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Nome da conta
               <mat-icon>payments</mat-icon>
@@ -18,33 +18,35 @@
         </div>
 
         <div>
-          <mat-form-field>
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Data de vencimento
               <mat-icon>calendar_month</mat-icon>
             </mat-label>
-            <input matInput required="true" type="date" placeholder="Data de vencimento da conta"
+            <input matInput [matDatepicker]="datePicker" required="true" placeholder="Data de vencimento da conta"
               [(ngModel)]="billDueDate">
+            <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
           </mat-form-field>
         </div>
 
         <div>
-          <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
+          <mat-form-field floatLabel="always" class="cls-form-field-full-width">
             <mat-label>Tipo de movimento da conta</mat-label>
             <mat-slide-toggle color="{{uiColor}}" [(ngModel)]="isCashEntry">
               <div *ngIf="isCashEntry">Entrada</div>
               <div *ngIf="!isCashEntry">Saída</div>
             </mat-slide-toggle>
             <textarea matInput hidden></textarea>
-          </mat-form-field>
 
-          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashEntry">
-            Conta paga? {{isBillPayed == true ? 'Sim' : 'Não' }}
-          </mat-checkbox>
+            <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillPayed" [(disabled)]="isCashEntry">
+              Conta paga? {{isBillPayed == true ? 'Sim' : 'Não' }}
+            </mat-checkbox>
+          </mat-form-field>
         </div>
 
         <div>
-          <mat-form-field>
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Descrição da conta
               <mat-icon>description</mat-icon>
@@ -67,68 +69,54 @@
       <div>
 
         <div>
-          <mat-form-field class="number-1">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Valor total da conta
               <mat-icon>123</mat-icon>
             </mat-label>
-            <input matInput required="true" type="number" placeholder="0" [(ngModel)]="billTotalValue">
+            <input matInput required="true" type="number" placeholder="0" [(ngModel)]="billTotalValue"
+              (ngModelChange)="calculateAmountValue()">
             <span matPrefix>R$&nbsp;</span>
           </mat-form-field>
         </div>
 
         <div>
-          <mat-form-field>
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>
               Número de prestações
               <mat-icon>123</mat-icon>
             </mat-label>
             <input matInput [(disabled)]="isCashEntry"
               matTooltip="Informe um valor maior que um para habilitar novos campos" type=" number" placeholder="1"
-              value="1" [(ngModel)]="billAmountQuantity">
+              value="1" [(ngModel)]="billAmountQuantity" (ngModelChange)="calculateAmountValue()">
           </mat-form-field>
         </div>
 
         <div *ngIf="billAmountQuantity > 1">
-          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashEntry">
-            Dividir "valor total" pelo "número de prestações"? {{isBillValueToDivide == true ? 'Sim' : 'Não' }}
+          <mat-checkbox color="{{uiColor}}" [(ngModel)]="isBillValueToDivide" [(disabled)]="isCashEntry"
+            (ngModelChange)="calculateAmountValue()">
+            {{installmentDescription}}
           </mat-checkbox>
-
-          <div>
-            <mat-label *ngIf="billAmountQuantity > 1 && billTotalValue > 1">
-              <mat-card style="width: 95%; height: 10%;">
-                <mat-icon>help</mat-icon>
-                Exemplo:
-                {{isBillValueToDivide == true ? 'O valor por prestação ficará: ' + ( billTotalValue /
-                billAmountQuantity) : 'O valor final ficará: ' + ( billTotalValue *
-                billAmountQuantity)}}
-
-                <strong>
-                  <p>No caso da opção '{{isBillValueToDivide == true ? 'marcada' : 'desmarcada'}}', o cálculo será:
-                  </p>
-                  '{{isBillValueToDivide == true ? 'valorTotal / numeroPrestacoes = valor por prestação' : 'valorTotal
-                  *
-                  numeroPrestacoes = valor por prestação'}}'
-                </strong>
-              </mat-card>
-            </mat-label>
-          </div>
+          <button mat-icon-button color="{{uiColor}}" aria-label="Ajuda" (click)="showHelpDialog()"
+            matTooltip="Clique para obter ajuda">
+            <mat-icon>help</mat-icon>
+          </button>
         </div>
 
         <div>
-          <mat-form-field class="">
+          <mat-form-field class="cls-form-field-full-width">
             <mat-label>Tags</mat-label>
-            <mat-chip-list #chipList aria-label=" Seleção de tags">
-              <mat-chip *ngFor="let tag of billTags" (removed)="removeTag(tag)">
+            <mat-chip-grid #chipGrid aria-label="Seleção de tags">
+              <mat-chip-row *ngFor="let tag of listTags" (removed)="removeTag(tag)">
                 {{tag}}
-                <button matChipRemove>
+                <button matChipRemove [attr.aria-label]="'remove ' + tag">
                   <mat-icon>cancel</mat-icon>
                 </button>
-              </mat-chip>
-              <input placeholder="Nova tag..." #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
-                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="addTag($event)">
-            </mat-chip-list>
+              </mat-chip-row>
+            </mat-chip-grid>
+            <input placeholder="Nova tag..." #tagInput [formControl]="tagCtrl" [matChipInputFor]="chipGrid"
+              [matAutocomplete]="auto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)">
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
               <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
                 {{tag}}

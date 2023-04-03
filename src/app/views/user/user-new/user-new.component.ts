@@ -38,7 +38,23 @@ export class UserNewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit (): void { }
+  ngOnInit (): void {
+    this.loadUserAfterRegisterError();
+  }
+
+  /**
+   * Reload user that generate error/exception from previous registration
+   * process.
+   */
+  loadUserAfterRegisterError () {
+    if (this.data) {
+      this.userName = this.data.userName;
+      this.userLogin = this.data.user;
+      this.userPass = this.data.password;
+      this.userConfirmPass = this.data.password;
+      this.userEmail = this.data.email;
+    }
+  }
 
   onExitClick () {
     if (this.validateBeforeExit()) this.dialogRef.close();

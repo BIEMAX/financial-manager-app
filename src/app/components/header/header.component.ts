@@ -3,7 +3,6 @@ import { environment, ui } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { UserService } from 'src/app/services/user.service';
 import { UserAccessService } from 'src/app/services/user-access-permissions.service';
@@ -13,7 +12,6 @@ import { GenericFunctions } from 'src/app/util/generic-functions';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 
 //Dark/light mode
-import { FormControl } from '@angular/forms';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
@@ -59,15 +57,6 @@ export class HeaderComponent implements OnInit {
 
   @ViewChild(MatSidenav) sideNav: MatSidenav;
 
-  /**
-   * On screen's resize, auto close sidenav
-   * @param event 
-   */
-  @HostListener('window:resize', ['$event'])
-  onResize (event) {
-    if (event.target.innerWidth < 500) this.sideNav.close();
-    else if (event.target.innerWidth > 500) this.sideNav.open();
-  }
   @HostBinding('class') className = '';
 
   constructor(
@@ -100,7 +89,7 @@ export class HeaderComponent implements OnInit {
     this.qtyNotification = this.userAccessService.user.notifications?.length || 0;
     this.descNotifications = `Você possuí ${this.qtyNotification} novas notificações.`;
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
-    this.startSideNavOpened = !this.isMobileDevice;
+    // this.startSideNavOpened = !this.isMobileDevice;
     this.isShowing = this.isMobileDevice;
   }
 

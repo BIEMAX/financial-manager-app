@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
    * Define true to show waiting progress spinner on front.
    */
   public hasToWait: boolean = false;
+  public gridColumnsToShow: number = 2;
 
   constructor(
     private userAccessService: UserAccessService,
@@ -55,6 +56,20 @@ export class HomeComponent implements OnInit {
           icon: 'assignment_late',
           tasks: '',
           class: 'bills-overdue'
+        },
+        {
+          name: 'Balanço do mês',
+          description: 'Entrada e saída de dinheiro',
+          icon: 'savings',
+          tasks: '',
+          class: 'saved-money-current-month'
+        },
+        {
+          name: 'Tarefas semanais',
+          description: 'Lista de tarefas',
+          icon: 'format_list_numbered',
+          tasks: '',
+          class: 'task-to-do-current-week'
         }
       );
       this.getBillsCloseToOverdue();

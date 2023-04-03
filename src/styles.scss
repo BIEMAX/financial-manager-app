@@ -32,17 +32,162 @@ $angular-dark-theme: mat.define-dark-theme((color: (primary: $angular-primary,
   @include mat.all-component-colors($angular-dark-theme);
 }
 
+/****************** Custom definitions globally ******************/
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #3f51b5;
+  // background-color: #3f51b5;
   /* footer background color */
 }
 
-mat-form-field {
-  width: 100%;
+mat-card-title {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+button {
+  margin-left: 5px;
 }
 
 mat-label {
-  font-size: calc(12px + 0.390625vw);
+  font-size: calc(12px + 0.390625vw); //Change font size based on device
+}
+
+/****************** Menu sidenav bar options ******************/
+.cls-accordion-financials {}
+
+.cls-accordion-home {}
+
+.cls-lst-item-mouse-over {
+  cursor: pointer;
+}
+
+.mat-card-flex {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.mat-card-content-scrollable {
+  overflow: auto;
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/****************** Data grid's/tables with data ******************/
+mat-paginator {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+
+.cls-mat-table-size {
+  /* Div containing the table with data*/
+  width: 98.4%;
+  padding: 1px;
+}
+
+/* Define the size of the table */
+table {
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  border-radius: 10px;
+  width: auto;
+  padding: 20px;
+}
+
+/* Table header cells background color */
+table th.mat-sort-header,
+.mat-mdc-header-cell {
+  /* */
+  /* Color of table rows */
+  background-color: #3f51b5 !important;
+  border-radius: 5px;
+}
+
+/* Fix the border around the accordion with fields to filter data */
+mat-accordion .mat-expansion-panel {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/****************** Global Loading spinner ******************/
+.loading-indicator {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/****************** Loading spinner exclusive for login screen ******************/
+.loading-indicator-login {
+  position: absolute;
+  left: 35%;
+  top: 45%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+}
+
+/****************** Defaulters status ******************/
+.active-status {
+  background-color: #5cb85c;
+}
+
+.cancelled-status {
+  background-color: #f94449;
+}
+
+.blocked-status {
+  background-color: #f3ef1a;
+}
+
+.done-status {
+  background-color: #5bc0de;
+}
+
+/****************** Date picker in some screens ******************/
+.cls-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.cls-month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+/****************** Exclusive for dialogs ******************/
+.cls-form-field-full-width {
+  width: 100%;
+  margin-top: 0px;
+  margin-left: 10px;
+}
+
+.cls-button-small {
+  width: 10%;
+}
+
+/****************** Fields to filter (Web and mobile) ******************/
+
+.cls-form-field-filter {
+  // width: 150px;
+  margin-top: 0px;
+  margin-left: 10px;
+  display: flex;
+  align-items: flex-start;
 }

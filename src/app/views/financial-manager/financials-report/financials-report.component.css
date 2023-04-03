@@ -26,3 +26,9 @@ mat-toolbar {
 .content>mat-card {
   margin-bottom: 16px;
 }
+
+.form-filter {
+  width: 15%;
+  margin-top: 15px;
+  margin-left: 15px;
+}

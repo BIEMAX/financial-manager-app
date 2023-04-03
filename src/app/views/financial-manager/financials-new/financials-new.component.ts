@@ -19,6 +19,8 @@ import { TagsService } from 'src/app/services/tags.service';
 import { DialogReport } from 'src/app/util/error-dialog-report';
 import { GenericFunctions } from 'src/app/util/generic-functions';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { HelpDialogComponent } from '../../generic/help-dialog/help-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-financials-new',
@@ -30,20 +32,30 @@ export class FinancialsNewComponent implements OnInit {
   public billName: string;
   public billDueDate: string; //format yyyy-MM-dd
   public billDescription: string;
-  public billTotalValue: Number;
-  public billAmountQuantity: Number = 1;//Quantidade de vezes da conta
+  public billTotalValue: number;
+  /**
+   * Quantity times that the bill will be paid.
+   */
+  public billAmountQuantity: number = 1;
   /**
    * Contains the tags linked to new bill creation
    */
-  public billTags: string[] = ['Contas fixas']; //Starter tag
+  public listTags: string[] = ['Contas fixas']; //Starter tag
   public isCashEntry: Boolean = false;
   public uiColor: string = ui.color;
   public billId: string;
   public isBillPayed: boolean = false;
   public isBillValueToDivide: boolean = false;
-  public filteredTags: Observable<string[]>;
+
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   public tagCtrl = new FormControl('');
+  public filteredTags: Observable<string[]>;
+  /**
+   * Contains the calculation (using variables billTotalValue and billAmountQuantity)
+   * to format and show the correct value.
+   */
+  public installmentValue: number;
+  public installmentDescription: string;
 
   /**
    * Contains the user tags previously stored into database.
@@ -61,7 +73,8 @@ export class FinancialsNewComponent implements OnInit {
     private tagsService: TagsService,
     private dialogReport: DialogReport,
     private genericFunctions: GenericFunctions,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit (): void {
@@ -72,7 +85,7 @@ export class FinancialsNewComponent implements OnInit {
       this.billDescription = this.data.description;
       this.billTotalValue = this.data.value;
       this.billAmountQuantity = this.data.quantityAmount;
-      this.billTags = this.data.tags;
+      this.listTags = this.data.tags;
       this.isCashEntry = this.data.isCashEntry;
       this.isBillPayed = this.data.isBillPayed;
     } else {
@@ -91,7 +104,7 @@ export class FinancialsNewComponent implements OnInit {
         this.billDescription || '',
         this.billTotalValue,
         this.billAmountQuantity,
-        this.billTags,
+        this.listTags,
         this.isCashEntry,
         this.isBillPayed || false,
         this.isBillValueToDivide
@@ -113,8 +126,8 @@ export class FinancialsNewComponent implements OnInit {
    * Validate if there are new tags to save in database
    */
   thereIsNewTags () {
-    if (this.billTags.length > 0) {
-      let newTags = this.billTags.filter(t => !this.allTags.includes(t));
+    if (this.listTags.length > 0) {
+      let newTags = this.listTags.filter(t => !this.allTags.includes(t));
       if (newTags.length > 0) {
         newTags.map((newTag) => {
           //If tag doesn't exist, creat it 
@@ -142,7 +155,7 @@ export class FinancialsNewComponent implements OnInit {
     const value = (event.value || '').trim();
 
     // Add new tag
-    if (value) this.billTags.push(value);
+    if (value) this.listTags.push(value);
 
     // Clear the input value
     event.chipInput!.clear();
@@ -150,21 +163,21 @@ export class FinancialsNewComponent implements OnInit {
   }
 
   selectTag (event: MatAutocompleteSelectedEvent): void {
-    if (this.billTags.length <= 0)
-      this.billTags.push(event.option.viewValue);
+    if (this.listTags.length <= 0)
+      this.listTags.push(event.option.viewValue);
     else {
-      if (this.billTags.filter(t => t.toUpperCase().trim() == event.option.viewValue.toUpperCase().trim()).length <= 0)
-        this.billTags.push(event.option.viewValue);
+      if (this.listTags.filter(t => t.toUpperCase().trim() == event.option.viewValue.toUpperCase().trim()).length <= 0)
+        this.listTags.push(event.option.viewValue);
     }
     this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }
 
   removeTag (tag: string): void {
-    const index = this.billTags.indexOf(tag);
+    const index = this.listTags.indexOf(tag);
 
     if (index >= 0) {
-      this.billTags.splice(index, 1);
+      this.listTags.splice(index, 1);
     }
   }
 
@@ -182,7 +195,7 @@ export class FinancialsNewComponent implements OnInit {
           this.allTags = resp.data.tags;
           this.filteredTags = this.tagCtrl.valueChanges.pipe(
             startWith(null),
-            map((t: string | null) => (t ? this.filterTag(t) : this.allTags.slice())),
+            map((tag: string | null) => (tag ? this.filterTag(tag) : this.allTags.slice())),
           );
         }
         else this.genericFunctions.showNotification('Não foi possível identificar tags no seu usuário', 'Erro');
@@ -192,6 +205,57 @@ export class FinancialsNewComponent implements OnInit {
         this.dialogReport.showMessageDialog(error, true, true);
       }
     )
+  }
+
+  /**
+   * After the user fill the 'value' and 'quantity of amounts', we calculate
+   * each value will be payed and format.
+   */
+  calculateAmountValue () {
+    if (this.billAmountQuantity > 1 && this.billTotalValue > 1) {
+      if (this.isBillValueToDivide) {
+        this.installmentValue = Math.round(this.billTotalValue / this.billAmountQuantity);
+        this.installmentDescription = `Parcelar o valor total? Valor por prestação: R$ ${this.installmentValue}`;
+      }
+      else {
+        this.installmentValue = Math.round(this.billTotalValue * this.billAmountQuantity);
+        this.installmentDescription = `Parcelar o valor total? Valor total à pagar: R$ ${this.installmentValue}`;
+      }
+    }
+  }
+
+  /**
+   * Show a help dialog to user understand the functionality.
+   */
+  showHelpDialog () {
+    let help = `
+    Exemplo:
+    <br><br>
+    Caso a opção 'parcelar o valor total' seja marcada, <br>
+    o sistema irá aplicar a seguinte fórmula:
+    <br><br>
+    valorTotalDaConta / numeroPrestacoes = valorPorPrestacao
+    <br><br>
+    <strong>E.g.: 1500 / 10 = R$ 150,00</strong> será o <br>
+    valor pago <strong>por</strong> prestação à pagar
+    <br><br>
+    Caso a opção esteja desmarcada, o cálculo será feito da seguinte forma:
+    <br><br>
+    valorTotalDaConta * numeroPrestacoes = valorPorPrestacao
+    <br><br>
+    <strong>E.g.: 1500 * 10 = R$ 15.000,00</strong> será o <br>
+    valor total à ser pago <strong>após as dez prestações</strong>
+    `;
+
+    const dialogRef = this.dialog.open(HelpDialogComponent, {
+      disableClose: true,
+      width: 'auto',
+      height: 'auto',
+      autoFocus: true,
+      data: help
+    });
+
+    dialogRef.afterClosed().subscribe(r => { });
   }
 
 }

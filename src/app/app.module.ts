@@ -63,6 +63,7 @@ import { FinancialsTagNewComponent } from './views/financial-manager/financials-
 import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
 import { FinancialsDefaultersNewComponent } from './views/financial-manager/financials-defaulters-new/financials-defaulters-new.component';
 import { FinancialsDefaultersSubtractComponent } from './views/financial-manager/financials-defaulters-subtract/financials-defaulters-subtract.component';
+import { HelpDialogComponent } from './views/generic/help-dialog/help-dialog.component';
 
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -70,6 +71,10 @@ import { UserUpdateInfoComponent } from './views/user/user-change-pass/user-upda
 import { UserNewComponent } from './views/user/user-new/user-new.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 import { UserDialogComponent } from './views/generic/user-dialog-report/user-dialog-report.component';
+
+// Presell
+import { PresellComponent } from './views/presell/presell.component'
+import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
 
 @NgModule({
   declarations: [
@@ -85,6 +90,7 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     PageNotFoundComponent,
     ReleaseNotesComponent,
     UserDialogComponent,
+    HelpDialogComponent,
     //Financials
     FinancialsDefaultersComponent,
     FinancialsDefaultersNewComponent,
@@ -97,6 +103,9 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     //Footer and header
     FooterComponent,
     HeaderComponent,
+    //Pre-sale
+    PresellComponent,
+    ProstadineComponent
   ],
   imports: [
     ReactiveFormsModule,

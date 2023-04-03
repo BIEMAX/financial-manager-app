@@ -27,29 +27,25 @@ export const MY_FORMATS = {
   },
   display: {
     dateInput: 'MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
+    monthYearLabel: 'MM/YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
-
 @Component({
   selector: 'financials-list.component',
   styleUrls: ['financials-list.component.css'],
   templateUrl: 'financials-list.component.html',
   providers: [
-    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
-    // application's root module. We provide it at the component level here, due to limitations of
-    // our example generation script.
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
+
 export class FinancialsListComponent implements OnInit {
 
   /**
@@ -62,6 +58,13 @@ export class FinancialsListComponent implements OnInit {
   public tagToFilter: string = "";
   public hasToWait: Boolean = false;
   public listBills: MatTableDataSource<any>;
+  /**
+   * Contains all columns from api
+   */
+  public defaultColumns: any[];
+  /**
+   * Contains only visible columns based on device (web or mobile)
+   */
   public displayedColumns: string[];
   public date = new FormControl(moment());
 
@@ -70,6 +73,7 @@ export class FinancialsListComponent implements OnInit {
    */
   public uiColor: string = ui.color;
   public isMobileDevice: Boolean = false;
+  public expandFilterTab: Boolean;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -83,7 +87,8 @@ export class FinancialsListComponent implements OnInit {
 
   ngOnInit () {
     this.isMobileDevice = this.genericFunctions.isMobileDevice();
-    this.setDisplayedColumnsByDevice();
+    this.expandFilterTab = !this.isMobileDevice;
+    this.loadDefaultColumns();
     this.paginator._intl.itemsPerPageLabel = "Items por página";
   }
 
@@ -248,26 +253,29 @@ export class FinancialsListComponent implements OnInit {
     this.getBills();
   }
 
-  setDisplayedColumnsByDevice () {
-    if (this.isMobileDevice) {
-      this.displayedColumns = [
-        'name',
-        'dueDate',
-        'value',
-        'actions'
-      ];
-    }
-    else {
-      this.displayedColumns = [
-        'type',
-        'name',
-        'dueDate',
-        'value',
-        'quantityAmount',
-        'tags',
-        'isBillPayed',
-        'actions'
-      ];
-    }
+  loadDefaultColumns () {
+    this.defaultColumns = [
+      { def: 'type', showColumn: true },
+      { def: 'name', showColumn: true },
+      { def: 'dueDate', showColumn: true },
+      { def: 'value', showColumn: true },
+      { def: 'quantityAmount', showColumn: true },
+      { def: 'tags', showColumn: false },
+      { def: 'isBillPayed', showColumn: true },
+      { def: 'userActions', showColumn: true },
+    ];
+    this.getDisplayedColumns();
   }
+
+  /**
+   * Get displayed columns based on device
+   * @returns string[]
+   */
+  getDisplayedColumns () {
+    this.displayedColumns =
+      this.defaultColumns
+        .filter(cd => cd['showColumn'] !== false)
+        .map(cd => typeof cd === 'string' ? cd : cd.def);
+  }
+
 }

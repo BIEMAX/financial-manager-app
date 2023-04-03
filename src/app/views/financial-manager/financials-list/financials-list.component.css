@@ -1,30 +1,20 @@
-/* Absolute Center Spinner */
-.loading-indicator {
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+/* Fix the border around the accordion with fields */
+/* mat-accordion .mat-expansion-panel,
+mat-expansion-panel:not(mat-expanded) {
+  margin: 10px;
+} */
 
-table {
-  width: 100%;
-}
+/* Let the rows gray and when mouse over, turn the background color to white */
+/* .gray {
+  background-color: #b1b0b0;
+  color: rgb(246, 244, 244);
+} */
 
-.example-month-picker .mat-calendar-period-button {
-  pointer-events: none;
-}
+/* table th.mat-header-cell {
+  background-color: #3f51b5 !important;
+} */
 
-.example-month-picker .mat-calendar-arrow {
-  display: none;
-}
-
-.mat-form-field {
-  margin-left: 8px;
-  width: 150px;
+/* Arrow that are used to sort data in table */
+:host ::ng-deep .mat-sort-header-arrow {
+  color: #9b5436;
 }

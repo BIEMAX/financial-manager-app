@@ -36,6 +36,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "diffEditor.ignoreTrimWhitespace": false,
-  "eslint.workingDirectories": []
+  "diffEditor.ignoreTrimWhitespace": true,
+  "eslint.workingDirectories": [],
+  "cSpell.words": [
+    "prostadine"
+  ]
 }
