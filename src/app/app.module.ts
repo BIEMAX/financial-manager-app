@@ -72,6 +72,10 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 import { UserDialogComponent } from './views/generic/user-dialog-report/user-dialog-report.component';
 
+// Presell
+import { PresellComponent } from './views/presell/presell.component'
+import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +103,9 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
     //Footer and header
     FooterComponent,
     HeaderComponent,
+    //Pre-sale
+    PresellComponent,
+    ProstadineComponent
   ],
   imports: [
     ReactiveFormsModule,

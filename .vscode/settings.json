@@ -37,5 +37,8 @@
     "source.fixAll.eslint": true
   },
   "diffEditor.ignoreTrimWhitespace": true,
-  "eslint.workingDirectories": []
+  "eslint.workingDirectories": [],
+  "cSpell.words": [
+    "prostadine"
+  ]
 }

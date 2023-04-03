@@ -13,6 +13,10 @@ import { ReleaseNotesComponent } from './views/generic/release-notes/release-not
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
 import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
 
+// Pre-sale
+import { PresellComponent } from './views/presell/presell.component'
+import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
+
 //Router to access through angular
 const routes: Routes = [
   {
@@ -21,34 +25,39 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,
-    canActivate: [UserHasAccess]
+    component: HomeComponent
   },
   //Financials manager
   {
     path: 'financials',
-    component: FinancialsListComponent,
-    canActivate: [UserHasAccess]
+    component: FinancialsListComponent
   },
   {
     path: 'reports',
-    component: FinancialsReportComponent,
-    canActivate: [UserHasAccess]
+    component: FinancialsReportComponent
   },
   {
     path: 'tags',
-    component: FinancialsTagsComponent,
-    canActivate: [UserHasAccess]
+    component: FinancialsTagsComponent
   },
   {
     path: 'defaulters',
-    component: FinancialsDefaultersComponent,
-    canActivate: [UserHasAccess]
+    component: FinancialsDefaultersComponent
   },
   //Generics
   {
     path: 'whatsnew',
     component: ReleaseNotesComponent
+  },
+  {
+    path: 'presell',
+    component: PresellComponent,
+    children: [
+      {
+        path: 'prostadine',
+        component: ProstadineComponent
+      }
+    ]
   },
   //Templates
   {
@@ -58,7 +67,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabledBlocking'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
