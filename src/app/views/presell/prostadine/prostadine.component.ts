@@ -14,7 +14,7 @@ export class ProstadineComponent implements OnInit {
   public uiColor = ui.color;
   public listImages: Array<ImageAff>;
   public productName: string = "Prostadine";
-  private affiliateLink: string = 'https://getexipure.com/?aff_id=531782&subid=madmax';
+  private affiliateLink: string = 'https://theprostadine.com/text.php?aff_id=27110&subid=firebase';
 
   constructor(private titleService: Title) { }
 
