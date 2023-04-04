@@ -4,11 +4,11 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, #19265b, #40508f);
+  background: linear-gradient(to bottom, #136e73, #1ea0a6);
 }
 
 .gradient-background {
-  background: linear-gradient(to bottom, #19265b, #40508f);
+  background: linear-gradient(to bottom, #136e73, #1ea0a6);
 }
 
 img {

@@ -16,6 +16,8 @@ import { FinancialsDefaultersComponent } from './views/financial-manager/financi
 // Pre-sale
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
+import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
+import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
 
 //Router to access through angular
 const routes: Routes = [
@@ -56,6 +58,14 @@ const routes: Routes = [
       {
         path: 'prostadine',
         component: ProstadineComponent
+      },
+      {
+        path: 'alpilean',
+        component: AlpileanComponent
+      },
+      {
+        path: 'prostadine-fr',
+        component: ProstadineFrComponent
       }
     ]
   },
