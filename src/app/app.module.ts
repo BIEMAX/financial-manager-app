@@ -75,6 +75,8 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
 // Presell
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
+import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
+import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
 
 @NgModule({
   declarations: [
@@ -105,7 +107,8 @@ import { ProstadineComponent } from './views/presell/prostadine/prostadine.compo
     HeaderComponent,
     //Pre-sale
     PresellComponent,
-    ProstadineComponent
+    ProstadineComponent,
+    AlpileanComponent
   ],
   imports: [
     ReactiveFormsModule,
