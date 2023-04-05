@@ -77,6 +77,9 @@ import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
 import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
 import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
+import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
+import { ProsperCbdComponent } from './views/presell/luis/prospercbd/prospercbd.component'
+import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 
 @NgModule({
   declarations: [
@@ -105,10 +108,15 @@ import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.comp
     //Footer and header
     FooterComponent,
     HeaderComponent,
-    //Pre-sale
+    //Pre-sale (luis)
     PresellComponent,
     ProstadineComponent,
-    AlpileanComponent
+    SynogutComponent,
+    ProsperCbdComponent,
+    MaasalongComponent,
+    //Pre-sale (Fran)
+    AlpileanComponent,
+    ProstadineFrComponent
   ],
   imports: [
     ReactiveFormsModule,
