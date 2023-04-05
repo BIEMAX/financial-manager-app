@@ -17,7 +17,10 @@ import { FinancialsDefaultersComponent } from './views/financial-manager/financi
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
 import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
+import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
+import { ProsperCbdComponent } from './views/presell/luis/prospercbd/prospercbd.component'
 import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
+import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 
 //Router to access through angular
 const routes: Routes = [
@@ -66,6 +69,18 @@ const routes: Routes = [
       {
         path: 'prostadine-fr',
         component: ProstadineFrComponent
+      },
+      {
+        path: 'synogut',
+        component: SynogutComponent
+      },
+      {
+        path: 'prosper',
+        component: ProsperCbdComponent
+      },
+      {
+        path: 'massalong',
+        component: MaasalongComponent
       }
     ]
   },
