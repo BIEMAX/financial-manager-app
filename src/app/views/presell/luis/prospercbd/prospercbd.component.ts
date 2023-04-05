@@ -9,7 +9,7 @@ import ImageAff from 'src/app/models/image.model'
   templateUrl: './prosperCbd.component.html',
   styleUrls: ['./prosperCbd.component.css']
 })
-export class ProsperCbdComponent implements OnInit {
+export class ProsperComponent implements OnInit {
 
   public uiColor = ui.color;
   public listImages: Array<ImageAff>;
