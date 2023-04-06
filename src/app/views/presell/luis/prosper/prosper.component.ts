@@ -20,6 +20,7 @@ export class ProsperComponent implements OnInit {
 
   ngOnInit (): void {
     this.titleService.setTitle(this.productName);
+    console.log('dionei');
   }
 
   createImagesStructure () {
