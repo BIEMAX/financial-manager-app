@@ -16,11 +16,12 @@ import { FinancialsDefaultersComponent } from './views/financial-manager/financi
 // Pre-sale
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
-import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
+import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
 import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
-import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
+import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
+import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.component'
 
 //Router to access through angular
 const routes: Routes = [
@@ -63,7 +64,7 @@ const routes: Routes = [
         component: ProstadineComponent
       },
       {
-        path: 'alpilean',
+        path: 'aprafffr',
         component: AlpileanComponent
       },
       {
@@ -81,6 +82,10 @@ const routes: Routes = [
       {
         path: 'massalong',
         component: MaasalongComponent
+      },
+      {
+        path: 'apraffluipat',
+        component: AlpiluisComponent
       }
     ]
   },
