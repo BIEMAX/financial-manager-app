@@ -5,9 +5,9 @@ import { Title } from '@angular/platform-browser';
 import ImageAff from 'src/app/models/image.model'
 
 @Component({
-  selector: 'prosperCbd',
-  templateUrl: './prosperCbd.component.html',
-  styleUrls: ['./prosperCbd.component.css']
+  selector: 'prosper',
+  templateUrl: './prosper.component.html',
+  styleUrls: ['./prosper.component.css']
 })
 export class ProsperComponent implements OnInit {
 

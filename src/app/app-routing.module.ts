@@ -18,7 +18,7 @@ import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
 import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
-import { ProsperComponent } from './views/presell/luis/prospercbd/prospercbd.component'
+import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
 import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 

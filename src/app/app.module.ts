@@ -78,7 +78,7 @@ import { ProstadineComponent } from './views/presell/prostadine/prostadine.compo
 import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
 import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
-import { ProsperComponent } from './views/presell/luis/prospercbd/prospercbd.component'
+import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 
 @NgModule({
