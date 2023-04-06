@@ -75,11 +75,12 @@ import { UserDialogComponent } from './views/generic/user-dialog-report/user-dia
 // Presell
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
-import { AlpileanComponent } from './views/presell/alpilean/alpilean.component'
-import { ProstadineFrComponent } from './views/presell/prosta-fr/prostadine.component'
+import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
+import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
 import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
+import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.component'
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.com
     SynogutComponent,
     ProsperComponent,
     MaasalongComponent,
+    AlpiluisComponent,
     //Pre-sale (Fran)
     AlpileanComponent,
     ProstadineFrComponent
