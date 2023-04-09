@@ -72,15 +72,23 @@ import { UserNewComponent } from './views/user/user-new/user-new.component';
 import { ReleaseNotesComponent } from './views/generic/release-notes/release-notes.component';
 import { UserDialogComponent } from './views/generic/user-dialog-report/user-dialog-report.component';
 
-// Presell
+// Pre-sale Luis
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
-import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
-import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
 import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.component'
+import { GlucofortluiComponent } from './views/presell/luis/glucofort/glucofort.component'
+import { FolifortluiComponent } from './views/presell/luis/folifort/folifort.component'
+import { GlucoswiluiComponent } from './views/presell/luis/gluco-switch/gluco-switch.component'
+
+// Pre-sale Franciele
+import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
+import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
+import { GlucofortComponent } from './views/presell/fran/glucofort/glucofort.component'
+import { GlucoberryComponent } from './views/presell/fran/glucoberry/glucoberry.component'
+import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-juice.component'
 
 @NgModule({
   declarations: [
@@ -116,9 +124,15 @@ import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.compo
     ProsperComponent,
     MaasalongComponent,
     AlpiluisComponent,
+    GlucofortluiComponent,
+    FolifortluiComponent,
+    GlucoswiluiComponent,
     //Pre-sale (Fran)
     AlpileanComponent,
-    ProstadineFrComponent
+    ProstadineFrComponent,
+    GlucofortComponent,
+    GlucoberryComponent,
+    IkariaJuiceComponent
   ],
   imports: [
     ReactiveFormsModule,

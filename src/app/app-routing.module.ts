@@ -13,15 +13,23 @@ import { ReleaseNotesComponent } from './views/generic/release-notes/release-not
 import { FinancialsTagsComponent } from './views/financial-manager/financials-tags/financials-tags.component';
 import { FinancialsDefaultersComponent } from './views/financial-manager/financials-defaulters/financials-defaulters.component';
 
-// Pre-sale
+// Pre-sale Luis
 import { PresellComponent } from './views/presell/presell.component'
 import { ProstadineComponent } from './views/presell/prostadine/prostadine.component'
-import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
 import { SynogutComponent } from './views/presell/luis/synogut/synogut.component'
 import { ProsperComponent } from './views/presell/luis/prosper/prosper.component'
-import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
 import { MaasalongComponent } from './views/presell/luis/maasalong/maasalong.component'
 import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.component'
+import { GlucofortluiComponent } from './views/presell/luis/glucofort/glucofort.component'
+import { FolifortluiComponent } from './views/presell/luis/folifort/folifort.component'
+import { GlucoswiluiComponent } from './views/presell/luis/gluco-switch/gluco-switch.component'
+
+// Pre-sale Franciele
+import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
+import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine.component'
+import { GlucofortComponent } from './views/presell/fran/glucofort/glucofort.component'
+import { GlucoberryComponent } from './views/presell/fran/glucoberry/glucoberry.component'
+import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-juice.component'
 
 //Router to access through angular
 const routes: Routes = [
@@ -59,17 +67,10 @@ const routes: Routes = [
     path: 'presell',
     component: PresellComponent,
     children: [
+      //Luis
       {
         path: 'prostadine',
         component: ProstadineComponent
-      },
-      {
-        path: 'aprafffr',
-        component: AlpileanComponent
-      },
-      {
-        path: 'prostadine-fr',
-        component: ProstadineFrComponent
       },
       {
         path: 'synogut',
@@ -86,6 +87,39 @@ const routes: Routes = [
       {
         path: 'apraffluipat',
         component: AlpiluisComponent
+      },
+      {
+        path: 'gluco-ls',
+        component: GlucofortluiComponent
+      },
+      {
+        path: 'foli-ls',
+        component: FolifortluiComponent
+      },
+      {
+        path: 'swit-ls',
+        component: GlucoswiluiComponent
+      },
+      // Franciele
+      {
+        path: 'aprafffr',
+        component: AlpileanComponent
+      },
+      {
+        path: 'prostadine-fr',
+        component: ProstadineFrComponent
+      },
+      {
+        path: 'gluco-fr',
+        component: GlucofortComponent
+      },
+      {
+        path: 'glucobr-fr',
+        component: GlucoberryComponent
+      },
+      {
+        path: 'juice',
+        component: IkariaJuiceComponent
       }
     ]
   },
