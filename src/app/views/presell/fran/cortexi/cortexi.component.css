@@ -1,0 +1,57 @@
+.gradient-background {
+  background: linear-gradient(to bottom, #379884, #ffffff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.section {
+  text-align: center;
+  color: #FFFFFF;
+  font-family: "Tahoma", Sans-serif;
+  font-size: 40px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.button-container {
+  /*Align at the center of the screen*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-btn {
+  font-family: "Archivo", Sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  text-shadow: 0px 0px 100px rgba(0, 0, 0, 0.3);
+  fill: #000000;
+  color: #000000;
+  background-color: #FAC400;
+  border-radius: 10px 10px 10px 10px;
+  padding: 20px 30px 20px 30px;
+  animation: pulse 1s ease-in-out infinite;
+  bottom: 7.5vh;
+  position: relative;
+  width: 90%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
