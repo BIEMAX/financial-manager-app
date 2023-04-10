@@ -89,6 +89,7 @@ import { ProstadineFrComponent } from './views/presell/fran/prosta-fr/prostadine
 import { GlucofortComponent } from './views/presell/fran/glucofort/glucofort.component'
 import { GlucoberryComponent } from './views/presell/fran/glucoberry/glucoberry.component'
 import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-juice.component'
+import { CortexiComponent } from './views/presell/fran/cortexi/cortexi.component'
 
 @NgModule({
   declarations: [
@@ -132,7 +133,8 @@ import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-j
     ProstadineFrComponent,
     GlucofortComponent,
     GlucoberryComponent,
-    IkariaJuiceComponent
+    IkariaJuiceComponent,
+    CortexiComponent
   ],
   imports: [
     ReactiveFormsModule,
