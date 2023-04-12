@@ -82,6 +82,7 @@ import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.compo
 import { GlucofortluiComponent } from './views/presell/luis/glucofort/glucofort.component'
 import { FolifortluiComponent } from './views/presell/luis/folifort/folifort.component'
 import { GlucoswiluiComponent } from './views/presell/luis/gluco-switch/gluco-switch.component'
+import { ProdentimLuisComponent } from './views/presell/luis/prodentim/pro-luis.component'
 
 // Pre-sale Franciele
 import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
@@ -90,6 +91,7 @@ import { GlucofortComponent } from './views/presell/fran/glucofort/glucofort.com
 import { GlucoberryComponent } from './views/presell/fran/glucoberry/glucoberry.component'
 import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-juice.component'
 import { CortexiComponent } from './views/presell/fran/cortexi/cortexi.component'
+import { ProdentimFrComponent } from './views/presell/fran/prodentim/pro-fr.component'
 
 @NgModule({
   declarations: [
@@ -128,13 +130,15 @@ import { CortexiComponent } from './views/presell/fran/cortexi/cortexi.component
     GlucofortluiComponent,
     FolifortluiComponent,
     GlucoswiluiComponent,
+    ProdentimLuisComponent,
     //Pre-sale (Fran)
     AlpileanComponent,
     ProstadineFrComponent,
     GlucofortComponent,
     GlucoberryComponent,
     IkariaJuiceComponent,
-    CortexiComponent
+    CortexiComponent,
+    ProdentimFrComponent
   ],
   imports: [
     ReactiveFormsModule,
