@@ -11,6 +11,8 @@ export class AlpileanComponent implements OnInit {
 
   public uiColor = ui.color;
   public productName: string = "Alpilean";
+  public showLastChanceToBuy: boolean = true;
+  public offerNumber: number = 40;
   private affiliateLink: string = 'https://7d2fdbt4-39r7ke2mcr8kwvybp.hop.clickbank.net/?tid=CB032023';
 
   constructor(private titleService: Title) { }
