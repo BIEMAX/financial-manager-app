@@ -1,14 +1,17 @@
-.container {
+.gradient-background {
+  background: linear-gradient(to bottom, #136e73, #ffffff);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom, #136e73, #1ea0a6);
 }
 
-.gradient-background {
-  background: linear-gradient(to bottom, #136e73, #1ea0a6);
+.section {
+  text-align: center;
+  color: #FFFFFF;
+  font-family: "Tahoma", Sans-serif;
+  font-size: 40px;
 }
 
 img {
@@ -16,16 +19,36 @@ img {
   max-height: 100%;
 }
 
-.title {
-  text-align: center;
-  color: #FFFFFF;
-  font-family: "Tahoma", Sans-serif;
-  font-size: 40px;
-  font-weight: 800;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
+.animated-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  animation: grow-shrink 2s infinite;
 }
+
+/* .banner {
+  background-color: #ffdd57;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  padding: 20px;
+  text-align: center;
+  animation: flash 2s linear infinite;
+  position: relative;
+  border-radius: 2.5px 2.5px 2.5px 2.5px;
+}
+
+.banner::after {
+  content: "up to 40%";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  font-size: 12px;
+  padding: 4px;
+} */
 
 .button-container {
   /*Align at the center of the screen*/
@@ -44,10 +67,70 @@ img {
   background-color: #FAC400;
   border-radius: 10px 10px 10px 10px;
   padding: 20px 30px 20px 30px;
-  /* margin-bottom: 0;
-  position: relative; */
-  /* location */
+  animation: pulse 1s ease-in-out infinite;
   bottom: 7.5vh;
   position: relative;
-  width: 100%;
+  width: 90%;
+}
+
+.container {
+  position: relative;
+}
+
+.container img:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.container img:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Button pulse */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Banner animation
+@keyframes flash {
+  0% {
+    background-color: #ffdd57;
+  }
+
+  50% {
+    background-color: #ffa500;
+  }
+
+  100% {
+    background-color: #ffdd57;
+  }
+} */
+
+/* Animated image */
+@keyframes grow-shrink {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

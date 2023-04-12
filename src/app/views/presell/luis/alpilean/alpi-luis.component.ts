@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment, ui } from 'src/environments/environment';
+import { ui } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -11,6 +11,8 @@ export class AlpiluisComponent implements OnInit {
 
   public uiColor = ui.color;
   public productName: string = "Alpilean";
+  public showLastChanceToBuy: boolean = true;
+  public offerNumber: number = 40;
   private affiliateLink: string = 'https://a1c549yflzcquxc6ogqek9wzdq.hop.clickbank.net/?tid=gus060423';
 
   constructor(private titleService: Title) { }
