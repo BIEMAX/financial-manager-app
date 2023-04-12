@@ -3,17 +3,17 @@ import { ui } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'alpilean',
-  templateUrl: './alpilean.component.html',
-  styleUrls: ['./alpilean.component.css']
+  selector: 'pro-luis',
+  templateUrl: './pro-luis.component.html',
+  styleUrls: ['./pro-luis.component.css']
 })
-export class AlpileanComponent implements OnInit {
+export class ProdentimLuisComponent implements OnInit {
 
   public uiColor = ui.color;
-  public productName: string = "Ice hack product";
+  public productName: string = "ProDentim";
   public showLastChanceToBuy: boolean = true;
   public offerNumber: number = 40;
-  private affiliateLink: string = 'https://7d2fdbt4-39r7ke2mcr8kwvybp.hop.clickbank.net/?tid=CB032023';
+  private affiliateLink: string = 'https://theprodentim.com/text.php?aff_id=132282&subid=Gus120423';
 
   constructor(private titleService: Title) { }
 

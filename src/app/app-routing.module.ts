@@ -23,6 +23,7 @@ import { AlpiluisComponent } from './views/presell/luis/alpilean/alpi-luis.compo
 import { GlucofortluiComponent } from './views/presell/luis/glucofort/glucofort.component'
 import { FolifortluiComponent } from './views/presell/luis/folifort/folifort.component'
 import { GlucoswiluiComponent } from './views/presell/luis/gluco-switch/gluco-switch.component'
+import { ProdentimLuisComponent } from './views/presell/luis/prodentim/pro-luis.component'
 
 // Pre-sale Franciele
 import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
@@ -31,6 +32,7 @@ import { GlucofortComponent } from './views/presell/fran/glucofort/glucofort.com
 import { GlucoberryComponent } from './views/presell/fran/glucoberry/glucoberry.component'
 import { IkariaJuiceComponent } from './views/presell/fran/ikaria-juice/ikaria-juice.component'
 import { CortexiComponent } from './views/presell/fran/cortexi/cortexi.component'
+import { ProdentimFrComponent } from './views/presell/fran/prodentim/pro-fr.component'
 
 //Router to access through angular
 const routes: Routes = [
@@ -101,6 +103,10 @@ const routes: Routes = [
         path: 'swit-ls',
         component: GlucoswiluiComponent
       },
+      {
+        path: 'pro-ls',
+        component: ProdentimLuisComponent
+      },
       // Franciele
       {
         path: 'aprafffr',
@@ -125,6 +131,10 @@ const routes: Routes = [
       {
         path: 'cortexi',
         component: CortexiComponent
+      },
+      {
+        path: 'pro-fr',
+        component: ProdentimFrComponent
       }
     ]
   },

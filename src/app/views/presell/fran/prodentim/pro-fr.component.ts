@@ -3,17 +3,17 @@ import { ui } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'alpilean',
-  templateUrl: './alpilean.component.html',
-  styleUrls: ['./alpilean.component.css']
+  selector: 'pro-fr',
+  templateUrl: './pro-fr.component.html',
+  styleUrls: ['./pro-fr.component.css']
 })
-export class AlpileanComponent implements OnInit {
+export class ProdentimFrComponent implements OnInit {
 
   public uiColor = ui.color;
-  public productName: string = "Ice hack product";
+  public productName: string = "ProDentim";
   public showLastChanceToBuy: boolean = true;
   public offerNumber: number = 40;
-  private affiliateLink: string = 'https://7d2fdbt4-39r7ke2mcr8kwvybp.hop.clickbank.net/?tid=CB032023';
+  private affiliateLink: string = 'https://32f25m3zwrrt0m7mwnl3sql69e.hop.clickbank.net/?tid=CB120423';
 
   constructor(private titleService: Title) { }
 
