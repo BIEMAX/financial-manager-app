@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment, ui } from 'src/environments/environment';
+import { ui } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
