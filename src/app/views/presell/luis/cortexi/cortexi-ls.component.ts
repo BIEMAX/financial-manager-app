@@ -12,7 +12,7 @@ export class CortexiLsComponent implements OnInit {
   public uiColor = ui.color;
   public productName: string = "Cortexi";
   public showLastChanceToBuy: boolean = true;
-  private affiliateLink: string = 'https://fe65aq-1-elq7xearlv24dck3z.hop.clickbank.net/?tid=CB130423';
+  private affiliateLink: string = 'https://trycortexi.com/?aff_id=14166&subid=Gus130423';
 
   constructor(private titleService: Title) { }
 
