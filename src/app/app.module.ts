@@ -83,6 +83,7 @@ import { GlucofortluiComponent } from './views/presell/luis/glucofort/glucofort.
 import { FolifortluiComponent } from './views/presell/luis/folifort/folifort.component'
 import { GlucoswiluiComponent } from './views/presell/luis/gluco-switch/gluco-switch.component'
 import { ProdentimLuisComponent } from './views/presell/luis/prodentim/pro-luis.component'
+import { CortexiLsComponent } from './views/presell/luis/cortexi/cortexi-ls.component'
 
 // Pre-sale Franciele
 import { AlpileanComponent } from './views/presell/fran/alpilean/alpilean.component'
@@ -131,6 +132,7 @@ import { ProdentimFrComponent } from './views/presell/fran/prodentim/pro-fr.comp
     FolifortluiComponent,
     GlucoswiluiComponent,
     ProdentimLuisComponent,
+    CortexiLsComponent,
     //Pre-sale (Fran)
     AlpileanComponent,
     ProstadineFrComponent,
