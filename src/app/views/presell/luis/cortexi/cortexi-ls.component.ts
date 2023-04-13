@@ -3,16 +3,16 @@ import { ui } from 'src/environments/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'alpilean',
-  templateUrl: './alpilean.component.html',
-  styleUrls: ['./alpilean.component.css']
+  selector: 'cortexi-ls',
+  templateUrl: './cortexi-ls.component.html',
+  styleUrls: ['./cortexi-ls.component.css']
 })
-export class AlpileanComponent implements OnInit {
+export class CortexiLsComponent implements OnInit {
 
   public uiColor = ui.color;
-  public productName: string = "Alpilean";
+  public productName: string = "Cortexi";
   public showLastChanceToBuy: boolean = true;
-  private affiliateLink: string = 'https://7d2fdbt4-39r7ke2mcr8kwvybp.hop.clickbank.net/?tid=CB032023';
+  private affiliateLink: string = 'https://fe65aq-1-elq7xearlv24dck3z.hop.clickbank.net/?tid=CB130423';
 
   constructor(private titleService: Title) { }
 

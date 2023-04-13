@@ -11,7 +11,8 @@ export class CortexiComponent implements OnInit {
 
   public uiColor = ui.color;
   public productName: string = "Cortexi";
-  private affiliateLink: string = 'https://3c7ac5vazwpen8u11b67-fbsdt.hop.clickbank.net/?tid=CB09042023';
+  public showLastChanceToBuy: boolean = true;
+  private affiliateLink: string = 'https://fe65aq-1-elq7xearlv24dck3z.hop.clickbank.net/?tid=CB130423';
 
   constructor(private titleService: Title) { }
 
