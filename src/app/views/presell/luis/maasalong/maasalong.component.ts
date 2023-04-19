@@ -14,7 +14,7 @@ export class MaasalongComponent implements OnInit {
   public uiColor = ui.color;
   public listImages: Array<ImageAff>;
   public productName: string = "Maasalong";
-  private affiliateLink: string = 'https://www.digistore24.com/redir/462315/PatriciaWillerdingBerwanger/CAMPAIGNKEY';
+  private affiliateLink: string = 'https://www.digistore24.com/redir/462317/PatriciaWillerdingBerwanger';
 
   constructor(private titleService: Title) { }
 
