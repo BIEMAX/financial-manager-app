@@ -118,7 +118,7 @@ const routes: Routes = [
         component: AlpileanComponent
       },
       {
-        path: 'prostadine-fr',
+        path: 'prtde-fr',
         component: ProstadineFrComponent
       },
       {
